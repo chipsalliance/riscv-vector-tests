@@ -3,3 +3,6 @@
 
 # Binaries
 build/
+
+# Go Vendor
+vendor/
