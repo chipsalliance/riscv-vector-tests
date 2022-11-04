@@ -4,5 +4,8 @@
 # Binaries
 build/
 
+# Output files
+out/
+
 # Go Vendor
 vendor/
