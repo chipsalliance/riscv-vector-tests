@@ -9,6 +9,15 @@ type num interface {
 	uint8 | uint16 | uint32 | uint64 | string
 }
 
+func convNum[T num](n any) T {
+	var res T
+	var ok bool
+	if res, ok = n.(T); !ok {
+		res = T(n.(uint8))
+	}
+	return res
+}
+
 type testCase[T num] []T
 
 type tests struct {

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/pelletier/go-toml/v2"
 	"log"
+	"math"
 )
 
 type insnFormat string
@@ -74,11 +75,10 @@ type Option struct {
 }
 
 type insn struct {
-	Name                string     `toml:"name"`
-	Format              insnFormat `toml:"format"`
-	OperandExchangeable bool       `toml:"operand_exchangeable"`
-	Tests               tests      `toml:"tests"`
-	Option              Option     `toml:"-"`
+	Name   string     `toml:"name"`
+	Format insnFormat `toml:"format"`
+	Tests  tests      `toml:"tests"`
+	Option Option     `toml:"-"`
 }
 
 func ReadInsnFromToml(contents []byte, option Option) (*insn, error) {
@@ -148,12 +148,12 @@ func (i *insn) genData(buf []byte) []byte {
 .data
 RVTEST_DATA_BEGIN
 
-# Generates a 2KiB space for test data.
+# Reserve space for test data.
 testdata:
-	.zero 2048
+	.zero %d
 
 RVTEST_DATA_END
-`))...)
+`, i.vlenb()*(8 /* max LMUL */)))...)
 	return buf
 }
 
@@ -165,4 +165,87 @@ func (i *insn) genTestCases() string {
 		log.Fatalln("unreachable")
 		return ""
 	}
+}
+
+func (i *insn) vlenb() int {
+	return int(i.Option.VLEN) / 8
+}
+
+func (i *insn) testCases(sew SEW) [][]any {
+	res := make([][]any, 0)
+	for _, c := range i.Tests.Base {
+		l := make([]any, len(c))
+		for b, op := range c {
+			l[b] = op
+		}
+		res = append(res, l)
+	}
+
+	switch sew {
+	case 8:
+		for _, c := range i.Tests.SEW8 {
+			l := make([]any, len(c))
+			for b, op := range c {
+				l[b] = op
+			}
+			res = append(res, l)
+		}
+	case 16:
+		for _, c := range i.Tests.SEW16 {
+			l := make([]any, len(c))
+			for b, op := range c {
+				l[b] = op
+			}
+			res = append(res, l)
+		}
+	case 32:
+		for _, c := range i.Tests.SEW32 {
+			l := make([]any, len(c))
+			for b, op := range c {
+				l[b] = op
+			}
+			res = append(res, l)
+		}
+	case 64:
+		for _, c := range i.Tests.SEW64 {
+			l := make([]any, len(c))
+			for b, op := range c {
+				l[b] = op
+			}
+			res = append(res, l)
+		}
+	}
+
+	return res
+}
+
+type combination struct {
+	SEW   SEW
+	LMUL  LMUL
+	LMUL1 LMUL
+	Vl    int
+	Mask  bool
+}
+
+func (i *insn) combinations() []combination {
+	res := make([]combination, 0)
+	for _, lmul := range allLMULs {
+		for _, sew := range allSEWs {
+			lmul1 := LMUL(math.Max(float64(lmul), 1))
+			for _, mask := range []bool{false, true} {
+				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))
+				for _, vl := range []int{0, vlmax1 / 2, vlmax1, vlmax1 + 1} {
+					res = append(res, combination{
+						SEW:   sew,
+						LMUL:  lmul,
+						LMUL1: lmul1,
+						Vl:    vl,
+						Mask:  mask,
+					})
+				}
+			}
+		}
+	}
+
+	return res
 }

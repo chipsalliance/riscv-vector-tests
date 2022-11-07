@@ -1,6 +1,5 @@
 name = "vadd.vv"
 format = "vd,vs2,vs1,vm"
-operand_exchangeable = true
 
 [tests]
 base = [

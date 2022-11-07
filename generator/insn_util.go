@@ -52,3 +52,10 @@ type VLEN int
 func (v VLEN) Valid() bool {
 	return 128 <= v && v <= 65536 && v&(v-1) == 0
 }
+
+func v0t(mask bool) string {
+	if mask {
+		return ", v0.t"
+	}
+	return ""
+}

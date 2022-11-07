@@ -36,6 +36,7 @@ func main() {
 	files, err := os.ReadDir(*configsDirF)
 	fatalIf(err)
 
+	println("Generating...")
 	for _, file := range files {
 		name := file.Name()
 		fp := filepath.Join(*configsDirF, name)
