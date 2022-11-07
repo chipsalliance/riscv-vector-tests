@@ -7,6 +7,7 @@ import (
 	"github.com/ksco/riscv-vector-tests/generator"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -42,7 +43,7 @@ func main() {
 
 	println("Generating...")
 
-	makefrag := "tests = \\\n"
+	makefrag := make([]string, 0)
 	lk := sync.Mutex{}
 	wg := sync.WaitGroup{}
 	wg.Add(len(files))
@@ -73,7 +74,7 @@ func main() {
 					testContent)
 
 				lk.Lock()
-				makefrag += fmt.Sprintf("  %s \\\n", asmFilename)
+				makefrag = append(makefrag, fmt.Sprintf("  %s \\\n", asmFilename))
 				lk.Unlock()
 			}
 
@@ -82,7 +83,10 @@ func main() {
 	}
 	wg.Wait()
 
-	writeTo(".", "Makefrag", makefrag)
+	sort.Slice(makefrag, func(i, j int) bool {
+		return makefrag[i] < makefrag[j]
+	})
+	writeTo(".", "Makefrag", "tests = \\\n"+strings.Join(makefrag, ""))
 
 	println("\033[32mOK\033[0m")
 }

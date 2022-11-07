@@ -1,24 +1,24 @@
 tests = \
-  vsm.v-0 \
-  vlm.v-0 \
-  vse64.v-0 \
-  vle64.v-0 \
-  vse32.v-0 \
-  vle32.v-0 \
-  vle16.v-0 \
-  vse16.v-0 \
-  vle8.v-0 \
-  vse8.v-0 \
-  vlse64.v-0 \
-  vlse32.v-0 \
-  vlse32.v-1 \
   vadd.vv-0 \
   vadd.vv-1 \
+  vle16.v-0 \
+  vle32.v-0 \
+  vle64.v-0 \
+  vle8.v-0 \
+  vlm.v-0 \
   vlse16.v-0 \
   vlse16.v-1 \
   vlse16.v-2 \
+  vlse32.v-0 \
+  vlse32.v-1 \
+  vlse64.v-0 \
   vlse8.v-0 \
   vlse8.v-1 \
   vlse8.v-2 \
   vlse8.v-3 \
   vlse8.v-4 \
+  vse16.v-0 \
+  vse32.v-0 \
+  vse64.v-0 \
+  vse8.v-0 \
+  vsm.v-0 \
