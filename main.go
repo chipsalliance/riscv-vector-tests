@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"github.com/ksco/riscv-vector-tests/generator"
@@ -18,25 +19,28 @@ func fatalIf(err error) {
 }
 
 var vlenF = flag.Int("VLEN", 256, "")
-var outputDirF = flag.String("output", "out/", "output directory.")
+var elenF = flag.Int("ELEN", 64, "")
+var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
-
-var stage1OutputDir = filepath.Join(*outputDirF, "tests/stage1")
 
 func main() {
 	flag.Parse()
 
-	option := generator.Option{
-		VLEN: generator.VLEN(*vlenF),
+	if stage1OutputDirF == nil || *stage1OutputDirF == "" {
+		fatalIf(errors.New("-stage1output is required"))
 	}
 
-	err := os.RemoveAll(*outputDirF)
-	fatalIf(err)
+	option := generator.Option{
+		VLEN: generator.VLEN(*vlenF),
+		ELEN: generator.ELEN(*elenF),
+	}
 
 	files, err := os.ReadDir(*configsDirF)
 	fatalIf(err)
 
 	println("Generating...")
+
+	makefrag := "tests = \\\n"
 	for _, file := range files {
 		name := file.Name()
 		fp := filepath.Join(*configsDirF, name)
@@ -53,9 +57,11 @@ func main() {
 		insn, err := generator.ReadInsnFromToml(contents, option)
 		fatalIf(err)
 
-		writeTo(stage1OutputDir,
-			strings.TrimSuffix(name, ".toml")+".S", insn.Generate())
+		asmFilename := strings.TrimSuffix(name, ".toml")
+		writeTo(*stage1OutputDirF, asmFilename+".S", insn.Generate())
+		makefrag += fmt.Sprintf("  %s \\\n", asmFilename)
 	}
+	writeTo(".", "Makefrag", []byte(makefrag))
 
 	println("\033[32mOK\033[0m")
 }

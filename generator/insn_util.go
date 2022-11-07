@@ -53,6 +53,12 @@ func (v VLEN) Valid() bool {
 	return 128 <= v && v <= 65536 && v&(v-1) == 0
 }
 
+type ELEN int
+
+func (e ELEN) Valid(v VLEN) bool {
+	return e >= 64 && e <= ELEN(v) && e&(e-1) == 0
+}
+
 func v0t(mask bool) string {
 	if mask {
 		return ", v0.t"

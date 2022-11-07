@@ -72,6 +72,7 @@ var formats = map[insnFormat]struct{}{
 
 type Option struct {
 	VLEN VLEN
+	ELEN ELEN
 }
 
 type insn struct {
@@ -84,7 +85,7 @@ type insn struct {
 func ReadInsnFromToml(contents []byte, option Option) (*insn, error) {
 	i := insn{Option: option}
 
-	if err := i.Check(); err != nil {
+	if err := i.check(); err != nil {
 		return nil, err
 	}
 
@@ -103,9 +104,13 @@ func ReadInsnFromToml(contents []byte, option Option) (*insn, error) {
 	return &i, nil
 }
 
-func (i *insn) Check() error {
+func (i *insn) check() error {
 	if !i.Option.VLEN.Valid() {
 		return fmt.Errorf("wrong VLEN: %d", i.Option.VLEN)
+	}
+
+	if !i.Option.ELEN.Valid(i.Option.VLEN) {
+		return fmt.Errorf("wrong ELEN: %d", i.Option.ELEN)
 	}
 	return nil
 }
@@ -137,7 +142,9 @@ RVTEST_CODE_BEGIN
 
 %s
 
+  TEST_CASE(2, x0, 0x0)
   TEST_PASSFAIL
+
 RVTEST_CODE_END
 `, i.genTestCases()))...)
 	return buf
@@ -145,12 +152,12 @@ RVTEST_CODE_END
 
 func (i *insn) genData(buf []byte) []byte {
 	buf = append(buf, []byte(fmt.Sprintf(`
-.data
+  .data
 RVTEST_DATA_BEGIN
 
 # Reserve space for test data.
 testdata:
-	.zero %d
+  .zero %d
 
 RVTEST_DATA_END
 `, i.vlenb()*(8 /* max LMUL */)))...)
@@ -231,6 +238,9 @@ func (i *insn) combinations() []combination {
 	res := make([]combination, 0)
 	for _, lmul := range allLMULs {
 		for _, sew := range allSEWs {
+			if float64(lmul) < float64(sew)/float64(i.Option.ELEN) {
+				continue
+			}
 			lmul1 := LMUL(math.Max(float64(lmul), 1))
 			for _, mask := range []bool{false, true} {
 				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))

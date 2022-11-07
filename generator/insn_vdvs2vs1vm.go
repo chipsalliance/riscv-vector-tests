@@ -64,17 +64,17 @@ func (i *insn) genCodeVdVs2Vs1Vm() string {
 				b := a % len(cases)
 				switch c.SEW {
 				case 8:
-					res += fmt.Sprintf("li, a1, 0x%x\n", convNum[uint8](cases[b][idx]))
-					res += fmt.Sprintf("sb, a1, %d(a0)\n", a*(int(c.SEW)/8))
+					res += fmt.Sprintf("li a1, 0x%x\n", convNum[uint8](cases[b][idx]))
+					res += fmt.Sprintf("sb a1, %d(a0)\n", a*(int(c.SEW)/8))
 				case 16:
-					res += fmt.Sprintf("li, a1, 0x%x\n", convNum[uint16](cases[b][idx]))
-					res += fmt.Sprintf("sh, a1, %d(a0)\n", a*(int(c.SEW)/8))
+					res += fmt.Sprintf("li a1, 0x%x\n", convNum[uint16](cases[b][idx]))
+					res += fmt.Sprintf("sh a1, %d(a0)\n", a*(int(c.SEW)/8))
 				case 32:
-					res += fmt.Sprintf("li, a1, 0x%x\n", convNum[uint32](cases[b][idx]))
-					res += fmt.Sprintf("sw, a1, %d(a0)\n", a*(int(c.SEW)/8))
+					res += fmt.Sprintf("li a1, 0x%x\n", convNum[uint32](cases[b][idx]))
+					res += fmt.Sprintf("sw a1, %d(a0)\n", a*(int(c.SEW)/8))
 				case 64:
 					res += fmt.Sprintf("li a1, 0x%x\n", convNum[uint64](cases[b][idx]))
-					res += fmt.Sprintf("sd, a1, %d(a0)\n", a*(int(c.SEW)/8))
+					res += fmt.Sprintf("sd a1, %d(a0)\n", a*(int(c.SEW)/8))
 				}
 			}
 
@@ -99,7 +99,7 @@ func (i *insn) genCodeVdVs2Vs1Vm() string {
 		res += fmt.Sprintf("vse%d.v %s, (a0)\n\n", c.SEW, vd)
 
 		// Magic insn
-		res += fmt.Sprintf("addi, x0, x%d, %d", 1*int(c.LMUL1), 2*int(c.LMUL1))
+		res += fmt.Sprintf("addi x0, x%d, %d", 1*int(c.LMUL1), 2*int(c.LMUL1))
 	}
 	return res
 }

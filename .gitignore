@@ -9,3 +9,6 @@ out/
 
 # Go Vendor
 vendor/
+
+# macOS
+.DS_Store
