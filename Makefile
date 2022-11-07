@@ -17,6 +17,8 @@ RISCV_PREFIX = riscv64-unknown-elf-
 RISCV_GCC = $(RISCV_PREFIX)gcc
 RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles
 
+all: compile-stage2
+
 build: build-spike build-generator build-merger
 
 build-generator:
@@ -76,6 +78,8 @@ clean:
 	rm -rf out/
 	rm -rf build/
 
-.PHONY: build build-generator unittest \
+.PHONY: all \
+ 		build build-generator unittest \
 		generate-stage1 compile-stage1 $(tests) \
-		generate-stage2 $(tests_patch) clean
+		$(tests_patch) generate-stage2 compile-stage2 $(tests_stage2) \
+		clean
