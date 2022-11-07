@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 )
 
 func fatalIf(err error) {
@@ -22,6 +23,7 @@ var vlenF = flag.Int("VLEN", 256, "")
 var elenF = flag.Int("ELEN", 64, "")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
+var rewriteMakeFrag = flag.Bool("rewrite-makefrag", true, "rewrite makefrag file.")
 
 func main() {
 	flag.Parse()
@@ -40,28 +42,43 @@ func main() {
 
 	println("Generating...")
 
-	makefrag := "tests = \\\n"
-	for _, file := range files {
-		name := file.Name()
-		fp := filepath.Join(*configsDirF, name)
-		if file.IsDir() ||
-			!strings.HasPrefix(name, "v") ||
-			!strings.HasSuffix(name, ".toml") {
-			fmt.Printf("\033[0;1;31mskipping:\033[0m %s, unrecognized filename\n", fp)
-			continue
+	if rewriteMakeFrag != nil && *rewriteMakeFrag {
+		makefrag := "tests = \\\n"
+		for _, file := range files {
+			filename := strings.TrimSuffix(file.Name(), ".toml")
+			makefrag += fmt.Sprintf("  %s \\\n", filename)
 		}
-
-		contents, err := os.ReadFile(fp)
-		fatalIf(err)
-
-		insn, err := generator.ReadInsnFromToml(contents, option)
-		fatalIf(err)
-
-		asmFilename := strings.TrimSuffix(name, ".toml")
-		writeTo(*stage1OutputDirF, asmFilename+".S", insn.Generate())
-		makefrag += fmt.Sprintf("  %s \\\n", asmFilename)
+		writeTo(".", "Makefrag", []byte(makefrag))
 	}
-	writeTo(".", "Makefrag", []byte(makefrag))
+
+	lk := sync.Mutex{}
+	wg := sync.WaitGroup{}
+	wg.Add(len(files))
+	for _, file := range files {
+		go func(file os.DirEntry) {
+			name := file.Name()
+			fp := filepath.Join(*configsDirF, name)
+			if file.IsDir() ||
+				!strings.HasPrefix(name, "v") ||
+				!strings.HasSuffix(name, ".toml") {
+				lk.Lock()
+				fmt.Printf("\033[0;1;31mskipping:\033[0m %s, unrecognized filename\n", fp)
+				lk.Unlock()
+				return
+			}
+
+			contents, err := os.ReadFile(fp)
+			fatalIf(err)
+
+			insn, err := generator.ReadInsnFromToml(contents, option)
+			fatalIf(err)
+
+			writeTo(*stage1OutputDirF,
+				strings.TrimSuffix(name, ".toml")+".S", insn.Generate())
+			wg.Done()
+		}(file)
+	}
+	wg.Wait()
 
 	println("\033[32mOK\033[0m")
 }
