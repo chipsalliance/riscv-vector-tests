@@ -7,13 +7,16 @@ import (
 )
 
 func (i *insn) genCodeVdRs1mVm() string {
+	getEEW := func(name string) SEW {
+		eew, _ := strconv.Atoi(
+			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vle"), ".v"))
+		return SEW(eew)
+	}
 	res := i.genCodeTestDataAddr()
 	res += i.genCodeWriteRandomData(LMUL(1))
 	res += i.genCodeLoadDataIntoRegisterGroup(0, LMUL(1), SEW(8))
 
-	sew, _ := strconv.Atoi(
-		strings.TrimSuffix(strings.TrimPrefix(i.Name, "vle"), ".v"))
-	for _, c := range i.combinations([]SEW{SEW(sew)}) {
+	for _, c := range i.combinations([]SEW{getEEW(i.Name)}) {
 		res += c.comment()
 
 		vd := 1 * int(c.LMUL1)
