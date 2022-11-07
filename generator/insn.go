@@ -176,6 +176,7 @@ RVTEST_DATA_END
 }
 
 func (i *insn) genTestCases() string {
+	// TODO: Split test cases into multi files to prevent R_RISCV_JAL truncated issue.
 	switch i.Format {
 	case insnFormatVdVs2Vs1Vm:
 		return i.genCodeVdVs2Vs1Vm()
