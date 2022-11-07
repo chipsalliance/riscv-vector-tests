@@ -178,6 +178,8 @@ func (i *insn) genTestCases() string {
 		return i.genCodeVs3Rs1mVm()
 	case insnFormatVdRs1m:
 		return i.genCodeVdRs1m()
+	case insnFormatVs3Rs1m:
+		return i.genCodeVs3Rs1m()
 	default:
 		log.Fatalln("unreachable")
 		return ""

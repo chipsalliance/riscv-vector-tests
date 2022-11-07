@@ -9,3 +9,4 @@ tests = \
   vse32.v \
   vse64.v \
   vse8.v \
+  vsm.v \
