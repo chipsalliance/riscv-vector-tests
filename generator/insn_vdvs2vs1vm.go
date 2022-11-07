@@ -31,7 +31,7 @@ func (i *insn) genCodeVdVs2Vs1Vm() string {
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
 		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gMagicInsn(int(c.LMUL1)))
+		builder.WriteString(i.gMagicInsn(vd))
 	}
 	return builder.String()
 }

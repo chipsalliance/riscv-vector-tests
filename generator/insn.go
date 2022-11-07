@@ -12,7 +12,7 @@ type insnFormat string
 
 const (
 	insnFormatVdRs1mVm    insnFormat = "vd,(rs1),vm"
-	insnFormatVs2Rs1mVm   insnFormat = "vs3,(rs1),vm"
+	insnFormatVs3Rs1mVm   insnFormat = "vs3,(rs1),vm"
 	insnFormatVdRs1m      insnFormat = "vd,(rs1)"
 	insnFormatVdRs1mRs2Vm insnFormat = "vd,(rs1),rs2,vm"
 	insnFormatVdRs1mVs2Vm insnFormat = "vd,(rs1),vs2,vm"
@@ -43,7 +43,7 @@ const (
 
 var formats = map[insnFormat]struct{}{
 	insnFormatVdRs1mVm:    {},
-	insnFormatVs2Rs1mVm:   {},
+	insnFormatVs3Rs1mVm:   {},
 	insnFormatVdRs1m:      {},
 	insnFormatVdRs1mRs2Vm: {},
 	insnFormatVdRs1mVs2Vm: {},
@@ -172,6 +172,8 @@ func (i *insn) genTestCases() string {
 		return i.genCodeVdVs2Vs1Vm()
 	case insnFormatVdRs1mVm:
 		return i.genCodeVdRs1mVm()
+	case insnFormatVs3Rs1mVm:
+		return i.genCodeVs3Rs1mVm()
 	default:
 		log.Fatalln("unreachable")
 		return ""

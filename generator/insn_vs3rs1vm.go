@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeVdRs1mVm() string {
+func (i *insn) genCodeVs3Rs1mVm() string {
 	getEEW := func(name string) SEW {
 		eew, _ := strconv.Atoi(
-			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vle"), ".v"))
+			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vse"), ".v"))
 		return SEW(eew)
 	}
 
@@ -21,18 +21,18 @@ func (i *insn) genCodeVdRs1mVm() string {
 	for _, c := range i.combinations([]SEW{getEEW(i.Name)}) {
 		builder.WriteString(c.comment())
 
-		vd := int(c.LMUL1)
-		builder.WriteString(i.gWriteRandomData(c.LMUL1))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
+		vs3 := int(c.LMUL1)
 		builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
+		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
-		builder.WriteString(fmt.Sprintf("%s v%d, (a0)%s\n", i.Name, vd, v0t(c.Mask)))
+		builder.WriteString(fmt.Sprintf("%s v%d, (a0)%s\n", i.Name, vs3, v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
+		builder.WriteString(i.gMagicInsn(vs3))
 	}
 	return builder.String()
 }
