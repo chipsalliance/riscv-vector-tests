@@ -6,7 +6,7 @@ import (
 )
 
 func (i *insn) gTestDataAddr() string {
-	return "la a0, testdata\n\n"
+	return fmt.Sprintf("la a0, testdata\n")
 }
 
 func (i *insn) gWriteRandomData(lmul LMUL) string {
@@ -21,7 +21,7 @@ func (i *insn) gWriteRandomData(lmul LMUL) string {
 		res += fmt.Sprintf("li a1, 0x%x\n", elem)
 		res += fmt.Sprintf("sd a1, %d(a0)\n", a*8)
 	}
-	return res
+	return res + "\n"
 }
 
 func (i *insn) gWriteTestData(lmul LMUL, sew SEW, idx int) string {
@@ -45,7 +45,7 @@ func (i *insn) gWriteTestData(lmul LMUL, sew SEW, idx int) string {
 			res += fmt.Sprintf("sd a1, %d(a0)\n", a*(int(sew)/8))
 		}
 	}
-	return res
+	return res + "\n"
 }
 
 func (i *insn) gLoadDataIntoRegisterGroup(
@@ -68,7 +68,7 @@ func (i *insn) gStoreRegisterGroupIntoData(
 }
 
 func (i *insn) gMagicInsn(group int) string {
-	return fmt.Sprintf("addi x0, x%d, %d", 1*int(group), 2*int(group))
+	return fmt.Sprintf("addi x0, x%d, %d\n\n", 1*int(group), 2*int(group))
 }
 
 func (i *insn) gVsetvli(vl int, sew SEW, lmul LMUL) string {

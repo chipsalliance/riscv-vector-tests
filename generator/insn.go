@@ -11,67 +11,69 @@ import (
 type insnFormat string
 
 const (
-	insnFormatVdRs1mVm    insnFormat = "vd,(rs1),vm"
-	insnFormatVs3Rs1mVm   insnFormat = "vs3,(rs1),vm"
-	insnFormatVdRs1m      insnFormat = "vd,(rs1)"
-	insnFormatVs3Rs1m     insnFormat = "vs3,(rs1)"
-	insnFormatVdRs1mRs2Vm insnFormat = "vd,(rs1),rs2,vm"
-	insnFormatVdRs1mVs2Vm insnFormat = "vd,(rs1),vs2,vm"
-	insnFormatVdVs2Vs1    insnFormat = "vd,vs2,vs1"
-	insnFormatVdVs2Vs1V0  insnFormat = "vd,vs2,vs1,v0"
-	insnFormatVdVs2Vs1Vm  insnFormat = "vd,vs2,vs1,vm"
-	insnFormatVdVs2Rs1V0  insnFormat = "vd,vs2,rs1,v0"
-	insnFormatVdVs2Fs1V0  insnFormat = "vd,vs2,fs1,v0"
-	insnFormatVdVs2Rs1Vm  insnFormat = "vd,vs2,rs1,vm"
-	insnFormatVdVs2Fs1Vm  insnFormat = "vd,vs2,fs1,vm"
-	insnFormatVdVs2ImmV0  insnFormat = "vd,vs2,imm,v0"
-	insnFormatVdVs2ImmVm  insnFormat = "vd,vs2,imm,vm"
-	insnFormatVdVs2UimmVm insnFormat = "vd,vs2,uimm,vm"
-	insnFormatVdVs1Vs2Vm  insnFormat = "vd,vs1,vs2,vm"
-	insnFormatVdRs1Vs2Vm  insnFormat = "vd,rs1,vs2,vm"
-	insnFormatVdFs1Vs2Vm  insnFormat = "vd,fs1,vs2,vm"
-	insnFormatVdVs1       insnFormat = "vd,vs1"
-	insnFormatVdRs1       insnFormat = "vd,rs1"
-	insnFormatVdFs1       insnFormat = "vd,fs1"
-	insnFormatVdImm       insnFormat = "vd,imm"
-	insnFormatVdVs2       insnFormat = "vd,vs2"
-	insnFormatVdVs2Vm     insnFormat = "vd,vs2,vm"
-	insnFormatRdVs2Vm     insnFormat = "rd,vs2,vm"
-	insnFormatRdVs2       insnFormat = "rd,vs2"
-	insnFormatFdVs2       insnFormat = "fd,vs2"
-	insnFormatVdVm        insnFormat = "vd,vm"
+	insnFormatVdRs1mVm     insnFormat = "vd,(rs1),vm"
+	insnFormatVs3Rs1mVm    insnFormat = "vs3,(rs1),vm"
+	insnFormatVdRs1m       insnFormat = "vd,(rs1)"
+	insnFormatVs3Rs1m      insnFormat = "vs3,(rs1)"
+	insnFormatVdRs1mRs2Vm  insnFormat = "vd,(rs1),rs2,vm"
+	insnFormatVs3Rs1mRs2Vm insnFormat = "vs3,(rs1),rs2,vm"
+	insnFormatVdRs1mVs2Vm  insnFormat = "vd,(rs1),vs2,vm"
+	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"
+	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0"
+	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm"
+	insnFormatVdVs2Rs1V0   insnFormat = "vd,vs2,rs1,v0"
+	insnFormatVdVs2Fs1V0   insnFormat = "vd,vs2,fs1,v0"
+	insnFormatVdVs2Rs1Vm   insnFormat = "vd,vs2,rs1,vm"
+	insnFormatVdVs2Fs1Vm   insnFormat = "vd,vs2,fs1,vm"
+	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0"
+	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"
+	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm"
+	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"
+	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm"
+	insnFormatVdFs1Vs2Vm   insnFormat = "vd,fs1,vs2,vm"
+	insnFormatVdVs1        insnFormat = "vd,vs1"
+	insnFormatVdRs1        insnFormat = "vd,rs1"
+	insnFormatVdFs1        insnFormat = "vd,fs1"
+	insnFormatVdImm        insnFormat = "vd,imm"
+	insnFormatVdVs2        insnFormat = "vd,vs2"
+	insnFormatVdVs2Vm      insnFormat = "vd,vs2,vm"
+	insnFormatRdVs2Vm      insnFormat = "rd,vs2,vm"
+	insnFormatRdVs2        insnFormat = "rd,vs2"
+	insnFormatFdVs2        insnFormat = "fd,vs2"
+	insnFormatVdVm         insnFormat = "vd,vm"
 )
 
 var formats = map[insnFormat]struct{}{
-	insnFormatVdRs1mVm:    {},
-	insnFormatVs3Rs1mVm:   {},
-	insnFormatVdRs1m:      {},
-	insnFormatVs3Rs1m:     {},
-	insnFormatVdRs1mRs2Vm: {},
-	insnFormatVdRs1mVs2Vm: {},
-	insnFormatVdVs2Vs1:    {},
-	insnFormatVdVs2Vs1V0:  {},
-	insnFormatVdVs2Vs1Vm:  {},
-	insnFormatVdVs2Rs1V0:  {},
-	insnFormatVdVs2Fs1V0:  {},
-	insnFormatVdVs2Rs1Vm:  {},
-	insnFormatVdVs2Fs1Vm:  {},
-	insnFormatVdVs2ImmV0:  {},
-	insnFormatVdVs2ImmVm:  {},
-	insnFormatVdVs2UimmVm: {},
-	insnFormatVdVs1Vs2Vm:  {},
-	insnFormatVdRs1Vs2Vm:  {},
-	insnFormatVdFs1Vs2Vm:  {},
-	insnFormatVdVs1:       {},
-	insnFormatVdRs1:       {},
-	insnFormatVdFs1:       {},
-	insnFormatVdImm:       {},
-	insnFormatVdVs2:       {},
-	insnFormatVdVs2Vm:     {},
-	insnFormatRdVs2Vm:     {},
-	insnFormatRdVs2:       {},
-	insnFormatFdVs2:       {},
-	insnFormatVdVm:        {},
+	insnFormatVdRs1mVm:     {},
+	insnFormatVs3Rs1mVm:    {},
+	insnFormatVdRs1m:       {},
+	insnFormatVs3Rs1m:      {},
+	insnFormatVdRs1mRs2Vm:  {},
+	insnFormatVs3Rs1mRs2Vm: {},
+	insnFormatVdRs1mVs2Vm:  {},
+	insnFormatVdVs2Vs1:     {},
+	insnFormatVdVs2Vs1V0:   {},
+	insnFormatVdVs2Vs1Vm:   {},
+	insnFormatVdVs2Rs1V0:   {},
+	insnFormatVdVs2Fs1V0:   {},
+	insnFormatVdVs2Rs1Vm:   {},
+	insnFormatVdVs2Fs1Vm:   {},
+	insnFormatVdVs2ImmV0:   {},
+	insnFormatVdVs2ImmVm:   {},
+	insnFormatVdVs2UimmVm:  {},
+	insnFormatVdVs1Vs2Vm:   {},
+	insnFormatVdRs1Vs2Vm:   {},
+	insnFormatVdFs1Vs2Vm:   {},
+	insnFormatVdVs1:        {},
+	insnFormatVdRs1:        {},
+	insnFormatVdFs1:        {},
+	insnFormatVdImm:        {},
+	insnFormatVdVs2:        {},
+	insnFormatVdVs2Vm:      {},
+	insnFormatRdVs2Vm:      {},
+	insnFormatRdVs2:        {},
+	insnFormatFdVs2:        {},
+	insnFormatVdVm:         {},
 }
 
 type Option struct {
@@ -155,16 +157,21 @@ RVTEST_CODE_END
 }
 
 func (i *insn) genData(buf []byte) []byte {
+	dataSize := i.vlenb() * (8 /* max LMUL */)
 	buf = append(buf, []byte(fmt.Sprintf(`
   .data
 RVTEST_DATA_BEGIN
 
 # Reserve space for test data.
+testdataneg:
+  .zero %d # For strided insns
 testdata:
   .zero %d
+  .zero %d # For strided insns
+  .zero %d # For strided insns
 
 RVTEST_DATA_END
-`, i.vlenb()*(8 /* max LMUL */)))...)
+`, dataSize, dataSize, dataSize, dataSize))...)
 	return buf
 }
 
@@ -180,6 +187,8 @@ func (i *insn) genTestCases() string {
 		return i.genCodeVdRs1m()
 	case insnFormatVs3Rs1m:
 		return i.genCodeVs3Rs1m()
+	case insnFormatVdRs1mRs2Vm:
+		return i.genCodeVdRs1mRs2Vm()
 	default:
 		log.Fatalln("unreachable")
 		return ""

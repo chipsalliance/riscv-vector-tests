@@ -5,6 +5,10 @@ tests = \
   vle64.v \
   vle8.v \
   vlm.v \
+  vlse16.v \
+  vlse32.v \
+  vlse64.v \
+  vlse8.v \
   vse16.v \
   vse32.v \
   vse64.v \
