@@ -33,8 +33,8 @@ build-spike:
 	git am < ../../patches/0001-Modify-addi-to-generate-test-cases.patch 2>/dev/null || true; \
 	mkdir -p build; \
 	cd build; \
-	../configure --prefix=$(.); \
-	$(MAKE) -j8
+	[ -z "$(ls -A build)" ] || ../configure --prefix=$(.); \
+	[ -z "$(ls -A build)" ] || $(MAKE) -j8 \
 
 unittest:
 	go test ./...
