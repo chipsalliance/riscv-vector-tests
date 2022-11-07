@@ -163,7 +163,7 @@ RVTEST_CODE_BEGIN
   TEST_PASSFAIL
 
 RVTEST_CODE_END
-`, c)
+`, ac)
 			res = append(res, buf)
 			ac = ""
 		}
