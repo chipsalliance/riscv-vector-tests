@@ -7,6 +7,7 @@ import (
 	"github.com/ksco/riscv-vector-tests/generator"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync"
 )
@@ -23,7 +24,6 @@ var vlenF = flag.Int("VLEN", 256, "")
 var elenF = flag.Int("ELEN", 64, "")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
-var rewriteMakeFrag = flag.Bool("rewrite-makefrag", true, "rewrite makefrag file.")
 
 func main() {
 	flag.Parse()
@@ -42,15 +42,7 @@ func main() {
 
 	println("Generating...")
 
-	if rewriteMakeFrag != nil && *rewriteMakeFrag {
-		makefrag := "tests = \\\n"
-		for _, file := range files {
-			filename := strings.TrimSuffix(file.Name(), ".toml")
-			makefrag += fmt.Sprintf("  %s \\\n", filename)
-		}
-		writeTo(".", "Makefrag", []byte(makefrag))
-	}
-
+	makefrag := "tests = \\\n"
 	lk := sync.Mutex{}
 	wg := sync.WaitGroup{}
 	wg.Add(len(files))
@@ -73,19 +65,31 @@ func main() {
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
 
-			writeTo(*stage1OutputDirF,
-				strings.TrimSuffix(name, ".toml")+".S", insn.Generate())
+			for idx, testContent := range insn.Generate() {
+				asmFilename := strings.TrimSuffix(name, ".toml") + "-" + strconv.Itoa(idx)
+				writeTo(
+					*stage1OutputDirF,
+					asmFilename+".S",
+					testContent)
+
+				lk.Lock()
+				makefrag += fmt.Sprintf("  %s \\\n", asmFilename)
+				lk.Unlock()
+			}
+
 			wg.Done()
 		}(file)
 	}
 	wg.Wait()
 
+	writeTo(".", "Makefrag", makefrag)
+
 	println("\033[32mOK\033[0m")
 }
 
-func writeTo(path string, name string, contents []byte) {
+func writeTo(path string, name string, contents string) {
 	err := os.MkdirAll(path, 0777)
 	fatalIf(err)
-	err = os.WriteFile(filepath.Join(path, name), contents, 0644)
+	err = os.WriteFile(filepath.Join(path, name), []byte(contents), 0644)
 	fatalIf(err)
 }

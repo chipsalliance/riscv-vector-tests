@@ -6,20 +6,22 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeVdRs1mRs2Vm() string {
+func (i *insn) genCodeVdRs1mRs2Vm() []string {
 	getEEW := func(name string) SEW {
 		eew, _ := strconv.Atoi(
 			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vlse"), ".v"))
 		return SEW(eew)
 	}
+	combinations := i.combinations(allLMULs, []SEW{getEEW(i.Name)}, []bool{false, true})
+	res := make([]string, 0, len(combinations))
 
-	builder := strings.Builder{}
-	builder.WriteString(i.gTestDataAddr())
+	for _, c := range combinations {
+		builder := strings.Builder{}
+		builder.WriteString(i.gTestDataAddr())
 
-	builder.WriteString(i.gWriteRandomData(LMUL(1)))
-	builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(8)))
+		builder.WriteString(i.gWriteRandomData(LMUL(1)))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(8)))
 
-	for _, c := range i.combinations(allLMULs, []SEW{getEEW(i.Name)}, []bool{false, true}) {
 		builder.WriteString(c.comment())
 
 		vd := int(c.LMUL1)
@@ -52,6 +54,7 @@ func (i *insn) genCodeVdRs1mRs2Vm() string {
 			builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, c.SEW))
 			builder.WriteString(i.gMagicInsn(vd))
 		}
+		res = append(res, builder.String())
 	}
-	return builder.String()
+	return res
 }

@@ -50,8 +50,7 @@ func (l LMUL) String() string {
 type VLEN int
 
 func (v VLEN) Valid() bool {
-	// FIXME: Currently, we don't support larger VLENs.
-	return 128 <= v && v <= 256 /* 65536 */ && v&(v-1) == 0
+	return 128 <= v && v <= 65536 && v&(v-1) == 0
 }
 
 type ELEN int

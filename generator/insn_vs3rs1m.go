@@ -5,10 +5,14 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeVs3Rs1m() string {
-	builder := strings.Builder{}
-	builder.WriteString(i.gTestDataAddr())
-	for _, c := range i.combinations([]LMUL{1}, []SEW{8}, []bool{false}) {
+func (i *insn) genCodeVs3Rs1m() []string {
+	combinations := i.combinations([]LMUL{1}, []SEW{8}, []bool{false})
+	res := make([]string, 0, len(combinations))
+
+	for _, c := range combinations {
+		builder := strings.Builder{}
+		builder.WriteString(i.gTestDataAddr())
+
 		builder.WriteString(c.comment())
 
 		vs3 := int(c.LMUL1)
@@ -23,6 +27,8 @@ func (i *insn) genCodeVs3Rs1m() string {
 
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vs3))
+
+		res = append(res, builder.String())
 	}
-	return builder.String()
+	return res
 }
