@@ -18,7 +18,7 @@ func (i *insn) genCodeVs3Rs1mVm() string {
 	builder.WriteString(i.gWriteRandomData(LMUL(1)))
 	builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(8)))
 
-	for _, c := range i.combinations([]SEW{getEEW(i.Name)}) {
+	for _, c := range i.combinations(allLMULs, []SEW{getEEW(i.Name)}, []bool{false, true}) {
 		builder.WriteString(c.comment())
 
 		vs3 := int(c.LMUL1)

@@ -14,6 +14,7 @@ const (
 	insnFormatVdRs1mVm    insnFormat = "vd,(rs1),vm"
 	insnFormatVs3Rs1mVm   insnFormat = "vs3,(rs1),vm"
 	insnFormatVdRs1m      insnFormat = "vd,(rs1)"
+	insnFormatVs3Rs1m     insnFormat = "vs3,(rs1)"
 	insnFormatVdRs1mRs2Vm insnFormat = "vd,(rs1),rs2,vm"
 	insnFormatVdRs1mVs2Vm insnFormat = "vd,(rs1),vs2,vm"
 	insnFormatVdVs2Vs1    insnFormat = "vd,vs2,vs1"
@@ -45,6 +46,7 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVdRs1mVm:    {},
 	insnFormatVs3Rs1mVm:   {},
 	insnFormatVdRs1m:      {},
+	insnFormatVs3Rs1m:     {},
 	insnFormatVdRs1mRs2Vm: {},
 	insnFormatVdRs1mVs2Vm: {},
 	insnFormatVdVs2Vs1:    {},
@@ -174,6 +176,8 @@ func (i *insn) genTestCases() string {
 		return i.genCodeVdRs1mVm()
 	case insnFormatVs3Rs1mVm:
 		return i.genCodeVs3Rs1mVm()
+	case insnFormatVdRs1m:
+		return i.genCodeVdRs1m()
 	default:
 		log.Fatalln("unreachable")
 		return ""
@@ -242,21 +246,22 @@ type combination struct {
 
 func (c *combination) comment() string {
 	return fmt.Sprintf(
-		"\n\n# Generating tests for LMUL: %s, SEW or EEW: %s, Mask: %v\n\n",
+		"\n\n# Generating tests for VL: %d, LMUL: %s, SEW or EEW: %s, Mask: %v\n\n",
+		c.Vl,
 		c.LMUL.String(),
 		c.SEW.String(),
 		c.Mask)
 }
 
-func (i *insn) combinations(sews []SEW) []combination {
+func (i *insn) combinations(lmuls []LMUL, sews []SEW, masks []bool) []combination {
 	res := make([]combination, 0)
-	for _, lmul := range allLMULs {
+	for _, lmul := range lmuls {
 		for _, sew := range sews {
 			if float64(lmul) < float64(sew)/float64(i.Option.ELEN) {
 				continue
 			}
 			lmul1 := LMUL(math.Max(float64(lmul), 1))
-			for _, mask := range []bool{false, true} {
+			for _, mask := range masks {
 				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))
 				for _, vl := range []int{0, vlmax1 / 2, vlmax1, vlmax1 + 1} {
 					res = append(res, combination{
