@@ -168,7 +168,6 @@ RVTEST_DATA_END
 }
 
 func (i *insn) genTestCases() string {
-	// TODO: Use strings.Builder for better performance.
 	switch i.Format {
 	case insnFormatVdVs2Vs1Vm:
 		return i.genCodeVdVs2Vs1Vm()

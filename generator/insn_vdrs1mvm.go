@@ -12,26 +12,28 @@ func (i *insn) genCodeVdRs1mVm() string {
 			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vle"), ".v"))
 		return SEW(eew)
 	}
-	res := i.genCodeTestDataAddr()
-	res += i.genCodeWriteRandomData(LMUL(1))
-	res += i.genCodeLoadDataIntoRegisterGroup(0, LMUL(1), SEW(8))
+
+	builder := strings.Builder{}
+	builder.WriteString(i.genCodeTestDataAddr())
+	builder.WriteString(i.genCodeWriteRandomData(LMUL(1)))
+	builder.WriteString(i.genCodeLoadDataIntoRegisterGroup(0, LMUL(1), SEW(8)))
 
 	for _, c := range i.combinations([]SEW{getEEW(i.Name)}) {
-		res += c.comment()
+		builder.WriteString(c.comment())
 
 		vd := 1 * int(c.LMUL1)
 
-		res += i.genCodeWriteRandomData(c.LMUL1)
-		res += i.genCodeLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW)
-		res += i.genCodeWriteTestData(c.LMUL1, c.SEW, 0)
+		builder.WriteString(i.genCodeWriteRandomData(c.LMUL1))
+		builder.WriteString(i.genCodeLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
+		builder.WriteString(i.genCodeWriteTestData(c.LMUL1, c.SEW, 0))
 
-		res += "# -------------- TEST BEGIN --------------\n"
-		res += i.genCodeVsetvli(c.Vl, c.SEW, c.LMUL)
-		res += fmt.Sprintf("%s v%d, (a0)%s\n", i.Name, vd, v0t(c.Mask))
-		res += "# -------------- TEST END   --------------\n"
+		builder.WriteString("# -------------- TEST BEGIN --------------\n")
+		builder.WriteString(i.genCodeVsetvli(c.Vl, c.SEW, c.LMUL))
+		builder.WriteString(fmt.Sprintf("%s v%d, (a0)%s\n", i.Name, vd, v0t(c.Mask)))
+		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		res += i.genCodeStoreRegisterGroupIntoDataArea(vd, c.LMUL1, c.SEW)
-		res += i.genCodeMagicInsn(int(c.LMUL1))
+		builder.WriteString(i.genCodeStoreRegisterGroupIntoDataArea(vd, c.LMUL1, c.SEW))
+		builder.WriteString(i.genCodeMagicInsn(int(c.LMUL1)))
 	}
-	return res
+	return builder.String()
 }
