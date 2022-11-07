@@ -1,2 +1,6 @@
 tests = \
   vadd.vv \
+  vle16.v \
+  vle32.v \
+  vle64.v \
+  vle8.v \
