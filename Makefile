@@ -17,7 +17,7 @@ RISCV_PREFIX = riscv64-unknown-elf-
 RISCV_GCC = $(RISCV_PREFIX)gcc
 RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles
 
-all: compile-stage2
+all: clean-out compile-stage2
 
 build: build-spike build-generator build-merger
 
@@ -73,13 +73,15 @@ $(tests_stage2):
 	${SPIKE} --isa rv64gcv --varch=vlen:${VLEN},elen:${ELEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 
 
-clean:
-	go clean
+clean-out:
 	rm -rf out/
+
+clean: clean-out
+	go clean
 	rm -rf build/
 
 .PHONY: all \
  		build build-generator unittest \
 		generate-stage1 compile-stage1 $(tests) \
 		$(tests_patch) generate-stage2 compile-stage2 $(tests_stage2) \
-		clean
+		clean-out clean
