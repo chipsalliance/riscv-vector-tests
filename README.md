@@ -7,7 +7,23 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 ## How to use
 
 ```
-make
+make -j8
 ```
 
 After `make`, you will find all the generated tests in `out/bin/stage2/`.
+
+The default VLEN is 256, if you want to generate tests for a different VLEN/ELEN, you can use `make -e VLEN=512 ELEN=128 -j8`.
+
+
+
+## How it works
+
+It uses Spike to generate reference results, which are then combined into tests to form the final result.
+
+
+
+## License
+
+This project uses third-party projects, and the licenses of these projects are attached to the corresponding directories.
+
+The code for this project is distributed under the MIT license.
