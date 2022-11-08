@@ -14,7 +14,7 @@ After `make`, you will find all the generated tests in `out/bin/stage2/`.
 
 The default VLEN is 256, if you want to generate tests for a different VLEN/ELEN, you can use `make -e VLEN=512 ELEN=128 -j8`.
 
-> NOTE: When changing VLEN and ELEN, you need to run `make` twice. The first run will regenerate the Makefrag file, and the second run will generate the tests.
+> NOTE: When changing VLEN and ELEN, you need to run `make` twice. The first run will regenerate the Makefrag file (and then fails), the second run will generate the tests.
 
 ## License
 
