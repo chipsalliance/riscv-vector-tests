@@ -93,3 +93,18 @@ tests = \
   vsse8.v-6 \
   vsse8.v-7 \
   vsse8.v-8 \
+  vsub.vv-0 \
+  vsub.vv-1 \
+  vsub.vv-2 \
+  vsub.vv-3 \
+  vsub.vv-4 \
+  vsub.vv-5 \
+  vsub.vv-6 \
+  vsub.vx-0 \
+  vsub.vx-1 \
+  vsub.vx-2 \
+  vsub.vx-3 \
+  vsub.vx-4 \
+  vsub.vx-5 \
+  vsub.vx-6 \
+  vsub.vx-7 \
