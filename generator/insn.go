@@ -154,12 +154,12 @@ RVTEST_RV64UV
 
 func (i *insn) genCode() []string {
 	res := make([]string, 0)
-	ac := ""
 
+	builder := strings.Builder{}
 	cs := i.genTestCases()
 	for idx, c := range cs {
-		ac += c
-		if strings.Count(ac, "\n") > 50000 || idx == len(cs)-1 {
+		builder.WriteString(c)
+		if strings.Count(builder.String(), "\n") > 10000 || idx == len(cs)-1 {
 			buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
 
@@ -169,9 +169,9 @@ RVTEST_CODE_BEGIN
   TEST_PASSFAIL
 
 RVTEST_CODE_END
-`, ac)
+`, builder.String())
 			res = append(res, buf)
-			ac = ""
+			builder.Reset()
 		}
 	}
 

@@ -53,7 +53,7 @@ func (l LMUL) String() string {
 type VLEN int
 
 func (v VLEN) Valid() bool {
-	return 128 <= v && v <= 1024 && v&(v-1) == 0
+	return 128 <= v && v <= 4096 && v&(v-1) == 0
 }
 
 type ELEN int

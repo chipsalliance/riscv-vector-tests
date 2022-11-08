@@ -27,8 +27,8 @@ func (i *insn) genCodeVs3Rs1mRs2Vm() []string {
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
 			builder.WriteString(i.gWriteRandomData(c.LMUL1 * strides))
 
-			builder.WriteString(fmt.Sprintf("addi a0, a0, %d\n\n",
-				-minStride*i.vlenb()*int(c.LMUL1)))
+			builder.WriteString(fmt.Sprintf("li a5, %d\n", -minStride*i.vlenb()*int(c.LMUL1)))
+			builder.WriteString("add a0, a0, a5\n")
 
 			builder.WriteString("# -------------- TEST BEGIN --------------\n")
 			builder.WriteString(fmt.Sprintf("li s0, %d # stride\n", stride))
@@ -36,19 +36,20 @@ func (i *insn) genCodeVs3Rs1mRs2Vm() []string {
 			builder.WriteString(fmt.Sprintf("%s v%d, (a0), s0%s\n", i.Name, vs3, v0t(c.Mask)))
 			builder.WriteString("# -------------- TEST END   --------------\n")
 
-			builder.WriteString(fmt.Sprintf("addi a0, a0, %d\n\n",
-				minStride*i.vlenb()*int(c.LMUL1)))
+			builder.WriteString(fmt.Sprintf("li a5, %d\n", minStride*i.vlenb()*int(c.LMUL1)))
+			builder.WriteString("add a0, a0, a5\n")
 
 			builder.WriteString("mv a4, a0\n")
 			for a := 0; a < strides; a++ {
 				builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
 				builder.WriteString(i.gMagicInsn(vs3))
-				builder.WriteString(fmt.Sprintf("addi a4, a4,  %d\n", i.vlenb()*int(c.LMUL1)))
+				builder.WriteString(fmt.Sprintf("li a5, %d\n", i.vlenb()*int(c.LMUL1)))
+				builder.WriteString(fmt.Sprintf("add a4, a4, a5\n"))
 				builder.WriteString("mv a0, a4\n")
 			}
 
-			builder.WriteString(fmt.Sprintf("addi a0, a0,  %d\n\n",
-				-strides*i.vlenb()*int(c.LMUL1)))
+			builder.WriteString(fmt.Sprintf("li a5, %d\n", -strides*i.vlenb()*int(c.LMUL1)))
+			builder.WriteString("add a0, a0, a5\n")
 		}
 
 		res = append(res, builder.String())
