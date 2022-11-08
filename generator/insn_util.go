@@ -3,6 +3,8 @@ package generator
 import (
 	"fmt"
 	"log"
+	"strconv"
+	"strings"
 )
 
 type SEW int
@@ -64,4 +66,16 @@ func v0t(mask bool) string {
 		return ", v0.t"
 	}
 	return ""
+}
+
+func trimBoth(name, prefix, suffix string) string {
+	return strings.TrimSuffix(strings.TrimPrefix(name, prefix), suffix)
+}
+
+func getEEW(name, prefix, suffix string) SEW {
+	eew, err := strconv.Atoi(trimBoth(name, prefix, suffix))
+	if err != nil {
+		log.Fatalln("unreachable", err.Error())
+	}
+	return SEW(eew)
 }

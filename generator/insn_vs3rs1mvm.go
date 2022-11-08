@@ -2,17 +2,14 @@ package generator
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 )
 
 func (i *insn) genCodeVs3Rs1mVm() []string {
-	getEEW := func(name string) SEW {
-		eew, _ := strconv.Atoi(
-			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vse"), ".v"))
-		return SEW(eew)
-	}
-	combinations := i.combinations(allLMULs, []SEW{getEEW(i.Name)}, []bool{false, true})
+	combinations := i.combinations(
+		allLMULs,
+		[]SEW{getEEW(i.Name, "vse", ".v")},
+		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations {

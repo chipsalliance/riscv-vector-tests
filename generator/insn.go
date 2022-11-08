@@ -82,6 +82,10 @@ type Option struct {
 	ELEN ELEN
 }
 
+const minStride = -1 // Must be negative
+const maxStride = 3  // Must be greater than 1
+const strides = maxStride - minStride
+
 type insn struct {
 	Name   string     `toml:"name"`
 	Format insnFormat `toml:"format"`
@@ -174,20 +178,21 @@ RVTEST_CODE_END
 
 func (i *insn) genData() string {
 	dataSize := i.vlenb() * (8 /* max LMUL */)
+	// Stride insns
+	if strings.HasPrefix(i.Name, "vlse") ||
+		strings.HasPrefix(i.Name, "vsse") {
+		dataSize *= strides
+	}
 	return fmt.Sprintf(`
   .data
 RVTEST_DATA_BEGIN
 
 # Reserve space for test data.
-testdataneg:
-  .zero %d # For strided insns
 testdata:
   .zero %d
-  .zero %d # For strided insns
-  .zero %d # For strided insns
 
 RVTEST_DATA_END
-`, dataSize, dataSize, dataSize, dataSize)
+`, dataSize)
 }
 
 func (i *insn) genTestCases() []string {
@@ -204,6 +209,8 @@ func (i *insn) genTestCases() []string {
 		return i.genCodeVs3Rs1m()
 	case insnFormatVdRs1mRs2Vm:
 		return i.genCodeVdRs1mRs2Vm()
+	case insnFormatVs3Rs1mRs2Vm:
+		return i.genCodeVs3Rs1mRs2Vm()
 	default:
 		log.Fatalln("unreachable")
 		return nil

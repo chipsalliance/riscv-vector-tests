@@ -1,0 +1,15 @@
+name = "vsse16.v"
+format = "vs3,(rs1),rs2,vm"
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x2],
+    [0xf]
+]
+sew16 = [
+    [0x7fff],
+    [0xfff8],
+    [0xffff]
+]

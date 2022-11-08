@@ -2,17 +2,14 @@ package generator
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 )
 
 func (i *insn) genCodeVdRs1mRs2Vm() []string {
-	getEEW := func(name string) SEW {
-		eew, _ := strconv.Atoi(
-			strings.TrimSuffix(strings.TrimPrefix(i.Name, "vlse"), ".v"))
-		return SEW(eew)
-	}
-	combinations := i.combinations(allLMULs, []SEW{getEEW(i.Name)}, []bool{false, true})
+	combinations := i.combinations(
+		allLMULs,
+		[]SEW{getEEW(i.Name, "vlse", ".v")},
+		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations {
@@ -36,14 +33,14 @@ func (i *insn) genCodeVdRs1mRs2Vm() []string {
 		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vd))
 
-		for _, stride := range []int{-1, 0, 1, 3} {
+		for _, stride := range []int{minStride, 0, 1, maxStride} {
 			stride = stride * int(c.SEW) / 8
 			builder.WriteString(i.gWriteRandomData(c.LMUL1))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
-			builder.WriteString(i.gWriteTestData(c.LMUL1*3, c.SEW, 0))
-			builder.WriteString(fmt.Sprintf("addi a0, a0, -%d\n\n", i.vlenb()*int(c.LMUL1)))
-			builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 0))
-			builder.WriteString(fmt.Sprintf("addi a0, a0,  %d\n\n", i.vlenb()*int(c.LMUL1)))
+			builder.WriteString(i.gWriteTestData(c.LMUL1*strides, c.SEW, 0))
+
+			builder.WriteString(fmt.Sprintf("addi a0, a0, %d\n\n",
+				-minStride*i.vlenb()*int(c.LMUL1)))
 
 			builder.WriteString("# -------------- TEST BEGIN --------------\n")
 			builder.WriteString(fmt.Sprintf("li s0, %d # stride\n", stride))

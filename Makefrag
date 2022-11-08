@@ -22,3 +22,9 @@ tests = \
   vse64.v-0 \
   vse8.v-0 \
   vsm.v-0 \
+  vsse16.v-0 \
+  vsse16.v-1 \
+  vsse32.v-0 \
+  vsse64.v-0 \
+  vsse8.v-0 \
+  vsse8.v-1 \
