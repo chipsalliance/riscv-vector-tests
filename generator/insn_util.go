@@ -3,6 +3,7 @@ package generator
 import (
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -52,7 +53,7 @@ func (l LMUL) String() string {
 type VLEN int
 
 func (v VLEN) Valid() bool {
-	return 128 <= v && v <= 65536 && v&(v-1) == 0
+	return 128 <= v && v <= 1024 && v&(v-1) == 0
 }
 
 type ELEN int
@@ -72,10 +73,11 @@ func trimBoth(name, prefix, suffix string) string {
 	return strings.TrimSuffix(strings.TrimPrefix(name, prefix), suffix)
 }
 
-func getEEW(name, prefix, suffix string) SEW {
-	eew, err := strconv.Atoi(trimBoth(name, prefix, suffix))
+func getEEW(name string) SEW {
+	s := regexp.MustCompile(`v.+?(\d+)\.v`)
+	eew, err := strconv.Atoi(s.FindStringSubmatch(name)[1])
 	if err != nil {
-		log.Fatalln("unreachable", err.Error())
+		log.Fatalln("unreachable")
 	}
 	return SEW(eew)
 }

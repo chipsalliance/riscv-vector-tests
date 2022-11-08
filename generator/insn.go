@@ -19,6 +19,7 @@ const (
 	insnFormatVdRs1mRs2Vm  insnFormat = "vd,(rs1),rs2,vm"
 	insnFormatVs3Rs1mRs2Vm insnFormat = "vs3,(rs1),rs2,vm"
 	insnFormatVdRs1mVs2Vm  insnFormat = "vd,(rs1),vs2,vm"
+	insnFormatVs3Rs1mVs2Vm insnFormat = "vs3,(rs1),vs2,vm"
 	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"
 	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0"
 	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm"
@@ -52,6 +53,7 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVdRs1mRs2Vm:  {},
 	insnFormatVs3Rs1mRs2Vm: {},
 	insnFormatVdRs1mVs2Vm:  {},
+	insnFormatVs3Rs1mVs2Vm: {},
 	insnFormatVdVs2Vs1:     {},
 	insnFormatVdVs2Vs1V0:   {},
 	insnFormatVdVs2Vs1Vm:   {},

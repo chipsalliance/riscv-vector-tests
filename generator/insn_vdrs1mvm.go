@@ -8,7 +8,7 @@ import (
 func (i *insn) genCodeVdRs1mVm() []string {
 	combinations := i.combinations(
 		allLMULs,
-		[]SEW{getEEW(i.Name, "vle", ".v")},
+		[]SEW{getEEW(i.Name)},
 		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
 
