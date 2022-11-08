@@ -1,4 +1,10 @@
 tests = \
+  vadd.vi-0 \
+  vadd.vi-1 \
+  vadd.vi-2 \
+  vadd.vi-3 \
+  vadd.vi-4 \
+  vadd.vi-5 \
   vadd.vv-0 \
   vadd.vv-1 \
   vadd.vv-2 \
