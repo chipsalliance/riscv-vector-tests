@@ -12,20 +12,20 @@ import (
 type insnFormat string
 
 const (
-	insnFormatVdRs1mVm     insnFormat = "vd,(rs1),vm"
-	insnFormatVs3Rs1mVm    insnFormat = "vs3,(rs1),vm"
-	insnFormatVdRs1m       insnFormat = "vd,(rs1)"
-	insnFormatVs3Rs1m      insnFormat = "vs3,(rs1)"
-	insnFormatVdRs1mRs2Vm  insnFormat = "vd,(rs1),rs2,vm"
-	insnFormatVs3Rs1mRs2Vm insnFormat = "vs3,(rs1),rs2,vm"
+	insnFormatVdRs1mVm     insnFormat = "vd,(rs1),vm"      // Added
+	insnFormatVs3Rs1mVm    insnFormat = "vs3,(rs1),vm"     // Added
+	insnFormatVdRs1m       insnFormat = "vd,(rs1)"         // Added
+	insnFormatVs3Rs1m      insnFormat = "vs3,(rs1)"        // Added
+	insnFormatVdRs1mRs2Vm  insnFormat = "vd,(rs1),rs2,vm"  // Added
+	insnFormatVs3Rs1mRs2Vm insnFormat = "vs3,(rs1),rs2,vm" // Added
 	insnFormatVdRs1mVs2Vm  insnFormat = "vd,(rs1),vs2,vm"
 	insnFormatVs3Rs1mVs2Vm insnFormat = "vs3,(rs1),vs2,vm"
 	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"
 	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0"
-	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm"
+	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm" // Added
 	insnFormatVdVs2Rs1V0   insnFormat = "vd,vs2,rs1,v0"
 	insnFormatVdVs2Fs1V0   insnFormat = "vd,vs2,fs1,v0"
-	insnFormatVdVs2Rs1Vm   insnFormat = "vd,vs2,rs1,vm"
+	insnFormatVdVs2Rs1Vm   insnFormat = "vd,vs2,rs1,vm" // Added
 	insnFormatVdVs2Fs1Vm   insnFormat = "vd,vs2,fs1,vm"
 	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0"
 	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"
