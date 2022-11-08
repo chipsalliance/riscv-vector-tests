@@ -6,6 +6,13 @@ tests = \
   vadd.vv-4 \
   vadd.vv-5 \
   vadd.vv-6 \
+  vadd.vx-0 \
+  vadd.vx-1 \
+  vadd.vx-2 \
+  vadd.vx-3 \
+  vadd.vx-4 \
+  vadd.vx-5 \
+  vadd.vx-6 \
   vle16.v-0 \
   vle16.v-1 \
   vle32.v-0 \

@@ -199,8 +199,6 @@ RVTEST_DATA_END
 
 func (i *insn) genTestCases() []string {
 	switch i.Format {
-	case insnFormatVdVs2Vs1Vm:
-		return i.genCodeVdVs2Vs1Vm()
 	case insnFormatVdRs1mVm:
 		return i.genCodeVdRs1mVm()
 	case insnFormatVs3Rs1mVm:
@@ -213,6 +211,10 @@ func (i *insn) genTestCases() []string {
 		return i.genCodeVdRs1mRs2Vm()
 	case insnFormatVs3Rs1mRs2Vm:
 		return i.genCodeVs3Rs1mRs2Vm()
+	case insnFormatVdVs2Vs1Vm:
+		return i.genCodeVdVs2Vs1Vm()
+	case insnFormatVdVs2Rs1Vm:
+		return i.genCodeVdVs2Rs1Vm()
 	default:
 		log.Fatalln("unreachable")
 		return nil
