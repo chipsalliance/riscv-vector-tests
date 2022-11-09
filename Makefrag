@@ -30,6 +30,26 @@ tests = \
   vadd.vx-4 \
   vadd.vx-5 \
   vadd.vx-6 \
+  vand.vi-0 \
+  vand.vi-1 \
+  vand.vi-2 \
+  vand.vi-3 \
+  vand.vi-4 \
+  vand.vi-5 \
+  vand.vv-0 \
+  vand.vv-1 \
+  vand.vv-2 \
+  vand.vv-3 \
+  vand.vv-4 \
+  vand.vv-5 \
+  vand.vv-6 \
+  vand.vx-0 \
+  vand.vx-1 \
+  vand.vx-2 \
+  vand.vx-3 \
+  vand.vx-4 \
+  vand.vx-5 \
+  vand.vx-6 \
   vle16.v-0 \
   vle16.v-1 \
   vle32.v-0 \
@@ -94,6 +114,26 @@ tests = \
   vmxnor.mm-1 \
   vmxor.mm-0 \
   vmxor.mm-1 \
+  vor.vi-0 \
+  vor.vi-1 \
+  vor.vi-2 \
+  vor.vi-3 \
+  vor.vi-4 \
+  vor.vi-5 \
+  vor.vv-0 \
+  vor.vv-1 \
+  vor.vv-2 \
+  vor.vv-3 \
+  vor.vv-4 \
+  vor.vv-5 \
+  vor.vv-6 \
+  vor.vx-0 \
+  vor.vx-1 \
+  vor.vx-2 \
+  vor.vx-3 \
+  vor.vx-4 \
+  vor.vx-5 \
+  vor.vx-6 \
   vrsub.vi-0 \
   vrsub.vi-1 \
   vrsub.vi-2 \
@@ -162,3 +202,23 @@ tests = \
   vsub.vx-5 \
   vsub.vx-6 \
   vsub.vx-7 \
+  vxor.vi-0 \
+  vxor.vi-1 \
+  vxor.vi-2 \
+  vxor.vi-3 \
+  vxor.vi-4 \
+  vxor.vi-5 \
+  vxor.vv-0 \
+  vxor.vv-1 \
+  vxor.vv-2 \
+  vxor.vv-3 \
+  vxor.vv-4 \
+  vxor.vv-5 \
+  vxor.vv-6 \
+  vxor.vx-0 \
+  vxor.vx-1 \
+  vxor.vx-2 \
+  vxor.vx-3 \
+  vxor.vx-4 \
+  vxor.vx-5 \
+  vxor.vx-6 \
