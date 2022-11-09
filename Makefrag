@@ -94,6 +94,19 @@ tests = \
   vmxnor.mm-1 \
   vmxor.mm-0 \
   vmxor.mm-1 \
+  vrsub.vi-0 \
+  vrsub.vi-1 \
+  vrsub.vi-2 \
+  vrsub.vi-3 \
+  vrsub.vi-4 \
+  vrsub.vi-5 \
+  vrsub.vx-0 \
+  vrsub.vx-1 \
+  vrsub.vx-2 \
+  vrsub.vx-3 \
+  vrsub.vx-4 \
+  vrsub.vx-5 \
+  vrsub.vx-6 \
   vsbc.vvm-0 \
   vsbc.vvm-1 \
   vsbc.vvm-2 \
