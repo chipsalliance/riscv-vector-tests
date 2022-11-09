@@ -11,6 +11,22 @@ import (
 
 type insnFormat string
 
+type Option struct {
+	VLEN VLEN
+	ELEN ELEN
+}
+
+const minStride = -1 // Must be negative
+const maxStride = 3  // Must be greater than 1
+const strides = maxStride - minStride
+
+type insn struct {
+	Name   string     `toml:"name"`
+	Format insnFormat `toml:"format"`
+	Tests  tests      `toml:"tests"`
+	Option Option     `toml:"-"`
+}
+
 const (
 	insnFormatVdRs1mVm     insnFormat = "vd,(rs1),vm"      // Added
 	insnFormatVs3Rs1mVm    insnFormat = "vs3,(rs1),vm"     // Added
@@ -20,7 +36,7 @@ const (
 	insnFormatVs3Rs1mRs2Vm insnFormat = "vs3,(rs1),rs2,vm" // Added
 	insnFormatVdRs1mVs2Vm  insnFormat = "vd,(rs1),vs2,vm"
 	insnFormatVs3Rs1mVs2Vm insnFormat = "vs3,(rs1),vs2,vm"
-	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"
+	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1" // Added
 	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0"
 	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm" // Added
 	insnFormatVdVs2Rs1V0   insnFormat = "vd,vs2,rs1,v0"
@@ -79,20 +95,32 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVdVm:         {},
 }
 
-type Option struct {
-	VLEN VLEN
-	ELEN ELEN
-}
-
-const minStride = -1 // Must be negative
-const maxStride = 3  // Must be greater than 1
-const strides = maxStride - minStride
-
-type insn struct {
-	Name   string     `toml:"name"`
-	Format insnFormat `toml:"format"`
-	Tests  tests      `toml:"tests"`
-	Option Option     `toml:"-"`
+func (i *insn) genTestCases() []string {
+	switch i.Format {
+	case insnFormatVdRs1mVm:
+		return i.genCodeVdRs1mVm()
+	case insnFormatVs3Rs1mVm:
+		return i.genCodeVs3Rs1mVm()
+	case insnFormatVdRs1m:
+		return i.genCodeVdRs1m()
+	case insnFormatVs3Rs1m:
+		return i.genCodeVs3Rs1m()
+	case insnFormatVdRs1mRs2Vm:
+		return i.genCodeVdRs1mRs2Vm()
+	case insnFormatVs3Rs1mRs2Vm:
+		return i.genCodeVs3Rs1mRs2Vm()
+	case insnFormatVdVs2Vs1:
+		return i.genCodeVdVs2Vs1()
+	case insnFormatVdVs2Vs1Vm:
+		return i.genCodeVdVs2Vs1Vm()
+	case insnFormatVdVs2Rs1Vm:
+		return i.genCodeVdVs2Rs1Vm()
+	case insnFormatVdVs2ImmVm:
+		return i.genCodeVdVs2ImmVm()
+	default:
+		log.Fatalln("unreachable")
+		return nil
+	}
 }
 
 func ReadInsnFromToml(contents []byte, option Option) (*insn, error) {
@@ -195,32 +223,6 @@ testdata:
 
 RVTEST_DATA_END
 `, dataSize)
-}
-
-func (i *insn) genTestCases() []string {
-	switch i.Format {
-	case insnFormatVdRs1mVm:
-		return i.genCodeVdRs1mVm()
-	case insnFormatVs3Rs1mVm:
-		return i.genCodeVs3Rs1mVm()
-	case insnFormatVdRs1m:
-		return i.genCodeVdRs1m()
-	case insnFormatVs3Rs1m:
-		return i.genCodeVs3Rs1m()
-	case insnFormatVdRs1mRs2Vm:
-		return i.genCodeVdRs1mRs2Vm()
-	case insnFormatVs3Rs1mRs2Vm:
-		return i.genCodeVs3Rs1mRs2Vm()
-	case insnFormatVdVs2Vs1Vm:
-		return i.genCodeVdVs2Vs1Vm()
-	case insnFormatVdVs2Rs1Vm:
-		return i.genCodeVdVs2Rs1Vm()
-	case insnFormatVdVs2ImmVm:
-		return i.genCodeVdVs2ImmVm()
-	default:
-		log.Fatalln("unreachable")
-		return nil
-	}
 }
 
 func (i *insn) vlenb() int {
