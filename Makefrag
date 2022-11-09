@@ -3,6 +3,10 @@ tests = \
   vadc.vvm-1 \
   vadc.vvm-2 \
   vadc.vvm-3 \
+  vadc.vxm-0 \
+  vadc.vxm-1 \
+  vadc.vxm-2 \
+  vadc.vxm-3 \
   vadd.vi-0 \
   vadd.vi-1 \
   vadd.vi-2 \
@@ -91,6 +95,10 @@ tests = \
   vsbc.vvm-1 \
   vsbc.vvm-2 \
   vsbc.vvm-3 \
+  vsbc.vxm-0 \
+  vsbc.vxm-1 \
+  vsbc.vxm-2 \
+  vsbc.vxm-3 \
   vse16.v-0 \
   vse16.v-1 \
   vse32.v-0 \
