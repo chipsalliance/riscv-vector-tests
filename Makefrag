@@ -1,4 +1,7 @@
 tests = \
+  vadc.vim-0 \
+  vadc.vim-1 \
+  vadc.vim-2 \
   vadc.vvm-0 \
   vadc.vvm-1 \
   vadc.vvm-2 \
