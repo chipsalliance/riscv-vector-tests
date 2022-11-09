@@ -43,9 +43,9 @@ const (
 	insnFormatVdVs2Fs1V0   insnFormat = "vd,vs2,fs1,v0"
 	insnFormatVdVs2Rs1Vm   insnFormat = "vd,vs2,rs1,vm" // Added
 	insnFormatVdVs2Fs1Vm   insnFormat = "vd,vs2,fs1,vm"
-	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0" // Added
-	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm" // Added
-	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm"
+	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0"  // Added
+	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"  // Added
+	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm" // Added
 	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"
 	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm"
 	insnFormatVdFs1Vs2Vm   insnFormat = "vd,fs1,vs2,vm"
@@ -123,6 +123,8 @@ func (i *insn) genTestCases() []string {
 		return i.genCodeVdVs2ImmV0()
 	case insnFormatVdVs2ImmVm:
 		return i.genCodeVdVs2ImmVm()
+	case insnFormatVdVs2UimmVm:
+		return i.genCodeVdVs2UimmVm()
 	default:
 		log.Fatalln("unreachable")
 		return nil

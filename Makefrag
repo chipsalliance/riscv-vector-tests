@@ -161,7 +161,25 @@ tests = \
   vse64.v-0 \
   vse8.v-0 \
   vse8.v-1 \
+  vsll.vi-0 \
+  vsll.vi-1 \
+  vsll.vi-2 \
+  vsll.vi-3 \
+  vsll.vi-4 \
+  vsll.vi-5 \
   vsm.v-0 \
+  vsra.vi-0 \
+  vsra.vi-1 \
+  vsra.vi-2 \
+  vsra.vi-3 \
+  vsra.vi-4 \
+  vsra.vi-5 \
+  vsrl.vi-0 \
+  vsrl.vi-1 \
+  vsrl.vi-2 \
+  vsrl.vi-3 \
+  vsrl.vi-4 \
+  vsrl.vi-5 \
   vsse16.v-0 \
   vsse16.v-1 \
   vsse16.v-2 \
