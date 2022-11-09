@@ -167,6 +167,20 @@ tests = \
   vsll.vi-3 \
   vsll.vi-4 \
   vsll.vi-5 \
+  vsll.vv-0 \
+  vsll.vv-1 \
+  vsll.vv-2 \
+  vsll.vv-3 \
+  vsll.vv-4 \
+  vsll.vv-5 \
+  vsll.vv-6 \
+  vsll.vx-0 \
+  vsll.vx-1 \
+  vsll.vx-2 \
+  vsll.vx-3 \
+  vsll.vx-4 \
+  vsll.vx-5 \
+  vsll.vx-6 \
   vsm.v-0 \
   vsra.vi-0 \
   vsra.vi-1 \
@@ -174,12 +188,40 @@ tests = \
   vsra.vi-3 \
   vsra.vi-4 \
   vsra.vi-5 \
+  vsra.vv-0 \
+  vsra.vv-1 \
+  vsra.vv-2 \
+  vsra.vv-3 \
+  vsra.vv-4 \
+  vsra.vv-5 \
+  vsra.vv-6 \
+  vsra.vx-0 \
+  vsra.vx-1 \
+  vsra.vx-2 \
+  vsra.vx-3 \
+  vsra.vx-4 \
+  vsra.vx-5 \
+  vsra.vx-6 \
   vsrl.vi-0 \
   vsrl.vi-1 \
   vsrl.vi-2 \
   vsrl.vi-3 \
   vsrl.vi-4 \
   vsrl.vi-5 \
+  vsrl.vv-0 \
+  vsrl.vv-1 \
+  vsrl.vv-2 \
+  vsrl.vv-3 \
+  vsrl.vv-4 \
+  vsrl.vv-5 \
+  vsrl.vv-6 \
+  vsrl.vx-0 \
+  vsrl.vx-1 \
+  vsrl.vx-2 \
+  vsrl.vx-3 \
+  vsrl.vx-4 \
+  vsrl.vx-5 \
+  vsrl.vx-6 \
   vsse16.v-0 \
   vsse16.v-1 \
   vsse16.v-2 \
