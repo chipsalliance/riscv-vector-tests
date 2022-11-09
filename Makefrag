@@ -1,4 +1,8 @@
 tests = \
+  vadc.vvm-0 \
+  vadc.vvm-1 \
+  vadc.vvm-2 \
+  vadc.vvm-3 \
   vadd.vi-0 \
   vadd.vi-1 \
   vadd.vi-2 \
@@ -83,6 +87,10 @@ tests = \
   vmxnor.mm-1 \
   vmxor.mm-0 \
   vmxor.mm-1 \
+  vsbc.vvm-0 \
+  vsbc.vvm-1 \
+  vsbc.vvm-2 \
+  vsbc.vvm-3 \
   vse16.v-0 \
   vse16.v-1 \
   vse32.v-0 \
