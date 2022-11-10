@@ -52,6 +52,8 @@ tests = \
   vand.vx-6 \
   vfadd.vv-0 \
   vfadd.vv-1 \
+  vfdiv.vv-0 \
+  vfdiv.vv-1 \
   vfmul.vv-0 \
   vfmul.vv-1 \
   vfsub.vv-0 \

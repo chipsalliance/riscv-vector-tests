@@ -6,14 +6,14 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 
 ## Plan
 
-- [ ] `[59/346]` Add tests for all insns (only basic tests, no coverage required)
+- [ ] `[60/346]` Add tests for all insns (only basic tests, no coverage required)
 - [ ] Improve test cases for existing tests
 - [ ] Add check mechanism for CSR register
 - [ ] Add V register coverage test
 - [ ] Support generating user mode tests (for gem5)
 - [ ] Add test coverage statistics
 - [ ] Add negative tests
-- [ ] Add tests for extensions that modifies V.
+- [ ] Add tests for sub extensions (e.g. Zvamo, Zvfh).
 
 ## Prerequisite
 
