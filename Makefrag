@@ -284,6 +284,18 @@ tests = \
   vwadd.vv-1 \
   vwadd.vv-2 \
   vwadd.vv-3 \
+  vwaddu.vv-0 \
+  vwaddu.vv-1 \
+  vwaddu.vv-2 \
+  vwaddu.vv-3 \
+  vwsub.vv-0 \
+  vwsub.vv-1 \
+  vwsub.vv-2 \
+  vwsub.vv-3 \
+  vwsubu.vv-0 \
+  vwsubu.vv-1 \
+  vwsubu.vv-2 \
+  vwsubu.vv-3 \
   vxor.vi-0 \
   vxor.vi-1 \
   vxor.vi-2 \
