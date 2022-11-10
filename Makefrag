@@ -128,6 +128,34 @@ tests = \
   vmor.mm-1 \
   vmorn.mm-0 \
   vmorn.mm-1 \
+  vmul.vv-0 \
+  vmul.vv-1 \
+  vmul.vv-2 \
+  vmul.vv-3 \
+  vmul.vv-4 \
+  vmul.vv-5 \
+  vmul.vv-6 \
+  vmulh.vv-0 \
+  vmulh.vv-1 \
+  vmulh.vv-2 \
+  vmulh.vv-3 \
+  vmulh.vv-4 \
+  vmulh.vv-5 \
+  vmulh.vv-6 \
+  vmulhsu.vv-0 \
+  vmulhsu.vv-1 \
+  vmulhsu.vv-2 \
+  vmulhsu.vv-3 \
+  vmulhsu.vv-4 \
+  vmulhsu.vv-5 \
+  vmulhsu.vv-6 \
+  vmulhu.vv-0 \
+  vmulhu.vv-1 \
+  vmulhu.vv-2 \
+  vmulhu.vv-3 \
+  vmulhu.vv-4 \
+  vmulhu.vv-5 \
+  vmulhu.vv-6 \
   vmxnor.mm-0 \
   vmxnor.mm-1 \
   vmxor.mm-0 \
@@ -288,6 +316,18 @@ tests = \
   vwaddu.vv-1 \
   vwaddu.vv-2 \
   vwaddu.vv-3 \
+  vwmul.vv-0 \
+  vwmul.vv-1 \
+  vwmul.vv-2 \
+  vwmul.vv-3 \
+  vwmulsu.vv-0 \
+  vwmulsu.vv-1 \
+  vwmulsu.vv-2 \
+  vwmulsu.vv-3 \
+  vwmulu.vv-0 \
+  vwmulu.vv-1 \
+  vwmulu.vv-2 \
+  vwmulu.vv-3 \
   vwsub.vv-0 \
   vwsub.vv-1 \
   vwsub.vv-2 \
