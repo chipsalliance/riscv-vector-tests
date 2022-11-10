@@ -54,8 +54,18 @@ tests = \
   vfadd.vv-1 \
   vfdiv.vv-0 \
   vfdiv.vv-1 \
+  vfmax.vv-0 \
+  vfmax.vv-1 \
+  vfmin.vv-0 \
+  vfmin.vv-1 \
   vfmul.vv-0 \
   vfmul.vv-1 \
+  vfsgnj.vv-0 \
+  vfsgnj.vv-1 \
+  vfsgnjn.vv-0 \
+  vfsgnjn.vv-1 \
+  vfsgnjx.vv-0 \
+  vfsgnjx.vv-1 \
   vfsub.vv-0 \
   vfsub.vv-1 \
   vle16.v-0 \
