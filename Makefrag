@@ -148,6 +148,62 @@ tests = \
   vmand.mm-1 \
   vmandn.mm-0 \
   vmandn.mm-1 \
+  vmax.vv-0 \
+  vmax.vv-1 \
+  vmax.vv-2 \
+  vmax.vv-3 \
+  vmax.vv-4 \
+  vmax.vv-5 \
+  vmax.vv-6 \
+  vmax.vx-0 \
+  vmax.vx-1 \
+  vmax.vx-2 \
+  vmax.vx-3 \
+  vmax.vx-4 \
+  vmax.vx-5 \
+  vmax.vx-6 \
+  vmaxu.vv-0 \
+  vmaxu.vv-1 \
+  vmaxu.vv-2 \
+  vmaxu.vv-3 \
+  vmaxu.vv-4 \
+  vmaxu.vv-5 \
+  vmaxu.vv-6 \
+  vmaxu.vx-0 \
+  vmaxu.vx-1 \
+  vmaxu.vx-2 \
+  vmaxu.vx-3 \
+  vmaxu.vx-4 \
+  vmaxu.vx-5 \
+  vmaxu.vx-6 \
+  vmin.vv-0 \
+  vmin.vv-1 \
+  vmin.vv-2 \
+  vmin.vv-3 \
+  vmin.vv-4 \
+  vmin.vv-5 \
+  vmin.vv-6 \
+  vmin.vx-0 \
+  vmin.vx-1 \
+  vmin.vx-2 \
+  vmin.vx-3 \
+  vmin.vx-4 \
+  vmin.vx-5 \
+  vmin.vx-6 \
+  vminu.vv-0 \
+  vminu.vv-1 \
+  vminu.vv-2 \
+  vminu.vv-3 \
+  vminu.vv-4 \
+  vminu.vv-5 \
+  vminu.vv-6 \
+  vminu.vx-0 \
+  vminu.vx-1 \
+  vminu.vx-2 \
+  vminu.vx-3 \
+  vminu.vx-4 \
+  vminu.vx-5 \
+  vminu.vx-6 \
   vmnand.mm-0 \
   vmnand.mm-1 \
   vmnor.mm-0 \
@@ -236,6 +292,34 @@ tests = \
   vor.vx-4 \
   vor.vx-5 \
   vor.vx-6 \
+  vrem.vv-0 \
+  vrem.vv-1 \
+  vrem.vv-2 \
+  vrem.vv-3 \
+  vrem.vv-4 \
+  vrem.vv-5 \
+  vrem.vv-6 \
+  vrem.vx-0 \
+  vrem.vx-1 \
+  vrem.vx-2 \
+  vrem.vx-3 \
+  vrem.vx-4 \
+  vrem.vx-5 \
+  vrem.vx-6 \
+  vremu.vv-0 \
+  vremu.vv-1 \
+  vremu.vv-2 \
+  vremu.vv-3 \
+  vremu.vv-4 \
+  vremu.vv-5 \
+  vremu.vv-6 \
+  vremu.vx-0 \
+  vremu.vx-1 \
+  vremu.vx-2 \
+  vremu.vx-3 \
+  vremu.vx-4 \
+  vremu.vx-5 \
+  vremu.vx-6 \
   vrsub.vi-0 \
   vrsub.vi-1 \
   vrsub.vi-2 \
