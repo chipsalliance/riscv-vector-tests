@@ -224,7 +224,7 @@ func (i *insn) genData() string {
 		strings.HasPrefix(i.Name, "vfw") {
 		dataSize *= 2
 	}
-	
+
 	return fmt.Sprintf(`
   .data
 RVTEST_DATA_BEGIN

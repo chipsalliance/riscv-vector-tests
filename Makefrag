@@ -212,6 +212,62 @@ tests = \
   vmor.mm-1 \
   vmorn.mm-0 \
   vmorn.mm-1 \
+  vmseq.vv-0 \
+  vmseq.vv-1 \
+  vmseq.vv-2 \
+  vmseq.vv-3 \
+  vmseq.vv-4 \
+  vmseq.vv-5 \
+  vmseq.vv-6 \
+  vmsgt.vv-0 \
+  vmsgt.vv-1 \
+  vmsgt.vv-2 \
+  vmsgt.vv-3 \
+  vmsgt.vv-4 \
+  vmsgt.vv-5 \
+  vmsgt.vv-6 \
+  vmsgtu.vv-0 \
+  vmsgtu.vv-1 \
+  vmsgtu.vv-2 \
+  vmsgtu.vv-3 \
+  vmsgtu.vv-4 \
+  vmsgtu.vv-5 \
+  vmsgtu.vv-6 \
+  vmsle.vv-0 \
+  vmsle.vv-1 \
+  vmsle.vv-2 \
+  vmsle.vv-3 \
+  vmsle.vv-4 \
+  vmsle.vv-5 \
+  vmsle.vv-6 \
+  vmsleu.vv-0 \
+  vmsleu.vv-1 \
+  vmsleu.vv-2 \
+  vmsleu.vv-3 \
+  vmsleu.vv-4 \
+  vmsleu.vv-5 \
+  vmsleu.vv-6 \
+  vmslt.vv-0 \
+  vmslt.vv-1 \
+  vmslt.vv-2 \
+  vmslt.vv-3 \
+  vmslt.vv-4 \
+  vmslt.vv-5 \
+  vmslt.vv-6 \
+  vmsltu.vv-0 \
+  vmsltu.vv-1 \
+  vmsltu.vv-2 \
+  vmsltu.vv-3 \
+  vmsltu.vv-4 \
+  vmsltu.vv-5 \
+  vmsltu.vv-6 \
+  vmsne.vv-0 \
+  vmsne.vv-1 \
+  vmsne.vv-2 \
+  vmsne.vv-3 \
+  vmsne.vv-4 \
+  vmsne.vv-5 \
+  vmsne.vv-6 \
   vmul.vv-0 \
   vmul.vv-1 \
   vmul.vv-2 \
@@ -272,6 +328,14 @@ tests = \
   vmxnor.mm-1 \
   vmxor.mm-0 \
   vmxor.mm-1 \
+  vnsra.wv-0 \
+  vnsra.wv-1 \
+  vnsra.wv-2 \
+  vnsra.wv-3 \
+  vnsrl.wv-0 \
+  vnsrl.wv-1 \
+  vnsrl.wv-2 \
+  vnsrl.wv-3 \
   vor.vi-0 \
   vor.vi-1 \
   vor.vi-2 \
