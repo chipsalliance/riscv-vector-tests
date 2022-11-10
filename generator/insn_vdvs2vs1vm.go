@@ -32,6 +32,7 @@ func (i *insn) genCodeVdVs2Vs1Vm() []string {
 
 		vdEMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
 		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
+		vdEEW := c.SEW * SEW(vdSize)
 		vs2EEW := c.SEW * SEW(vs2Size)
 		vd := int(vdEMUL1)
 		vss := []int{
@@ -54,7 +55,7 @@ func (i *insn) genCodeVdVs2Vs1Vm() []string {
 			i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, vdEMUL1, c.SEW))
+		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, vdEMUL1, vdEEW))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())

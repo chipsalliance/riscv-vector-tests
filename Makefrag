@@ -452,46 +452,93 @@ tests = \
   vwadd.vv-1 \
   vwadd.vv-2 \
   vwadd.vv-3 \
+  vwadd.vx-0 \
+  vwadd.vx-1 \
+  vwadd.vx-2 \
+  vwadd.vx-3 \
   vwadd.wv-0 \
   vwadd.wv-1 \
   vwadd.wv-2 \
   vwadd.wv-3 \
+  vwadd.wx-0 \
+  vwadd.wx-1 \
+  vwadd.wx-2 \
+  vwadd.wx-3 \
   vwaddu.vv-0 \
   vwaddu.vv-1 \
   vwaddu.vv-2 \
   vwaddu.vv-3 \
+  vwaddu.vx-0 \
+  vwaddu.vx-1 \
+  vwaddu.vx-2 \
+  vwaddu.vx-3 \
   vwaddu.wv-0 \
   vwaddu.wv-1 \
   vwaddu.wv-2 \
   vwaddu.wv-3 \
+  vwaddu.wx-0 \
+  vwaddu.wx-1 \
+  vwaddu.wx-2 \
+  vwaddu.wx-3 \
   vwmul.vv-0 \
   vwmul.vv-1 \
   vwmul.vv-2 \
   vwmul.vv-3 \
+  vwmul.vx-0 \
+  vwmul.vx-1 \
+  vwmul.vx-2 \
+  vwmul.vx-3 \
+  vwmul.vx-4 \
   vwmulsu.vv-0 \
   vwmulsu.vv-1 \
   vwmulsu.vv-2 \
   vwmulsu.vv-3 \
+  vwmulsu.vx-0 \
+  vwmulsu.vx-1 \
+  vwmulsu.vx-2 \
+  vwmulsu.vx-3 \
+  vwmulsu.vx-4 \
   vwmulu.vv-0 \
   vwmulu.vv-1 \
   vwmulu.vv-2 \
   vwmulu.vv-3 \
+  vwmulu.vx-0 \
+  vwmulu.vx-1 \
+  vwmulu.vx-2 \
+  vwmulu.vx-3 \
+  vwmulu.vx-4 \
   vwsub.vv-0 \
   vwsub.vv-1 \
   vwsub.vv-2 \
   vwsub.vv-3 \
+  vwsub.vx-0 \
+  vwsub.vx-1 \
+  vwsub.vx-2 \
+  vwsub.vx-3 \
   vwsub.wv-0 \
   vwsub.wv-1 \
   vwsub.wv-2 \
   vwsub.wv-3 \
+  vwsub.wx-0 \
+  vwsub.wx-1 \
+  vwsub.wx-2 \
+  vwsub.wx-3 \
   vwsubu.vv-0 \
   vwsubu.vv-1 \
   vwsubu.vv-2 \
   vwsubu.vv-3 \
+  vwsubu.vx-0 \
+  vwsubu.vx-1 \
+  vwsubu.vx-2 \
+  vwsubu.vx-3 \
   vwsubu.wv-0 \
   vwsubu.wv-1 \
   vwsubu.wv-2 \
   vwsubu.wv-3 \
+  vwsubu.wx-0 \
+  vwsubu.wx-1 \
+  vwsubu.wx-2 \
+  vwsubu.wx-3 \
   vxor.vi-0 \
   vxor.vi-1 \
   vxor.vi-2 \
