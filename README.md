@@ -6,7 +6,7 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 
 ## Plan
 
-- [ ] `[131/346]` Add tests for all insns (only basic tests, no coverage required)
+- [ ] `[142/346]` Add tests for all insns (only basic tests, no coverage required)
 - [ ] Improve test cases for existing tests
   - Add more test cases, the more, the better! 
   - Add NaN tests for float insns
