@@ -452,10 +452,18 @@ tests = \
   vwadd.vv-1 \
   vwadd.vv-2 \
   vwadd.vv-3 \
+  vwadd.wv-0 \
+  vwadd.wv-1 \
+  vwadd.wv-2 \
+  vwadd.wv-3 \
   vwaddu.vv-0 \
   vwaddu.vv-1 \
   vwaddu.vv-2 \
   vwaddu.vv-3 \
+  vwaddu.wv-0 \
+  vwaddu.wv-1 \
+  vwaddu.wv-2 \
+  vwaddu.wv-3 \
   vwmul.vv-0 \
   vwmul.vv-1 \
   vwmul.vv-2 \
@@ -472,10 +480,18 @@ tests = \
   vwsub.vv-1 \
   vwsub.vv-2 \
   vwsub.vv-3 \
+  vwsub.wv-0 \
+  vwsub.wv-1 \
+  vwsub.wv-2 \
+  vwsub.wv-3 \
   vwsubu.vv-0 \
   vwsubu.vv-1 \
   vwsubu.vv-2 \
   vwsubu.vv-3 \
+  vwsubu.wv-0 \
+  vwsubu.wv-1 \
+  vwsubu.wv-2 \
+  vwsubu.wv-3 \
   vxor.vi-0 \
   vxor.vi-1 \
   vxor.vi-2 \

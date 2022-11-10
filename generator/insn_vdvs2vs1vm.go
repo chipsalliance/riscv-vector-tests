@@ -9,7 +9,9 @@ import (
 func (i *insn) genCodeVdVs2Vs1Vm() []string {
 	float := strings.HasPrefix(i.Name, "vf")
 	vdWidening := strings.HasPrefix(i.Name, "vw")
+	vs2Widening := strings.HasSuffix(i.Name, "wv")
 	vdSize := iff(vdWidening, 2, 1)
+	vs2Size := iff(vs2Widening, 2, 1)
 
 	sews := iff(float, floatSEWs, allSEWs)
 	sews = iff(vdWidening, sews[:len(sews)-1], sews)
@@ -28,19 +30,22 @@ func (i *insn) genCodeVdVs2Vs1Vm() []string {
 
 		builder.WriteString(c.comment())
 
-		emul1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
-		vd := int(emul1)
+		vdEMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
+		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
+		vs2EEW := c.SEW * SEW(vs2Size)
+		vd := int(vdEMUL1)
 		vss := []int{
 			vd * 2,
-			vd*2 + int(c.LMUL1),
+			vd*2 + int(vs2EMUL1),
 		}
-		builder.WriteString(i.gWriteRandomData(emul1))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, emul1, SEW(8)))
+		builder.WriteString(i.gWriteRandomData(vdEMUL1))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		for idx, vs := range vss {
-			builder.WriteString(i.gWriteTestData(float, c.LMUL1, c.SEW, idx))
-			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs, c.LMUL1, c.SEW))
-		}
+		builder.WriteString(i.gWriteTestData(float, c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[0], c.LMUL1, c.SEW))
+
+		builder.WriteString(i.gWriteTestData(float, vs2EMUL1, vs2EEW, 1))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[1], vs2EMUL1, vs2EEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
@@ -49,7 +54,7 @@ func (i *insn) genCodeVdVs2Vs1Vm() []string {
 			i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, emul1, c.SEW))
+		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, vdEMUL1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())
