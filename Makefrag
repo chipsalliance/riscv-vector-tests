@@ -50,6 +50,34 @@ tests = \
   vand.vx-4 \
   vand.vx-5 \
   vand.vx-6 \
+  vdiv.vv-0 \
+  vdiv.vv-1 \
+  vdiv.vv-2 \
+  vdiv.vv-3 \
+  vdiv.vv-4 \
+  vdiv.vv-5 \
+  vdiv.vv-6 \
+  vdiv.vx-0 \
+  vdiv.vx-1 \
+  vdiv.vx-2 \
+  vdiv.vx-3 \
+  vdiv.vx-4 \
+  vdiv.vx-5 \
+  vdiv.vx-6 \
+  vdivu.vv-0 \
+  vdivu.vv-1 \
+  vdivu.vv-2 \
+  vdivu.vv-3 \
+  vdivu.vv-4 \
+  vdivu.vv-5 \
+  vdivu.vv-6 \
+  vdivu.vx-0 \
+  vdivu.vx-1 \
+  vdivu.vx-2 \
+  vdivu.vx-3 \
+  vdivu.vx-4 \
+  vdivu.vx-5 \
+  vdivu.vx-6 \
   vfadd.vv-0 \
   vfadd.vv-1 \
   vfdiv.vv-0 \
@@ -135,6 +163,13 @@ tests = \
   vmul.vv-4 \
   vmul.vv-5 \
   vmul.vv-6 \
+  vmul.vx-0 \
+  vmul.vx-1 \
+  vmul.vx-2 \
+  vmul.vx-3 \
+  vmul.vx-4 \
+  vmul.vx-5 \
+  vmul.vx-6 \
   vmulh.vv-0 \
   vmulh.vv-1 \
   vmulh.vv-2 \
@@ -142,6 +177,13 @@ tests = \
   vmulh.vv-4 \
   vmulh.vv-5 \
   vmulh.vv-6 \
+  vmulh.vx-0 \
+  vmulh.vx-1 \
+  vmulh.vx-2 \
+  vmulh.vx-3 \
+  vmulh.vx-4 \
+  vmulh.vx-5 \
+  vmulh.vx-6 \
   vmulhsu.vv-0 \
   vmulhsu.vv-1 \
   vmulhsu.vv-2 \
@@ -149,6 +191,13 @@ tests = \
   vmulhsu.vv-4 \
   vmulhsu.vv-5 \
   vmulhsu.vv-6 \
+  vmulhsu.vx-0 \
+  vmulhsu.vx-1 \
+  vmulhsu.vx-2 \
+  vmulhsu.vx-3 \
+  vmulhsu.vx-4 \
+  vmulhsu.vx-5 \
+  vmulhsu.vx-6 \
   vmulhu.vv-0 \
   vmulhu.vv-1 \
   vmulhu.vv-2 \
@@ -156,6 +205,13 @@ tests = \
   vmulhu.vv-4 \
   vmulhu.vv-5 \
   vmulhu.vv-6 \
+  vmulhu.vx-0 \
+  vmulhu.vx-1 \
+  vmulhu.vx-2 \
+  vmulhu.vx-3 \
+  vmulhu.vx-4 \
+  vmulhu.vx-5 \
+  vmulhu.vx-6 \
   vmxnor.mm-0 \
   vmxnor.mm-1 \
   vmxor.mm-0 \
