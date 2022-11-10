@@ -6,7 +6,7 @@ import (
 )
 
 type num interface {
-	uint8 | uint16 | uint32 | uint64 | string
+	uint8 | uint16 | uint32 | uint64 | float32 | float64 | string
 }
 
 func convNum[T num](n any) T {
@@ -29,6 +29,9 @@ type tests struct {
 	// Go toml cannot parse uint64, we parse it ourself.
 	SEW64_ []testCase[string] `toml:"sew64"`
 	SEW64  []testCase[uint64] `toml:"-"`
+
+	FSEW32 []testCase[float32] `toml:"fsew32"`
+	FSEW64 []testCase[float64] `toml:"fsew64"`
 }
 
 func (t *tests) initialize() error {

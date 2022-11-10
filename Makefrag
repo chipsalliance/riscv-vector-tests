@@ -50,6 +50,8 @@ tests = \
   vand.vx-4 \
   vand.vx-5 \
   vand.vx-6 \
+  vfadd.vv-0 \
+  vfadd.vv-1 \
   vle16.v-0 \
   vle16.v-1 \
   vle32.v-0 \

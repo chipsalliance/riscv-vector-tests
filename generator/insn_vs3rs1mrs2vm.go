@@ -23,7 +23,7 @@ func (i *insn) genCodeVs3Rs1mRs2Vm() []string {
 		vs3 := int(c.LMUL1)
 		for _, s := range []int{minStride, 0, 1, maxStride} {
 			stride := s * int(c.SEW) / 8
-			builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 0))
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
 			builder.WriteString(i.gWriteRandomData(c.LMUL1 * strides))
 

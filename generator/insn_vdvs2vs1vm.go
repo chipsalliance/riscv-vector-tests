@@ -6,7 +6,12 @@ import (
 )
 
 func (i *insn) genCodeVdVs2Vs1Vm() []string {
-	combinations := i.combinations(allLMULs, allSEWs, []bool{false, true})
+	float := strings.HasPrefix(i.Name, "vf")
+	combinations := i.combinations(
+		allLMULs,
+		iff(float, allFloatSEWs, allSEWs),
+		[]bool{false, true},
+	)
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations {
@@ -22,7 +27,7 @@ func (i *insn) genCodeVdVs2Vs1Vm() []string {
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 
 		for idx := 0; idx < 2; idx++ {
-			builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, idx))
+			builder.WriteString(i.gWriteTestData(float, c.LMUL1, c.SEW, idx))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup((idx+2)*int(c.LMUL1), c.LMUL1, c.SEW))
 		}
 

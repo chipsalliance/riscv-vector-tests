@@ -24,7 +24,7 @@ func (i *insn) genCodeVdRs1mRs2Vm() []string {
 		vd := int(c.LMUL1)
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
@@ -37,7 +37,7 @@ func (i *insn) genCodeVdRs1mRs2Vm() []string {
 			stride = stride * int(c.SEW) / 8
 			builder.WriteString(i.gWriteRandomData(c.LMUL1))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
-			builder.WriteString(i.gWriteTestData(c.LMUL1*strides, c.SEW, 0))
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1*strides, c.SEW, 0))
 
 			builder.WriteString(fmt.Sprintf("li a5, %d\n", -minStride*i.vlenb()*int(c.LMUL1)))
 			builder.WriteString("add a0, a0, a5\n")

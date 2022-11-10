@@ -22,7 +22,7 @@ func (i *insn) genCodeVdVs2Vs1V0() []string {
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 
 		for idx := 0; idx < 2; idx++ {
-			builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, idx))
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, idx))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup((idx+2)*int(c.LMUL1), c.LMUL1, c.SEW))
 		}
 

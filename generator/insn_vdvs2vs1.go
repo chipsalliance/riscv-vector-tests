@@ -19,7 +19,7 @@ func (i *insn) genCodeVdVs2Vs1() []string {
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 
 		for idx, vs := range vss {
-			builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, idx))
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, idx))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs, c.LMUL1, c.SEW))
 		}
 

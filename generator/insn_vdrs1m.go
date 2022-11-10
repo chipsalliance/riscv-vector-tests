@@ -17,7 +17,7 @@ func (i *insn) genCodeVdRs1m() []string {
 		vd := int(c.LMUL1)
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))

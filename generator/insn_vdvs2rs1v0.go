@@ -22,10 +22,10 @@ func (i *insn) genCodeVdVs2Rs1V0() []string {
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 1))
+		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
 
-		cases := i.testCases(c.SEW)
+		cases := i.integerTestCases(c.SEW)
 		for a := 0; a < len(cases); a++ {
 			builder.WriteString("# -------------- TEST BEGIN --------------\n")
 			switch c.SEW {

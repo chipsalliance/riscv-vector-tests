@@ -237,14 +237,20 @@ func (i *insn) vlenb() int {
 	return int(i.Option.VLEN) / 8
 }
 
-func (i *insn) testCases(sew SEW) [][]any {
+func (i *insn) integerTestCases(sew SEW) [][]any {
+	return i.testCases(false, sew)
+}
+
+func (i *insn) testCases(float bool, sew SEW) [][]any {
 	res := make([][]any, 0)
-	for _, c := range i.Tests.Base {
-		l := make([]any, len(c))
-		for b, op := range c {
-			l[b] = op
+	if !float {
+		for _, c := range i.Tests.Base {
+			l := make([]any, len(c))
+			for b, op := range c {
+				l[b] = op
+			}
+			res = append(res, l)
 		}
-		res = append(res, l)
 	}
 
 	switch sew {
@@ -265,6 +271,16 @@ func (i *insn) testCases(sew SEW) [][]any {
 			res = append(res, l)
 		}
 	case 32:
+		if float {
+			for _, c := range i.Tests.FSEW32 {
+				l := make([]any, len(c))
+				for b, op := range c {
+					l[b] = math.Float32bits(op)
+				}
+				res = append(res, l)
+			}
+			break
+		}
 		for _, c := range i.Tests.SEW32 {
 			l := make([]any, len(c))
 			for b, op := range c {
@@ -273,6 +289,16 @@ func (i *insn) testCases(sew SEW) [][]any {
 			res = append(res, l)
 		}
 	case 64:
+		if float {
+			for _, c := range i.Tests.FSEW64 {
+				l := make([]any, len(c))
+				for b, op := range c {
+					l[b] = math.Float64bits(op)
+				}
+				res = append(res, l)
+			}
+			break
+		}
 		for _, c := range i.Tests.SEW64 {
 			l := make([]any, len(c))
 			for b, op := range c {

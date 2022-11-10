@@ -21,7 +21,7 @@ func (i *insn) genCodeVs3Rs1mVm() []string {
 		builder.WriteString(c.comment())
 
 		vs3 := int(c.LMUL1)
-		builder.WriteString(i.gWriteTestData(c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 

@@ -11,6 +11,7 @@ import (
 type SEW int
 
 var allSEWs = []SEW{8, 16, 32, 64}
+var allFloatSEWs = []SEW{32, 64}
 var validSEWs = map[SEW]struct{}{
 	allSEWs[0]: {},
 	allSEWs[1]: {},
@@ -80,4 +81,11 @@ func getEEW(name string) SEW {
 		log.Fatalln("unreachable")
 	}
 	return SEW(eew)
+}
+
+func iff[T any](condition bool, t T, f T) T {
+	if condition {
+		return t
+	}
+	return f
 }

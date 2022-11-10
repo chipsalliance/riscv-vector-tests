@@ -30,9 +30,13 @@ func (i *insn) gWriteRandomData(lmul LMUL) string {
 	return builder.String()
 }
 
-func (i *insn) gWriteTestData(lmul LMUL, sew SEW, idx int) string {
+func (i *insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
+	return i.gWriteTestData(false, lmul, sew, idx)
+}
+
+func (i *insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
 	nBytes := i.vlenb() * int(lmul)
-	cases := i.testCases(sew)
+	cases := i.testCases(float, sew)
 
 	builder := strings.Builder{}
 	builder.WriteString(fmt.Sprintf("# Write test data into test data area.\n"))
