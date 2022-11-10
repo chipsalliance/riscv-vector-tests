@@ -220,7 +220,11 @@ func (i *insn) genData() string {
 	if strings.HasPrefix(i.Name, "vlse") ||
 		strings.HasPrefix(i.Name, "vsse") {
 		dataSize *= strides
+	} else if strings.HasPrefix(i.Name, "vw") ||
+		strings.HasPrefix(i.Name, "vfw") {
+		dataSize *= 2
 	}
+	
 	return fmt.Sprintf(`
   .data
 RVTEST_DATA_BEGIN
@@ -321,7 +325,7 @@ type combination struct {
 
 func (c *combination) comment() string {
 	return fmt.Sprintf(
-		"\n\n# Generating tests for VL: %d, LMUL: %s, SEW or EEW: %s, Mask: %v\n\n",
+		"\n\n# Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v\n\n",
 		c.Vl,
 		c.LMUL.String(),
 		c.SEW.String(),

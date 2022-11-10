@@ -11,7 +11,7 @@ import (
 type SEW int
 
 var allSEWs = []SEW{8, 16, 32, 64}
-var allFloatSEWs = []SEW{32, 64}
+var floatSEWs = []SEW{32, 64}
 var validSEWs = map[SEW]struct{}{
 	allSEWs[0]: {},
 	allSEWs[1]: {},
@@ -30,6 +30,7 @@ func (s SEW) String() string {
 type LMUL float32
 
 var allLMULs = []LMUL{LMUL(1) / 8, LMUL(1) / 4, LMUL(1) / 2, 1, 2, 4, 8}
+var wideningMULs = []LMUL{LMUL(1) / 8, LMUL(1) / 4, LMUL(1) / 2, 1, 2, 4}
 var validLMULs = map[LMUL]struct{}{
 	allLMULs[0]: {},
 	allLMULs[1]: {},

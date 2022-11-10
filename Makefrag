@@ -280,6 +280,10 @@ tests = \
   vsub.vx-5 \
   vsub.vx-6 \
   vsub.vx-7 \
+  vwadd.vv-0 \
+  vwadd.vv-1 \
+  vwadd.vv-2 \
+  vwadd.vv-3 \
   vxor.vi-0 \
   vxor.vi-1 \
   vxor.vi-2 \
