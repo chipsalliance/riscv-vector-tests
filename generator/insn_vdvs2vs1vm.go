@@ -8,7 +8,7 @@ import (
 
 func (i *insn) genCodeVdVs2Vs1Vm() []string {
 	float := strings.HasPrefix(i.Name, "vf")
-	vdWidening := strings.HasPrefix(i.Name, "vw")
+	vdWidening := strings.HasPrefix(i.Name, "vw") || strings.HasPrefix(i.Name, "vfw")
 	vs2Widening := strings.HasSuffix(i.Name, "wv")
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
