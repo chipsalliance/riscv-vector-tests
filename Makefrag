@@ -292,6 +292,62 @@ tests = \
   vor.vx-4 \
   vor.vx-5 \
   vor.vx-6 \
+  vredand.vs-0 \
+  vredand.vs-1 \
+  vredand.vs-2 \
+  vredand.vs-3 \
+  vredand.vs-4 \
+  vredand.vs-5 \
+  vredand.vs-6 \
+  vredmax.vs-0 \
+  vredmax.vs-1 \
+  vredmax.vs-2 \
+  vredmax.vs-3 \
+  vredmax.vs-4 \
+  vredmax.vs-5 \
+  vredmax.vs-6 \
+  vredmaxu.vs-0 \
+  vredmaxu.vs-1 \
+  vredmaxu.vs-2 \
+  vredmaxu.vs-3 \
+  vredmaxu.vs-4 \
+  vredmaxu.vs-5 \
+  vredmaxu.vs-6 \
+  vredmin.vs-0 \
+  vredmin.vs-1 \
+  vredmin.vs-2 \
+  vredmin.vs-3 \
+  vredmin.vs-4 \
+  vredmin.vs-5 \
+  vredmin.vs-6 \
+  vredminu.vs-0 \
+  vredminu.vs-1 \
+  vredminu.vs-2 \
+  vredminu.vs-3 \
+  vredminu.vs-4 \
+  vredminu.vs-5 \
+  vredminu.vs-6 \
+  vredor.vs-0 \
+  vredor.vs-1 \
+  vredor.vs-2 \
+  vredor.vs-3 \
+  vredor.vs-4 \
+  vredor.vs-5 \
+  vredor.vs-6 \
+  vredsum.vs-0 \
+  vredsum.vs-1 \
+  vredsum.vs-2 \
+  vredsum.vs-3 \
+  vredsum.vs-4 \
+  vredsum.vs-5 \
+  vredsum.vs-6 \
+  vredxor.vs-0 \
+  vredxor.vs-1 \
+  vredxor.vs-2 \
+  vredxor.vs-3 \
+  vredxor.vs-4 \
+  vredxor.vs-5 \
+  vredxor.vs-6 \
   vrem.vv-0 \
   vrem.vv-1 \
   vrem.vv-2 \
@@ -507,6 +563,14 @@ tests = \
   vwmulu.vx-2 \
   vwmulu.vx-3 \
   vwmulu.vx-4 \
+  vwredsum.vs-0 \
+  vwredsum.vs-1 \
+  vwredsum.vs-2 \
+  vwredsum.vs-3 \
+  vwredsumu.vs-0 \
+  vwredsumu.vs-1 \
+  vwredsumu.vs-2 \
+  vwredsumu.vs-3 \
   vwsub.vv-0 \
   vwsub.vv-1 \
   vwsub.vv-2 \
