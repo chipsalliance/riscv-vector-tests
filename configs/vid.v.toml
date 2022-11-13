@@ -1,0 +1,5 @@
+name = "vid.v"
+format = "vd,vm"
+
+[tests]
+base = []
