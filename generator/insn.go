@@ -56,7 +56,7 @@ const (
 	insnFormatVdVs2        insnFormat = "vd,vs2"
 	insnFormatVdVs2Vm      insnFormat = "vd,vs2,vm"
 	insnFormatRdVs2Vm      insnFormat = "rd,vs2,vm"
-	insnFormatRdVs2        insnFormat = "rd,vs2"
+	insnFormatRdVs2        insnFormat = "rd,vs2" // Added
 	insnFormatFdVs2        insnFormat = "fd,vs2" // Added
 	insnFormatVdVm         insnFormat = "vd,vm"  // Added
 )
