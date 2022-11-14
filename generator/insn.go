@@ -127,6 +127,8 @@ func (i *insn) genTestCases() []string {
 		return i.genCodeVdVs2UimmVm()
 	case insnFormatVdFs1:
 		return i.genCodeVdFs1()
+	case insnFormatRdVs2:
+		return i.genCodeRdVs2()
 	case insnFormatFdVs2:
 		return i.genCodeFdVs2()
 	case insnFormatVdVm:

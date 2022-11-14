@@ -363,6 +363,7 @@ tests = \
   vmulhu.vx-4 \
   vmulhu.vx-5 \
   vmulhu.vx-6 \
+  vmv.x.s-0 \
   vmxnor.mm-0 \
   vmxnor.mm-1 \
   vmxor.mm-0 \
