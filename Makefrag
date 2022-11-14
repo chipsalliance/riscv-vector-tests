@@ -116,6 +116,7 @@ tests = \
   vfmin.vv-1 \
   vfmul.vv-0 \
   vfmul.vv-1 \
+  vfmv.f.s-0 \
   vfsgnj.vv-0 \
   vfsgnj.vv-1 \
   vfsgnjn.vv-0 \
