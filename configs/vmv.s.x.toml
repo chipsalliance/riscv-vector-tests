@@ -1,0 +1,9 @@
+name = "vmv.s.x"
+format = "vd,rs1"
+
+[tests]
+base = []
+sew8 = [[0xd6]]
+sew16 = [[0xffd6]]
+sew32 = [[0xffffffd6]]
+sew64 = [["0xffffffffffffffd6"]]
