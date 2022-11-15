@@ -25,10 +25,11 @@ func (i *insn) genCodeVdFs1() []string {
 		switch c.SEW {
 		case 32:
 			builder.WriteString(fmt.Sprintf("li s0, %d\n", convNum[uint32](cases[0][0])))
+			builder.WriteString(fmt.Sprintf("fmv.w.x f0, s0\n"))
 		case 64:
 			builder.WriteString(fmt.Sprintf("li s0, %d\n", convNum[uint64](cases[0][0])))
+			builder.WriteString(fmt.Sprintf("fmv.d.x f0, s0\n"))
 		}
-		builder.WriteString(fmt.Sprintf("fmv.d.x f0, s0\n"))
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
 		builder.WriteString(fmt.Sprintf("%s v%d, f0\n", i.Name, vd))
 		builder.WriteString("# -------------- TEST END   --------------\n")
