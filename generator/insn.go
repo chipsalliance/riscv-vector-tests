@@ -55,10 +55,10 @@ const (
 	insnFormatVdImm        insnFormat = "vd,imm"
 	insnFormatVdVs2        insnFormat = "vd,vs2"
 	insnFormatVdVs2Vm      insnFormat = "vd,vs2,vm"
-	insnFormatRdVs2Vm      insnFormat = "rd,vs2,vm"
-	insnFormatRdVs2        insnFormat = "rd,vs2" // Added
-	insnFormatFdVs2        insnFormat = "fd,vs2" // Added
-	insnFormatVdVm         insnFormat = "vd,vm"  // Added
+	insnFormatRdVs2Vm      insnFormat = "rd,vs2,vm" // Added
+	insnFormatRdVs2        insnFormat = "rd,vs2"    // Added
+	insnFormatFdVs2        insnFormat = "fd,vs2"    // Added
+	insnFormatVdVm         insnFormat = "vd,vm"     // Added
 )
 
 var formats = map[insnFormat]struct{}{
@@ -129,6 +129,8 @@ func (i *insn) genTestCases() []string {
 		return i.genCodeVdRs1()
 	case insnFormatVdFs1:
 		return i.genCodeVdFs1()
+	case insnFormatRdVs2Vm:
+		return i.genCodeRdVs2Vm()
 	case insnFormatRdVs2:
 		return i.genCodeRdVs2()
 	case insnFormatFdVs2:

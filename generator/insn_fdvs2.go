@@ -27,7 +27,7 @@ func (i *insn) genCodeFdVs2() []string {
 		builder.WriteString(fmt.Sprintf("%s f0, v%d\n", i.Name, vs2))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(fmt.Sprintf("vfmv.s.f v%d, f0\n", vd))
+		builder.WriteString(i.gMoveScalarToVector("f0", vd, c.SEW))
 		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vd))
 

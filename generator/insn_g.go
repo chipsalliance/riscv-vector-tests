@@ -89,6 +89,20 @@ func (i *insn) gStoreRegisterGroupIntoData(
 	return builder.String()
 }
 
+func (i *insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
+	float := strings.HasPrefix(scalar, "f")
+	builder := strings.Builder{}
+
+	builder.WriteString(fmt.Sprintf("\n# Move %s to the elem 0 of v%d\n", scalar, vector))
+
+	builder.WriteString("li t0, -1\n")
+	builder.WriteString(fmt.Sprintf("vsetvli t1, t0, %s,m1,ta,ma\n", sew.String()))
+	builder.WriteString(fmt.Sprintf("v%smv.s.%s v%d, %s\n",
+		iff(float, "f", ""), iff(float, "f", "x"), vector, scalar))
+
+	return builder.String()
+}
+
 func (i *insn) gMagicInsn(group int) string {
 	return fmt.Sprintf("addi x0, x%d, %d\n\n", 1*int(group), 2*int(group))
 }

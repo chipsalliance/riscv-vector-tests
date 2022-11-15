@@ -78,6 +78,7 @@ tests = \
   vasubu.vv-4 \
   vasubu.vv-5 \
   vasubu.vv-6 \
+  vcpop.m-0 \
   vdiv.vv-0 \
   vdiv.vv-1 \
   vdiv.vv-2 \
