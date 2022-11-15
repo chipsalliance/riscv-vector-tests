@@ -3,10 +3,11 @@ package generator
 import (
 	"errors"
 	"fmt"
-	"github.com/pelletier/go-toml/v2"
 	"log"
 	"math"
 	"strings"
+
+	"github.com/pelletier/go-toml/v2"
 )
 
 type insnFormat string
@@ -119,6 +120,8 @@ func (i *insn) genTestCases() []string {
 		return i.genCodeVdVs2Vs1Vm()
 	case insnFormatVdVs2Rs1Vm:
 		return i.genCodeVdVs2Rs1Vm()
+	case insnFormatVdVs2Fs1Vm:
+		return i.genCodeVdVs2Fs1Vm()
 	case insnFormatVdVs2ImmV0:
 		return i.genCodeVdVs2ImmV0()
 	case insnFormatVdVs2ImmVm:

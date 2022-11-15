@@ -107,33 +107,64 @@ tests = \
   vdivu.vx-4 \
   vdivu.vx-5 \
   vdivu.vx-6 \
+  vfadd.vf-0 \
+  vfadd.vf-1 \
   vfadd.vv-0 \
   vfadd.vv-1 \
+  vfdiv.vf-0 \
+  vfdiv.vf-1 \
   vfdiv.vv-0 \
   vfdiv.vv-1 \
   vfirst.m-0 \
+  vfmax.vf-0 \
+  vfmax.vf-1 \
   vfmax.vv-0 \
   vfmax.vv-1 \
+  vfmin.vf-0 \
+  vfmin.vf-1 \
   vfmin.vv-0 \
   vfmin.vv-1 \
+  vfmul.vf-0 \
+  vfmul.vf-1 \
   vfmul.vv-0 \
   vfmul.vv-1 \
   vfmv.f.s-0 \
   vfmv.s.f-0 \
   vfmv.v.f-0 \
+  vfrdiv.vf-0 \
+  vfrdiv.vf-1 \
+  vfrsub.vf-0 \
+  vfrsub.vf-1 \
+  vfsgnj.vf-0 \
+  vfsgnj.vf-1 \
   vfsgnj.vv-0 \
   vfsgnj.vv-1 \
+  vfsgnjn.vf-0 \
+  vfsgnjn.vf-1 \
   vfsgnjn.vv-0 \
   vfsgnjn.vv-1 \
+  vfsgnjx.vf-0 \
+  vfsgnjx.vf-1 \
   vfsgnjx.vv-0 \
   vfsgnjx.vv-1 \
+  vfslide1down.vf-0 \
+  vfslide1down.vf-1 \
+  vfslide1up.vf-0 \
+  vfslide1up.vf-1 \
+  vfsub.vf-0 \
+  vfsub.vf-1 \
   vfsub.vv-0 \
   vfsub.vv-1 \
+  vfwadd.vf-0 \
   vfwadd.vv-0 \
+  vfwadd.wf-0 \
   vfwadd.wv-0 \
+  vfwmul.vf-0 \
   vfwmul.vv-0 \
   vfwmul.vv-1 \
+  vfwsub.vf-0 \
   vfwsub.vv-0 \
+  vfwsub.wf-0 \
   vfwsub.wv-0 \
   vid.v-0 \
   vid.v-1 \
