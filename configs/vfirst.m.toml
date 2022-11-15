@@ -1,0 +1,5 @@
+name = "vfirst.m"
+format = "rd,vs2,vm"
+
+[tests]
+base = []

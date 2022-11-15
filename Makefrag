@@ -111,6 +111,7 @@ tests = \
   vfadd.vv-1 \
   vfdiv.vv-0 \
   vfdiv.vv-1 \
+  vfirst.m-0 \
   vfmax.vv-0 \
   vfmax.vv-1 \
   vfmin.vv-0 \
