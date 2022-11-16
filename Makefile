@@ -1,3 +1,4 @@
+USER = 0
 VLEN = 256
 ELEN = 64
 OUTPUT = out/
@@ -69,8 +70,13 @@ compile-stage2: generate-stage2
 tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
+ifeq ($(USER), 0)
 	$(RISCV_GCC) -march=rv64gv $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 	${SPIKE} --isa rv64gcv --varch=vlen:${VLEN},elen:${ELEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+else
+	$(RISCV_GCC) -march=rv64gv $(RISCV_GCC_OPTS) -Ienv/ps -Imacros -Tenv/ps/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	${SPIKE} --isa rv64gcv --varch=vlen:${VLEN},elen:${ELEN} $(shell which pk) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+endif
 
 
 clean-out:

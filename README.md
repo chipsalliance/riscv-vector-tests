@@ -14,7 +14,7 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
   - ...
 - [ ] Add check mechanism for CSR register
 - [ ] Add V register coverage test
-- [ ] Support generating user mode tests (for gem5)
+- [x] Support generating user mode tests (for gem5)
 - [ ] Add test coverage statistics
 - [ ] Add negative tests
 - [ ] Add tests for sub extensions (e.g. Zvamo, Zvfh).
@@ -24,6 +24,7 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 1. `riscv64-unknown-elf-gcc` with RVV 1.0 support
 2. The Spike simulator
 3. Golang 1.19+
+4. `riscv-pk` if you need to generate user mode binaries
 
 ## How to use
 
@@ -36,6 +37,8 @@ After `make`, you will find all the generated tests in `out/bin/stage2/`.
 The default VLEN is 256, if you want to generate tests for a different VLEN/ELEN, you can use `make -e VLEN=512 ELEN=128 -j8`.
 
 > NOTE: When changing VLEN and ELEN, you need to run `make` twice. The first run will regenerate the Makefrag file (and then fails), the second run will generate the tests.
+
+If you want to generate user mode binaries, you can use `make -e USER=1 -j8`.
 
 ## License
 
