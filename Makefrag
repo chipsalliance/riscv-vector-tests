@@ -111,6 +111,7 @@ tests = \
   vfadd.vf-1 \
   vfadd.vv-0 \
   vfadd.vv-1 \
+  vfclass.v-0 \
   vfdiv.vf-0 \
   vfdiv.vf-1 \
   vfdiv.vv-0 \
