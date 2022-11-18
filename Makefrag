@@ -145,6 +145,14 @@ tests = \
   vfmv.f.s-0 \
   vfmv.s.f-0 \
   vfmv.v.f-0 \
+  vfncvt.f.f.w-0 \
+  vfncvt.f.x.w-0 \
+  vfncvt.f.xu.w-0 \
+  vfncvt.rod.f.f.w-0 \
+  vfncvt.rtz.x.f.w-0 \
+  vfncvt.rtz.xu.f.w-0 \
+  vfncvt.x.f.w-0 \
+  vfncvt.xu.f.w-0 \
   vfrdiv.vf-0 \
   vfrdiv.vf-1 \
   vfrsub.vf-0 \

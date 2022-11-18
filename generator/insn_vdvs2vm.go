@@ -8,11 +8,12 @@ import (
 
 func (i *insn) genCodeVdVs2Vm() []string {
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
-	vs2Widening := strings.HasSuffix(i.Name, "wf")
+	vdNarrowing := strings.HasPrefix(i.Name, "vfn")
 	vdSize := iff(vdWidening, 2, 1)
+	vs2Size := iff(vdNarrowing, 2, 1)
 
-	lmuls := iff(vdWidening || vs2Widening, wideningMULs, allLMULs)
-	sews := iff(vdWidening || vs2Widening, floatSEWs[:len(floatSEWs)-1], floatSEWs)
+	lmuls := iff(vdWidening || vdNarrowing, wideningMULs, allLMULs)
+	sews := iff(vdWidening || vdNarrowing, floatSEWs[:len(floatSEWs)-1], floatSEWs)
 	combinations := i.combinations(lmuls, sews, []bool{false, true})
 
 	res := make([]string, 0, len(combinations))
@@ -26,14 +27,16 @@ func (i *insn) genCodeVdVs2Vm() []string {
 
 		vdEMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
 		vdEEW := c.SEW * SEW(vdSize)
+		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
+		vs2EEW := c.SEW * SEW(vs2Size)
 		vd := int(vdEMUL1)
 		vs2 := vd * 2
 
 		builder.WriteString(i.gWriteRandomData(vdEMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(false, c.LMUL1, c.SEW, 0))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
+		builder.WriteString(i.gWriteTestData(false, vs2EMUL1, vs2EEW, 0))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, vs2EMUL1, vs2EEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))

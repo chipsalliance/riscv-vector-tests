@@ -1,0 +1,9 @@
+name = "vfncvt.rod.f.f.w"
+format = "vd,vs2,vm"
+
+[tests]
+sew64 = [
+    ["0xffffffffffffffff"],
+    ["0xfffffffffffffffe"],
+    ["0x2"]
+]
