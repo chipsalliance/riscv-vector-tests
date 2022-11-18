@@ -1,0 +1,4 @@
+name = "viota.m"
+format = "vd,vs2,vm/2"
+
+[tests]

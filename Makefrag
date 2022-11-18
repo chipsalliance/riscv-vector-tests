@@ -197,6 +197,8 @@ tests = \
   vfwsub.wv-0 \
   vid.v-0 \
   vid.v-1 \
+  viota.m-0 \
+  viota.m-1 \
   vle16.v-0 \
   vle16.v-1 \
   vle32.v-0 \
@@ -313,6 +315,7 @@ tests = \
   vmor.mm-1 \
   vmorn.mm-0 \
   vmorn.mm-1 \
+  vmsbf.m-0 \
   vmseq.vv-0 \
   vmseq.vv-1 \
   vmseq.vv-2 \
@@ -334,6 +337,7 @@ tests = \
   vmsgtu.vv-4 \
   vmsgtu.vv-5 \
   vmsgtu.vv-6 \
+  vmsif.m-0 \
   vmsle.vv-0 \
   vmsle.vv-1 \
   vmsle.vv-2 \
@@ -369,6 +373,7 @@ tests = \
   vmsne.vv-4 \
   vmsne.vv-5 \
   vmsne.vv-6 \
+  vmsof.m-0 \
   vmul.vv-0 \
   vmul.vv-1 \
   vmul.vv-2 \
