@@ -1,0 +1,4 @@
+name = "vmv4r.v"
+format = "vd,vs2"
+
+[tests]

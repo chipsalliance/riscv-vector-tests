@@ -437,8 +437,13 @@ tests = \
   vmulhu.vx-5 \
   vmulhu.vx-6 \
   vmv.s.x-0 \
+  vmv.v.i-0 \
   vmv.v.x-0 \
   vmv.x.s-0 \
+  vmv1r.v-0 \
+  vmv2r.v-0 \
+  vmv4r.v-0 \
+  vmv8r.v-0 \
   vmxnor.mm-0 \
   vmxnor.mm-1 \
   vmxor.mm-0 \
