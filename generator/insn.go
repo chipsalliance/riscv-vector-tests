@@ -48,7 +48,7 @@ const (
 	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"  // Added
 	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm" // Added
 	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"
-	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm"
+	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm" // Added
 	insnFormatVdFs1Vs2Vm   insnFormat = "vd,fs1,vs2,vm" // Added
 	insnFormatVdVs1        insnFormat = "vd,vs1"        // Added
 	insnFormatVdRs1        insnFormat = "vd,rs1"        // Added
@@ -124,6 +124,8 @@ func (i *Insn) genTestCases() []string {
 		return i.genCodeVdVs2Vs1Vm()
 	case insnFormatVdVs2Rs1Vm:
 		return i.genCodeVdVs2Rs1Vm()
+	case insnFormatVdRs1Vs2Vm:
+		return i.genCodeVdRs1Vs2Vm()
 	case insnFormatVdVs2Fs1Vm:
 		return i.genCodeVdVs2Fs1Vm()
 	case insnFormatVdVs2ImmV0:

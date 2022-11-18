@@ -301,6 +301,22 @@ tests = \
   vlse8.v-7 \
   vlse8.v-8 \
   vlse8.v-9 \
+  vmacc.vx-0 \
+  vmacc.vx-1 \
+  vmacc.vx-2 \
+  vmacc.vx-3 \
+  vmacc.vx-4 \
+  vmacc.vx-5 \
+  vmacc.vx-6 \
+  vmacc.vx-7 \
+  vmadd.vx-0 \
+  vmadd.vx-1 \
+  vmadd.vx-2 \
+  vmadd.vx-3 \
+  vmadd.vx-4 \
+  vmadd.vx-5 \
+  vmadd.vx-6 \
+  vmadd.vx-7 \
   vmand.mm-0 \
   vmand.mm-1 \
   vmandn.mm-0 \
@@ -578,6 +594,22 @@ tests = \
   vnclipu.wx-1 \
   vnclipu.wx-2 \
   vnclipu.wx-3 \
+  vnmsac.vx-0 \
+  vnmsac.vx-1 \
+  vnmsac.vx-2 \
+  vnmsac.vx-3 \
+  vnmsac.vx-4 \
+  vnmsac.vx-5 \
+  vnmsac.vx-6 \
+  vnmsac.vx-7 \
+  vnmsub.vx-0 \
+  vnmsub.vx-1 \
+  vnmsub.vx-2 \
+  vnmsub.vx-3 \
+  vnmsub.vx-4 \
+  vnmsub.vx-5 \
+  vnmsub.vx-6 \
+  vnmsub.vx-7 \
   vnsra.wv-0 \
   vnsra.wv-1 \
   vnsra.wv-2 \
@@ -999,6 +1031,26 @@ tests = \
   vwaddu.wx-1 \
   vwaddu.wx-2 \
   vwaddu.wx-3 \
+  vwmacc.vx-0 \
+  vwmacc.vx-1 \
+  vwmacc.vx-2 \
+  vwmacc.vx-3 \
+  vwmacc.vx-4 \
+  vwmaccsu.vx-0 \
+  vwmaccsu.vx-1 \
+  vwmaccsu.vx-2 \
+  vwmaccsu.vx-3 \
+  vwmaccsu.vx-4 \
+  vwmaccu.vx-0 \
+  vwmaccu.vx-1 \
+  vwmaccu.vx-2 \
+  vwmaccu.vx-3 \
+  vwmaccu.vx-4 \
+  vwmaccus.vx-0 \
+  vwmaccus.vx-1 \
+  vwmaccus.vx-2 \
+  vwmaccus.vx-3 \
+  vwmaccus.vx-4 \
   vwmul.vv-0 \
   vwmul.vv-1 \
   vwmul.vv-2 \
