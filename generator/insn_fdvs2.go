@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeFdVs2() []string {
+func (i *Insn) genCodeFdVs2() []string {
 	combinations := i.combinations([]LMUL{1}, floatSEWs, []bool{false})
 
 	res := make([]string, 0, len(combinations))

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeVdVs2Fs1Vm() []string {
+func (i *Insn) genCodeVdVs2Fs1Vm() []string {
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wf")
 	vdSize := iff(vdWidening, 2, 1)

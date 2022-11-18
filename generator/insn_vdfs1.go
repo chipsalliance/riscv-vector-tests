@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeVdFs1() []string {
+func (i *Insn) genCodeVdFs1() []string {
 	lmuls := iff(strings.HasSuffix(i.Name, ".s.f"), []LMUL{1}, allLMULs)
 	combinations := i.combinations(lmuls, floatSEWs, []bool{false})
 

@@ -6,11 +6,11 @@ import (
 	"strings"
 )
 
-func (i *insn) gTestDataAddr() string {
+func (i *Insn) gTestDataAddr() string {
 	return fmt.Sprintf("la a0, testdata\n")
 }
 
-func (i *insn) gWriteRandomData(lmul LMUL) string {
+func (i *Insn) gWriteRandomData(lmul LMUL) string {
 	nBytes := i.vlenb() * int(lmul)
 	rdata := genRandomData(int64(nBytes))
 
@@ -30,11 +30,11 @@ func (i *insn) gWriteRandomData(lmul LMUL) string {
 	return builder.String()
 }
 
-func (i *insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
+func (i *Insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
 	return i.gWriteTestData(false, lmul, sew, idx)
 }
 
-func (i *insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
+func (i *Insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
 	nBytes := i.vlenb() * int(lmul)
 	cases := i.testCases(float, sew)
 
@@ -67,7 +67,7 @@ func (i *insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
 	return builder.String()
 }
 
-func (i *insn) gLoadDataIntoRegisterGroup(
+func (i *Insn) gLoadDataIntoRegisterGroup(
 	group int, lmul LMUL, sew SEW) string {
 	builder := strings.Builder{}
 	builder.WriteString(fmt.Sprintf("\n# Load data into v%d register group.\n", group))
@@ -77,7 +77,7 @@ func (i *insn) gLoadDataIntoRegisterGroup(
 	return builder.String()
 }
 
-func (i *insn) gStoreRegisterGroupIntoData(
+func (i *Insn) gStoreRegisterGroupIntoData(
 	group int, lmul LMUL, sew SEW) string {
 	builder := strings.Builder{}
 
@@ -89,7 +89,7 @@ func (i *insn) gStoreRegisterGroupIntoData(
 	return builder.String()
 }
 
-func (i *insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
+func (i *Insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
 	float := strings.HasPrefix(scalar, "f")
 	builder := strings.Builder{}
 
@@ -103,11 +103,11 @@ func (i *insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
 	return builder.String()
 }
 
-func (i *insn) gMagicInsn(group int) string {
+func (i *Insn) gMagicInsn(group int) string {
 	return fmt.Sprintf("addi x0, x%d, %d\n\n", 1*int(group), 2*int(group))
 }
 
-func (i *insn) gVsetvli(vl int, sew SEW, lmul LMUL) string {
+func (i *Insn) gVsetvli(vl int, sew SEW, lmul LMUL) string {
 	res := fmt.Sprintf("li t0, %d\n", vl)
 	res += fmt.Sprintf("vsetvli t1, t0, %s,%s,ta,ma\n",
 		sew.String(), lmul.String())

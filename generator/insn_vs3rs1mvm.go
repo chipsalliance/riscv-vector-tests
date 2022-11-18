@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (i *insn) genCodeVs3Rs1mVm() []string {
+func (i *Insn) genCodeVs3Rs1mVm() []string {
 	combinations := i.combinations(
 		allLMULs,
 		[]SEW{getEEW(i.Name)},
