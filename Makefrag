@@ -155,6 +155,10 @@ tests = \
   vfncvt.xu.f.w-0 \
   vfrdiv.vf-0 \
   vfrdiv.vf-1 \
+  vfrec7.v-0 \
+  vfrec7.v-1 \
+  vfrsqrt7.v-0 \
+  vfrsqrt7.v-1 \
   vfrsub.vf-0 \
   vfrsub.vf-1 \
   vfsgnj.vf-0 \
@@ -173,6 +177,8 @@ tests = \
   vfslide1down.vf-1 \
   vfslide1up.vf-0 \
   vfslide1up.vf-1 \
+  vfsqrt.v-0 \
+  vfsqrt.v-1 \
   vfsub.vf-0 \
   vfsub.vf-1 \
   vfsub.vv-0 \
