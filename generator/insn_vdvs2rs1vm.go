@@ -12,9 +12,9 @@ func (i *Insn) genCodeVdVs2Rs1Vm() []string {
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
 
-	sews := iff(vdWidening, allSEWs[:len(allSEWs)-1], allSEWs)
+	sews := iff(vdWidening || vs2Widening, allSEWs[:len(allSEWs)-1], allSEWs)
 	combinations := i.combinations(
-		iff(vdWidening, wideningMULs, allLMULs),
+		iff(vdWidening || vs2Widening, wideningMULs, allLMULs),
 		sews,
 		[]bool{false, true},
 	)
