@@ -112,10 +112,19 @@ tests = \
   vfadd.vv-0 \
   vfadd.vv-1 \
   vfclass.v-0 \
+  vfclass.v-1 \
   vfcvt.f.x.v-0 \
+  vfcvt.f.x.v-1 \
   vfcvt.f.xu.v-0 \
+  vfcvt.f.xu.v-1 \
+  vfcvt.rtz.x.f.v-0 \
+  vfcvt.rtz.x.f.v-1 \
+  vfcvt.rtz.xu.f.v-0 \
+  vfcvt.rtz.xu.f.v-1 \
   vfcvt.x.f.v-0 \
+  vfcvt.x.f.v-1 \
   vfcvt.xu.f.v-0 \
+  vfcvt.xu.f.v-1 \
   vfdiv.vf-0 \
   vfdiv.vf-1 \
   vfdiv.vv-0 \
@@ -164,6 +173,13 @@ tests = \
   vfwadd.vv-0 \
   vfwadd.wf-0 \
   vfwadd.wv-0 \
+  vfwcvt.f.f.v-0 \
+  vfwcvt.f.x.v-0 \
+  vfwcvt.f.xu.v-0 \
+  vfwcvt.rtz.x.f.v-0 \
+  vfwcvt.rtz.xu.f.v-0 \
+  vfwcvt.x.f.v-0 \
+  vfwcvt.xu.f.v-0 \
   vfwmul.vf-0 \
   vfwmul.vv-0 \
   vfwmul.vv-1 \
