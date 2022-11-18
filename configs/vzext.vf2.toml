@@ -1,0 +1,26 @@
+name = "vzext.vf2"
+format = "vd,vs2,vm/3"
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x7f],
+    [0xfe],
+    [0xff],
+]
+
+sew8 = [
+]
+
+sew16 = [
+    [0x7fff],
+    [0xfffe],
+    [0xffff],
+]
+
+sew32 = [
+    [0x7fffffff],
+    [0xfffffffe],
+    [0xffffffff],
+]

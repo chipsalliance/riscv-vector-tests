@@ -1,0 +1,14 @@
+name = "vsext.vf8"
+format = "vd,vs2,vm/3"
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x7f],
+    [0xfe],
+    [0xff],
+]
+
+sew8 = [
+]

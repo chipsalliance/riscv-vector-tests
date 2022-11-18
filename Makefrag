@@ -598,6 +598,10 @@ tests = \
   vse64.v-0 \
   vse8.v-0 \
   vse8.v-1 \
+  vsext.vf2-0 \
+  vsext.vf2-1 \
+  vsext.vf4-0 \
+  vsext.vf8-0 \
   vsll.vi-0 \
   vsll.vi-1 \
   vsll.vi-2 \
@@ -853,3 +857,7 @@ tests = \
   vxor.vx-4 \
   vxor.vx-5 \
   vxor.vx-6 \
+  vzext.vf2-0 \
+  vzext.vf2-1 \
+  vzext.vf4-0 \
+  vzext.vf8-0 \
