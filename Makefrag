@@ -534,6 +534,8 @@ tests = \
   vmulhu.vx-6 \
   vmv.s.x-0 \
   vmv.v.i-0 \
+  vmv.v.v-0 \
+  vmv.v.v-1 \
   vmv.v.x-0 \
   vmv.x.s-0 \
   vmv1r.v-0 \
