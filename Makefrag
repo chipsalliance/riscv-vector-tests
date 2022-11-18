@@ -160,6 +160,8 @@ tests = \
   vfirst.m-0 \
   vfmacc.vf-0 \
   vfmacc.vf-1 \
+  vfmadd.vf-0 \
+  vfmadd.vf-1 \
   vfmax.vf-0 \
   vfmax.vf-1 \
   vfmax.vv-0 \
@@ -168,6 +170,10 @@ tests = \
   vfmin.vf-1 \
   vfmin.vv-0 \
   vfmin.vv-1 \
+  vfmsac.vf-0 \
+  vfmsac.vf-1 \
+  vfmsub.vf-0 \
+  vfmsub.vf-1 \
   vfmul.vf-0 \
   vfmul.vf-1 \
   vfmul.vv-0 \
@@ -183,6 +189,14 @@ tests = \
   vfncvt.rtz.xu.f.w-0 \
   vfncvt.x.f.w-0 \
   vfncvt.xu.f.w-0 \
+  vfnmacc.vf-0 \
+  vfnmacc.vf-1 \
+  vfnmadd.vf-0 \
+  vfnmadd.vf-1 \
+  vfnmsac.vf-0 \
+  vfnmsac.vf-1 \
+  vfnmsub.vf-0 \
+  vfnmsub.vf-1 \
   vfrdiv.vf-0 \
   vfrdiv.vf-1 \
   vfrec7.v-0 \
@@ -224,9 +238,13 @@ tests = \
   vfwcvt.rtz.xu.f.v-0 \
   vfwcvt.x.f.v-0 \
   vfwcvt.xu.f.v-0 \
+  vfwmacc.vf-0 \
+  vfwmsac.vf-0 \
   vfwmul.vf-0 \
   vfwmul.vv-0 \
   vfwmul.vv-1 \
+  vfwnmacc.vf-0 \
+  vfwnmsac.vf-0 \
   vfwsub.vf-0 \
   vfwsub.vv-0 \
   vfwsub.wf-0 \
