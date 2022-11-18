@@ -158,6 +158,8 @@ tests = \
   vfdiv.vv-0 \
   vfdiv.vv-1 \
   vfirst.m-0 \
+  vfmacc.vf-0 \
+  vfmacc.vf-1 \
   vfmax.vf-0 \
   vfmax.vf-1 \
   vfmax.vv-0 \
