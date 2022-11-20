@@ -37,31 +37,32 @@ const (
 	insnFormatVs3Rs1mRs2Vm insnFormat = "vs3,(rs1),rs2,vm" // Added
 	insnFormatVdRs1mVs2Vm  insnFormat = "vd,(rs1),vs2,vm"
 	insnFormatVs3Rs1mVs2Vm insnFormat = "vs3,(rs1),vs2,vm"
-	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"    // Added
-	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0" // Added
-	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm" // Added
-	insnFormatVdVs2Rs1V0   insnFormat = "vd,vs2,rs1,v0" // Added
-	insnFormatVdVs2Fs1V0   insnFormat = "vd,vs2,fs1,v0"
+	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"     // Added
+	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0"  // Added
+	insnFormatVdmVs2Vs1V0  insnFormat = "vdm,vs2,vs1,v0" // Added
+	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm"  // Added
+	insnFormatVdVs2Rs1V0   insnFormat = "vd,vs2,rs1,v0"  // Added
+	insnFormatVdVs2Fs1V0   insnFormat = "vd,vs2,fs1,v0"  // Added
 	insnFormatVdVs2Rs1Vm   insnFormat = "vd,vs2,rs1,vm"  // Added
 	insnFormatVdVs2Fs1Vm   insnFormat = "vd,vs2,fs1,vm"  // Added
 	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0"  // Added
 	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"  // Added
 	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm" // Added
-	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"
-	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm" // Added
-	insnFormatVdFs1Vs2Vm   insnFormat = "vd,fs1,vs2,vm" // Added
-	insnFormatVdVs1        insnFormat = "vd,vs1"        // Added
-	insnFormatVdRs1        insnFormat = "vd,rs1"        // Added
-	insnFormatVdFs1        insnFormat = "vd,fs1"        // Added
-	insnFormatVdImm        insnFormat = "vd,imm"        // Added
-	insnFormatVdVs2        insnFormat = "vd,vs2"        // Added
-	insnFormatVdVs2Vm      insnFormat = "vd,vs2,vm"     // Added
-	insnFormatVdVs2VmP2    insnFormat = "vd,vs2,vm/2"   // Added
-	insnFormatVdVs2VmP3    insnFormat = "vd,vs2,vm/3"   // Added
-	insnFormatRdVs2Vm      insnFormat = "rd,vs2,vm"     // Added
-	insnFormatRdVs2        insnFormat = "rd,vs2"        // Added
-	insnFormatFdVs2        insnFormat = "fd,vs2"        // Added
-	insnFormatVdVm         insnFormat = "vd,vm"         // Added
+	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"  // Added
+	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm"  // Added
+	insnFormatVdFs1Vs2Vm   insnFormat = "vd,fs1,vs2,vm"  // Added
+	insnFormatVdVs1        insnFormat = "vd,vs1"         // Added
+	insnFormatVdRs1        insnFormat = "vd,rs1"         // Added
+	insnFormatVdFs1        insnFormat = "vd,fs1"         // Added
+	insnFormatVdImm        insnFormat = "vd,imm"         // Added
+	insnFormatVdVs2        insnFormat = "vd,vs2"         // Added
+	insnFormatVdVs2Vm      insnFormat = "vd,vs2,vm"      // Added
+	insnFormatVdVs2VmP2    insnFormat = "vd,vs2,vm/2"    // Added
+	insnFormatVdVs2VmP3    insnFormat = "vd,vs2,vm/3"    // Added
+	insnFormatRdVs2Vm      insnFormat = "rd,vs2,vm"      // Added
+	insnFormatRdVs2        insnFormat = "rd,vs2"         // Added
+	insnFormatFdVs2        insnFormat = "fd,vs2"         // Added
+	insnFormatVdVm         insnFormat = "vd,vm"          // Added
 )
 
 var formats = map[insnFormat]struct{}{
@@ -75,6 +76,7 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVs3Rs1mVs2Vm: {},
 	insnFormatVdVs2Vs1:     {},
 	insnFormatVdVs2Vs1V0:   {},
+	insnFormatVdmVs2Vs1V0:  {},
 	insnFormatVdVs2Vs1Vm:   {},
 	insnFormatVdVs2Rs1V0:   {},
 	insnFormatVdVs2Fs1V0:   {},
@@ -118,12 +120,18 @@ func (i *Insn) genTestCases() []string {
 		return i.genCodeVdVs2Vs1()
 	case insnFormatVdVs2Vs1V0:
 		return i.genCodeVdVs2Vs1V0()
+	// case insnFormatVdmVs2Vs1V0:
+	// 	return i.genCodeVdmVs2Vs1V0()
 	case insnFormatVdVs2Rs1V0:
 		return i.genCodeVdVs2Rs1V0()
+	case insnFormatVdVs2Fs1V0:
+		return i.genCodeVdVs2Fs1V0()
 	case insnFormatVdVs2Vs1Vm:
 		return i.genCodeVdVs2Vs1Vm()
 	case insnFormatVdVs2Rs1Vm:
 		return i.genCodeVdVs2Rs1Vm()
+	case insnFormatVdVs1Vs2Vm:
+		return i.genCodeVdVs1Vs2Vm()
 	case insnFormatVdRs1Vs2Vm:
 		return i.genCodeVdRs1Vs2Vm()
 	case insnFormatVdVs2Fs1Vm:

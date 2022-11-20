@@ -6,7 +6,7 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Vs1() []string {
-	combinations := i.combinations(allLMULs, []SEW{8}, []bool{false})
+	combinations := i.combinations(allLMULs, allSEWs, []bool{false})
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations {
 		builder := strings.Builder{}

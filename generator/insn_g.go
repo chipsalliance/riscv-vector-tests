@@ -37,7 +37,6 @@ func (i *Insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
 func (i *Insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
 	nBytes := i.vlenb() * int(lmul)
 	cases := i.testCases(float, sew)
-
 	builder := strings.Builder{}
 	builder.WriteString(fmt.Sprintf("# Write test data into test data area.\n"))
 	builder.WriteString("mv a3, a0\n")
