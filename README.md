@@ -18,6 +18,8 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 - [ ] Add test coverage statistics
 - [ ] Add negative tests
 - [ ] Add tests for sub extensions (e.g. Zvamo, Zvfh).
+- [ ] Support Zve32x, Zve32f, Zve64x and Zve64f (currently, we only support Zve64d).
+- [ ] Add simple sanity tests.
 
 ## Prerequisite
 
