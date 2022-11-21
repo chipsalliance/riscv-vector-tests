@@ -39,8 +39,6 @@ func main() {
 		XLEN: generator.XLEN(*xlenF),
 	}
 
-	println("Generating...")
-
 	fp := *configFileF
 	contents, err := os.ReadFile(fp)
 	fatalIf(err)
@@ -55,8 +53,6 @@ func main() {
 			asmFilename+".S",
 			testContent)
 	}
-
-	println("\033[32mOK\033[0m")
 }
 
 func writeTo(path string, name string, contents string) {
