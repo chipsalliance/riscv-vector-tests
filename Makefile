@@ -1,4 +1,4 @@
-USERMODE = 0
+MODE = machine # or user, sequencer/vector
 VLEN = 256
 XLEN = 64
 INTEGER = 0
@@ -6,6 +6,7 @@ OUTPUT = out/
 OUTPUT_STAGE1 = ${OUTPUT}tests/stage1/
 OUTPUT_STAGE2 = ${OUTPUT}tests/stage2/
 OUTPUT_STAGE2_PATCH = ${OUTPUT}patches/stage2/
+OUTPUT_STAGE2_ASM = ${OUTPUT}asm/stage2/
 OUTPUT_STAGE1_BIN = ${OUTPUT}bin/stage1/
 OUTPUT_STAGE2_BIN = ${OUTPUT}bin/stage2/
 CONFIGS = configs/
@@ -58,7 +59,7 @@ compile-stage1: generate-stage1
 	$(MAKE) $(tests)
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
-	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros/general -Tenv/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
 
 tests_patch = $(addsuffix .patch, $(tests))
 
@@ -73,18 +74,21 @@ generate-stage2: patching-stage2
 	build/merger -stage1output ${OUTPUT_STAGE1} -stage2output ${OUTPUT_STAGE2} -stage2patch ${OUTPUT_STAGE2_PATCH}
 
 compile-stage2: generate-stage2
+	@mkdir -p ${OUTPUT_STAGE2_ASM}
 	@mkdir -p ${OUTPUT_STAGE2_BIN}
 	$(MAKE) $(tests_stage2)
 
 tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
-ifeq ($(USERMODE), 0)
-	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-else
-	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/ps -Imacros -Tenv/ps/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+ifeq ($(MODE),user)
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/ps -Imacros/general -Tenv/ps/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(shell which pk) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+else ifeq ($(MODE),sequencer/vector)
+	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_ASM}$(shell basename $@ .stage2).S
+else # machine
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros/general -Tenv/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 endif
 
 
