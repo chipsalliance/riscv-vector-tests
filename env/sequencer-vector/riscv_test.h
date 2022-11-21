@@ -125,6 +125,7 @@ _start:                                                                 \
 reset_vector:                                                           \
         INIT_XREG;                                                      \
         RISCV_MULTICORE_DISABLE;                                        \
+        init;                                                           \
 
 //-----------------------------------------------------------------------
 // End Macro
