@@ -6,6 +6,7 @@ OUTPUT = out/
 OUTPUT_STAGE1 = ${OUTPUT}tests/stage1/
 OUTPUT_STAGE2 = ${OUTPUT}tests/stage2/
 OUTPUT_STAGE2_PATCH = ${OUTPUT}patches/stage2/
+OUTPUT_STAGE1_ASM = ${OUTPUT}asm/stage1/
 OUTPUT_STAGE2_ASM = ${OUTPUT}asm/stage2/
 OUTPUT_STAGE1_BIN = ${OUTPUT}bin/stage1/
 OUTPUT_STAGE2_BIN = ${OUTPUT}bin/stage2/
@@ -26,9 +27,9 @@ RISCV_PREFIX = riscv64-unknown-elf-
 RISCV_GCC = $(RISCV_PREFIX)gcc
 RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles
 
-all: clean-out compile-stage2
+all: compile-stage2
 
-build: build-spike build-generator build-merger
+build: build-generator build-merger
 
 build-generator:
 	go build -o build/generator
@@ -50,24 +51,28 @@ build-spike:
 unittest:
 	go test ./...
 
-generate-stage1: build
+generate-stage1: clean-out build
 	@mkdir -p ${OUTPUT_STAGE1}
 	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 compile-stage1: generate-stage1
-	@mkdir -p ${OUTPUT_STAGE1_BIN}
+	@mkdir -p ${OUTPUT_STAGE1_BIN} ${OUTPUT_STAGE1_ASM}
 	$(MAKE) $(tests)
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros/general -Tenv/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
+ifeq ($(MODE),sequencer/vector)
+	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@)
+	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE1}$(shell basename $@).S -o ${OUTPUT_STAGE1_ASM}$(shell basename $@).S
+endif
 
 tests_patch = $(addsuffix .patch, $(tests))
 
-patching-stage2: compile-stage1
+patching-stage2: build-spike compile-stage1
+	@mkdir -p ${OUTPUT_STAGE2_PATCH}
 	$(MAKE) $(tests_patch)
 
 $(tests_patch):
-	mkdir -p ${OUTPUT_STAGE2_PATCH}
 	${PATCHED_SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
 
 generate-stage2: patching-stage2
