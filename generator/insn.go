@@ -207,9 +207,9 @@ func (i *Insn) check() error {
 	return nil
 }
 
-func (i *Insn) Generate() []string {
+func (i *Insn) Generate(split bool) []string {
 	res := make([]string, 0)
-	for _, code := range i.genCode() {
+	for _, code := range i.genCode(split) {
 		builder := strings.Builder{}
 		builder.WriteString(i.genHeader())
 		builder.WriteString(code)
@@ -231,14 +231,14 @@ RVTEST_RV%dUV
 `, i.Name, i.Option.XLEN)
 }
 
-func (i *Insn) genCode() []string {
+func (i *Insn) genCode(split bool) []string {
 	res := make([]string, 0)
 
 	builder := strings.Builder{}
 	cs := i.genTestCases()
 	for idx, c := range cs {
 		builder.WriteString(c)
-		if strings.Count(builder.String(), "\n") > 10000 || idx == len(cs)-1 {
+		if (strings.Count(builder.String(), "\n") > 10000 && split) || idx == len(cs)-1 {
 			buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
 

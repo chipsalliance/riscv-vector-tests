@@ -71,7 +71,7 @@ func main() {
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
 
-			for idx, testContent := range insn.Generate() {
+			for idx, testContent := range insn.Generate(true) {
 				asmFilename := strings.TrimSuffix(name, ".toml") + "-" + strconv.Itoa(idx)
 				writeTo(
 					*stage1OutputDirF,
