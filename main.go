@@ -23,6 +23,7 @@ func fatalIf(err error) {
 
 var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "")
+var integer = flag.Bool("integer", false, "")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 
@@ -46,8 +47,12 @@ func main() {
 	makefrag := make([]string, 0)
 	lk := sync.Mutex{}
 	wg := sync.WaitGroup{}
-	wg.Add(len(files))
 	for _, file := range files {
+		if *integer && strings.HasPrefix(file.Name(), "vf") {
+			continue
+		}
+
+		wg.Add(1)
 		go func(file os.DirEntry) {
 			name := file.Name()
 			fp := filepath.Join(*configsDirF, name)

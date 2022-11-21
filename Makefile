@@ -1,6 +1,7 @@
 USERMODE = 0
 VLEN = 256
 XLEN = 64
+INTEGER = 0
 OUTPUT = out/
 OUTPUT_STAGE1 = ${OUTPUT}tests/stage1/
 OUTPUT_STAGE2 = ${OUTPUT}tests/stage2/
@@ -50,7 +51,7 @@ unittest:
 
 generate-stage1: build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 compile-stage1: generate-stage1
 	@mkdir -p ${OUTPUT_STAGE1_BIN}

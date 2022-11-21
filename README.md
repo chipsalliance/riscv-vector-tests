@@ -18,7 +18,7 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 - [ ] Add test coverage statistics
 - [ ] Add negative tests
 - [ ] Add tests for sub extensions (e.g. Zvamo, Zvfh).
-- [ ] Support Zve32x, Zve64x and Zve64f (currently, we support V, Zve32f and Zve64d).
+- [ ] Support Zve64f.
 - [ ] Add simple sanity tests.
 
 ## Prerequisite
@@ -43,6 +43,8 @@ The default VLEN is 256, if you want to generate tests for a different VLEN/XLEN
 > 2. When changing VLEN and XLEN, you need to run `make` twice. The first run will regenerate the Makefrag file (and then fails), the second run will generate the tests.
 
 If you want to generate user mode binaries, you can use `make -e USERMODE=1 -j8`.
+
+If you don't want float tests (i.e. for Zve32x or Zve64x), you can use `make -e INTEGER=1 -j8`
 
 ## License
 
