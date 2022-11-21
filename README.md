@@ -6,7 +6,7 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 
 ## Plan
 
-- [ ] `[270/346]` Add tests for all insns (only basic tests, no coverage required)
+- [ ] `[303/346]` Add tests for all insns (only basic tests, no coverage required)
 - [ ] Improve test cases for existing tests
   - Add more test cases, the more, the better! 
   - Add NaN tests for float insns
@@ -18,7 +18,7 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 - [ ] Add test coverage statistics
 - [ ] Add negative tests
 - [ ] Add tests for sub extensions (e.g. Zvamo, Zvfh).
-- [ ] Support Zve32x, Zve32f, Zve64x and Zve64f (currently, we only support V and Zve64d).
+- [ ] Support Zve32x, Zve64x and Zve64f (currently, we support V, Zve32f and Zve64d).
 - [ ] Add simple sanity tests.
 
 ## Prerequisite
@@ -36,11 +36,13 @@ make -j8
 
 After `make`, you will find all the generated tests in `out/bin/stage2/`.
 
-The default VLEN is 256, if you want to generate tests for a different VLEN/ELEN, you can use `make -e VLEN=512 ELEN=128 -j8`.
+The default VLEN is 256, if you want to generate tests for a different VLEN/XLEN, you can use `make -e VLEN=512 XLEN=64 -j8`.
 
-> NOTE: When changing VLEN and ELEN, you need to run `make` twice. The first run will regenerate the Makefrag file (and then fails), the second run will generate the tests.
+> NOTE:
+> 1. We do not support specifying ELEN yet, ELEN is consistent with XLEN.
+> 2. When changing VLEN and XLEN, you need to run `make` twice. The first run will regenerate the Makefrag file (and then fails), the second run will generate the tests.
 
-If you want to generate user mode binaries, you can use `make -e USER=1 -j8`.
+If you want to generate user mode binaries, you can use `make -e USERMODE=1 -j8`.
 
 ## License
 

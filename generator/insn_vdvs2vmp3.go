@@ -31,6 +31,10 @@ func (i *Insn) genCodeVdVs2VmP3() []string {
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, c.LMUL1, c.SEW))
 
 		vs2EEW := c.SEW / SEW(f)
+		if vs2EEW > SEW(i.Option.XLEN) {
+			continue
+		}
+
 		vdEMUL := c.LMUL * LMUL(f)
 		vdEMUL1 := LMUL(math.Max(float64(vdEMUL), 1))
 

@@ -17,13 +17,18 @@ func (i *Insn) gWriteRandomData(lmul LMUL) string {
 	builder := strings.Builder{}
 	builder.WriteString("# Write random data into test data area.\n")
 	builder.WriteString("mv a3, a0\n")
-	for a := 0; a < nBytes/8; a++ {
-		elem := binary.LittleEndian.Uint64(rdata)
-		rdata = rdata[8:]
+	xlenb := int(i.Option.XLEN) / 8
+	for a := 0; a < nBytes/xlenb; a++ {
+		elem := uint64(binary.LittleEndian.Uint32(rdata))
+		if xlenb == 8 {
+			elem = binary.LittleEndian.Uint64(rdata)
+		}
+
+		rdata = rdata[xlenb:]
 
 		builder.WriteString(fmt.Sprintf("li a1, 0x%x\n", elem))
-		builder.WriteString(fmt.Sprintf("sd a1, 0(a3)\n"))
-		builder.WriteString("addi a3, a3, 8\n")
+		builder.WriteString(fmt.Sprintf("s%s a1, 0(a3)\n", iff(xlenb == 4, "w", "d")))
+		builder.WriteString(fmt.Sprintf("addi a3, a3, %d\n", xlenb))
 	}
 	builder.WriteString("\n")
 

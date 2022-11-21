@@ -31,8 +31,8 @@ func (i *Insn) genCodeRdVs2Vm() []string {
 			i.Name, vs2, v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gMoveScalarToVector("s0", vd, SEW(64)))
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, SEW(64)))
+		builder.WriteString(i.gMoveScalarToVector("s0", vd, SEW(i.Option.XLEN)))
+		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, SEW(i.Option.XLEN)))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())

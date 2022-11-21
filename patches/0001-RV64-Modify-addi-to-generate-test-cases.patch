@@ -1,7 +1,7 @@
 From e7f3e65a4163de14b9316cb874a83fb05ac767f2 Mon Sep 17 00:00:00 2001
 From: ksco <numbksco@gmail.com>
 Date: Mon, 7 Nov 2022 18:12:41 +0800
-Subject: [PATCH] Modify addi to generate test cases
+Subject: [PATCH] RV64 Modify addi to generate test cases
 
 ---
  riscv/insns/addi.h | 15 +++++++++++++++

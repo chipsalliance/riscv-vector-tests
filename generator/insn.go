@@ -14,7 +14,7 @@ type insnFormat string
 
 type Option struct {
 	VLEN VLEN
-	ELEN ELEN
+	XLEN XLEN
 }
 
 const minStride = -1 // Must be negative
@@ -201,8 +201,8 @@ func (i *Insn) check() error {
 		return fmt.Errorf("wrong VLEN: %d", i.Option.VLEN)
 	}
 
-	if !i.Option.ELEN.Valid(i.Option.VLEN) {
-		return fmt.Errorf("wrong ELEN: %d", i.Option.ELEN)
+	if !i.Option.XLEN.Valid(i.Option.VLEN) {
+		return fmt.Errorf("wrong XLEN: %d", i.Option.XLEN)
 	}
 	return nil
 }
@@ -227,8 +227,8 @@ func (i *Insn) genHeader() string {
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV64UV
-`, i.Name)
+RVTEST_RV%dUV
+`, i.Name, i.Option.XLEN)
 }
 
 func (i *Insn) genCode() []string {
@@ -379,7 +379,10 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool) []combinatio
 	res := make([]combination, 0)
 	for _, lmul := range lmuls {
 		for _, sew := range sews {
-			if float64(lmul) < float64(sew)/float64(i.Option.ELEN) {
+			if int(i.Option.XLEN) < int(sew) {
+				continue
+			}
+			if float64(lmul) < float64(sew)/float64(i.Option.XLEN) {
 				continue
 			}
 			lmul1 := LMUL(math.Max(float64(lmul), 1))

@@ -26,7 +26,7 @@ func (i *Insn) genCodeVdVs2Vs1Vm() []string {
 		builder := strings.Builder{}
 		builder.WriteString(i.gTestDataAddr())
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(64)))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
 		builder.WriteString(c.comment())
 
@@ -34,6 +34,10 @@ func (i *Insn) genCodeVdVs2Vs1Vm() []string {
 		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
 		vdEEW := c.SEW * SEW(vdSize)
 		vs2EEW := c.SEW * SEW(vs2Size)
+		if vdEEW > SEW(i.Option.XLEN) || vs2EEW > SEW(i.Option.XLEN) {
+			continue
+		}
+
 		vd := int(vdEMUL1)
 		vss := []int{
 			vd * 2,

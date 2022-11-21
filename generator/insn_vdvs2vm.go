@@ -29,6 +29,10 @@ func (i *Insn) genCodeVdVs2Vm() []string {
 		vdEEW := c.SEW * SEW(vdSize)
 		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
 		vs2EEW := c.SEW * SEW(vs2Size)
+		if vdEEW > SEW(i.Option.XLEN) || vs2EEW > SEW(i.Option.XLEN) {
+			continue
+		}
+
 		vd := int(vdEMUL1)
 		vs2 := vd * 2
 

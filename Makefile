@@ -1,6 +1,6 @@
-USER = 0
+USERMODE = 0
 VLEN = 256
-ELEN = 64
+XLEN = 64
 OUTPUT = out/
 OUTPUT_STAGE1 = ${OUTPUT}tests/stage1/
 OUTPUT_STAGE2 = ${OUTPUT}tests/stage2/
@@ -11,6 +11,12 @@ CONFIGS = configs/
 
 SPIKE = spike
 PATCHED_SPIKE = build/spike/build/spike
+MARCH = rv${XLEN}gcv
+MABI = lp64d
+
+ifeq ($(XLEN), 32)
+MABI = ilp32f
+endif
 
 include Makefrag
 
@@ -31,7 +37,9 @@ build-merger:
 build-spike:
 	git clone --depth 1 https://github.com/riscv-software-src/riscv-isa-sim.git build/spike/ 2>/dev/null || true
 	cd build/spike/; \
-	git am < ../../patches/0001-Modify-addi-to-generate-test-cases.patch 2>/dev/null || true; \
+	git reset --hard origin/master; \
+	git am --abort || true; \
+	git am < ../../patches/0001-RV${XLEN}-Modify-addi-to-generate-test-cases.patch; \
 	mkdir -p build; \
 	cd build; \
 	../configure --prefix=$(.); \
@@ -42,14 +50,14 @@ unittest:
 
 generate-stage1: build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -ELEN ${ELEN} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 compile-stage1: generate-stage1
 	@mkdir -p ${OUTPUT_STAGE1_BIN}
 	$(MAKE) $(tests)
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
-	$(RISCV_GCC) -march=rv64gv $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
 
 tests_patch = $(addsuffix .patch, $(tests))
 
@@ -58,7 +66,7 @@ patching-stage2: compile-stage1
 
 $(tests_patch):
 	mkdir -p ${OUTPUT_STAGE2_PATCH}
-	${PATCHED_SPIKE} --isa rv64gcv --varch=vlen:${VLEN},elen:${ELEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
+	${PATCHED_SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
 
 generate-stage2: patching-stage2
 	build/merger -stage1output ${OUTPUT_STAGE1} -stage2output ${OUTPUT_STAGE2} -stage2patch ${OUTPUT_STAGE2_PATCH}
@@ -70,12 +78,12 @@ compile-stage2: generate-stage2
 tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
-ifeq ($(USER), 0)
-	$(RISCV_GCC) -march=rv64gv $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-	${SPIKE} --isa rv64gcv --varch=vlen:${VLEN},elen:${ELEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+ifeq ($(USERMODE), 0)
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros -Tenv/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 else
-	$(RISCV_GCC) -march=rv64gv $(RISCV_GCC_OPTS) -Ienv/ps -Imacros -Tenv/ps/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-	${SPIKE} --isa rv64gcv --varch=vlen:${VLEN},elen:${ELEN} $(shell which pk) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/ps -Imacros -Tenv/ps/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(shell which pk) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 endif
 
 

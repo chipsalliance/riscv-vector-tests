@@ -16,7 +16,7 @@ func (i *Insn) genCodeVdRs1mVm() []string {
 		builder := strings.Builder{}
 		builder.WriteString(i.gTestDataAddr())
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(64)))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
 		builder.WriteString(c.comment())
 

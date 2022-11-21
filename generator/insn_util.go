@@ -58,10 +58,10 @@ func (v VLEN) Valid() bool {
 	return 128 <= v && v <= 4096 && v&(v-1) == 0
 }
 
-type ELEN int
+type XLEN int
 
-func (e ELEN) Valid(v VLEN) bool {
-	return e >= 64 && e <= ELEN(v) && e&(e-1) == 0
+func (x XLEN) Valid(v VLEN) bool {
+	return x == 32 || x == 64
 }
 
 func v0t(mask bool) string {

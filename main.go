@@ -22,7 +22,7 @@ func fatalIf(err error) {
 }
 
 var vlenF = flag.Int("VLEN", 256, "")
-var elenF = flag.Int("ELEN", 64, "")
+var xlenF = flag.Int("XLEN", 64, "")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 
@@ -35,7 +35,7 @@ func main() {
 
 	option := generator.Option{
 		VLEN: generator.VLEN(*vlenF),
-		ELEN: generator.ELEN(*elenF),
+		XLEN: generator.XLEN(*xlenF),
 	}
 
 	files, err := os.ReadDir(*configsDirF)
