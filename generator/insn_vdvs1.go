@@ -11,7 +11,6 @@ func (i *Insn) genCodeVdVs1() []string {
 
 	for _, c := range combinations {
 		builder := strings.Builder{}
-		builder.WriteString(i.gTestDataAddr())
 		builder.WriteString(c.comment())
 
 		vd := int(c.LMUL1)
@@ -28,7 +27,8 @@ func (i *Insn) genCodeVdVs1() []string {
 			i.Name, vd, vs1))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, c.SEW))
+		builder.WriteString(i.gResultDataAddr())
+		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())

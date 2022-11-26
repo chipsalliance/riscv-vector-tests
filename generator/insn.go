@@ -1,6 +1,8 @@
 package generator
 
 import (
+	"bytes"
+	"encoding/binary"
 	"errors"
 	"fmt"
 	"log"
@@ -21,11 +23,39 @@ const minStride = -1 // Must be negative
 const maxStride = 3  // Must be greater than 1
 const strides = maxStride - minStride
 
+type TestData struct {
+	CurrentOffset uint64
+
+	Raws [][]byte
+}
+
+func (t *TestData) Append(raw []byte) uint64 {
+	offset := t.CurrentOffset
+	t.Raws = append(t.Raws, raw)
+	t.CurrentOffset += uint64(len(raw))
+	return offset
+}
+
+func (t *TestData) String() string {
+	builder := strings.Builder{}
+	for _, raw := range t.Raws {
+		for len(raw) > 0 {
+			reader := bytes.NewReader(raw)
+			var data uint64
+			_ = binary.Read(reader, binary.LittleEndian, &data)
+			raw = raw[8:]
+			builder.WriteString(fmt.Sprintf("  .quad 0x%x\n", data))
+		}
+	}
+	return builder.String()
+}
+
 type Insn struct {
-	Name   string     `toml:"name"`
-	Format insnFormat `toml:"format"`
-	Tests  tests      `toml:"tests"`
-	Option Option     `toml:"-"`
+	Name     string     `toml:"name"`
+	Format   insnFormat `toml:"format"`
+	Tests    tests      `toml:"tests"`
+	Option   Option     `toml:"-"`
+	TestData *TestData
 }
 
 const (
@@ -102,7 +132,7 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVdVm:         {},
 }
 
-func (i *Insn) genTestCases() []string {
+func (i *Insn) genCodeCombinations() []string {
 	switch i.Format {
 	case insnFormatVdRs1mVm:
 		return i.genCodeVdRs1mVm()
@@ -120,8 +150,6 @@ func (i *Insn) genTestCases() []string {
 		return i.genCodeVdVs2Vs1()
 	case insnFormatVdVs2Vs1V0:
 		return i.genCodeVdVs2Vs1V0()
-	// case insnFormatVdmVs2Vs1V0:
-	// 	return i.genCodeVdmVs2Vs1V0()
 	case insnFormatVdVs2Rs1V0:
 		return i.genCodeVdVs2Rs1V0()
 	case insnFormatVdVs2Fs1V0:
@@ -175,7 +203,10 @@ func (i *Insn) genTestCases() []string {
 }
 
 func ReadInsnFromToml(contents []byte, option Option) (*Insn, error) {
-	i := Insn{Option: option}
+	i := Insn{
+		Option:   option,
+		TestData: &TestData{},
+	}
 
 	if err := i.check(); err != nil {
 		return nil, err
@@ -207,9 +238,10 @@ func (i *Insn) check() error {
 	return nil
 }
 
-func (i *Insn) Generate(split bool) []string {
+func (i *Insn) Generate(splitPerLines int) []string {
 	res := make([]string, 0)
-	for _, code := range i.genCode(split) {
+
+	for _, code := range i.genMergedCodeCombinations(splitPerLines) {
 		builder := strings.Builder{}
 		builder.WriteString(i.genHeader())
 		builder.WriteString(code)
@@ -231,29 +263,25 @@ RVTEST_RV%dUV
 `, i.Name, i.Option.XLEN)
 }
 
-func (i *Insn) genCode(split bool) []string {
+func (i *Insn) genMergedCodeCombinations(splitPerLines int) []string {
 	res := make([]string, 0)
-
 	builder := strings.Builder{}
-	cs := i.genTestCases()
+	cs := i.genCodeCombinations()
 	for idx, c := range cs {
 		builder.WriteString(c)
-		if (strings.Count(builder.String(), "\n") > 10000 && split) || idx == len(cs)-1 {
+		if (splitPerLines > 0 && strings.Count(builder.String(), "\n") > splitPerLines) ||
+			idx == len(cs)-1 {
 			buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
-
 %s
-
   TEST_CASE(2, x0, 0x0)
   TEST_PASSFAIL
-
 RVTEST_CODE_END
 `, builder.String())
 			res = append(res, buf)
 			builder.Reset()
 		}
 	}
-
 	return res
 }
 
@@ -273,11 +301,14 @@ func (i *Insn) genData() string {
 RVTEST_DATA_BEGIN
 
 # Reserve space for test data.
-testdata:
+resultdata:
   .zero %d
 
+testdata:
+%s
+
 RVTEST_DATA_END
-`, dataSize)
+`, dataSize, i.TestData.String())
 }
 
 func (i *Insn) vlenb() int {

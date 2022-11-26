@@ -38,9 +38,9 @@ build-merger:
 	go build -o build/merger merger/merger.go
 
 build-spike:
-	git clone --depth 1 https://github.com/riscv-software-src/riscv-isa-sim.git build/spike/ 2>/dev/null || true
+	git clone https://github.com/riscv-software-src/riscv-isa-sim.git build/spike/ || true
 	cd build/spike/; \
-	git reset --hard origin/master; \
+	git reset --hard b60d5766bf1cb3b3162c091cdc6a999f55d340e8; \
 	git am --abort || true; \
 	git am < ../../patches/0001-RV${XLEN}-Modify-addi-to-generate-test-cases.patch; \
 	mkdir -p build; \

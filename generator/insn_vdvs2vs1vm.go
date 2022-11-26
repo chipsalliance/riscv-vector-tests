@@ -24,11 +24,10 @@ func (i *Insn) genCodeVdVs2Vs1Vm() []string {
 
 	for _, c := range combinations {
 		builder := strings.Builder{}
-		builder.WriteString(i.gTestDataAddr())
+		builder.WriteString(c.comment())
+
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
-
-		builder.WriteString(c.comment())
 
 		vdEMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
 		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
@@ -59,7 +58,8 @@ func (i *Insn) genCodeVdVs2Vs1Vm() []string {
 			i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, vdEMUL1, vdEEW))
+		builder.WriteString(i.gResultDataAddr())
+		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())

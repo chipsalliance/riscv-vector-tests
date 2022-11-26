@@ -1,37 +1,25 @@
 package generator
 
 import (
+	"bytes"
 	"encoding/binary"
 	"fmt"
 	"strings"
 )
 
-func (i *Insn) gTestDataAddr() string {
-	return fmt.Sprintf("la a0, testdata\n")
+func (i *Insn) gResultDataAddr() string {
+	return fmt.Sprintf("la a0, resultdata\n")
 }
 
 func (i *Insn) gWriteRandomData(lmul LMUL) string {
 	nBytes := i.vlenb() * int(lmul)
-	rdata := genRandomData(int64(nBytes))
+	off := i.TestData.Append(genRandomData(int64(nBytes)))
 
 	builder := strings.Builder{}
-	builder.WriteString("# Write random data into test data area.\n")
-	builder.WriteString("mv a3, a0\n")
-	xlenb := int(i.Option.XLEN) / 8
-	for a := 0; a < nBytes/xlenb; a++ {
-		elem := uint64(binary.LittleEndian.Uint32(rdata))
-		if xlenb == 8 {
-			elem = binary.LittleEndian.Uint64(rdata)
-		}
-
-		rdata = rdata[xlenb:]
-
-		builder.WriteString(fmt.Sprintf("li a1, 0x%x\n", elem))
-		builder.WriteString(fmt.Sprintf("s%s a1, 0(a3)\n", iff(xlenb == 4, "w", "d")))
-		builder.WriteString(fmt.Sprintf("addi a3, a3, %d\n", xlenb))
-	}
-	builder.WriteString("\n")
-
+	builder.WriteString("# Move a0 to test data area.\n")
+	builder.WriteString("la a0, testdata\n")
+	builder.WriteString(fmt.Sprintf("li a5, %d\n", off))
+	builder.WriteString("add a0, a0, a5\n")
 	return builder.String()
 }
 
@@ -43,31 +31,26 @@ func (i *Insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
 	nBytes := i.vlenb() * int(lmul)
 	cases := i.testCases(float, sew)
 	builder := strings.Builder{}
-	builder.WriteString(fmt.Sprintf("# Write test data into test data area.\n"))
-	builder.WriteString("mv a3, a0\n")
+	buf := &bytes.Buffer{}
 	for a := 0; a < (nBytes / (int(sew) / 8)); a++ {
 		b := a % len(cases)
 		switch sew {
 		case 8:
-			builder.WriteString(fmt.Sprintf("li a1, 0x%x\n", convNum[uint8](cases[b][idx])))
-			builder.WriteString(fmt.Sprintf("sb a1, 0(a3)\n"))
-			builder.WriteString(fmt.Sprintf("addi a3, a3, %d\n", int(sew)/8))
+			_ = binary.Write(buf, binary.LittleEndian, convNum[uint8](cases[b][idx]))
 		case 16:
-			builder.WriteString(fmt.Sprintf("li a1, 0x%x\n", convNum[uint16](cases[b][idx])))
-			builder.WriteString(fmt.Sprintf("sh a1, 0(a3)\n"))
-			builder.WriteString(fmt.Sprintf("addi a3, a3, %d\n", int(sew)/8))
+			_ = binary.Write(buf, binary.LittleEndian, convNum[uint16](cases[b][idx]))
 		case 32:
-			builder.WriteString(fmt.Sprintf("li a1, 0x%x\n", convNum[uint32](cases[b][idx])))
-			builder.WriteString(fmt.Sprintf("sw a1, 0(a3)\n"))
-			builder.WriteString(fmt.Sprintf("addi a3, a3, %d\n", int(sew)/8))
+			_ = binary.Write(buf, binary.LittleEndian, convNum[uint32](cases[b][idx]))
 		case 64:
-			builder.WriteString(fmt.Sprintf("li a1, 0x%x\n", convNum[uint64](cases[b][idx])))
-			builder.WriteString(fmt.Sprintf("sd a1, 0(a3)\n"))
-			builder.WriteString(fmt.Sprintf("addi a3, a3, %d\n", int(sew)/8))
+			_ = binary.Write(buf, binary.LittleEndian, convNum[uint64](cases[b][idx]))
 		}
 	}
+	off := i.TestData.Append(buf.Bytes())
+	builder.WriteString("# Move a0 to test data area.\n")
+	builder.WriteString("la a0, testdata\n")
+	builder.WriteString(fmt.Sprintf("li a5, %d\n", off))
+	builder.WriteString("add a0, a0, a5\n")
 
-	builder.WriteString("\n")
 	return builder.String()
 }
 
@@ -81,11 +64,11 @@ func (i *Insn) gLoadDataIntoRegisterGroup(
 	return builder.String()
 }
 
-func (i *Insn) gStoreRegisterGroupIntoData(
+func (i *Insn) gStoreRegisterGroupIntoResultData(
 	group int, lmul LMUL, sew SEW) string {
 	builder := strings.Builder{}
 
-	builder.WriteString(fmt.Sprintf("\n# Store v%d register group into test data area.\n", group))
+	builder.WriteString(fmt.Sprintf("\n# Store v%d register group into result data area.\n", group))
 	builder.WriteString("li t0, -1\n")
 	builder.WriteString(fmt.Sprintf("vsetvli t1, t0, %s,%s,ta,ma\n",
 		sew.String(), lmul.String()))

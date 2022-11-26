@@ -71,13 +71,9 @@ func main() {
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
 
-			for idx, testContent := range insn.Generate(true) {
+			for idx, testContent := range insn.Generate(10000) {
 				asmFilename := strings.TrimSuffix(name, ".toml") + "-" + strconv.Itoa(idx)
-				writeTo(
-					*stage1OutputDirF,
-					asmFilename+".S",
-					testContent)
-
+				writeTo(*stage1OutputDirF, asmFilename+".S", testContent)
 				lk.Lock()
 				makefrag = append(makefrag, fmt.Sprintf("  %s \\\n", asmFilename))
 				lk.Unlock()

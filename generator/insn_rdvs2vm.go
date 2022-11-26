@@ -11,7 +11,6 @@ func (i *Insn) genCodeRdVs2Vm() []string {
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations {
 		builder := strings.Builder{}
-		builder.WriteString(i.gTestDataAddr())
 		builder.WriteString(c.comment())
 
 		vd := int(c.LMUL1)
@@ -32,7 +31,9 @@ func (i *Insn) genCodeRdVs2Vm() []string {
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
 		builder.WriteString(i.gMoveScalarToVector("s0", vd, SEW(i.Option.XLEN)))
-		builder.WriteString(i.gStoreRegisterGroupIntoData(vd, c.LMUL1, SEW(i.Option.XLEN)))
+
+		builder.WriteString(i.gResultDataAddr())
+		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, SEW(i.Option.XLEN)))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())

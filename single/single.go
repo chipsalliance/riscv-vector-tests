@@ -7,7 +7,6 @@ import (
 	"github.com/ksco/riscv-vector-tests/generator"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 )
 
@@ -15,7 +14,7 @@ func fatalIf(err error) {
 	if err == nil {
 		return
 	}
-	fmt.Printf("\033[0;1;31mfatal:\033[0m %s\n", err.Error())
+	fmt.Printf("fatal: %s\n", err.Error())
 	os.Exit(1)
 }
 
@@ -46,13 +45,8 @@ func main() {
 	insn, err := generator.ReadInsnFromToml(contents, option)
 	fatalIf(err)
 
-	for idx, testContent := range insn.Generate(false) {
-		asmFilename := strings.TrimSuffix(filepath.Base(fp), ".toml") + "-" + strconv.Itoa(idx)
-		writeTo(
-			*outputDirF,
-			asmFilename+".S",
-			testContent)
-	}
+	asmFilename := strings.TrimSuffix(filepath.Base(fp), ".toml")
+	writeTo(*outputDirF, asmFilename+".S", insn.Generate(-1)[0])
 }
 
 func writeTo(path string, name string, contents string) {
