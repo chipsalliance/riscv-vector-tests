@@ -93,6 +93,9 @@ const (
 	insnFormatRdVs2        insnFormat = "rd,vs2"
 	insnFormatFdVs2        insnFormat = "fd,vs2"
 	insnFormatVdVm         insnFormat = "vd,vm"
+	insnFormatvsetvli      insnFormat = "vsetvli"
+	insnFormatvsetvl       insnFormat = "vsetvl"
+	insnFormatvsetivli     insnFormat = "vsetivli"
 )
 
 var formats = map[insnFormat]struct{}{
@@ -130,6 +133,9 @@ var formats = map[insnFormat]struct{}{
 	insnFormatRdVs2:        {},
 	insnFormatFdVs2:        {},
 	insnFormatVdVm:         {},
+	insnFormatvsetvli:      {},
+	insnFormatvsetvl:       {},
+	insnFormatvsetivli:     {},
 }
 
 func (i *Insn) genCodeCombinations() []string {
@@ -196,6 +202,12 @@ func (i *Insn) genCodeCombinations() []string {
 		return i.genCodeFdVs2()
 	case insnFormatVdVm:
 		return i.genCodeVdVm()
+	case insnFormatvsetvli:
+		return i.genCodevsetvli()
+	case insnFormatvsetvl:
+		return i.genCodevsetvl()
+	case insnFormatvsetivli:
+		return i.genCodevsetivli()
 	default:
 		log.Fatalln("unreachable")
 		return nil
@@ -432,5 +444,41 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool) []combinatio
 		}
 	}
 
+	return res
+}
+
+type vsetvlicombinations struct {
+	SEW  SEW
+	LMUL LMUL
+	vta  bool
+	vma  bool
+}
+
+func (c *vsetvlicombinations) comment() string {
+	return fmt.Sprintf(
+		"\n\n# Generating tests for vsetvli: LMUL: %s, SEW: %s, vta: %s, vma: %s\n\n",
+		c.LMUL.String(),
+		c.SEW.String(),
+		ta(c.vta),
+		ma(c.vma),
+	)
+}
+
+func (i *Insn) vsetvlicombinations(lmuls []LMUL, sews []SEW, vtas []bool, vmas []bool) []vsetvlicombinations {
+	res := make([]vsetvlicombinations, 0)
+	for _, lmul := range lmuls {
+		for _, sew := range sews {
+			for _, vta := range vtas {
+				for _, vma := range vmas {
+					res = append(res, vsetvlicombinations{
+						SEW:  sew,
+						LMUL: lmul,
+						vta:  vta,
+						vma:  vma,
+					})
+				}
+			}
+		}
+	}
 	return res
 }

@@ -1,0 +1,9 @@
+name = "vsetivli"
+format = "vsetivli"
+
+[tests]
+base = [
+    [0x0, 0x0],
+    [0x1, 0x1],
+    [0x3, 0x3]
+]
