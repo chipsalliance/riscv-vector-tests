@@ -2,49 +2,20 @@ package generator
 
 import (
 	"fmt"
-	"log"
+	"math"
 	"strings"
 )
 
-func (i *Insn) getvset(curtype int, curvl int, sew SEW, lmul LMUL, vta bool, vma bool, rd int, rs1 int) []int {
-	t := 0
-	switch lmul {
-	case LMUL(1) / 8:
-		t = t + 5
-	case LMUL(1) / 4:
-		t = t + 6
-	case LMUL(1) / 2:
-		t = t + 7
-	case 1:
-		t = t + 0
-	case 2:
-		t = t + 1
-	case 4:
-		t = t + 2
-	case 8:
-		t = t + 3
-	default:
-		log.Fatalln("illegal vlmul")
-	}
-	switch sew {
-	case 8:
-		t = t + (0 << 3)
-	case 16:
-		t = t + (1 << 3)
-	case 32:
-		t = t + (2 << 3)
-	case 64:
-		t = t + (3 << 3)
-	default:
-		log.Fatalln("illegal vsew")
-	}
-	if vta {
+func (v *vtype) vtypeImm(XLEN int, VLEN int, curVtypeRaw int64, curVl int64, rd int64, rs1 int64) []int64 {
+	t := int64(math.Ilogb(float64(v.lmul)) & 7)
+	t = t + int64(math.Ilogb(float64(v.sew/8))<<3)
+	if v.vta {
 		t = t + (1 << 6)
 	}
-	if vma {
+	if v.vma {
 		t = t + (1 << 7)
 	}
-	res := i.vtype(t, curtype, curvl, rd, rs1, t)
+	res := v.vtypeRaw(XLEN, VLEN, t, curVtypeRaw, curVl, rd, rs1)
 	return res
 }
 
@@ -63,22 +34,24 @@ func (i *Insn) genCodevsetvli() []string {
 		builder.WriteString(c.comment())
 
 		cases := i.testCases(false, 8)
-		curvtype := 0
-		curvl := 0
+		curvtype := int64(0)
+		curvl := int64(0)
 		for _, cs := range cases {
 			builder.WriteString(fmt.Sprintf("# ------case test begin---------\n"))
 			builder.WriteString(fmt.Sprintf("li t0, %d\n", cs[0]))
 			builder.WriteString(fmt.Sprintf("li t1, %d\n", cs[1]))
 			builder.WriteString(fmt.Sprintf("vsetvli t0, t1, %s,%s,%s,%s\n",
 				c.SEW, c.LMUL, ta(c.vta), ma(c.vma)))
-			t := i.getvset(curvtype, curvl, c.SEW, c.LMUL, c.vta, c.vma, int(cs[0].(uint8)), int(cs[1].(uint8)))
+
+			v := vtype{float32(c.LMUL), int(c.SEW), c.vta, c.vma}
+			t := v.vtypeImm(int(i.Option.XLEN), int(i.Option.VLEN), curvtype, curvl, int64(cs[0].(uint8)), int64(cs[1].(uint8)))
 
 			builder.WriteString(fmt.Sprintf("csrr a4, vstart\n"))
 			builder.WriteString(fmt.Sprintf("TEST_CASE(%d, a4, %d)\n", ncase, t[0]))
 			ncase = ncase + 1
 
 			builder.WriteString(fmt.Sprintf("csrr a4, vtype\n"))
-			if t[1] == 1<<31 {
+			if t[1] == 1<<(i.Option.XLEN-1) {
 				builder.WriteString(fmt.Sprintf("TEST_CASE(%d, a4, %d)\n", ncase, uint64(1<<(i.Option.XLEN-1))))
 			} else {
 				builder.WriteString(fmt.Sprintf("TEST_CASE(%d, a4, %d)\n", ncase, t[1]))
