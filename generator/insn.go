@@ -482,3 +482,10 @@ func (i *Insn) vsetvlicombinations(lmuls []LMUL, sews []SEW, vtas []bool, vmas [
 	}
 	return res
 }
+
+type vtype struct {
+	lmul float32
+	sew  int
+	vta  bool
+	vma  bool
+}

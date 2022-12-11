@@ -32,6 +32,11 @@ func getVlmax(vtype int64, vlen int) int {
 	return int(vlmax)
 }
 
+func bits64(val int64, first int, last int) int64 {
+	nbits := first - last + 1
+	return (val >> last) & (1<<nbits - 1)
+}
+
 func (v *vtype) vtypeRaw(XLEN int, VLEN int, newVtypeRaw int64, curVtypeRaw int64, curVl int64, rd int64, rs1 int64) []int64 {
 	res := make([]int64, 0, 3)
 	// vstart
