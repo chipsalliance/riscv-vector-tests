@@ -174,6 +174,8 @@ tests = \
   vmadc.vim-0 \
   vmadc.vim-1 \
   vmadc.vvm-0 \
+  vmadc.vxm-0 \
+  vmadc.vxm-1 \
   vmadd.vv-0 \
   vmadd.vv-1 \
   vmadd.vx-0 \
@@ -197,12 +199,17 @@ tests = \
   vmerge.vim-0 \
   vmerge.vim-1 \
   vmerge.vvm-0 \
+  vmerge.vxm-0 \
   vmfeq.vf-0 \
+  vmfeq.vv-0 \
   vmfge.vf-0 \
   vmfgt.vf-0 \
   vmfle.vf-0 \
+  vmfle.vv-0 \
   vmflt.vf-0 \
+  vmflt.vv-0 \
   vmfne.vf-0 \
+  vmfne.vv-0 \
   vmin.vv-0 \
   vmin.vv-1 \
   vmin.vx-0 \
@@ -220,19 +227,30 @@ tests = \
   vmor.mm-0 \
   vmorn.mm-0 \
   vmsbc.vvm-0 \
+  vmsbc.vxm-0 \
+  vmsbc.vxm-1 \
   vmsbf.m-0 \
+  vmseq.vi-0 \
+  vmseq.vi-1 \
+  vmseq.vi-2 \
   vmseq.vv-0 \
   vmseq.vv-1 \
   vmseq.vx-0 \
   vmseq.vx-1 \
   vmseq.vx-2 \
   vmseq.vx-3 \
+  vmsgt.vi-0 \
+  vmsgt.vi-1 \
+  vmsgt.vi-2 \
   vmsgt.vv-0 \
   vmsgt.vv-1 \
   vmsgt.vx-0 \
   vmsgt.vx-1 \
   vmsgt.vx-2 \
   vmsgt.vx-3 \
+  vmsgtu.vi-0 \
+  vmsgtu.vi-1 \
+  vmsgtu.vi-2 \
   vmsgtu.vv-0 \
   vmsgtu.vv-1 \
   vmsgtu.vx-0 \
@@ -240,12 +258,18 @@ tests = \
   vmsgtu.vx-2 \
   vmsgtu.vx-3 \
   vmsif.m-0 \
+  vmsle.vi-0 \
+  vmsle.vi-1 \
+  vmsle.vi-2 \
   vmsle.vv-0 \
   vmsle.vv-1 \
   vmsle.vx-0 \
   vmsle.vx-1 \
   vmsle.vx-2 \
   vmsle.vx-3 \
+  vmsleu.vi-0 \
+  vmsleu.vi-1 \
+  vmsleu.vi-2 \
   vmsleu.vv-0 \
   vmsleu.vv-1 \
   vmsleu.vx-0 \
@@ -264,6 +288,9 @@ tests = \
   vmsltu.vx-1 \
   vmsltu.vx-2 \
   vmsltu.vx-3 \
+  vmsne.vi-0 \
+  vmsne.vi-1 \
+  vmsne.vi-2 \
   vmsne.vv-0 \
   vmsne.vv-1 \
   vmsne.vx-0 \
@@ -310,7 +337,14 @@ tests = \
   vmv8r.v-0 \
   vmxnor.mm-0 \
   vmxor.mm-0 \
+  vnclip.wi-0 \
+  vnclip.wi-1 \
   vnclip.wv-0 \
+  vnclip.wx-0 \
+  vnclip.wx-1 \
+  vnclip.wx-2 \
+  vnclipu.wi-0 \
+  vnclipu.wi-1 \
   vnclipu.wv-0 \
   vnclipu.wx-0 \
   vnclipu.wx-1 \
@@ -327,10 +361,14 @@ tests = \
   vnmsub.vx-1 \
   vnmsub.vx-2 \
   vnmsub.vx-3 \
+  vnsra.wi-0 \
+  vnsra.wi-1 \
   vnsra.wv-0 \
   vnsra.wx-0 \
   vnsra.wx-1 \
   vnsra.wx-2 \
+  vnsrl.wi-0 \
+  vnsrl.wi-1 \
   vnsrl.wv-0 \
   vnsrl.wx-0 \
   vnsrl.wx-1 \
@@ -374,12 +412,16 @@ tests = \
   vremu.vx-2 \
   vremu.vx-3 \
   vremu.vx-4 \
+  vrgather.vi-0 \
+  vrgather.vi-1 \
+  vrgather.vi-2 \
   vrgather.vv-0 \
   vrgather.vv-1 \
   vrgather.vx-0 \
   vrgather.vx-1 \
   vrgather.vx-2 \
   vrgather.vx-3 \
+  vrgatherei16.vv-0 \
   vrsub.vi-0 \
   vrsub.vi-1 \
   vrsub.vi-2 \
@@ -387,12 +429,18 @@ tests = \
   vrsub.vx-1 \
   vrsub.vx-2 \
   vrsub.vx-3 \
+  vsadd.vi-0 \
+  vsadd.vi-1 \
+  vsadd.vi-2 \
   vsadd.vv-0 \
   vsadd.vv-1 \
   vsadd.vx-0 \
   vsadd.vx-1 \
   vsadd.vx-2 \
   vsadd.vx-3 \
+  vsaddu.vi-0 \
+  vsaddu.vi-1 \
+  vsaddu.vi-2 \
   vsaddu.vv-0 \
   vsaddu.vv-1 \
   vsaddu.vx-0 \
@@ -407,6 +455,9 @@ tests = \
   vse32.v-0 \
   vse64.v-0 \
   vse8.v-0 \
+  vsetivli-0 \
+  vsetvl-0 \
+  vsetvli-0 \
   vsext.vf2-0 \
   vsext.vf4-0 \
   vsext.vf8-0 \
@@ -418,10 +469,16 @@ tests = \
   vslide1up.vx-1 \
   vslide1up.vx-2 \
   vslide1up.vx-3 \
+  vslidedown.vi-0 \
+  vslidedown.vi-1 \
+  vslidedown.vi-2 \
   vslidedown.vx-0 \
   vslidedown.vx-1 \
   vslidedown.vx-2 \
   vslidedown.vx-3 \
+  vslideup.vi-0 \
+  vslideup.vi-1 \
+  vslideup.vi-2 \
   vslideup.vx-0 \
   vslideup.vx-1 \
   vslideup.vx-2 \
@@ -467,6 +524,9 @@ tests = \
   vsse64.v-0 \
   vsse8.v-0 \
   vsse8.v-1 \
+  vssra.vi-0 \
+  vssra.vi-1 \
+  vssra.vi-2 \
   vssra.vv-0 \
   vssra.vv-1 \
   vssra.vx-0 \
@@ -474,6 +534,9 @@ tests = \
   vssra.vx-2 \
   vssra.vx-3 \
   vssra.vx-4 \
+  vssrl.vi-0 \
+  vssrl.vi-1 \
+  vssrl.vi-2 \
   vssrl.vv-0 \
   vssrl.vv-1 \
   vssrl.vx-0 \

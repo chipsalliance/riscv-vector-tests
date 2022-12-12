@@ -90,3 +90,17 @@ func iff[T any](condition bool, t T, f T) T {
 	}
 	return f
 }
+
+func ta(mask bool) string {
+	if mask {
+		return "ta"
+	}
+	return "tu"
+}
+
+func ma(mask bool) string {
+	if mask {
+		return "ma"
+	}
+	return "mu"
+}

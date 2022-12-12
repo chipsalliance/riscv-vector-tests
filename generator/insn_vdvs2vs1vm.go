@@ -7,7 +7,7 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Vs1Vm() []string {
-	float := strings.HasPrefix(i.Name, "vf")
+	float := strings.HasPrefix(i.Name, "vf") || strings.HasPrefix(i.Name, "vmf")
 	vdWidening := strings.HasPrefix(i.Name, "vw") || strings.HasPrefix(i.Name, "vfw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wv")
 	vdSize := iff(vdWidening, 2, 1)
@@ -23,6 +23,9 @@ func (i *Insn) genCodeVdVs2Vs1Vm() []string {
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations {
+		if strings.HasPrefix(i.Name, "vrgatherei16") && (16*c.LMUL/LMUL(c.SEW) > LMUL(8.0) || 16*c.LMUL/LMUL(c.SEW) < LMUL(0.125)) {
+			continue
+		}
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 
