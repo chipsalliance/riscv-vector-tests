@@ -1,6 +1,8 @@
 name = "vfmsub.vf"
 format = "vd,fs1,vs2,vm"
 
+supported_zve = ["Zve32f", "Zve64f", "Zve64d"]
+
 [tests]
 fsew32 = [
     [0.0,   2.5,           1.0],

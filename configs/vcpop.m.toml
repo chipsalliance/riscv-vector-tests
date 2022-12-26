@@ -1,5 +1,7 @@
 name = "vcpop.m"
 format = "rd,vs2,vm"
 
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
 [tests]
 base = []

@@ -1,6 +1,8 @@
 name = "vfrdiv.vf"
 format = "vd,vs2,fs1,vm"
 
+supported_zve = ["Zve32f", "Zve64f", "Zve64d"]
+
 [tests]
 fsew32 = [
     [2.5,           1.0],

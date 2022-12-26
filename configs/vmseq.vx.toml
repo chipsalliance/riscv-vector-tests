@@ -1,6 +1,8 @@
 name = "vmseq.vx"
 format = "vd,vs2,rs1,vm"
 
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
 [tests]
 base = [
     [0x0, 0x0],

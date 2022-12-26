@@ -1,6 +1,8 @@
 name = "vadc.vvm"
 format = "vd,vs2,vs1,v0"
 
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
 [tests]
 base = [
     [0x0, 0x0],

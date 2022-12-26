@@ -1,6 +1,8 @@
 name = "vfwmul.vf"
 format = "vd,vs2,fs1,vm"
 
+supported_zve = ["Zve64d"]
+
 [tests]
 fsew32 = [
     [2.5,           1.0],

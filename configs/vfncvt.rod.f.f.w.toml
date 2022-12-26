@@ -1,6 +1,8 @@
 name = "vfncvt.rod.f.f.w"
 format = "vd,vs2,vm"
 
+supported_zve = ["Zve32f", "Zve64f", "Zve64d"]
+
 [tests]
 sew64 = [
     ["0xffffffffffffffff"],

@@ -1,4 +1,6 @@
 name = "vmsof.m"
 format = "vd,vs2,vm/2"
 
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
 [tests]

@@ -1,6 +1,8 @@
 name = "vfncvt.rtz.xu.f.w"
 format = "vd,vs2,vm"
 
+supported_zve = ["Zve32f", "Zve64f", "Zve64d"]
+
 [tests]
 sew64 = [
     ["0x7ff8000000000000"], # Quiet NaN
