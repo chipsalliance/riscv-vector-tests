@@ -8,7 +8,7 @@ import (
 
 func (i *Insn) genCodeVdVs2UimmVm() []string {
 	vs2Widening := strings.HasSuffix(i.Name, ".wi")
-	sews := iff(vs2Widening, allSEWs[:len(allSEWs)-1], allSEWs)
+	sews := iff(vs2Widening, allSEWs[:len(allSEWs)-2], allSEWs[:len(allSEWs)-1])
 	vs2Size := iff(vs2Widening, 2, 1)
 
 	combinations := i.combinations(
