@@ -41,6 +41,17 @@ var validLMULs = map[LMUL]struct{}{
 	allLMULs[6]: {},
 }
 
+func nfieldsLMULs(nfields int) []LMUL {
+	var lmuls []LMUL
+	for _, lmul := range allLMULs {
+		if lmul*LMUL(nfields) > LMUL(8) {
+			continue
+		}
+		lmuls = append(lmuls, lmul)
+	}
+	return lmuls
+}
+
 func (l LMUL) String() string {
 	if _, ok := validLMULs[l]; !ok {
 		log.Fatalln("unreachable")
@@ -82,6 +93,29 @@ func getEEW(name string) SEW {
 		log.Fatalln("unreachable")
 	}
 	return SEW(eew)
+}
+
+func getNfieldsRoundedUp(name string) int {
+	s := regexp.MustCompile(`v.+?seg(\d)e.+?\.v`)
+	subs := s.FindStringSubmatch(name)
+	if len(subs) < 2 {
+		return 1
+	}
+	nfields, err := strconv.Atoi(s.FindStringSubmatch(name)[1])
+	if err != nil {
+		return 1
+	}
+	switch nfields {
+	case 1, 2:
+		return 2
+	case 3, 4:
+		return 4
+	case 5, 6, 7, 8:
+		return 8
+	default:
+		log.Fatalln("unreachable")
+		return 1
+	}
 }
 
 func iff[T any](condition bool, t T, f T) T {

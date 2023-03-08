@@ -2,12 +2,14 @@ package generator
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
 func (i *Insn) genCodeVdRs1mVm() []string {
+	nfields := getNfieldsRoundedUp(i.Name)
 	combinations := i.combinations(
-		allLMULs,
+		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
 		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
@@ -19,10 +21,11 @@ func (i *Insn) genCodeVdRs1mVm() []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-		vd := int(c.LMUL1)
-		builder.WriteString(i.gWriteRandomData(c.LMUL1))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
+		lmul1 := LMUL(math.Max(float64(c.LMUL)*float64(nfields), 1))
+		vd := int(lmul1)
+		builder.WriteString(i.gWriteRandomData(lmul1))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, lmul1, c.SEW))
+		builder.WriteString(i.gWriteIntegerTestData(lmul1, c.SEW, 0))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
@@ -30,7 +33,7 @@ func (i *Insn) genCodeVdRs1mVm() []string {
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
 		builder.WriteString(i.gResultDataAddr())
-		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, c.SEW))
+		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, lmul1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vd))
 
 		res = append(res, builder.String())

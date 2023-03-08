@@ -2,12 +2,14 @@ package generator
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
 func (i *Insn) genCodeVs3Rs1mRs2Vm() []string {
+	nfields := getNfieldsRoundedUp(i.Name)
 	combinations := i.combinations(
-		allLMULs,
+		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
 		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
@@ -19,11 +21,12 @@ func (i *Insn) genCodeVs3Rs1mRs2Vm() []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-		vs3 := int(c.LMUL1)
+		lmul1 := LMUL(math.Max(float64(c.LMUL)*float64(nfields), 1))
+		vs3 := int(lmul1)
 		for _, s := range []int{minStride, 0, 1, maxStride} {
 			stride := s * int(c.SEW) / 8
-			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
-			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
+			builder.WriteString(i.gWriteIntegerTestData(lmul1, c.SEW, 0))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, c.SEW))
 
 			builder.WriteString(i.gResultDataAddr())
 			builder.WriteString(fmt.Sprintf("li a5, %d\n", -minStride*i.vlenb()*int(c.LMUL1)))
@@ -40,7 +43,7 @@ func (i *Insn) genCodeVs3Rs1mRs2Vm() []string {
 
 			builder.WriteString("mv a4, a0\n")
 			for a := 0; a < strides; a++ {
-				builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
+				builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, c.SEW))
 				builder.WriteString(i.gMagicInsn(vs3))
 				builder.WriteString(fmt.Sprintf("li a5, %d\n", i.vlenb()*int(c.LMUL1)))
 				builder.WriteString(fmt.Sprintf("add a4, a4, a5\n"))
