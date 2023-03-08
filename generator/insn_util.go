@@ -106,7 +106,9 @@ func getNfieldsRoundedUp(name string) int {
 		return 1
 	}
 	switch nfields {
-	case 1, 2:
+	case 1:
+		return 1
+	case 2:
 		return 2
 	case 3, 4:
 		return 4
