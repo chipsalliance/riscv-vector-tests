@@ -101,7 +101,7 @@ func getNfieldsRoundedUp(name string) int {
 	if len(subs) < 2 {
 		return 1
 	}
-	nfields, err := strconv.Atoi(s.FindStringSubmatch(name)[1])
+	nfields, err := strconv.Atoi(subs[1])
 	if err != nil {
 		return 1
 	}

@@ -1,0 +1,17 @@
+name = "vl8re32.v"
+format = "vd,(rs1)"
+
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x2],
+    [0xf]
+]
+sew32 = [
+    [0x7fffffff],
+    [0xfffffff8],
+    [0xffffffff]
+]

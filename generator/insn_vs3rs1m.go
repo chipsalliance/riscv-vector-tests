@@ -2,11 +2,22 @@ package generator
 
 import (
 	"fmt"
+	"regexp"
+	"strconv"
 	"strings"
 )
 
 func (i *Insn) genCodeVs3Rs1m() []string {
-	combinations := i.combinations([]LMUL{1}, []SEW{8}, []bool{false})
+	s := regexp.MustCompile(`vs(\d)r\.v`)
+	subs := s.FindStringSubmatch(i.Name)
+
+	lmuls := []LMUL{1}
+	if len(subs) == 2 {
+		nfields, _ := strconv.Atoi(subs[1])
+		lmuls = []LMUL{LMUL(nfields)}
+	}
+
+	combinations := i.combinations(lmuls, []SEW{8}, []bool{false})
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations {

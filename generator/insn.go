@@ -69,7 +69,6 @@ const (
 	insnFormatVs3Rs1mVs2Vm insnFormat = "vs3,(rs1),vs2,vm"
 	insnFormatVdVs2Vs1     insnFormat = "vd,vs2,vs1"
 	insnFormatVdVs2Vs1V0   insnFormat = "vd,vs2,vs1,v0"
-	insnFormatVdmVs2Vs1V0  insnFormat = "vdm,vs2,vs1,v0"
 	insnFormatVdVs2Vs1Vm   insnFormat = "vd,vs2,vs1,vm"
 	insnFormatVdVs2Rs1V0   insnFormat = "vd,vs2,rs1,v0"
 	insnFormatVdVs2Fs1V0   insnFormat = "vd,vs2,fs1,v0"
@@ -93,9 +92,9 @@ const (
 	insnFormatRdVs2        insnFormat = "rd,vs2"
 	insnFormatFdVs2        insnFormat = "fd,vs2"
 	insnFormatVdVm         insnFormat = "vd,vm"
-	insnFormatvsetvli      insnFormat = "vsetvli"
-	insnFormatvsetvl       insnFormat = "vsetvl"
-	insnFormatvsetivli     insnFormat = "vsetivli"
+	insnFormatVsetvli      insnFormat = "vsetvli"
+	insnFormatVsetvl       insnFormat = "vsetvl"
+	insnFormatVsetivli     insnFormat = "vsetivli"
 )
 
 var formats = map[insnFormat]struct{}{
@@ -109,7 +108,6 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVs3Rs1mVs2Vm: {},
 	insnFormatVdVs2Vs1:     {},
 	insnFormatVdVs2Vs1V0:   {},
-	insnFormatVdmVs2Vs1V0:  {},
 	insnFormatVdVs2Vs1Vm:   {},
 	insnFormatVdVs2Rs1V0:   {},
 	insnFormatVdVs2Fs1V0:   {},
@@ -133,9 +131,9 @@ var formats = map[insnFormat]struct{}{
 	insnFormatRdVs2:        {},
 	insnFormatFdVs2:        {},
 	insnFormatVdVm:         {},
-	insnFormatvsetvli:      {},
-	insnFormatvsetvl:       {},
-	insnFormatvsetivli:     {},
+	insnFormatVsetvli:      {},
+	insnFormatVsetvl:       {},
+	insnFormatVsetivli:     {},
 }
 
 func (i *Insn) genCodeCombinations() []string {
@@ -202,11 +200,11 @@ func (i *Insn) genCodeCombinations() []string {
 		return i.genCodeFdVs2()
 	case insnFormatVdVm:
 		return i.genCodeVdVm()
-	case insnFormatvsetvli:
+	case insnFormatVsetvli:
 		return i.genCodevsetvli()
-	case insnFormatvsetvl:
+	case insnFormatVsetvl:
 		return i.genCodevsetvl()
-	case insnFormatvsetivli:
+	case insnFormatVsetivli:
 		return i.genCodevsetivli()
 	default:
 		log.Fatalln("unreachable")

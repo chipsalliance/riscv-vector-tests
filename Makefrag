@@ -156,6 +156,22 @@ tests = \
   vfwsub.wv-0 \
   vid.v-0 \
   viota.m-0 \
+  vl1re16.v-0 \
+  vl1re32.v-0 \
+  vl1re64.v-0 \
+  vl1re8.v-0 \
+  vl2re16.v-0 \
+  vl2re32.v-0 \
+  vl2re64.v-0 \
+  vl2re8.v-0 \
+  vl4re16.v-0 \
+  vl4re32.v-0 \
+  vl4re64.v-0 \
+  vl4re8.v-0 \
+  vl8re16.v-0 \
+  vl8re32.v-0 \
+  vl8re64.v-0 \
+  vl8re8.v-0 \
   vle16.v-0 \
   vle32.v-0 \
   vle64.v-0 \
@@ -484,6 +500,10 @@ tests = \
   vrsub.vx-1 \
   vrsub.vx-2 \
   vrsub.vx-3 \
+  vs1r.v-0 \
+  vs2r.v-0 \
+  vs4r.v-0 \
+  vs8r.v-0 \
   vsadd.vi-0 \
   vsadd.vi-1 \
   vsadd.vi-2 \
