@@ -87,7 +87,7 @@ func trimBoth(name, prefix, suffix string) string {
 }
 
 func getEEW(name string) SEW {
-	s := regexp.MustCompile(`v.+?(\d+)\.v`)
+	s := regexp.MustCompile(`v.+?(\d+)f*\.v`)
 	eew, err := strconv.Atoi(s.FindStringSubmatch(name)[1])
 	if err != nil {
 		log.Fatalln("unreachable")

@@ -150,6 +150,10 @@ func (i *Insn) genCodeCombinations() []string {
 		return i.genCodeVdRs1mRs2Vm()
 	case insnFormatVs3Rs1mRs2Vm:
 		return i.genCodeVs3Rs1mRs2Vm()
+	case insnFormatVdRs1mVs2Vm:
+		return i.genCodeVdRs1mVs2Vm()
+	case insnFormatVs3Rs1mVs2Vm:
+		return i.genCodeVs3Rs1mVs2Vm()
 	case insnFormatVdVs2Vs1:
 		return i.genCodeVdVs2Vs1()
 	case insnFormatVdVs2Vs1V0:

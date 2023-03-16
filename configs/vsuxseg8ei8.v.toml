@@ -1,0 +1,17 @@
+name = "vsuxseg8ei8.v"
+format = "vs3,(rs1),vs2,vm"
+
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x2],
+    [0xf]
+]
+sew8 = [
+    [0x7f],
+    [0xf8],
+    [0xff]
+]

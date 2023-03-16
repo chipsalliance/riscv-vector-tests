@@ -23,6 +23,35 @@ func (i *Insn) gWriteRandomData(lmul LMUL) string {
 	return builder.String()
 }
 
+func (i *Insn) gWriteIndexData(lmul1 LMUL, n int, sew SEW) string {
+	if n <= 0 {
+		n = 1
+	}
+	nBytes := i.vlenb() * int(lmul1)
+	builder := strings.Builder{}
+	buf := &bytes.Buffer{}
+	s := genShuffledSlice(n)
+	for a := 0; a < nBytes/(int(sew)/8); a++ {
+		switch sew {
+		case 8:
+			_ = binary.Write(buf, binary.LittleEndian, uint8(s[a%n]))
+		case 16:
+			_ = binary.Write(buf, binary.LittleEndian, uint16(s[a%n]*2))
+		case 32:
+			_ = binary.Write(buf, binary.LittleEndian, uint32(s[a%n]*4))
+		case 64:
+			_ = binary.Write(buf, binary.LittleEndian, uint64(s[a%n]*8))
+		}
+	}
+	off := i.TestData.Append(buf.Bytes())
+	builder.WriteString("# Move a0 to test data area.\n")
+	builder.WriteString("la a0, testdata\n")
+	builder.WriteString(fmt.Sprintf("li a5, %d\n", off))
+	builder.WriteString("add a0, a0, a5\n")
+
+	return builder.String()
+}
+
 func (i *Insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
 	return i.gWriteTestData(false, lmul, sew, idx)
 }

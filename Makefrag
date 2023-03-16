@@ -173,10 +173,46 @@ tests = \
   vl8re64.v-0 \
   vl8re8.v-0 \
   vle16.v-0 \
+  vle16ff.v-0 \
   vle32.v-0 \
+  vle32ff.v-0 \
   vle64.v-0 \
+  vle64ff.v-0 \
   vle8.v-0 \
+  vle8ff.v-0 \
   vlm.v-0 \
+  vloxei16.v-0 \
+  vloxei32.v-0 \
+  vloxei64.v-0 \
+  vloxei8.v-0 \
+  vloxseg2ei16.v-0 \
+  vloxseg2ei32.v-0 \
+  vloxseg2ei64.v-0 \
+  vloxseg2ei8.v-0 \
+  vloxseg3ei16.v-0 \
+  vloxseg3ei32.v-0 \
+  vloxseg3ei64.v-0 \
+  vloxseg3ei8.v-0 \
+  vloxseg4ei16.v-0 \
+  vloxseg4ei32.v-0 \
+  vloxseg4ei64.v-0 \
+  vloxseg4ei8.v-0 \
+  vloxseg5ei16.v-0 \
+  vloxseg5ei32.v-0 \
+  vloxseg5ei64.v-0 \
+  vloxseg5ei8.v-0 \
+  vloxseg6ei16.v-0 \
+  vloxseg6ei32.v-0 \
+  vloxseg6ei64.v-0 \
+  vloxseg6ei8.v-0 \
+  vloxseg7ei16.v-0 \
+  vloxseg7ei32.v-0 \
+  vloxseg7ei64.v-0 \
+  vloxseg7ei8.v-0 \
+  vloxseg8ei16.v-0 \
+  vloxseg8ei32.v-0 \
+  vloxseg8ei64.v-0 \
+  vloxseg8ei8.v-0 \
   vlse16.v-0 \
   vlse32.v-0 \
   vlse64.v-0 \
@@ -237,6 +273,38 @@ tests = \
   vlsseg8e32.v-0 \
   vlsseg8e64.v-0 \
   vlsseg8e8.v-0 \
+  vluxei16.v-0 \
+  vluxei32.v-0 \
+  vluxei64.v-0 \
+  vluxei8.v-0 \
+  vluxseg2ei16.v-0 \
+  vluxseg2ei32.v-0 \
+  vluxseg2ei64.v-0 \
+  vluxseg2ei8.v-0 \
+  vluxseg3ei16.v-0 \
+  vluxseg3ei32.v-0 \
+  vluxseg3ei64.v-0 \
+  vluxseg3ei8.v-0 \
+  vluxseg4ei16.v-0 \
+  vluxseg4ei32.v-0 \
+  vluxseg4ei64.v-0 \
+  vluxseg4ei8.v-0 \
+  vluxseg5ei16.v-0 \
+  vluxseg5ei32.v-0 \
+  vluxseg5ei64.v-0 \
+  vluxseg5ei8.v-0 \
+  vluxseg6ei16.v-0 \
+  vluxseg6ei32.v-0 \
+  vluxseg6ei64.v-0 \
+  vluxseg6ei8.v-0 \
+  vluxseg7ei16.v-0 \
+  vluxseg7ei32.v-0 \
+  vluxseg7ei64.v-0 \
+  vluxseg7ei8.v-0 \
+  vluxseg8ei16.v-0 \
+  vluxseg8ei32.v-0 \
+  vluxseg8ei64.v-0 \
+  vluxseg8ei8.v-0 \
   vmacc.vv-0 \
   vmacc.vv-1 \
   vmacc.vx-0 \
@@ -571,6 +639,38 @@ tests = \
   vsmul.vx-1 \
   vsmul.vx-2 \
   vsmul.vx-3 \
+  vsoxei16.v-0 \
+  vsoxei32.v-0 \
+  vsoxei64.v-0 \
+  vsoxei8.v-0 \
+  vsoxseg2ei16.v-0 \
+  vsoxseg2ei32.v-0 \
+  vsoxseg2ei64.v-0 \
+  vsoxseg2ei8.v-0 \
+  vsoxseg3ei16.v-0 \
+  vsoxseg3ei32.v-0 \
+  vsoxseg3ei64.v-0 \
+  vsoxseg3ei8.v-0 \
+  vsoxseg4ei16.v-0 \
+  vsoxseg4ei32.v-0 \
+  vsoxseg4ei64.v-0 \
+  vsoxseg4ei8.v-0 \
+  vsoxseg5ei16.v-0 \
+  vsoxseg5ei32.v-0 \
+  vsoxseg5ei64.v-0 \
+  vsoxseg5ei8.v-0 \
+  vsoxseg6ei16.v-0 \
+  vsoxseg6ei32.v-0 \
+  vsoxseg6ei64.v-0 \
+  vsoxseg6ei8.v-0 \
+  vsoxseg7ei16.v-0 \
+  vsoxseg7ei32.v-0 \
+  vsoxseg7ei64.v-0 \
+  vsoxseg7ei8.v-0 \
+  vsoxseg8ei16.v-0 \
+  vsoxseg8ei32.v-0 \
+  vsoxseg8ei64.v-0 \
+  vsoxseg8ei8.v-0 \
   vsra.vi-0 \
   vsra.vi-1 \
   vsra.vv-0 \
@@ -693,6 +793,38 @@ tests = \
   vsub.vx-2 \
   vsub.vx-3 \
   vsub.vx-4 \
+  vsuxei16.v-0 \
+  vsuxei32.v-0 \
+  vsuxei64.v-0 \
+  vsuxei8.v-0 \
+  vsuxseg2ei16.v-0 \
+  vsuxseg2ei32.v-0 \
+  vsuxseg2ei64.v-0 \
+  vsuxseg2ei8.v-0 \
+  vsuxseg3ei16.v-0 \
+  vsuxseg3ei32.v-0 \
+  vsuxseg3ei64.v-0 \
+  vsuxseg3ei8.v-0 \
+  vsuxseg4ei16.v-0 \
+  vsuxseg4ei32.v-0 \
+  vsuxseg4ei64.v-0 \
+  vsuxseg4ei8.v-0 \
+  vsuxseg5ei16.v-0 \
+  vsuxseg5ei32.v-0 \
+  vsuxseg5ei64.v-0 \
+  vsuxseg5ei8.v-0 \
+  vsuxseg6ei16.v-0 \
+  vsuxseg6ei32.v-0 \
+  vsuxseg6ei64.v-0 \
+  vsuxseg6ei8.v-0 \
+  vsuxseg7ei16.v-0 \
+  vsuxseg7ei32.v-0 \
+  vsuxseg7ei64.v-0 \
+  vsuxseg7ei8.v-0 \
+  vsuxseg8ei16.v-0 \
+  vsuxseg8ei32.v-0 \
+  vsuxseg8ei64.v-0 \
+  vsuxseg8ei8.v-0 \
   vwadd.vv-0 \
   vwadd.vx-0 \
   vwadd.vx-1 \

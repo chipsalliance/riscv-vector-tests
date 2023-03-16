@@ -1,0 +1,17 @@
+name = "vloxseg7ei16.v"
+format = "vd,(rs1),vs2,vm"
+
+supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x2],
+    [0xf]
+]
+sew16 = [
+    [0x7fff],
+    [0xfff8],
+    [0xffff]
+]
