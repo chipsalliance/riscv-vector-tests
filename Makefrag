@@ -311,9 +311,14 @@ tests = \
   vmacc.vx-1 \
   vmacc.vx-2 \
   vmacc.vx-3 \
+  vmadc.vi-0 \
+  vmadc.vi-1 \
   vmadc.vim-0 \
   vmadc.vim-1 \
+  vmadc.vv-0 \
   vmadc.vvm-0 \
+  vmadc.vx-0 \
+  vmadc.vx-1 \
   vmadc.vxm-0 \
   vmadc.vxm-1 \
   vmadd.vv-0 \
@@ -366,7 +371,10 @@ tests = \
   vmnor.mm-0 \
   vmor.mm-0 \
   vmorn.mm-0 \
+  vmsbc.vv-0 \
   vmsbc.vvm-0 \
+  vmsbc.vx-0 \
+  vmsbc.vx-1 \
   vmsbc.vxm-0 \
   vmsbc.vxm-1 \
   vmsbf.m-0 \
