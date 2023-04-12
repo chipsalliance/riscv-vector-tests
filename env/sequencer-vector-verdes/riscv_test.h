@@ -26,7 +26,7 @@ loop:                                                                   \
   vsetvli t0, a2, e8, m8, ta, ma;                                       \
   vle8.v v0, (a1);                                                      \
     add a1, a1, t0;                                                     \
-    add a1, a1, t0;                                                     \
+    sub a2, a2, t0;                                                     \
   vse8.v v0, (a3);                                                      \
     add a3, a3, t0;                                                     \
     bnez a2, loop;                                                      \
