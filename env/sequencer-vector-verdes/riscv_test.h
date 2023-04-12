@@ -17,23 +17,19 @@
 #define RVTEST_RV32UV                                                   \
   .macro init;                                                          \
   RVTEST_VECTOR_ENABLE;                                                 \
-  // Copy the data segment from ROM to RAM
-  la   a0, __data_start
-  la   a2, __data_end
-  sub  a2, a2, a0
-  la   a1, __data_load_start
-
-  // memcpy, directly copied from riscv-v-spec A.3. Memcpy example
-  mv a3, a0
-loop:
-  vsetvli t0, a2, e8, m8, ta, ma
-  vle8.v v0, (a1)
-    add a1, a1, t0
-    add a1, a1, t0
-  vse8.v v0, (a3)
-    add a3, a3, t0
-    bnez a2, loop
-
+  la   a0, __data_start;                                                \
+  la   a2, __data_end;                                                  \
+  sub  a2, a2, a0;                                                      \
+  la   a1, __data_load_start;                                           \
+  mv a3, a0;                                                            \
+loop:                                                                   \
+  vsetvli t0, a2, e8, m8, ta, ma;                                       \
+  vle8.v v0, (a1);                                                      \
+    add a1, a1, t0;                                                     \
+    add a1, a1, t0;                                                     \
+  vse8.v v0, (a3);                                                      \
+    add a3, a3, t0;                                                     \
+    bnez a2, loop;                                                      \
   .endm
 
 #define INIT_XREG                                                       \
