@@ -7,7 +7,7 @@ ENTRY(_start)
 MEMORY
 {
     BOOTROM (rx) : ORIGIN = 0x100000, LENGTH = 288K
-    RAM    (xrw) : ORIGIN = 0x80000000, LENGTH = 64K
+    RAM    (xrw) : ORIGIN = 0x80000000, LENGTH = 64M
 }
 
 SECTIONS
@@ -20,6 +20,7 @@ SECTIONS
   . = ALIGN(0x1000);
   .text : {
     *(.text)
+    *(.got)
   } >BOOTROM
 
   . = ALIGN(0x1000);
