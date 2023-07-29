@@ -51,6 +51,14 @@ If you want to generate user mode binaries, you can use `make -e MODE=user -j$(n
 
 If you don't want float tests (i.e. for Zve32x or Zve64x), you can use `make -e INTEGER=1 -j$(nproc)`
 
+### Nix package
+
+This repository also provide a nix derivation with the following output provided:
+
+- `${riscv-vector-test}/bin/*`: Generator binaries
+- `${riscv-vector-test}/include/*`: Necessary headers for runtime usage
+- `${riscv-vector-test}/configs/*`: Necessary runtime configs
+
 ## License
 
 This project uses third-party projects, and the licenses of these projects are attached to the corresponding directories.
