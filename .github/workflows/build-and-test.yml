@@ -1,0 +1,45 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - uses: actions/setup-go@v4
+
+      - name: Install Toolchain
+        run: |
+          mkdir -p build/
+          cd build
+          wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.07.07/riscv64-elf-ubuntu-22.04-gcc-nightly-2023.07.07-nightly.tar.gz | tar -xzf -
+
+      - name: Build Spike
+        run: |
+          sudo apt-get install device-tree-compiler
+          cd build
+          git clone --depth=1 https://github.com/riscv-software-src/riscv-isa-sim.git
+          cd riscv-isa-sim
+          mkdir build
+          cd build
+          ../configure --prefix=${{ github.workspace }}/build/riscv
+          make
+          sudo make install
+
+      - name: Build and Test
+          run: |
+            export PATH="${{ github.workspace }}/build/riscv/bin:$PATH"
+            export RISCV="${{ github.workspace }}/build/riscv"
+            make -j4
+
+
