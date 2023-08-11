@@ -30,6 +30,9 @@ RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartf
 
 all: compile-stage2
 
+git-submodule-init:
+	git submodule update --init
+
 build: build-generator build-merger
 
 build-generator:
@@ -45,7 +48,7 @@ build-patcher-spike: pspike/pspike.cc
 unittest:
 	go test ./...
 
-generate-stage1: clean-out build
+generate-stage1: clean-out git-submodule-init build
 	@mkdir -p ${OUTPUT_STAGE1}
 	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
@@ -99,6 +102,7 @@ clean: clean-out
 	rm -rf build/
 
 .PHONY: all \
+		git-submodule-init \
 		build build-generator unittest \
 		generate-stage1 compile-stage1 $(tests) \
 		$(tests_patch) generate-stage2 compile-stage2 $(tests_stage2) \
