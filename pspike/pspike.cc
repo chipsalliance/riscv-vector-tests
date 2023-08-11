@@ -7,9 +7,9 @@
 
 // Copied from spike main.
 // TODO: This should really be provided in libriscv
-static std::vector<std::pair<reg_t, mem_t*>> make_mems(const std::vector<mem_cfg_t> &layout)
+static std::vector<std::pair<reg_t, abstract_mem_t*>> make_mems(const std::vector<mem_cfg_t> &layout)
 {
-  std::vector<std::pair<reg_t, mem_t*>> mems;
+  std::vector<std::pair<reg_t, abstract_mem_t*>> mems;
   mems.reserve(layout.size());
   for (const auto &cfg : layout) {
     mems.push_back(std::make_pair(cfg.get_base(), new mem_t(cfg.get_size())));
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
     .support_haltgroups = true,
     .support_impebreak = true
   };
-  std::vector<std::pair<reg_t, mem_t*>> mems = make_mems(cfg.mem_layout());
+  std::vector<std::pair<reg_t, abstract_mem_t*>> mems = make_mems(cfg.mem_layout());
   std::vector<const device_factory_t*> plugin_devices;
   sim_t sim(&cfg, false,
             mems,
