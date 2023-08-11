@@ -33,7 +33,7 @@ jobs:
           mkdir build
           cd build
           ../configure --prefix=${{ github.workspace }}/build/riscv
-          make
+          make -j4
           sudo make install
 
       - name: Build and Test
