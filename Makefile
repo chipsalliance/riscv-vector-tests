@@ -54,7 +54,7 @@ compile-stage1: generate-stage1
 	$(MAKE) $(tests)
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
-	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros/general -Tenv/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/riscv-test-env/p -Imacros/general -Tenv/riscv-test-env/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
 ifeq ($(MODE),sequencer/vector)
 	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@)
 	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE1}$(shell basename $@).S -o ${OUTPUT_STAGE1_ASM}$(shell basename $@).S
@@ -86,7 +86,7 @@ ifeq ($(MODE),user)
 else ifeq ($(MODE),sequencer/vector)
 	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_ASM}$(shell basename $@ .stage2).S
 else # machine
-	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/p -Imacros/general -Tenv/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/riscv-test-env/p -Imacros/general -Tenv/riscv-test-env/p/link.ld ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 endif
 
