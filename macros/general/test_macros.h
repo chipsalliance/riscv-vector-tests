@@ -15,7 +15,10 @@ test_ ## testnum: \
     li  TESTNUM, testnum; \
     code; \
     li  x7, MASK_XLEN(correctval); \
-    bne testreg, x7, fail;
+    beq testreg, x7, test_ ## testnum ## _success; \
+    la x7, fail;                                   \
+    jr x7;                                         \
+test_ ## testnum ## _success:
 
 # We use a macro hack to simpify code generation for various numbers
 # of bubble cycles.
