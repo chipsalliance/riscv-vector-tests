@@ -57,4 +57,10 @@ jobs:
           make || true # FIXME: workaround for Makefrag
           make -j4
 
-
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Final sources and binaries
+          path: |
+            out/tests/stage2/*
+            out/bin/stage2/*
