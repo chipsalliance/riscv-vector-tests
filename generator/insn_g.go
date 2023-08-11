@@ -120,7 +120,8 @@ func (i *Insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
 }
 
 func (i *Insn) gMagicInsn(group int) string {
-	return fmt.Sprintf("addi x0, x%d, %d\n\n", 1*int(group), 2*int(group))
+	insn := 0b0001011 + (group & 0b11111) << 15
+	return fmt.Sprintf(".word 0x%x\n", insn);
 }
 
 func (i *Insn) gVsetvli(vl int, sew SEW, lmul LMUL) string {
