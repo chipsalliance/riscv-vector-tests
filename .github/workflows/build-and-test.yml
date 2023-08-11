@@ -37,9 +37,9 @@ jobs:
           sudo make install
 
       - name: Build and Test
-          run: |
-            export PATH="${{ github.workspace }}/build/riscv/bin:$PATH"
-            export RISCV="${{ github.workspace }}/build/riscv"
-            make -j4
+        run: |
+          export PATH="${{ github.workspace }}/build/riscv/bin:$PATH"
+          export RISCV="${{ github.workspace }}/build/riscv"
+          make -j4
 
 
