@@ -18,13 +18,27 @@ jobs:
 
       - uses: actions/setup-go@v4
 
+      - name: Get Spike Cache Key
+        id: get-spike-cache-key
+        run: |
+          echo "key=$(git ls-remote https://github.com/riscv-software-src/riscv-isa-sim.git HEAD | awk '{print $1}')" >> $GITHUB_OUTPUT
+
+      - name: Cache Spike
+        id: cache-spike
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/build/riscv
+          key: ${{ runner.os }}-${{ steps.get-spike-cache-key.outputs.key }}-spike
+
       - name: Install Toolchain
+        if: steps.cache-spike.outputs.cache-hit != 'true'
         run: |
           mkdir -p build/
           cd build
           wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.07.07/riscv64-elf-ubuntu-22.04-gcc-nightly-2023.07.07-nightly.tar.gz | tar -xzf -
 
       - name: Build Spike
+        if: steps.cache-spike.outputs.cache-hit != 'true'
         run: |
           sudo apt-get install device-tree-compiler
           cd build
