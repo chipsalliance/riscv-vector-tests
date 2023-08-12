@@ -31,32 +31,29 @@ jobs:
         id: cache-spike
         uses: actions/cache@v3
         with:
-          path: ${{ github.workspace }}/build/riscv
+          path: ${{ github.workspace }}/riscv
           key: ${{ runner.os }}-${{ steps.get-spike-cache-key.outputs.key }}-spike
 
       - name: Install Toolchain
         if: steps.cache-spike.outputs.cache-hit != 'true'
         run: |
-          mkdir -p build/
-          cd build
           wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.07.07/riscv64-elf-ubuntu-22.04-gcc-nightly-2023.07.07-nightly.tar.gz | tar -xzf -
 
       - name: Build Spike
         if: steps.cache-spike.outputs.cache-hit != 'true'
         run: |
-          cd build
           git clone --depth=1 https://github.com/riscv-software-src/riscv-isa-sim.git
           cd riscv-isa-sim
           mkdir build
           cd build
-          ../configure --prefix=${{ github.workspace }}/build/riscv
+          ../configure --prefix=${{ github.workspace }}/riscv
           make -j4
           sudo make install
 
       - name: Build and Test
         run: |
-          export PATH="${{ github.workspace }}/build/riscv/bin:$PATH"
-          export RISCV="${{ github.workspace }}/build/riscv"
+          export PATH="${{ github.workspace }}/riscv/bin:$PATH"
+          export RISCV="${{ github.workspace }}/riscv"
           make -j4
 
       - name: Archive artifacts
