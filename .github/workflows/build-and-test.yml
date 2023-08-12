@@ -57,7 +57,6 @@ jobs:
         run: |
           export PATH="${{ github.workspace }}/build/riscv/bin:$PATH"
           export RISCV="${{ github.workspace }}/build/riscv"
-          make || true # FIXME: workaround for Makefrag
           make -j4
 
       - name: Archive artifacts

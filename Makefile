@@ -22,8 +22,6 @@ ifeq ($(XLEN), 32)
 MABI = ilp32f
 endif
 
-include Makefrag
-
 RISCV_PREFIX = riscv64-unknown-elf-
 RISCV_GCC = $(RISCV_PREFIX)gcc
 RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles
@@ -42,7 +40,8 @@ build-merger:
 	go build -o build/merger merger/merger.go
 
 build-patcher-spike: pspike/pspike.cc
-	mkdir -p build ;
+	rm -rf build
+	mkdir -p build
 	g++ -std=c++17 -I$(SPIKE_INSTALL)/include -L$(SPIKE_INSTALL)/lib $< -lriscv -lfesvr -o $(PATCHER_SPIKE)
 
 unittest:
@@ -51,6 +50,8 @@ unittest:
 generate-stage1: clean-out git-submodule-init build
 	@mkdir -p ${OUTPUT_STAGE1}
 	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+
+-include build/Makefrag
 
 compile-stage1: generate-stage1
 	@mkdir -p ${OUTPUT_STAGE1_BIN} ${OUTPUT_STAGE1_ASM}

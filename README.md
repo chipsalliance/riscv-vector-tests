@@ -47,7 +47,6 @@ The default VLEN is 256, if you want to generate tests for a different VLEN/XLEN
 
 > NOTE:
 > 1. We do not support specifying ELEN yet, ELEN is consistent with XLEN.
-> 2. When changing VLEN and XLEN, you need to run `make` twice. The first run will regenerate the Makefrag file (and then fails), the second run will generate the tests.
 
 If you want to generate user-mode binaries, you can use `make -e MODE=user -j$(nproc)`.
 
