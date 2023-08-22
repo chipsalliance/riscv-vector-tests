@@ -1,8 +1,6 @@
 name = "vmv.v.v"
 format = "vd,vs1"
 
-supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
-
 [tests]
 base = []
 sew8 = [[0xd6]]

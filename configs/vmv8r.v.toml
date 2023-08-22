@@ -1,6 +1,4 @@
 name = "vmv8r.v"
 format = "vd,vs2"
 
-supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
-
 [tests]

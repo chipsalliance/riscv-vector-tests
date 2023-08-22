@@ -1,8 +1,6 @@
 name = "vfmv.v.f"
 format = "vd,fs1"
 
-supported_zve = ["Zve32f", "Zve64f", "Zve64d"]
-
 [tests]
 fsew32 = [[42.0]]
 fsew64 = [[42.0]]

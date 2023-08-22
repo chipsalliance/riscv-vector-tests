@@ -1,8 +1,6 @@
 name = "vzext.vf2"
 format = "vd,vs2,vm/3"
 
-supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
-
 [tests]
 base = [
     [0x0],

@@ -1,8 +1,6 @@
 name = "vfwnmacc.vv"
 format = "vd,vs1,vs2,vm"
 
-supported_zve = ["Zve64d"]
-
 [tests]
 fsew32 = [
     [0.0,   2.5,           1.0],

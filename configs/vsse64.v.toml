@@ -1,8 +1,6 @@
 name = "vsse64.v"
 format = "vs3,(rs1),rs2,vm"
 
-supported_zve = ["Zve64x", "Zve64f", "Zve64d"]
-
 [tests]
 base = [
     [0x0],

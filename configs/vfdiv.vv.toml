@@ -1,8 +1,6 @@
 name = "vfmul.vv"
 format = "vd,vs2,vs1,vm"
 
-supported_zve = ["Zve32f", "Zve64f", "Zve64d"]
-
 [tests]
 fsew32 = [
     [3.14159265, 2.71828182],

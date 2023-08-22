@@ -1,8 +1,6 @@
 name = "vfwcvt.f.x.v"
 format = "vd,vs2,vm"
 
-supported_zve = ["Zve64d"]
-
 [tests]
 sew32 = [
     [0xffffffff],

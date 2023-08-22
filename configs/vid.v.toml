@@ -1,7 +1,5 @@
 name = "vid.v"
 format = "vd,vm"
 
-supported_zve = ["Zve32x", "Zve32f", "Zve64x", "Zve64f", "Zve64d"]
-
 [tests]
 base = []
