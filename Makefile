@@ -1,16 +1,17 @@
-MODE = machine # or user, sequencer/vector
+# machine, user, or sequencer-vector
+MODE = machine
 VLEN = 256
 XLEN = 64
 INTEGER = 0
 SPIKE_INSTALL = $(RISCV)
-OUTPUT = out/
-OUTPUT_STAGE1 = ${OUTPUT}tests/stage1/
-OUTPUT_STAGE2 = ${OUTPUT}tests/stage2/
-OUTPUT_STAGE2_PATCH = ${OUTPUT}patches/stage2/
-OUTPUT_STAGE1_ASM = ${OUTPUT}asm/stage1/
-OUTPUT_STAGE2_ASM = ${OUTPUT}asm/stage2/
-OUTPUT_STAGE1_BIN = ${OUTPUT}bin/stage1/
-OUTPUT_STAGE2_BIN = ${OUTPUT}bin/stage2/
+OUTPUT = out/v$(VLEN)x$(XLEN)$(MODE)
+OUTPUT_STAGE1 = $(OUTPUT)/tests/stage1/
+OUTPUT_STAGE2 = $(OUTPUT)/tests/stage2/
+OUTPUT_STAGE2_PATCH = $(OUTPUT)/patches/stage2/
+OUTPUT_STAGE1_ASM = $(OUTPUT)/asm/stage1/
+OUTPUT_STAGE2_ASM = $(OUTPUT)/asm/stage2/
+OUTPUT_STAGE1_BIN = $(OUTPUT)/bin/stage1/
+OUTPUT_STAGE2_BIN = $(OUTPUT)/bin/stage2/
 CONFIGS = configs/
 
 SPIKE = spike
@@ -59,7 +60,7 @@ compile-stage1: generate-stage1
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -Ienv/riscv-test-env/p -Imacros/general -Tenv/riscv-test-env/p/link.ld $< -o ${OUTPUT_STAGE1_BIN}$@
-ifeq ($(MODE),sequencer/vector)
+ifeq ($(MODE),sequencer-vector)
 	${SPIKE} --isa ${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@)
 	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE1}$(shell basename $@).S -o ${OUTPUT_STAGE1_ASM}$(shell basename $@).S
 endif
@@ -96,7 +97,7 @@ endif
 
 
 clean-out:
-	rm -rf out/
+	rm -rf $(OUTPUT)
 
 clean: clean-out
 	go clean
