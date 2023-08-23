@@ -10,14 +10,21 @@
 
 #define MASK_XLEN(x) ((x) & ((1 << (__riscv_xlen - 1) << 1) - 1))
 
+
+// Ugly, this currently inlines the correctval in with the code,
+// but this avoids many SLLI/ADDI to generate it from an immediate
 #define TEST_CASE( testnum, testreg, correctval, code... ) \
 test_ ## testnum: \
-    li  TESTNUM, testnum; \
-    code; \
-    li  x7, MASK_XLEN(correctval); \
+    li  TESTNUM, testnum;				   \
+    code;						   \
+    la  x7, test_ ## testnum ## _data;			   \
+    ld  x7, 0(x7);					   \
     beq testreg, x7, test_ ## testnum ## _success; \
     la x7, fail;                                   \
     jr x7;                                         \
+.align 3;					   \
+test_ ## testnum ## _data:			   \
+   .quad MASK_XLEN(correctval);			   \
 test_ ## testnum ## _success:
 
 # We use a macro hack to simpify code generation for various numbers
