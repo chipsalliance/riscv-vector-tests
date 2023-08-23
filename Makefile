@@ -2,6 +2,7 @@
 MODE = machine
 VLEN = 256
 XLEN = 64
+SPLIT = 10000
 INTEGER = 0
 SPIKE_INSTALL = $(RISCV)
 OUTPUT = out/v$(VLEN)x$(XLEN)$(MODE)
@@ -61,7 +62,7 @@ unittest:
 
 generate-stage1: clean-out git-submodule-init build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 -include build/Makefrag
 
