@@ -23,6 +23,7 @@ func fatalIf(err error) {
 
 var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "")
+var splitF = flag.Int("split", 10000, "")
 var integer = flag.Bool("integer", false, "")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
@@ -71,7 +72,7 @@ func main() {
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
 
-			for idx, testContent := range insn.Generate(10000) {
+			for idx, testContent := range insn.Generate(*splitF) {
 				asmFilename := strings.TrimSuffix(name, ".toml") + "-" + strconv.Itoa(idx)
 				writeTo(*stage1OutputDirF, asmFilename+".S", testContent)
 				lk.Lock()
