@@ -14,5 +14,5 @@ sew64 = [
     ["0xc00921f9f01b866e"], # -3.14159
     ["0x400921f9f01b866e"], #  3.14159
     ["0x0000000000000001"], # Subnormal
-    ["0x000fffffffffffff"], # Submornal
+    ["0x000fffffffffffff"], # Subnormal
 ]

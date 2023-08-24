@@ -2,5 +2,5 @@ name = "vfmv.v.f"
 format = "vd,fs1"
 
 [tests]
-fsew32 = [[42.0]]
-fsew64 = [[42.0]]
+fsew32 = [["42.0"]]
+fsew64 = [["42.0"]]

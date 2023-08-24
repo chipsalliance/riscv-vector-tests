@@ -6,27 +6,14 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 
 For starters, you can directly download the pre-generated tests from Github Action Artifacts.
 
-## Known Users
-
-- https://github.com/sequencer/vector
-- https://10xengineers.ai/
-
 ## Plan
 
-- [x] Add tests for all instructions (only basic tests, no coverage required)
-- [ ] Improve test cases for existing tests
-  - Add more test cases, the more, the better!
-  - Add NaN tests for float instructions
-  - Add Inf tests for float instructions
-  - ...
 - [ ] Add check mechanism for CSR register
 - [ ] Add V register coverage test
-- [x] Support generating user mode tests (for gem5)
 - [ ] Add test coverage statistics
 - [ ] Add negative tests
 - [ ] Add tests for sub-extensions (e.g. Zvamo, Zvfh).
 - [ ] Support Zve64f.
-- [ ] Add simple sanity tests.
 
 ## Prerequisite
 

@@ -14,5 +14,5 @@ sew32 = [
     [0xc0490e56], # -3.14159
     [0x40490fd0], #  3.14159
     [0x00000001], # Subnormal
-    [0x007fffff], # Submornal
+    [0x007fffff], # Subnormal
 ]

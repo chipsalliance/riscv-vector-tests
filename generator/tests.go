@@ -1,8 +1,10 @@
 package generator
 
 import (
+	"math"
 	"strconv"
 	"strings"
+	"unsafe"
 )
 
 type num interface {
@@ -18,6 +20,94 @@ func convNum[T num](n any) T {
 	return res
 }
 
+func parseCustomFloat32(n string) float32 {
+	var val uint32 = 0x800000
+	var smallestNormalFloat32 = *(*float32)(unsafe.Pointer(&val))
+	switch n {
+	case "nan":
+		val = 0x7fc00001
+		return *(*float32)(unsafe.Pointer(&val))
+	case "-nan":
+		val = 0xffc00001
+		return *(*float32)(unsafe.Pointer(&val))
+	case "inf":
+		val = 0x7f800000
+		return *(*float32)(unsafe.Pointer(&val))
+	case "-inf":
+		val = 0xff800000
+		return *(*float32)(unsafe.Pointer(&val))
+	case "quiet_nan":
+		val = 0x7fc00000
+		return *(*float32)(unsafe.Pointer(&val))
+	case "signaling_nan":
+		val = 0x7fa00000
+		return *(*float32)(unsafe.Pointer(&val))
+	case "smallest_nonzero_float":
+		return math.SmallestNonzeroFloat32
+	case "largest_subnormal_float":
+		return smallestNormalFloat32 - math.SmallestNonzeroFloat32
+	case "smallest_normal_float":
+		return smallestNormalFloat32
+	case "max_float":
+		return math.MaxFloat32
+	case "-smallest_nonzero_float":
+		return -math.SmallestNonzeroFloat32
+	case "-largest_subnormal_float":
+		return math.SmallestNonzeroFloat32 - smallestNormalFloat32
+	case "-smallest_normal_float":
+		return -smallestNormalFloat32
+	case "-max_float":
+		return -math.MaxFloat32
+	default:
+		v, _ := strconv.ParseFloat(n, 32)
+		return float32(v)
+	}
+}
+
+func parseCustomFloat64(n string) float64 {
+	var val uint64 = 0x10000000000000
+	var smallestNormalFloat64 = *(*float64)(unsafe.Pointer(&val))
+	switch n {
+	case "nan":
+		val = 0x7ff8000000000001
+		return *(*float64)(unsafe.Pointer(&val))
+	case "-nan":
+		val = 0xfff8000000000001
+		return *(*float64)(unsafe.Pointer(&val))
+	case "inf":
+		val = 0x7ff0000000000000
+		return *(*float64)(unsafe.Pointer(&val))
+	case "-inf":
+		val = 0xfff0000000000000
+		return *(*float64)(unsafe.Pointer(&val))
+	case "quiet_nan":
+		val = 0x7ff8000000000000
+		return *(*float64)(unsafe.Pointer(&val))
+	case "signaling_nan":
+		val = 0x7ff4000000000000
+		return *(*float64)(unsafe.Pointer(&val))
+	case "smallest_nonzero_float":
+		return math.SmallestNonzeroFloat64
+	case "largest_subnormal_float":
+		return smallestNormalFloat64 - math.SmallestNonzeroFloat64
+	case "smallest_normal_float":
+		return smallestNormalFloat64
+	case "max_float":
+		return math.MaxFloat64
+	case "-smallest_nonzero_float":
+		return -math.SmallestNonzeroFloat64
+	case "-largest_subnormal_float":
+		return math.SmallestNonzeroFloat64 - smallestNormalFloat64
+	case "-smallest_normal_float":
+		return -smallestNormalFloat64
+	case "-max_float":
+		return -math.MaxFloat64
+	default:
+		v, _ := strconv.ParseFloat(n, 64)
+		return v
+	}
+}
+
 type testCase[T num] []T
 
 type tests struct {
@@ -26,12 +116,15 @@ type tests struct {
 	SEW16 []testCase[uint16] `toml:"sew16"`
 	SEW32 []testCase[uint32] `toml:"sew32"`
 
-	// Go toml cannot parse uint64, we parse it ourself.
+	// Go toml cannot parse uint64/float32/float64 well, parse it ourself.
 	SEW64_ []testCase[string] `toml:"sew64"`
 	SEW64  []testCase[uint64] `toml:"-"`
 
-	FSEW32 []testCase[float32] `toml:"fsew32"`
-	FSEW64 []testCase[float64] `toml:"fsew64"`
+	FSEW32_ []testCase[string]  `toml:"fsew32"`
+	FSEW32  []testCase[float32] `toml:"-"`
+
+	FSEW64_ []testCase[string]  `toml:"fsew64"`
+	FSEW64  []testCase[float64] `toml:"-"`
 }
 
 func (t *tests) initialize() error {
@@ -41,6 +134,26 @@ func (t *tests) initialize() error {
 		for j, s := range ss {
 			t.SEW64[i][j], err = strconv.ParseUint(
 				strings.TrimPrefix(s, "0x"), 16, 64)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	for i, ss := range t.FSEW32_ {
+		t.FSEW32 = append(t.FSEW32, make([]float32, len(ss)))
+		for j, s := range ss {
+			t.FSEW32[i][j] = parseCustomFloat32(s)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	for i, ss := range t.FSEW64_ {
+		t.FSEW64 = append(t.FSEW64, make([]float64, len(ss)))
+		for j, s := range ss {
+			t.FSEW64[i][j] = parseCustomFloat64(s)
 			if err != nil {
 				return err
 			}
