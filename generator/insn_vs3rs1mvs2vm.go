@@ -29,12 +29,12 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm() []string {
 		builder.WriteString(i.gWriteIndexData(lmul1, c.Vl, c.SEW))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs1, lmul1, c.SEW))
 
+		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
 		builder.WriteString(fmt.Sprintf("%s v%d, (a0), v%d%s\n", i.Name, vs3, vs1, v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, c.SEW))
 		builder.WriteString(i.gMagicInsn(vs3))
 
