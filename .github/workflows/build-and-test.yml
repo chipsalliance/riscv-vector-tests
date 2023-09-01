@@ -61,5 +61,5 @@ jobs:
         with:
           name: Final sources and binaries
           path: |
-            out/v128x64machine/tests/stage2/*
-            out/v128x64machine/bin/stage2/*
+            out/v256x64machine/tests/stage2/*
+            out/v256x64machine/bin/stage2/*
