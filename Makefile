@@ -1,4 +1,4 @@
-# machine, user, or sequencer-vector
+# MODE: machine or user
 MODE = machine
 VLEN = 256
 XLEN = 64
@@ -72,10 +72,6 @@ compile-stage1: generate-stage1
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) $< -o ${OUTPUT_STAGE1_BIN}$@
-ifeq ($(MODE),sequencer-vector)
-	${SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@)
-	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE1}$(shell basename $@).S -o ${OUTPUT_STAGE1_ASM}$(shell basename $@).S
-endif
 
 tests_patch = $(addsuffix .patch, $(tests))
 
@@ -97,12 +93,8 @@ compile-stage2: generate-stage2
 tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
-ifeq ($(MODE),sequencer/vector)
-	$(RISCV_GCC) -Ienv/sequencer-vector -Imacros/sequencer-vector -E ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_ASM}$(shell basename $@ .stage2).S
-else # machine/user
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 	${SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-endif
 
 
 clean-out:
