@@ -23,7 +23,7 @@ func (i *Insn) gWriteRandomData(lmul LMUL) string {
 	return builder.String()
 }
 
-func (i *Insn) gWriteIndexData(lmul1 LMUL, n int, sew SEW) string {
+func (i *Insn) gWriteIndexData(lmul1 LMUL, n int, width SEW, sew SEW) string {
 	if n <= 0 {
 		n = 1
 	}
@@ -34,13 +34,13 @@ func (i *Insn) gWriteIndexData(lmul1 LMUL, n int, sew SEW) string {
 	for a := 0; a < nBytes/(int(sew)/8); a++ {
 		switch sew {
 		case 8:
-			_ = binary.Write(buf, binary.LittleEndian, uint8(s[a%n]))
+			_ = binary.Write(buf, binary.LittleEndian, uint8(s[a%n]*int(width)/8))
 		case 16:
-			_ = binary.Write(buf, binary.LittleEndian, uint16(s[a%n]*2))
+			_ = binary.Write(buf, binary.LittleEndian, uint16(s[a%n]*int(width)/8))
 		case 32:
-			_ = binary.Write(buf, binary.LittleEndian, uint32(s[a%n]*4))
+			_ = binary.Write(buf, binary.LittleEndian, uint32(s[a%n]*int(width)/8))
 		case 64:
-			_ = binary.Write(buf, binary.LittleEndian, uint64(s[a%n]*8))
+			_ = binary.Write(buf, binary.LittleEndian, uint64(s[a%n]*int(width)/8))
 		}
 	}
 	off := i.TestData.Append(buf.Bytes())
