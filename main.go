@@ -88,7 +88,7 @@ func main() {
 	sort.Slice(makefrag, func(i, j int) bool {
 		return makefrag[i] < makefrag[j]
 	})
-	writeTo("build/", "Makefrag", "tests = \\\n"+strings.Join(makefrag, ""))
+	writeTo("./", "Makefrag", "tests = \\\n"+strings.Join(makefrag, ""))
 
 	println("\033[32mOK\033[0m")
 }

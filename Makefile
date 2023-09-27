@@ -64,7 +64,7 @@ generate-stage1: clean-out git-submodule-init build
 	@mkdir -p ${OUTPUT_STAGE1}
 	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
--include build/Makefrag
+include Makefrag
 
 compile-stage1: generate-stage1
 	@mkdir -p ${OUTPUT_STAGE1_BIN} ${OUTPUT_STAGE1_ASM}
@@ -98,7 +98,7 @@ $(tests_stage2):
 
 
 clean-out:
-	rm -rf $(OUTPUT)
+	rm -rf out
 
 clean: clean-out
 	go clean
