@@ -9,8 +9,6 @@ OUTPUT = out/v$(VLEN)x$(XLEN)$(MODE)
 OUTPUT_STAGE1 = $(OUTPUT)/tests/stage1/
 OUTPUT_STAGE2 = $(OUTPUT)/tests/stage2/
 OUTPUT_STAGE2_PATCH = $(OUTPUT)/patches/stage2/
-OUTPUT_STAGE1_ASM = $(OUTPUT)/asm/stage1/
-OUTPUT_STAGE2_ASM = $(OUTPUT)/asm/stage2/
 OUTPUT_STAGE1_BIN = $(OUTPUT)/bin/stage1/
 OUTPUT_STAGE2_BIN = $(OUTPUT)/bin/stage2/
 CONFIGS = configs/
@@ -64,7 +62,7 @@ generate-stage1: clean-out build
 include Makefrag
 
 compile-stage1: generate-stage1
-	@mkdir -p ${OUTPUT_STAGE1_BIN} ${OUTPUT_STAGE1_ASM}
+	@mkdir -p ${OUTPUT_STAGE1_BIN}
 	$(MAKE) $(tests)
 
 $(tests): %: ${OUTPUT_STAGE1}%.S
@@ -83,7 +81,6 @@ generate-stage2: patching-stage2
 	build/merger -stage1output ${OUTPUT_STAGE1} -stage2output ${OUTPUT_STAGE2} -stage2patch ${OUTPUT_STAGE2_PATCH}
 
 compile-stage2: generate-stage2
-	@mkdir -p ${OUTPUT_STAGE2_ASM}
 	@mkdir -p ${OUTPUT_STAGE2_BIN}
 	$(MAKE) $(tests_stage2)
 

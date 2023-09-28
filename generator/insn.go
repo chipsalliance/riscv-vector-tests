@@ -294,19 +294,25 @@ func (i *Insn) genMergedCodeCombinations(splitPerLines int) ([]string, []string)
 	pos := 0
 	for !done {
 		cs := i.genCodeCombinations(pos)
+		if len(cs) == 0 {
+			break
+		}
 		for idx, c := range cs {
 			builder.WriteString(c)
-			if (splitPerLines > 0 && strings.Count(builder.String(), "\n") > splitPerLines) ||
+			str := builder.String()
+			if (splitPerLines > 0 && strings.Count(str, "\n") > splitPerLines) ||
 				idx == len(cs)-1 {
-				buf := fmt.Sprintf(`
+				if len(str) != 0 {
+					buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
 %s
   TEST_CASE(2, x0, 0x0)
   TEST_PASSFAIL
 RVTEST_CODE_END
-`, builder.String())
-				codeRes = append(codeRes, buf)
-				dataRes = append(dataRes, i.genData())
+`, str)
+					codeRes = append(codeRes, buf)
+					dataRes = append(dataRes, i.genData())
+				}
 				i.TestData = &TestData{}
 				builder.Reset()
 				pos += idx
