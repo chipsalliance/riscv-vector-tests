@@ -140,84 +140,84 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVsetivli:     {},
 }
 
-func (i *Insn) genCodeCombinations() []string {
+func (i *Insn) genCodeCombinations(pos int) []string {
 	switch i.Format {
 	case insnFormatVdRs1mVm:
-		return i.genCodeVdRs1mVm()
+		return i.genCodeVdRs1mVm(pos)
 	case insnFormatVs3Rs1mVm:
-		return i.genCodeVs3Rs1mVm()
+		return i.genCodeVs3Rs1mVm(pos)
 	case insnFormatVdRs1m:
-		return i.genCodeVdRs1m()
+		return i.genCodeVdRs1m(pos)
 	case insnFormatVs3Rs1m:
-		return i.genCodeVs3Rs1m()
+		return i.genCodeVs3Rs1m(pos)
 	case insnFormatVdRs1mRs2Vm:
-		return i.genCodeVdRs1mRs2Vm()
+		return i.genCodeVdRs1mRs2Vm(pos)
 	case insnFormatVs3Rs1mRs2Vm:
-		return i.genCodeVs3Rs1mRs2Vm()
+		return i.genCodeVs3Rs1mRs2Vm(pos)
 	case insnFormatVdRs1mVs2Vm:
-		return i.genCodeVdRs1mVs2Vm()
+		return i.genCodeVdRs1mVs2Vm(pos)
 	case insnFormatVs3Rs1mVs2Vm:
-		return i.genCodeVs3Rs1mVs2Vm()
+		return i.genCodeVs3Rs1mVs2Vm(pos)
 	case insnFormatVdVs2Vs1:
-		return i.genCodeVdVs2Vs1()
+		return i.genCodeVdVs2Vs1(pos)
 	case insnFormatVdVs2Vs1V0:
-		return i.genCodeVdVs2Vs1V0()
+		return i.genCodeVdVs2Vs1V0(pos)
 	case insnFormatVdVs2Rs1:
-		return i.genCodeVdVs2Rs1()
+		return i.genCodeVdVs2Rs1(pos)
 	case insnFormatVdVs2Rs1V0:
-		return i.genCodeVdVs2Rs1V0()
+		return i.genCodeVdVs2Rs1V0(pos)
 	case insnFormatVdVs2Fs1V0:
-		return i.genCodeVdVs2Fs1V0()
+		return i.genCodeVdVs2Fs1V0(pos)
 	case insnFormatVdVs2Vs1Vm:
-		return i.genCodeVdVs2Vs1Vm()
+		return i.genCodeVdVs2Vs1Vm(pos)
 	case insnFormatVdVs2Rs1Vm:
-		return i.genCodeVdVs2Rs1Vm()
+		return i.genCodeVdVs2Rs1Vm(pos)
 	case insnFormatVdVs1Vs2Vm:
-		return i.genCodeVdVs1Vs2Vm()
+		return i.genCodeVdVs1Vs2Vm(pos)
 	case insnFormatVdRs1Vs2Vm:
-		return i.genCodeVdRs1Vs2Vm()
+		return i.genCodeVdRs1Vs2Vm(pos)
 	case insnFormatVdVs2Fs1Vm:
-		return i.genCodeVdVs2Fs1Vm()
+		return i.genCodeVdVs2Fs1Vm(pos)
 	case insnFormatVdVs2Imm:
-		return i.genCodeVdVs2Imm()
+		return i.genCodeVdVs2Imm(pos)
 	case insnFormatVdVs2ImmV0:
-		return i.genCodeVdVs2ImmV0()
+		return i.genCodeVdVs2ImmV0(pos)
 	case insnFormatVdVs2ImmVm:
-		return i.genCodeVdVs2ImmVm()
+		return i.genCodeVdVs2ImmVm(pos)
 	case insnFormatVdVs2UimmVm:
-		return i.genCodeVdVs2UimmVm()
+		return i.genCodeVdVs2UimmVm(pos)
 	case insnFormatVdFs1Vs2Vm:
-		return i.genCodeVdFs1Vs2Vm()
+		return i.genCodeVdFs1Vs2Vm(pos)
 	case insnFormatVdVs1:
-		return i.genCodeVdVs1()
+		return i.genCodeVdVs1(pos)
 	case insnFormatVdRs1:
-		return i.genCodeVdRs1()
+		return i.genCodeVdRs1(pos)
 	case insnFormatVdFs1:
-		return i.genCodeVdFs1()
+		return i.genCodeVdFs1(pos)
 	case insnFormatVdImm:
-		return i.genCodeVdImm()
+		return i.genCodeVdImm(pos)
 	case insnFormatVdVs2:
-		return i.genCodeVdVs2()
+		return i.genCodeVdVs2(pos)
 	case insnFormatVdVs2Vm:
-		return i.genCodeVdVs2Vm()
+		return i.genCodeVdVs2Vm(pos)
 	case insnFormatVdVs2VmP2:
-		return i.genCodeVdVs2VmP2()
+		return i.genCodeVdVs2VmP2(pos)
 	case insnFormatVdVs2VmP3:
-		return i.genCodeVdVs2VmP3()
+		return i.genCodeVdVs2VmP3(pos)
 	case insnFormatRdVs2Vm:
-		return i.genCodeRdVs2Vm()
+		return i.genCodeRdVs2Vm(pos)
 	case insnFormatRdVs2:
-		return i.genCodeRdVs2()
+		return i.genCodeRdVs2(pos)
 	case insnFormatFdVs2:
-		return i.genCodeFdVs2()
+		return i.genCodeFdVs2(pos)
 	case insnFormatVdVm:
-		return i.genCodeVdVm()
+		return i.genCodeVdVm(pos)
 	case insnFormatVsetvli:
-		return i.genCodevsetvli()
+		return i.genCodevsetvli(pos)
 	case insnFormatVsetvl:
-		return i.genCodevsetvl()
+		return i.genCodevsetvl(pos)
 	case insnFormatVsetivli:
-		return i.genCodevsetivli()
+		return i.genCodevsetivli(pos)
 	default:
 		log.Fatalln("unreachable")
 		return nil
@@ -263,11 +263,12 @@ func (i *Insn) check() error {
 func (i *Insn) Generate(splitPerLines int) []string {
 	res := make([]string, 0)
 
-	for _, code := range i.genMergedCodeCombinations(splitPerLines) {
+	codes, data := i.genMergedCodeCombinations(splitPerLines)
+	for idx, code := range codes {
 		builder := strings.Builder{}
 		builder.WriteString(i.genHeader())
 		builder.WriteString(code)
-		builder.WriteString(i.genData())
+		builder.WriteString(data[idx])
 		res = append(res, builder.String())
 	}
 	return res
@@ -285,26 +286,39 @@ RVTEST_RV%dUV
 `, i.Name, i.Option.XLEN)
 }
 
-func (i *Insn) genMergedCodeCombinations(splitPerLines int) []string {
-	res := make([]string, 0)
+func (i *Insn) genMergedCodeCombinations(splitPerLines int) ([]string, []string) {
+	codeRes := make([]string, 0)
+	dataRes := make([]string, 0)
 	builder := strings.Builder{}
-	cs := i.genCodeCombinations()
-	for idx, c := range cs {
-		builder.WriteString(c)
-		if (splitPerLines > 0 && strings.Count(builder.String(), "\n") > splitPerLines) ||
-			idx == len(cs)-1 {
-			buf := fmt.Sprintf(`
+	done := false
+	pos := 0
+	for !done {
+		cs := i.genCodeCombinations(pos)
+		for idx, c := range cs {
+			builder.WriteString(c)
+			if (splitPerLines > 0 && strings.Count(builder.String(), "\n") > splitPerLines) ||
+				idx == len(cs)-1 {
+				buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
 %s
   TEST_CASE(2, x0, 0x0)
   TEST_PASSFAIL
 RVTEST_CODE_END
 `, builder.String())
-			res = append(res, buf)
-			builder.Reset()
+				codeRes = append(codeRes, buf)
+				dataRes = append(dataRes, i.genData())
+				i.TestData = &TestData{}
+				builder.Reset()
+				pos += idx
+				if idx == len(cs)-1 {
+					done = true
+				}
+				break
+			}
 		}
 	}
-	return res
+
+	return codeRes, dataRes
 }
 
 func (i *Insn) genData() string {

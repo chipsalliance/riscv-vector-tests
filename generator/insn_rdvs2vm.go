@@ -5,11 +5,11 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeRdVs2Vm() []string {
+func (i *Insn) genCodeRdVs2Vm(pos int) []string {
 	combinations := i.combinations([]LMUL{1}, []SEW{8}, []bool{false, true})
 
 	res := make([]string, 0, len(combinations))
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 

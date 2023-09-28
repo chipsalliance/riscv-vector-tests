@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVdVs2() []string {
+func (i *Insn) genCodeVdVs2(pos int) []string {
 	s := regexp.MustCompile(`vmv(\d)r.v`)
 	nr, err := strconv.Atoi(s.FindStringSubmatch(i.Name)[1])
 	if err != nil {
@@ -18,7 +18,7 @@ func (i *Insn) genCodeVdVs2() []string {
 	combinations := i.combinations([]LMUL{LMUL(nr)}, allSEWs, []bool{false})
 	res := make([]string, 0, len(combinations))
 
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 

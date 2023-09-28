@@ -19,7 +19,7 @@ func (v *vtype) vtypeImm(XLEN int, VLEN int, curVtypeRaw int64, curVl int64, rd 
 	return res
 }
 
-func (i *Insn) genCodevsetvli() []string {
+func (i *Insn) genCodevsetvli(pos int) []string {
 	combinations := i.vsetvlicombinations(
 		allLMULs,
 		allSEWs,
@@ -28,7 +28,7 @@ func (i *Insn) genCodevsetvli() []string {
 	)
 	ncase := 3
 	res := make([]string, 0, len(combinations))
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(fmt.Sprintf("# ------combination test begin---------\n"))
 		builder.WriteString(c.comment())

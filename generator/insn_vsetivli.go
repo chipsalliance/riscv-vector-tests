@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodevsetivli() []string {
+func (i *Insn) genCodevsetivli(pos int) []string {
 	combinations := i.vsetvlicombinations(
 		allLMULs,
 		allSEWs,
@@ -14,7 +14,7 @@ func (i *Insn) genCodevsetivli() []string {
 	)
 	ncase := 3
 	res := make([]string, 0, len(combinations))
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(fmt.Sprintf("# ------combination test begin---------\n"))
 		builder.WriteString(c.comment())

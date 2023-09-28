@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVs3Rs1mVm() []string {
+func (i *Insn) genCodeVs3Rs1mVm(pos int) []string {
 	nfields := getNfieldsRoundedUp(i.Name)
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
@@ -14,7 +14,7 @@ func (i *Insn) genCodeVs3Rs1mVm() []string {
 		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
 
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 

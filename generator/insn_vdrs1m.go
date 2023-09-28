@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVdRs1m() []string {
+func (i *Insn) genCodeVdRs1m(pos int) []string {
 	s := regexp.MustCompile(`vl(\d)re(\d+)\.v`)
 	subs := s.FindStringSubmatch(i.Name)
 
@@ -23,7 +23,7 @@ func (i *Insn) genCodeVdRs1m() []string {
 
 	res := make([]string, 0, len(combinations))
 
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 

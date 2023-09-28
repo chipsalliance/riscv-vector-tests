@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVdVs2VmP3() []string {
+func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 	s := regexp.MustCompile(`v[z|s]ext\.vf(\d)`)
 	f, err := strconv.Atoi(s.FindStringSubmatch(i.Name)[1])
 	if err != nil {
@@ -22,7 +22,7 @@ func (i *Insn) genCodeVdVs2VmP3() []string {
 
 	combinations := i.combinations(lmuls, sews, []bool{false, true})
 	res := make([]string, 0, len(combinations))
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 
@@ -31,6 +31,7 @@ func (i *Insn) genCodeVdVs2VmP3() []string {
 
 		vs2EEW := c.SEW / SEW(f)
 		if vs2EEW > SEW(i.Option.XLEN) {
+			res = append(res, "")
 			continue
 		}
 

@@ -85,7 +85,7 @@ func (v *vtype) vtypeRaw(XLEN int, VLEN int, newVtypeRaw int64, curVtypeRaw int6
 	return res
 }
 
-func (i *Insn) genCodevsetvl() []string {
+func (i *Insn) genCodevsetvl(pos int) []string {
 	res := make([]string, 0, 1)
 	ncase := 3
 	builder := strings.Builder{}

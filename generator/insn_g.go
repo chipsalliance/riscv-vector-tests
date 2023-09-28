@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -23,24 +24,25 @@ func (i *Insn) gWriteRandomData(lmul LMUL) string {
 	return builder.String()
 }
 
-func (i *Insn) gWriteIndexData(lmul1 LMUL, n int, width SEW, sew SEW) string {
+func (i *Insn) gWriteIndexData(dataLmul1 LMUL, offsetLmul1 LMUL, n int, dataSew SEW, offsetSew SEW) string {
 	if n <= 0 {
 		n = 1
 	}
-	nBytes := i.vlenb() * int(lmul1)
+	nBytes := i.vlenb() * int(offsetLmul1)
 	builder := strings.Builder{}
 	buf := &bytes.Buffer{}
+	n = int(math.Min(float64(n), float64(int(dataLmul1)*i.vlenb()/(int(dataSew)/8))))
 	s := genShuffledSlice(n)
-	for a := 0; a < nBytes/(int(sew)/8); a++ {
-		switch sew {
+	for a := 0; a < nBytes/(int(offsetSew)/8); a++ {
+		switch offsetSew {
 		case 8:
-			_ = binary.Write(buf, binary.LittleEndian, uint8(s[a%n]*int(width)/8))
+			_ = binary.Write(buf, binary.LittleEndian, uint8(s[a%n]*int(dataSew)/8))
 		case 16:
-			_ = binary.Write(buf, binary.LittleEndian, uint16(s[a%n]*int(width)/8))
+			_ = binary.Write(buf, binary.LittleEndian, uint16(s[a%n]*int(dataSew)/8))
 		case 32:
-			_ = binary.Write(buf, binary.LittleEndian, uint32(s[a%n]*int(width)/8))
+			_ = binary.Write(buf, binary.LittleEndian, uint32(s[a%n]*int(dataSew)/8))
 		case 64:
-			_ = binary.Write(buf, binary.LittleEndian, uint64(s[a%n]*int(width)/8))
+			_ = binary.Write(buf, binary.LittleEndian, uint64(s[a%n]*int(dataSew)/8))
 		}
 	}
 	off := i.TestData.Append(buf.Bytes())

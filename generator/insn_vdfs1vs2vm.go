@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVdFs1Vs2Vm() []string {
+func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
 	vdSize := iff(vdWidening, 2, 1)
 
@@ -18,7 +18,7 @@ func (i *Insn) genCodeVdFs1Vs2Vm() []string {
 	)
 	res := make([]string, 0, len(combinations))
 
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 
@@ -28,6 +28,7 @@ func (i *Insn) genCodeVdFs1Vs2Vm() []string {
 		vdEMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
 		vdEEW := c.SEW * SEW(vdSize)
 		if vdEEW > SEW(i.Option.XLEN) {
+			res = append(res, "")
 			continue
 		}
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVs3Rs1mVs2Vm() []string {
+func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
 	nfields := getNfieldsRoundedUp(i.Name)
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
@@ -14,9 +14,10 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm() []string {
 		[]bool{false, true})
 	res := make([]string, 0, len(combinations))
 
-	for _, c := range combinations {
-		// sew is data width, c.SEW is offset width
-		var sew SEW = 8
+	for _, c := range combinations[pos:] {
+		builder := strings.Builder{}
+
+		var sew SEW = 8 // sew is data width, c.SEW is offset width
 		for ; sew <= SEW(i.Option.XLEN); sew <<= 1 {
 			if int(sew) > int(float64(i.Option.XLEN)*float64(c.LMUL)) {
 				continue
@@ -26,7 +27,6 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm() []string {
 				continue
 			}
 			emul = math.Max(emul, 1)
-			builder := strings.Builder{}
 			builder.WriteString(c.comment())
 
 			builder.WriteString(i.gWriteRandomData(LMUL(1)))
@@ -37,7 +37,7 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm() []string {
 			vs1 := 2 * int(math.Max(emul, float64(int(c.LMUL1)*nfields)))
 			builder.WriteString(i.gWriteIntegerTestData(lmul1, sew, 0))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, sew))
-			builder.WriteString(i.gWriteIndexData(LMUL(emul), c.Vl, sew, c.SEW))
+			builder.WriteString(i.gWriteIndexData(lmul1, LMUL(emul), c.Vl, sew, c.SEW))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs1, LMUL(emul), c.SEW))
 
 			builder.WriteString(i.gResultDataAddr())
@@ -48,9 +48,8 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm() []string {
 
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, sew))
 			builder.WriteString(i.gMagicInsn(vs3))
-
-			res = append(res, builder.String())
 		}
+		res = append(res, builder.String())
 	}
 	return res
 }

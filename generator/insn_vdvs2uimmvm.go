@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVdVs2UimmVm() []string {
+func (i *Insn) genCodeVdVs2UimmVm(pos int) []string {
 	vs2Widening := strings.HasSuffix(i.Name, ".wi")
 	sews := iff(vs2Widening, allSEWs[:len(allSEWs)-2], allSEWs[:len(allSEWs)-1])
 	vs2Size := iff(vs2Widening, 2, 1)
@@ -18,7 +18,7 @@ func (i *Insn) genCodeVdVs2UimmVm() []string {
 	)
 	res := make([]string, 0, len(combinations))
 
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 

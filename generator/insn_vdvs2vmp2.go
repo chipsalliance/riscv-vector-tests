@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (i *Insn) genCodeVdVs2VmP2() []string {
+func (i *Insn) genCodeVdVs2VmP2(pos int) []string {
 	vdMask := strings.HasPrefix(i.Name, "vm")
 
 	combinations := i.combinations([]LMUL{1}, []SEW{8}, []bool{false, true})
@@ -14,7 +14,7 @@ func (i *Insn) genCodeVdVs2VmP2() []string {
 	}
 
 	res := make([]string, 0, len(combinations))
-	for _, c := range combinations {
+	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.comment())
 
