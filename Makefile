@@ -1,4 +1,3 @@
-# MODE: machine or user
 MODE = machine
 VLEN = 256
 XLEN = 64

@@ -28,16 +28,16 @@ For starters, you can directly download the pre-generated tests from Github Acti
 make -j$(nproc)
 ```
 
-After `make`, you will find all the generated tests in `out/bin/stage2/`.
+After `make`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
 
-The default VLEN is 256, if you want to generate tests for a different VLEN/XLEN, you can use `make -e VLEN=512 XLEN=64 -j$(nproc)`.
+Options:
 
-> NOTE:
-> 1. We do not support specifying ELEN yet, ELEN is consistent with XLEN.
+- `VLEN`, default is 256, we do not support specifying ELEN yet, ELEN is consistent with XLEN
+- `XLEN`, default is 64
+- `MODE`, default is `machine`, can be `machine`, `virtual` or `user`
+- `INTEGER`, default is 0, set to 1 if you don't want float tests (i.e. for Zve32x or Zve64x)
 
-If you want to generate user-mode binaries, you can use `make -e MODE=user -j$(nproc)`.
-
-If you don't want float tests (i.e. for Zve32x or Zve64x), you can use `make -e INTEGER=1 -j$(nproc)`
+For example, to generate `isa=rv32gcv varch=vlen:128,elen:32 mode=machine` tests, use `make -e VLEN=128 XLEN=32 MODE=machine -j$(nproc)`.
 
 ### Nix package
 
