@@ -32,8 +32,8 @@ After `make`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]
 
 Options:
 
-- `VLEN`, default is 256, we do not support specifying ELEN yet, ELEN is consistent with XLEN
-- `XLEN`, default is 64
+- `VLEN`, default is 256
+- `XLEN`, default is 64, we do not support specifying ELEN yet, ELEN is consistent with XLEN
 - `MODE`, default is `machine`, can be `machine`, `virtual` or `user`
 - `INTEGER`, default is 0, set to 1 if you don't want float tests (i.e. for Zve32x or Zve64x)
 
