@@ -91,7 +91,7 @@ $(tests_stage2):
 
 
 clean-out:
-	rm -rf out
+	rm -rf $(OUTPUT)
 
 clean: clean-out
 	go clean
