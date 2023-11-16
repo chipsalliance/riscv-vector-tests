@@ -25,7 +25,7 @@ jobs:
       - name: Get Spike Cache Key
         id: get-spike-cache-key
         run: |
-          echo "key=$(git ls-remote https://github.com/riscv-software-src/riscv-isa-sim.git HEAD | awk '{print $1}')" >> $GITHUB_OUTPUT
+          echo "key=5a1145742e701597eb45825855311dfad21232a6" >> $GITHUB_OUTPUT
 
       - name: Cache Spike
         id: cache-spike
@@ -42,8 +42,9 @@ jobs:
       - name: Build Spike
         if: steps.cache-spike.outputs.cache-hit != 'true'
         run: |
-          git clone --depth=1 https://github.com/riscv-software-src/riscv-isa-sim.git
+          git clone https://github.com/riscv-software-src/riscv-isa-sim.git
           cd riscv-isa-sim
+          git reset --hard 5a1145742e701597eb45825855311dfad21232a6
           mkdir build
           cd build
           ../configure --prefix=${{ github.workspace }}/riscv
