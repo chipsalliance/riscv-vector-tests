@@ -48,6 +48,7 @@ func main() {
 			strings.TrimSuffix(file.Name(), ".S")+".patch")
 
 		patchContent, err := os.ReadFile(patchFilepath)
+		patchContent = bytes.TrimPrefix(patchContent, []byte("bbl loader"))
 		fatalIf(err)
 		patches := bytes.Split(patchContent, []byte("---"))
 

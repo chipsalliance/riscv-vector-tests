@@ -25,11 +25,17 @@ RISCV_PREFIX = riscv64-unknown-elf-
 RISCV_GCC = $(RISCV_PREFIX)gcc
 RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -DENTROPY=0xdeadbeef -DLFSR_BITS=9 -fno-tree-loop-distribute-patterns
 
+PK =
+
 ifeq ($(MODE),machine)
 ENV = env/riscv-test-env/p
 endif
 ifeq ($(MODE),user)
 ENV = env/ps
+PK = $(shell which pk)
+ifeq (, $(PK))
+$(error "No pk found, please install it to your path.")
+endif
 endif
 ifeq ($(MODE),virtual)
 ENV = env/riscv-test-env/v
@@ -74,7 +80,7 @@ patching-stage2: build-patcher-spike compile-stage1
 	$(MAKE) $(tests_patch)
 
 $(tests_patch):
-	LD_LIBRARY_PATH=$(SPIKE_INSTALL)/lib ${PATCHER_SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
+	LD_LIBRARY_PATH=$(SPIKE_INSTALL)/lib ${PATCHER_SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(PK) ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
 
 generate-stage2: patching-stage2
 	build/merger -stage1output ${OUTPUT_STAGE1} -stage2output ${OUTPUT_STAGE2} -stage2patch ${OUTPUT_STAGE2_PATCH}
@@ -87,7 +93,7 @@ tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-	${SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	${SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(PK) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 
 
 clean-out:
