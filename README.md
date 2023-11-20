@@ -39,6 +39,8 @@ Options:
 
 For example, to generate `isa=rv32gcv varch=vlen:128,elen:32 mode=machine` tests, use `make -e VLEN=128 XLEN=32 MODE=machine -j$(nproc)`.
 
+> Note: [single/single.go](single/single.go) generates tests directly from stage 1, suitable for targets with co-simulators.
+
 ### Nix package
 
 This repository also provides a nix derivation with the following output provided:

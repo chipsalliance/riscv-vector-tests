@@ -7,6 +7,7 @@ import (
 	"github.com/ksco/riscv-vector-tests/generator"
 	"os"
 	"path/filepath"
+	"regexp"
 )
 
 func fatalIf(err error) {
@@ -44,7 +45,8 @@ func main() {
 	insn, err := generator.ReadInsnFromToml(contents, option)
 	fatalIf(err)
 
-	writeTo(*outputFileF, insn.Generate(-1)[0])
+	r := regexp.MustCompile(".word 0x.+")
+	writeTo(*outputFileF, r.ReplaceAllString(insn.Generate(-1)[0], ""))
 }
 
 func writeTo(path string, contents string) {
