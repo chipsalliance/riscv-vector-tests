@@ -36,6 +36,7 @@ Options:
 - `XLEN`, default is 64, we do not support specifying ELEN yet, ELEN is consistent with XLEN
 - `MODE`, default is `machine`, can be `machine`, `virtual` or `user`
 - `INTEGER`, default is 0, set to 1 if you don't want float tests (i.e. for Zve32x or Zve64x)
+- `PATTERN`, default is `.*`, set to a valid regex to generate the tests of your interests (e.g. `PATTERN='^v[ls].+\.v$'` to generate load/store tests)
 
 For example, to generate `isa=rv32gcv varch=vlen:128,elen:32 mode=machine` tests, use `make -e VLEN=128 XLEN=32 MODE=machine -j$(nproc)`.
 

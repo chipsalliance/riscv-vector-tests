@@ -7,6 +7,7 @@ import (
 	"github.com/ksco/riscv-vector-tests/generator"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -22,14 +23,18 @@ func fatalIf(err error) {
 }
 
 var vlenF = flag.Int("VLEN", 256, "")
-var xlenF = flag.Int("XLEN", 64, "")
-var splitF = flag.Int("split", 10000, "")
-var integer = flag.Bool("integer", false, "")
+var xlenF = flag.Int("XLEN", 64, "we do not support specifying ELEN yet, ELEN is consistent with XLEN.")
+var splitF = flag.Int("split", 10000, "split per lines.")
+var integerF = flag.Bool("integer", false, "only generate integer tests.")
+var patternF = flag.String("pattern", ".*", "regex to filter out tests.")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 
 func main() {
 	flag.Parse()
+
+	pattern, err := regexp.Compile(*patternF)
+	fatalIf(err)
 
 	if stage1OutputDirF == nil || *stage1OutputDirF == "" {
 		fatalIf(errors.New("-stage1output is required"))
@@ -49,7 +54,11 @@ func main() {
 	lk := sync.Mutex{}
 	wg := sync.WaitGroup{}
 	for _, file := range files {
-		if *integer && strings.HasPrefix(file.Name(), "vf") {
+		if *integerF && strings.HasPrefix(file.Name(), "vf") {
+			continue
+		}
+
+		if !pattern.MatchString(strings.TrimSuffix(file.Name(), ".toml")) {
 			continue
 		}
 
