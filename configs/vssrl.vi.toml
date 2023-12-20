@@ -1,5 +1,6 @@
 name = "vssrl.vi"
 format = "vd,vs2,uimm,vm"
+vxrm = true
 
 [tests]
 base = [

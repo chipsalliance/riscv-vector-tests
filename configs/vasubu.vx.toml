@@ -1,5 +1,6 @@
 name = "vasubu.vx"
 format = "vd,vs2,rs1,vm"
+vxrm = true
 
 [tests]
 base = [

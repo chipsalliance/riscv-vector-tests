@@ -6,12 +6,12 @@ import (
 )
 
 func (i *Insn) genCodeFdVs2(pos int) []string {
-	combinations := i.combinations([]LMUL{1}, floatSEWs, []bool{false})
+	combinations := i.combinations([]LMUL{1}, floatSEWs, []bool{false}, i.vxrms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		vd := int(c.LMUL1)
 		vs2 := int(c.LMUL1) * 2

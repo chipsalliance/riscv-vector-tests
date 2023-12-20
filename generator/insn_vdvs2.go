@@ -15,12 +15,12 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		log.Fatal("unreachable")
 	}
 
-	combinations := i.combinations([]LMUL{LMUL(nr)}, allSEWs, []bool{false})
+	combinations := i.combinations([]LMUL{LMUL(nr)}, allSEWs, []bool{false}, i.vxrms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		vd := int(c.LMUL)
 		vs2 := 2 * int(c.LMUL)

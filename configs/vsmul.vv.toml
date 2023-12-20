@@ -1,5 +1,6 @@
 name = "vsmul.vv"
 format = "vd,vs2,vs1,vm"
+vxrm = true
 
 [tests]
 base = [

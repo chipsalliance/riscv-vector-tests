@@ -20,11 +20,11 @@ func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 	sews := allSEWs[len(allSEWs)-(4-n):]
 	lmuls := allLMULs[:len(allLMULs)-n]
 
-	combinations := i.combinations(lmuls, sews, []bool{false, true})
+	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.vxrms())
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, c.LMUL1, c.SEW))

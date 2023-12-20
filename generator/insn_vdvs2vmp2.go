@@ -8,15 +8,15 @@ import (
 func (i *Insn) genCodeVdVs2VmP2(pos int) []string {
 	vdMask := strings.HasPrefix(i.Name, "vm")
 
-	combinations := i.combinations([]LMUL{1}, []SEW{8}, []bool{false, true})
+	combinations := i.combinations([]LMUL{1}, []SEW{8}, []bool{false, true}, i.vxrms())
 	if !vdMask {
-		combinations = i.combinations(allLMULs, allSEWs, []bool{false, true})
+		combinations = i.combinations(allLMULs, allSEWs, []bool{false, true}, i.vxrms())
 	}
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		vd := int(c.LMUL1)
 		vs2 := 2 * int(c.LMUL1)

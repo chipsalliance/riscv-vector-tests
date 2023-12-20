@@ -53,6 +53,7 @@ func (t *TestData) String() string {
 type Insn struct {
 	Name     string     `toml:"name"`
 	Format   insnFormat `toml:"format"`
+	Vxrm     bool       `toml:"vxrm"`
 	Tests    tests      `toml:"tests"`
 	Option   Option     `toml:"-"`
 	TestData *TestData
@@ -437,18 +438,22 @@ type combination struct {
 	LMUL1 LMUL
 	Vl    int
 	Mask  bool
+	VXRM  VXRM
 }
 
-func (c *combination) comment() string {
-	return fmt.Sprintf(
-		"\n\n# Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v\n\n",
-		c.Vl,
-		c.LMUL.String(),
-		c.SEW.String(),
-		c.Mask)
+func (c *combination) initialize() string {
+	// write comments, set vxrm
+	return fmt.Sprintf(`
+# Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v
+
+# Initialize vxrm CSR.
+csrwi vxrm, %d # %s
+
+`,
+		c.Vl, c.LMUL.String(), c.SEW.String(), c.Mask, c.VXRM, c.VXRM)
 }
 
-func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool) []combination {
+func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM) []combination {
 	res := make([]combination, 0)
 	for _, lmul := range lmuls {
 		for _, sew := range sews {
@@ -462,19 +467,29 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool) []combinatio
 			for _, mask := range masks {
 				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))
 				for _, vl := range []int{0, vlmax1 / 2, vlmax1, vlmax1 + 1} {
-					res = append(res, combination{
-						SEW:   sew,
-						LMUL:  lmul,
-						LMUL1: lmul1,
-						Vl:    vl,
-						Mask:  mask,
-					})
+					for _, vxrm := range vxrms {
+						res = append(res, combination{
+							SEW:   sew,
+							LMUL:  lmul,
+							LMUL1: lmul1,
+							Vl:    vl,
+							Mask:  mask,
+							VXRM:  vxrm,
+						})
+					}
 				}
 			}
 		}
 	}
 
 	return res
+}
+
+func (i *Insn) vxrms() []VXRM {
+	if i.Vxrm {
+		return allVXRMs
+	}
+	return noVXRMs
 }
 
 type vsetvlicombinations struct {

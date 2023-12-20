@@ -11,12 +11,14 @@ func (i *Insn) genCodeVs3Rs1mRs2Vm(pos int) []string {
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
-		[]bool{false, true})
+		[]bool{false, true},
+		i.vxrms(),
+	)
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))

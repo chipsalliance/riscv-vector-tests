@@ -6,12 +6,12 @@ import (
 )
 
 func (i *Insn) genCodeVdImm(pos int) []string {
-	combinations := i.combinations(allLMULs, allSEWs, []bool{false})
+	combinations := i.combinations(allLMULs, allSEWs, []bool{false}, i.vxrms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		vd := int(c.LMUL1)
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))

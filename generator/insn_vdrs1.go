@@ -7,12 +7,12 @@ import (
 
 func (i *Insn) genCodeVdRs1(pos int) []string {
 	lmuls := iff(strings.HasSuffix(i.Name, ".s.x"), []LMUL{1}, allLMULs)
-	combinations := i.combinations(lmuls, allSEWs, []bool{false})
+	combinations := i.combinations(lmuls, allSEWs, []bool{false}, i.vxrms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		vd := int(c.LMUL1)
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))

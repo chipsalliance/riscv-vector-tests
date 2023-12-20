@@ -5,8 +5,22 @@ import (
 	"log"
 	"regexp"
 	"strconv"
-	"strings"
 )
+
+type VXRM int
+
+var allVXRMs = []VXRM{0, 1, 2, 3}
+var noVXRMs = []VXRM{0}
+var vxrmNames = map[VXRM]string{
+	allVXRMs[0]: "rnu (round-to-nearest-up)",
+	allVXRMs[1]: "rne (round-to-nearest-even)",
+	allVXRMs[2]: "rdn (round-down (truncate))",
+	allVXRMs[3]: "rod round-to-odd (OR bits into LSB, aka \"jam\")",
+}
+
+func (v VXRM) String() string {
+	return vxrmNames[v]
+}
 
 type SEW int
 
@@ -80,10 +94,6 @@ func v0t(mask bool) string {
 		return ", v0.t"
 	}
 	return ""
-}
-
-func trimBoth(name, prefix, suffix string) string {
-	return strings.TrimSuffix(strings.TrimPrefix(name, prefix), suffix)
 }
 
 func getEEW(name string) SEW {

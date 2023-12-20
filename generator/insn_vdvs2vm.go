@@ -14,12 +14,12 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 
 	lmuls := iff(vdWidening || vdNarrowing, wideningMULs, allLMULs)
 	sews := iff(vdWidening || vdNarrowing, floatSEWs[:len(floatSEWs)-1], floatSEWs)
-	combinations := i.combinations(lmuls, sews, []bool{false, true})
+	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.vxrms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, c.LMUL1, SEW(8)))

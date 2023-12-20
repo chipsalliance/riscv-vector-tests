@@ -17,12 +17,12 @@ func (i *Insn) genCodeVs3Rs1m(pos int) []string {
 		lmuls = []LMUL{LMUL(nfields)}
 	}
 
-	combinations := i.combinations(lmuls, []SEW{8}, []bool{false})
+	combinations := i.combinations(lmuls, []SEW{8}, []bool{false}, i.vxrms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
-		builder.WriteString(c.comment())
+		builder.WriteString(c.initialize())
 
 		vs3 := int(c.LMUL1)
 		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
