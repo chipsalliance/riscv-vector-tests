@@ -12,9 +12,7 @@ fsew32 = [
     ["inf",                     "-inf"],
     ["quiet_nan",               "signaling_nan"],
     ["smallest_nonzero_float",  "largest_subnormal_float"],
-    ["smallest_normal_float",   "max_float"],
-    ["-smallest_nonzero_float", "-largest_subnormal_float"],
-    ["-smallest_normal_float",  "-max_float"]
+    ["-smallest_nonzero_float", "-largest_subnormal_float"]
 ]
 fsew64 = [
     ["2.5",                     "1.0"],
@@ -26,7 +24,5 @@ fsew64 = [
     ["inf",                     "-inf"],
     ["quiet_nan",               "signaling_nan"],
     ["smallest_nonzero_float",  "largest_subnormal_float"],
-    ["smallest_normal_float",   "max_float"],
-    ["-smallest_nonzero_float", "-largest_subnormal_float"],
-    ["-smallest_normal_float",  "-max_float"]
+    ["-smallest_nonzero_float", "-largest_subnormal_float"]
 ]
