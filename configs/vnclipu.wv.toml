@@ -1,6 +1,7 @@
 name = "vnclipu.wv"
 format = "vd,vs2,vs1,vm"
 vxrm = true
+vxsat = true
 
 [tests]
 base = [

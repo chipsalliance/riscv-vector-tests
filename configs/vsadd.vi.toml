@@ -1,5 +1,6 @@
 name = "vsadd.vi"
 format = "vd,vs2,imm,vm"
+vxsat = true
 
 [tests]
 base = [

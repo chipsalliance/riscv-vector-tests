@@ -1,6 +1,7 @@
 name = "vnclip.wi"
 format = "vd,vs2,uimm,vm"
 vxrm = true
+vxsat = true
 
 [tests]
 base = [

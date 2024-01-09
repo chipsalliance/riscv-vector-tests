@@ -1,5 +1,6 @@
 name = "vsaddu.vv"
 format = "vd,vs2,vs1,vm"
+vxsat = true
 
 [tests]
 base = [

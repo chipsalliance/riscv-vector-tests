@@ -122,7 +122,18 @@ func (i *Insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
 }
 
 func (i *Insn) gMagicInsn(group int) string {
-	insn := 0b0001011 + (group&0b11111)<<15
+
+	// opcode
+	insn := 0b0001011
+
+	// rs1 for vreg group
+	insn += (group & 0b11111) << 15
+
+	// rs2[0] for vxsat CSR
+	if i.Vxsat {
+		insn += 1 << 20
+	}
+
 	return fmt.Sprintf(".word 0x%x\n", insn)
 }
 

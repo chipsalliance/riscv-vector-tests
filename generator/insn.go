@@ -54,6 +54,7 @@ type Insn struct {
 	Name     string     `toml:"name"`
 	Format   insnFormat `toml:"format"`
 	Vxrm     bool       `toml:"vxrm"`
+	Vxsat    bool       `toml:"vxsat"`
 	Tests    tests      `toml:"tests"`
 	Option   Option     `toml:"-"`
 	TestData *TestData
@@ -439,18 +440,26 @@ type combination struct {
 	Vl    int
 	Mask  bool
 	VXRM  VXRM
+	VXSAT VXSAT
 }
 
 func (c *combination) initialize() string {
-	// write comments, set vxrm
-	return fmt.Sprintf(`
+	// write comments, set vxrm, clear vxsat if necessary
+	str := fmt.Sprintf(`
 # Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v
 
-# Initialize vxrm CSR.
+# Initialize vxrm CSR
 csrwi vxrm, %d # %s
 
 `,
 		c.Vl, c.LMUL.String(), c.SEW.String(), c.Mask, c.VXRM, c.VXRM)
+	if c.VXSAT {
+		str = fmt.Sprintf(`%s# Clear vxsat CSR
+csrci vxsat, 1
+
+`, str)
+	}
+	return str
 }
 
 func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM) []combination {
@@ -475,6 +484,7 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM
 							Vl:    vl,
 							Mask:  mask,
 							VXRM:  vxrm,
+							VXSAT: VXSAT(i.Vxsat),
 						})
 					}
 				}

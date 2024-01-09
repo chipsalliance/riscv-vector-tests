@@ -20,6 +20,7 @@ static std::vector<std::pair<reg_t, abstract_mem_t*>> make_mems(const std::vecto
 static reg_t magic_insn(processor_t* p, insn_t insn, reg_t pc) {
   static int ncase = 2;
   int group = insn.rs1();
+  bool vxsat = insn.rs2() & 0x1;
   for (int reg = group; reg < 2*group; reg++) {
     for (int i = 0; i < p->VU.VLEN / p->get_xlen(); i++) {
       if (p->get_xlen() == 64) {
@@ -34,6 +35,9 @@ static reg_t magic_insn(processor_t* p, insn_t insn, reg_t pc) {
                p->VU.elt<type_sew_t<32>::type>(reg, i, false));
       }
     }
+  }
+  if (vxsat) {
+    printf("  TEST_CASE(%d, t0, 0x%lx, csrr t0, vxsat)\n", ncase++, p->get_csr(0x009));
   }
   printf("---\n");
   return pc + 4;

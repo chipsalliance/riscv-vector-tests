@@ -22,6 +22,8 @@ func (v VXRM) String() string {
 	return vxrmNames[v]
 }
 
+type VXSAT bool
+
 type SEW int
 
 var allSEWs = []SEW{8, 16, 32, 64}
