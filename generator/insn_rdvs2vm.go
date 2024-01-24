@@ -18,10 +18,12 @@ func (i *Insn) genCodeRdVs2Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(3)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, c.LMUL1, SEW(8)))
 
-		builder.WriteString(fmt.Sprintf("addi a0, a0, %d\n", 1*i.vlenb()))
+		builder.WriteString(fmt.Sprintf("li t1, %d\n", 1*i.vlenb()))
+		builder.WriteString(fmt.Sprintf("add a0, a0, t1\n"))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 
-		builder.WriteString(fmt.Sprintf("addi a0, a0, %d\n", 1*i.vlenb()))
+		builder.WriteString(fmt.Sprintf("li t1, %d\n", 1*i.vlenb()))
+		builder.WriteString(fmt.Sprintf("add a0, a0, t1\n"))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, SEW(8)))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")

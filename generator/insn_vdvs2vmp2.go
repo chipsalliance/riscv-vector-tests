@@ -22,7 +22,8 @@ func (i *Insn) genCodeVdVs2VmP2(pos int) []string {
 		vs2 := 2 * int(c.LMUL1)
 		builder.WriteString(i.gWriteRandomData(LMUL(1) * 2))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, c.LMUL1, c.SEW))
-		builder.WriteString(fmt.Sprintf("addi a0, a0, %d\n", 1*i.vlenb()))
+		builder.WriteString(fmt.Sprintf("li t1, %d\n", 1*i.vlenb()))
+		builder.WriteString(fmt.Sprintf("add a0, a0, t1\n"))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
 
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
