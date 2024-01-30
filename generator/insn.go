@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"math/rand"
 	"strings"
 
 	"github.com/pelletier/go-toml/v2"
@@ -475,7 +476,8 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM
 			lmul1 := LMUL(math.Max(float64(lmul), 1))
 			for _, mask := range masks {
 				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))
-				for _, vl := range []int{0, vlmax1 / 2, vlmax1, vlmax1 + 1} {
+				rand.Seed(int64(vlmax1))
+				for _, vl := range []int{0, vlmax1/2 - 1, vlmax1 / 2, vlmax1, vlmax1 - 1, vlmax1 + 1, rand.Intn(vlmax1), rand.Intn(vlmax1), rand.Intn(vlmax1)} {
 					for _, vxrm := range vxrms {
 						res = append(res, combination{
 							SEW:   sew,
