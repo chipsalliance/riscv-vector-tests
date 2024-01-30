@@ -4,13 +4,34 @@ tests = \
   vaadd.vv-2 \
   vaadd.vv-3 \
   vaadd.vv-4 \
+  vaadd.vv-5 \
+  vaadd.vv-6 \
+  vaadd.vv-7 \
+  vaadd.vv-8 \
+  vaadd.vv-9 \
   vaadd.vx-0 \
   vaadd.vx-1 \
   vaadd.vx-10 \
   vaadd.vx-11 \
   vaadd.vx-12 \
   vaadd.vx-13 \
+  vaadd.vx-14 \
+  vaadd.vx-15 \
+  vaadd.vx-16 \
+  vaadd.vx-17 \
+  vaadd.vx-18 \
+  vaadd.vx-19 \
   vaadd.vx-2 \
+  vaadd.vx-20 \
+  vaadd.vx-21 \
+  vaadd.vx-22 \
+  vaadd.vx-23 \
+  vaadd.vx-24 \
+  vaadd.vx-25 \
+  vaadd.vx-26 \
+  vaadd.vx-27 \
+  vaadd.vx-28 \
+  vaadd.vx-29 \
   vaadd.vx-3 \
   vaadd.vx-4 \
   vaadd.vx-5 \
@@ -23,13 +44,34 @@ tests = \
   vaaddu.vv-2 \
   vaaddu.vv-3 \
   vaaddu.vv-4 \
+  vaaddu.vv-5 \
+  vaaddu.vv-6 \
+  vaaddu.vv-7 \
+  vaaddu.vv-8 \
+  vaaddu.vv-9 \
   vaaddu.vx-0 \
   vaaddu.vx-1 \
   vaaddu.vx-10 \
   vaaddu.vx-11 \
   vaaddu.vx-12 \
   vaaddu.vx-13 \
+  vaaddu.vx-14 \
+  vaaddu.vx-15 \
+  vaaddu.vx-16 \
+  vaaddu.vx-17 \
+  vaaddu.vx-18 \
+  vaaddu.vx-19 \
   vaaddu.vx-2 \
+  vaaddu.vx-20 \
+  vaaddu.vx-21 \
+  vaaddu.vx-22 \
+  vaaddu.vx-23 \
+  vaaddu.vx-24 \
+  vaaddu.vx-25 \
+  vaaddu.vx-26 \
+  vaaddu.vx-27 \
+  vaaddu.vx-28 \
+  vaaddu.vx-29 \
   vaaddu.vx-3 \
   vaaddu.vx-4 \
   vaaddu.vx-5 \
@@ -39,39 +81,80 @@ tests = \
   vaaddu.vx-9 \
   vadc.vim-0 \
   vadc.vim-1 \
+  vadc.vim-2 \
   vadc.vvm-0 \
+  vadc.vvm-1 \
   vadc.vxm-0 \
   vadc.vxm-1 \
+  vadc.vxm-2 \
+  vadc.vxm-3 \
   vadd.vi-0 \
   vadd.vi-1 \
   vadd.vi-2 \
+  vadd.vi-3 \
+  vadd.vi-4 \
+  vadd.vi-5 \
   vadd.vv-0 \
   vadd.vv-1 \
+  vadd.vv-2 \
   vadd.vx-0 \
   vadd.vx-1 \
   vadd.vx-2 \
   vadd.vx-3 \
+  vadd.vx-4 \
+  vadd.vx-5 \
+  vadd.vx-6 \
+  vadd.vx-7 \
   vand.vi-0 \
   vand.vi-1 \
   vand.vi-2 \
+  vand.vi-3 \
+  vand.vi-4 \
+  vand.vi-5 \
   vand.vv-0 \
   vand.vv-1 \
+  vand.vv-2 \
   vand.vx-0 \
   vand.vx-1 \
   vand.vx-2 \
   vand.vx-3 \
+  vand.vx-4 \
+  vand.vx-5 \
+  vand.vx-6 \
+  vand.vx-7 \
   vasub.vv-0 \
   vasub.vv-1 \
   vasub.vv-2 \
   vasub.vv-3 \
   vasub.vv-4 \
+  vasub.vv-5 \
+  vasub.vv-6 \
+  vasub.vv-7 \
+  vasub.vv-8 \
+  vasub.vv-9 \
   vasub.vx-0 \
   vasub.vx-1 \
   vasub.vx-10 \
   vasub.vx-11 \
   vasub.vx-12 \
   vasub.vx-13 \
+  vasub.vx-14 \
+  vasub.vx-15 \
+  vasub.vx-16 \
+  vasub.vx-17 \
+  vasub.vx-18 \
+  vasub.vx-19 \
   vasub.vx-2 \
+  vasub.vx-20 \
+  vasub.vx-21 \
+  vasub.vx-22 \
+  vasub.vx-23 \
+  vasub.vx-24 \
+  vasub.vx-25 \
+  vasub.vx-26 \
+  vasub.vx-27 \
+  vasub.vx-28 \
+  vasub.vx-29 \
   vasub.vx-3 \
   vasub.vx-4 \
   vasub.vx-5 \
@@ -84,13 +167,34 @@ tests = \
   vasubu.vv-2 \
   vasubu.vv-3 \
   vasubu.vv-4 \
+  vasubu.vv-5 \
+  vasubu.vv-6 \
+  vasubu.vv-7 \
+  vasubu.vv-8 \
+  vasubu.vv-9 \
   vasubu.vx-0 \
   vasubu.vx-1 \
   vasubu.vx-10 \
   vasubu.vx-11 \
   vasubu.vx-12 \
   vasubu.vx-13 \
+  vasubu.vx-14 \
+  vasubu.vx-15 \
+  vasubu.vx-16 \
+  vasubu.vx-17 \
+  vasubu.vx-18 \
+  vasubu.vx-19 \
   vasubu.vx-2 \
+  vasubu.vx-20 \
+  vasubu.vx-21 \
+  vasubu.vx-22 \
+  vasubu.vx-23 \
+  vasubu.vx-24 \
+  vasubu.vx-25 \
+  vasubu.vx-26 \
+  vasubu.vx-27 \
+  vasubu.vx-28 \
+  vasubu.vx-29 \
   vasubu.vx-3 \
   vasubu.vx-4 \
   vasubu.vx-5 \
@@ -102,18 +206,32 @@ tests = \
   vcpop.m-0 \
   vdiv.vv-0 \
   vdiv.vv-1 \
+  vdiv.vv-2 \
   vdiv.vx-0 \
   vdiv.vx-1 \
   vdiv.vx-2 \
   vdiv.vx-3 \
+  vdiv.vx-4 \
+  vdiv.vx-5 \
+  vdiv.vx-6 \
+  vdiv.vx-7 \
+  vdiv.vx-8 \
   vdivu.vv-0 \
   vdivu.vv-1 \
+  vdivu.vv-2 \
   vdivu.vx-0 \
   vdivu.vx-1 \
   vdivu.vx-2 \
   vdivu.vx-3 \
+  vdivu.vx-4 \
+  vdivu.vx-5 \
+  vdivu.vx-6 \
+  vdivu.vx-7 \
+  vdivu.vx-8 \
   vfadd.vf-0 \
   vfadd.vf-1 \
+  vfadd.vf-2 \
+  vfadd.vf-3 \
   vfadd.vv-0 \
   vfclass.v-0 \
   vfcvt.f.x.v-0 \
@@ -124,29 +242,50 @@ tests = \
   vfcvt.xu.f.v-0 \
   vfdiv.vf-0 \
   vfdiv.vf-1 \
+  vfdiv.vf-2 \
+  vfdiv.vf-3 \
   vfdiv.vv-0 \
   vfirst.m-0 \
   vfmacc.vf-0 \
   vfmacc.vf-1 \
+  vfmacc.vf-2 \
+  vfmacc.vf-3 \
   vfmacc.vv-0 \
+  vfmacc.vv-1 \
   vfmadd.vf-0 \
   vfmadd.vf-1 \
+  vfmadd.vf-2 \
+  vfmadd.vf-3 \
   vfmadd.vv-0 \
+  vfmadd.vv-1 \
   vfmax.vf-0 \
   vfmax.vf-1 \
+  vfmax.vf-2 \
+  vfmax.vf-3 \
   vfmax.vv-0 \
   vfmerge.vfm-0 \
+  vfmerge.vfm-1 \
   vfmin.vf-0 \
   vfmin.vf-1 \
+  vfmin.vf-2 \
+  vfmin.vf-3 \
   vfmin.vv-0 \
   vfmsac.vf-0 \
   vfmsac.vf-1 \
+  vfmsac.vf-2 \
+  vfmsac.vf-3 \
   vfmsac.vv-0 \
+  vfmsac.vv-1 \
   vfmsub.vf-0 \
   vfmsub.vf-1 \
+  vfmsub.vf-2 \
+  vfmsub.vf-3 \
   vfmsub.vv-0 \
+  vfmsub.vv-1 \
   vfmul.vf-0 \
   vfmul.vf-1 \
+  vfmul.vf-2 \
+  vfmul.vf-3 \
   vfmul.vv-0 \
   vfmv.f.s-0 \
   vfmv.s.f-0 \
@@ -161,18 +300,32 @@ tests = \
   vfncvt.xu.f.w-0 \
   vfnmacc.vf-0 \
   vfnmacc.vf-1 \
+  vfnmacc.vf-2 \
+  vfnmacc.vf-3 \
   vfnmacc.vv-0 \
+  vfnmacc.vv-1 \
   vfnmadd.vf-0 \
   vfnmadd.vf-1 \
+  vfnmadd.vf-2 \
+  vfnmadd.vf-3 \
   vfnmadd.vv-0 \
+  vfnmadd.vv-1 \
   vfnmsac.vf-0 \
   vfnmsac.vf-1 \
+  vfnmsac.vf-2 \
+  vfnmsac.vf-3 \
   vfnmsac.vv-0 \
+  vfnmsac.vv-1 \
   vfnmsub.vf-0 \
   vfnmsub.vf-1 \
+  vfnmsub.vf-2 \
+  vfnmsub.vf-3 \
   vfnmsub.vv-0 \
+  vfnmsub.vv-1 \
   vfrdiv.vf-0 \
   vfrdiv.vf-1 \
+  vfrdiv.vf-2 \
+  vfrdiv.vf-3 \
   vfrec7.v-0 \
   vfredmax.vs-0 \
   vfredmin.vs-0 \
@@ -181,26 +334,42 @@ tests = \
   vfrsqrt7.v-0 \
   vfrsub.vf-0 \
   vfrsub.vf-1 \
+  vfrsub.vf-2 \
+  vfrsub.vf-3 \
   vfsgnj.vf-0 \
   vfsgnj.vf-1 \
+  vfsgnj.vf-2 \
+  vfsgnj.vf-3 \
   vfsgnj.vv-0 \
   vfsgnjn.vf-0 \
   vfsgnjn.vf-1 \
+  vfsgnjn.vf-2 \
+  vfsgnjn.vf-3 \
   vfsgnjn.vv-0 \
   vfsgnjx.vf-0 \
   vfsgnjx.vf-1 \
+  vfsgnjx.vf-2 \
+  vfsgnjx.vf-3 \
   vfsgnjx.vv-0 \
   vfslide1down.vf-0 \
   vfslide1down.vf-1 \
+  vfslide1down.vf-2 \
+  vfslide1down.vf-3 \
   vfslide1up.vf-0 \
   vfslide1up.vf-1 \
+  vfslide1up.vf-2 \
+  vfslide1up.vf-3 \
   vfsqrt.v-0 \
   vfsub.vf-0 \
   vfsub.vf-1 \
+  vfsub.vf-2 \
+  vfsub.vf-3 \
   vfsub.vv-0 \
   vfwadd.vf-0 \
+  vfwadd.vf-1 \
   vfwadd.vv-0 \
   vfwadd.wf-0 \
+  vfwadd.wf-1 \
   vfwadd.wv-0 \
   vfwcvt.f.f.v-0 \
   vfwcvt.f.x.v-0 \
@@ -210,23 +379,32 @@ tests = \
   vfwcvt.x.f.v-0 \
   vfwcvt.xu.f.v-0 \
   vfwmacc.vf-0 \
+  vfwmacc.vf-1 \
   vfwmacc.vv-0 \
   vfwmsac.vf-0 \
+  vfwmsac.vf-1 \
   vfwmsac.vv-0 \
   vfwmul.vf-0 \
+  vfwmul.vf-1 \
   vfwmul.vv-0 \
   vfwnmacc.vf-0 \
+  vfwnmacc.vf-1 \
   vfwnmacc.vv-0 \
   vfwnmsac.vf-0 \
+  vfwnmsac.vf-1 \
   vfwnmsac.vv-0 \
   vfwredosum.vs-0 \
   vfwredusum.vs-0 \
   vfwsub.vf-0 \
+  vfwsub.vf-1 \
   vfwsub.vv-0 \
   vfwsub.wf-0 \
+  vfwsub.wf-1 \
   vfwsub.wv-0 \
   vid.v-0 \
+  vid.v-1 \
   viota.m-0 \
+  viota.m-1 \
   vl1re16.v-0 \
   vl1re32.v-0 \
   vl1re64.v-0 \
@@ -253,21 +431,34 @@ tests = \
   vle8ff.v-0 \
   vlm.v-0 \
   vloxei16.v-0 \
+  vloxei16.v-1 \
   vloxei32.v-0 \
+  vloxei32.v-1 \
   vloxei64.v-0 \
   vloxei8.v-0 \
+  vloxei8.v-1 \
+  vloxei8.v-2 \
   vloxseg2ei16.v-0 \
+  vloxseg2ei16.v-1 \
   vloxseg2ei32.v-0 \
+  vloxseg2ei32.v-1 \
   vloxseg2ei64.v-0 \
   vloxseg2ei8.v-0 \
+  vloxseg2ei8.v-1 \
   vloxseg3ei16.v-0 \
+  vloxseg3ei16.v-1 \
   vloxseg3ei32.v-0 \
+  vloxseg3ei32.v-1 \
   vloxseg3ei64.v-0 \
   vloxseg3ei8.v-0 \
+  vloxseg3ei8.v-1 \
   vloxseg4ei16.v-0 \
+  vloxseg4ei16.v-1 \
   vloxseg4ei32.v-0 \
+  vloxseg4ei32.v-1 \
   vloxseg4ei64.v-0 \
   vloxseg4ei8.v-0 \
+  vloxseg4ei8.v-1 \
   vloxseg5ei16.v-0 \
   vloxseg5ei32.v-0 \
   vloxseg5ei64.v-0 \
@@ -285,9 +476,14 @@ tests = \
   vloxseg8ei64.v-0 \
   vloxseg8ei8.v-0 \
   vlse16.v-0 \
+  vlse16.v-1 \
   vlse32.v-0 \
+  vlse32.v-1 \
   vlse64.v-0 \
+  vlse64.v-1 \
   vlse8.v-0 \
+  vlse8.v-1 \
+  vlse8.v-2 \
   vlseg2e16.v-0 \
   vlseg2e32.v-0 \
   vlseg2e64.v-0 \
@@ -317,49 +513,73 @@ tests = \
   vlseg8e64.v-0 \
   vlseg8e8.v-0 \
   vlsseg2e16.v-0 \
+  vlsseg2e16.v-1 \
   vlsseg2e32.v-0 \
+  vlsseg2e32.v-1 \
   vlsseg2e64.v-0 \
   vlsseg2e8.v-0 \
+  vlsseg2e8.v-1 \
   vlsseg3e16.v-0 \
+  vlsseg3e16.v-1 \
   vlsseg3e32.v-0 \
   vlsseg3e64.v-0 \
   vlsseg3e8.v-0 \
+  vlsseg3e8.v-1 \
   vlsseg4e16.v-0 \
+  vlsseg4e16.v-1 \
   vlsseg4e32.v-0 \
   vlsseg4e64.v-0 \
   vlsseg4e8.v-0 \
+  vlsseg4e8.v-1 \
   vlsseg5e16.v-0 \
   vlsseg5e32.v-0 \
   vlsseg5e64.v-0 \
   vlsseg5e8.v-0 \
+  vlsseg5e8.v-1 \
   vlsseg6e16.v-0 \
   vlsseg6e32.v-0 \
   vlsseg6e64.v-0 \
   vlsseg6e8.v-0 \
+  vlsseg6e8.v-1 \
   vlsseg7e16.v-0 \
   vlsseg7e32.v-0 \
   vlsseg7e64.v-0 \
   vlsseg7e8.v-0 \
+  vlsseg7e8.v-1 \
   vlsseg8e16.v-0 \
   vlsseg8e32.v-0 \
   vlsseg8e64.v-0 \
   vlsseg8e8.v-0 \
+  vlsseg8e8.v-1 \
   vluxei16.v-0 \
+  vluxei16.v-1 \
   vluxei32.v-0 \
+  vluxei32.v-1 \
   vluxei64.v-0 \
   vluxei8.v-0 \
+  vluxei8.v-1 \
+  vluxei8.v-2 \
   vluxseg2ei16.v-0 \
+  vluxseg2ei16.v-1 \
   vluxseg2ei32.v-0 \
+  vluxseg2ei32.v-1 \
   vluxseg2ei64.v-0 \
   vluxseg2ei8.v-0 \
+  vluxseg2ei8.v-1 \
   vluxseg3ei16.v-0 \
+  vluxseg3ei16.v-1 \
   vluxseg3ei32.v-0 \
+  vluxseg3ei32.v-1 \
   vluxseg3ei64.v-0 \
   vluxseg3ei8.v-0 \
+  vluxseg3ei8.v-1 \
   vluxseg4ei16.v-0 \
+  vluxseg4ei16.v-1 \
   vluxseg4ei32.v-0 \
+  vluxseg4ei32.v-1 \
   vluxseg4ei64.v-0 \
   vluxseg4ei8.v-0 \
+  vluxseg4ei8.v-1 \
   vluxseg5ei16.v-0 \
   vluxseg5ei32.v-0 \
   vluxseg5ei64.v-0 \
@@ -378,177 +598,317 @@ tests = \
   vluxseg8ei8.v-0 \
   vmacc.vv-0 \
   vmacc.vv-1 \
+  vmacc.vv-2 \
   vmacc.vx-0 \
   vmacc.vx-1 \
   vmacc.vx-2 \
   vmacc.vx-3 \
+  vmacc.vx-4 \
+  vmacc.vx-5 \
+  vmacc.vx-6 \
+  vmacc.vx-7 \
   vmadc.vi-0 \
   vmadc.vi-1 \
+  vmadc.vi-2 \
   vmadc.vim-0 \
   vmadc.vim-1 \
+  vmadc.vim-2 \
   vmadc.vv-0 \
   vmadc.vvm-0 \
+  vmadc.vvm-1 \
   vmadc.vx-0 \
   vmadc.vx-1 \
+  vmadc.vx-2 \
+  vmadc.vx-3 \
   vmadc.vxm-0 \
   vmadc.vxm-1 \
+  vmadc.vxm-2 \
+  vmadc.vxm-3 \
   vmadd.vv-0 \
   vmadd.vv-1 \
+  vmadd.vv-2 \
   vmadd.vx-0 \
   vmadd.vx-1 \
   vmadd.vx-2 \
   vmadd.vx-3 \
+  vmadd.vx-4 \
+  vmadd.vx-5 \
+  vmadd.vx-6 \
+  vmadd.vx-7 \
   vmand.mm-0 \
   vmandn.mm-0 \
   vmax.vv-0 \
   vmax.vv-1 \
+  vmax.vv-2 \
   vmax.vx-0 \
   vmax.vx-1 \
   vmax.vx-2 \
   vmax.vx-3 \
+  vmax.vx-4 \
+  vmax.vx-5 \
+  vmax.vx-6 \
+  vmax.vx-7 \
   vmaxu.vv-0 \
   vmaxu.vv-1 \
+  vmaxu.vv-2 \
   vmaxu.vx-0 \
   vmaxu.vx-1 \
   vmaxu.vx-2 \
   vmaxu.vx-3 \
+  vmaxu.vx-4 \
+  vmaxu.vx-5 \
+  vmaxu.vx-6 \
+  vmaxu.vx-7 \
   vmerge.vim-0 \
   vmerge.vim-1 \
+  vmerge.vim-2 \
   vmerge.vvm-0 \
+  vmerge.vvm-1 \
   vmerge.vxm-0 \
+  vmerge.vxm-1 \
   vmfeq.vf-0 \
   vmfeq.vf-1 \
+  vmfeq.vf-2 \
+  vmfeq.vf-3 \
   vmfeq.vv-0 \
   vmfge.vf-0 \
   vmfge.vf-1 \
+  vmfge.vf-2 \
+  vmfge.vf-3 \
   vmfgt.vf-0 \
   vmfgt.vf-1 \
+  vmfgt.vf-2 \
+  vmfgt.vf-3 \
   vmfle.vf-0 \
   vmfle.vf-1 \
+  vmfle.vf-2 \
+  vmfle.vf-3 \
   vmfle.vv-0 \
   vmflt.vf-0 \
   vmflt.vf-1 \
+  vmflt.vf-2 \
+  vmflt.vf-3 \
   vmflt.vv-0 \
   vmfne.vf-0 \
   vmfne.vf-1 \
+  vmfne.vf-2 \
+  vmfne.vf-3 \
   vmfne.vv-0 \
   vmin.vv-0 \
   vmin.vv-1 \
+  vmin.vv-2 \
   vmin.vx-0 \
   vmin.vx-1 \
   vmin.vx-2 \
   vmin.vx-3 \
+  vmin.vx-4 \
+  vmin.vx-5 \
+  vmin.vx-6 \
+  vmin.vx-7 \
   vminu.vv-0 \
   vminu.vv-1 \
+  vminu.vv-2 \
   vminu.vx-0 \
   vminu.vx-1 \
   vminu.vx-2 \
   vminu.vx-3 \
+  vminu.vx-4 \
+  vminu.vx-5 \
+  vminu.vx-6 \
+  vminu.vx-7 \
   vmnand.mm-0 \
   vmnor.mm-0 \
   vmor.mm-0 \
   vmorn.mm-0 \
   vmsbc.vv-0 \
   vmsbc.vvm-0 \
+  vmsbc.vvm-1 \
   vmsbc.vx-0 \
   vmsbc.vx-1 \
+  vmsbc.vx-2 \
+  vmsbc.vx-3 \
   vmsbc.vxm-0 \
   vmsbc.vxm-1 \
+  vmsbc.vxm-2 \
+  vmsbc.vxm-3 \
   vmsbf.m-0 \
   vmseq.vi-0 \
   vmseq.vi-1 \
   vmseq.vi-2 \
+  vmseq.vi-3 \
+  vmseq.vi-4 \
+  vmseq.vi-5 \
   vmseq.vv-0 \
   vmseq.vv-1 \
+  vmseq.vv-2 \
   vmseq.vx-0 \
   vmseq.vx-1 \
   vmseq.vx-2 \
   vmseq.vx-3 \
+  vmseq.vx-4 \
+  vmseq.vx-5 \
+  vmseq.vx-6 \
+  vmseq.vx-7 \
   vmsgt.vi-0 \
   vmsgt.vi-1 \
   vmsgt.vi-2 \
+  vmsgt.vi-3 \
+  vmsgt.vi-4 \
+  vmsgt.vi-5 \
   vmsgt.vv-0 \
   vmsgt.vv-1 \
+  vmsgt.vv-2 \
   vmsgt.vx-0 \
   vmsgt.vx-1 \
   vmsgt.vx-2 \
   vmsgt.vx-3 \
+  vmsgt.vx-4 \
+  vmsgt.vx-5 \
+  vmsgt.vx-6 \
+  vmsgt.vx-7 \
   vmsgtu.vi-0 \
   vmsgtu.vi-1 \
   vmsgtu.vi-2 \
+  vmsgtu.vi-3 \
+  vmsgtu.vi-4 \
+  vmsgtu.vi-5 \
   vmsgtu.vv-0 \
   vmsgtu.vv-1 \
+  vmsgtu.vv-2 \
   vmsgtu.vx-0 \
   vmsgtu.vx-1 \
   vmsgtu.vx-2 \
   vmsgtu.vx-3 \
+  vmsgtu.vx-4 \
+  vmsgtu.vx-5 \
+  vmsgtu.vx-6 \
+  vmsgtu.vx-7 \
   vmsif.m-0 \
   vmsle.vi-0 \
   vmsle.vi-1 \
   vmsle.vi-2 \
+  vmsle.vi-3 \
+  vmsle.vi-4 \
+  vmsle.vi-5 \
   vmsle.vv-0 \
   vmsle.vv-1 \
+  vmsle.vv-2 \
   vmsle.vx-0 \
   vmsle.vx-1 \
   vmsle.vx-2 \
   vmsle.vx-3 \
+  vmsle.vx-4 \
+  vmsle.vx-5 \
+  vmsle.vx-6 \
+  vmsle.vx-7 \
   vmsleu.vi-0 \
   vmsleu.vi-1 \
   vmsleu.vi-2 \
+  vmsleu.vi-3 \
+  vmsleu.vi-4 \
+  vmsleu.vi-5 \
   vmsleu.vv-0 \
   vmsleu.vv-1 \
+  vmsleu.vv-2 \
   vmsleu.vx-0 \
   vmsleu.vx-1 \
   vmsleu.vx-2 \
   vmsleu.vx-3 \
+  vmsleu.vx-4 \
+  vmsleu.vx-5 \
+  vmsleu.vx-6 \
+  vmsleu.vx-7 \
   vmslt.vv-0 \
   vmslt.vv-1 \
+  vmslt.vv-2 \
   vmslt.vx-0 \
   vmslt.vx-1 \
   vmslt.vx-2 \
   vmslt.vx-3 \
+  vmslt.vx-4 \
+  vmslt.vx-5 \
+  vmslt.vx-6 \
+  vmslt.vx-7 \
   vmsltu.vv-0 \
   vmsltu.vv-1 \
+  vmsltu.vv-2 \
   vmsltu.vx-0 \
   vmsltu.vx-1 \
   vmsltu.vx-2 \
   vmsltu.vx-3 \
+  vmsltu.vx-4 \
+  vmsltu.vx-5 \
+  vmsltu.vx-6 \
+  vmsltu.vx-7 \
   vmsne.vi-0 \
   vmsne.vi-1 \
   vmsne.vi-2 \
+  vmsne.vi-3 \
+  vmsne.vi-4 \
+  vmsne.vi-5 \
   vmsne.vv-0 \
   vmsne.vv-1 \
+  vmsne.vv-2 \
   vmsne.vx-0 \
   vmsne.vx-1 \
   vmsne.vx-2 \
   vmsne.vx-3 \
+  vmsne.vx-4 \
+  vmsne.vx-5 \
+  vmsne.vx-6 \
+  vmsne.vx-7 \
   vmsof.m-0 \
   vmul.vv-0 \
   vmul.vv-1 \
+  vmul.vv-2 \
   vmul.vx-0 \
   vmul.vx-1 \
   vmul.vx-2 \
   vmul.vx-3 \
+  vmul.vx-4 \
+  vmul.vx-5 \
+  vmul.vx-6 \
+  vmul.vx-7 \
+  vmul.vx-8 \
   vmulh.vv-0 \
   vmulh.vv-1 \
+  vmulh.vv-2 \
   vmulh.vx-0 \
   vmulh.vx-1 \
   vmulh.vx-2 \
   vmulh.vx-3 \
+  vmulh.vx-4 \
+  vmulh.vx-5 \
+  vmulh.vx-6 \
+  vmulh.vx-7 \
+  vmulh.vx-8 \
   vmulhsu.vv-0 \
   vmulhsu.vv-1 \
+  vmulhsu.vv-2 \
   vmulhsu.vx-0 \
   vmulhsu.vx-1 \
   vmulhsu.vx-2 \
   vmulhsu.vx-3 \
+  vmulhsu.vx-4 \
+  vmulhsu.vx-5 \
+  vmulhsu.vx-6 \
+  vmulhsu.vx-7 \
+  vmulhsu.vx-8 \
   vmulhu.vv-0 \
   vmulhu.vv-1 \
+  vmulhu.vv-2 \
   vmulhu.vx-0 \
   vmulhu.vx-1 \
   vmulhu.vx-2 \
   vmulhu.vx-3 \
+  vmulhu.vx-4 \
+  vmulhu.vx-5 \
+  vmulhu.vx-6 \
+  vmulhu.vx-7 \
+  vmulhu.vx-8 \
   vmv.s.x-0 \
   vmv.v.i-0 \
+  vmv.v.i-1 \
   vmv.v.v-0 \
   vmv.v.x-0 \
   vmv.x.s-0 \
@@ -560,14 +920,34 @@ tests = \
   vmxor.mm-0 \
   vnclip.wi-0 \
   vnclip.wi-1 \
+  vnclip.wi-10 \
   vnclip.wi-2 \
   vnclip.wi-3 \
   vnclip.wi-4 \
+  vnclip.wi-5 \
+  vnclip.wi-6 \
+  vnclip.wi-7 \
+  vnclip.wi-8 \
+  vnclip.wi-9 \
   vnclip.wv-0 \
   vnclip.wv-1 \
   vnclip.wv-2 \
+  vnclip.wv-3 \
+  vnclip.wv-4 \
+  vnclip.wv-5 \
+  vnclip.wv-6 \
   vnclip.wx-0 \
   vnclip.wx-1 \
+  vnclip.wx-10 \
+  vnclip.wx-11 \
+  vnclip.wx-12 \
+  vnclip.wx-13 \
+  vnclip.wx-14 \
+  vnclip.wx-15 \
+  vnclip.wx-16 \
+  vnclip.wx-17 \
+  vnclip.wx-18 \
+  vnclip.wx-19 \
   vnclip.wx-2 \
   vnclip.wx-3 \
   vnclip.wx-4 \
@@ -575,16 +955,37 @@ tests = \
   vnclip.wx-6 \
   vnclip.wx-7 \
   vnclip.wx-8 \
+  vnclip.wx-9 \
   vnclipu.wi-0 \
   vnclipu.wi-1 \
+  vnclipu.wi-10 \
   vnclipu.wi-2 \
   vnclipu.wi-3 \
   vnclipu.wi-4 \
+  vnclipu.wi-5 \
+  vnclipu.wi-6 \
+  vnclipu.wi-7 \
+  vnclipu.wi-8 \
+  vnclipu.wi-9 \
   vnclipu.wv-0 \
   vnclipu.wv-1 \
   vnclipu.wv-2 \
+  vnclipu.wv-3 \
+  vnclipu.wv-4 \
+  vnclipu.wv-5 \
+  vnclipu.wv-6 \
   vnclipu.wx-0 \
   vnclipu.wx-1 \
+  vnclipu.wx-10 \
+  vnclipu.wx-11 \
+  vnclipu.wx-12 \
+  vnclipu.wx-13 \
+  vnclipu.wx-14 \
+  vnclipu.wx-15 \
+  vnclipu.wx-16 \
+  vnclipu.wx-17 \
+  vnclipu.wx-18 \
+  vnclipu.wx-19 \
   vnclipu.wx-2 \
   vnclipu.wx-3 \
   vnclipu.wx-4 \
@@ -592,83 +993,147 @@ tests = \
   vnclipu.wx-6 \
   vnclipu.wx-7 \
   vnclipu.wx-8 \
+  vnclipu.wx-9 \
   vnmsac.vv-0 \
   vnmsac.vv-1 \
+  vnmsac.vv-2 \
   vnmsac.vx-0 \
   vnmsac.vx-1 \
   vnmsac.vx-2 \
   vnmsac.vx-3 \
+  vnmsac.vx-4 \
+  vnmsac.vx-5 \
+  vnmsac.vx-6 \
+  vnmsac.vx-7 \
   vnmsub.vv-0 \
   vnmsub.vv-1 \
+  vnmsub.vv-2 \
   vnmsub.vx-0 \
   vnmsub.vx-1 \
   vnmsub.vx-2 \
   vnmsub.vx-3 \
+  vnmsub.vx-4 \
+  vnmsub.vx-5 \
+  vnmsub.vx-6 \
+  vnmsub.vx-7 \
   vnsra.wi-0 \
   vnsra.wi-1 \
+  vnsra.wi-2 \
   vnsra.wv-0 \
+  vnsra.wv-1 \
   vnsra.wx-0 \
   vnsra.wx-1 \
   vnsra.wx-2 \
+  vnsra.wx-3 \
+  vnsra.wx-4 \
   vnsrl.wi-0 \
   vnsrl.wi-1 \
+  vnsrl.wi-2 \
   vnsrl.wv-0 \
+  vnsrl.wv-1 \
   vnsrl.wx-0 \
   vnsrl.wx-1 \
   vnsrl.wx-2 \
+  vnsrl.wx-3 \
+  vnsrl.wx-4 \
   vor.vi-0 \
   vor.vi-1 \
   vor.vi-2 \
+  vor.vi-3 \
+  vor.vi-4 \
+  vor.vi-5 \
   vor.vv-0 \
   vor.vv-1 \
+  vor.vv-2 \
   vor.vx-0 \
   vor.vx-1 \
   vor.vx-2 \
   vor.vx-3 \
+  vor.vx-4 \
+  vor.vx-5 \
+  vor.vx-6 \
+  vor.vx-7 \
   vredand.vs-0 \
   vredand.vs-1 \
+  vredand.vs-2 \
   vredmax.vs-0 \
   vredmax.vs-1 \
+  vredmax.vs-2 \
   vredmaxu.vs-0 \
   vredmaxu.vs-1 \
+  vredmaxu.vs-2 \
   vredmin.vs-0 \
   vredmin.vs-1 \
+  vredmin.vs-2 \
   vredminu.vs-0 \
   vredminu.vs-1 \
+  vredminu.vs-2 \
   vredor.vs-0 \
   vredor.vs-1 \
+  vredor.vs-2 \
   vredsum.vs-0 \
   vredsum.vs-1 \
+  vredsum.vs-2 \
   vredxor.vs-0 \
   vredxor.vs-1 \
+  vredxor.vs-2 \
   vrem.vv-0 \
   vrem.vv-1 \
+  vrem.vv-2 \
   vrem.vx-0 \
   vrem.vx-1 \
   vrem.vx-2 \
   vrem.vx-3 \
+  vrem.vx-4 \
+  vrem.vx-5 \
+  vrem.vx-6 \
+  vrem.vx-7 \
+  vrem.vx-8 \
   vremu.vv-0 \
   vremu.vv-1 \
+  vremu.vv-2 \
   vremu.vx-0 \
   vremu.vx-1 \
   vremu.vx-2 \
   vremu.vx-3 \
+  vremu.vx-4 \
+  vremu.vx-5 \
+  vremu.vx-6 \
+  vremu.vx-7 \
+  vremu.vx-8 \
   vrgather.vi-0 \
   vrgather.vi-1 \
+  vrgather.vi-2 \
+  vrgather.vi-3 \
+  vrgather.vi-4 \
   vrgather.vv-0 \
   vrgather.vv-1 \
+  vrgather.vv-2 \
   vrgather.vx-0 \
   vrgather.vx-1 \
   vrgather.vx-2 \
   vrgather.vx-3 \
+  vrgather.vx-4 \
+  vrgather.vx-5 \
+  vrgather.vx-6 \
+  vrgather.vx-7 \
   vrgatherei16.vv-0 \
+  vrgatherei16.vv-1 \
+  vrgatherei16.vv-2 \
   vrsub.vi-0 \
   vrsub.vi-1 \
   vrsub.vi-2 \
+  vrsub.vi-3 \
+  vrsub.vi-4 \
+  vrsub.vi-5 \
   vrsub.vx-0 \
   vrsub.vx-1 \
   vrsub.vx-2 \
   vrsub.vx-3 \
+  vrsub.vx-4 \
+  vrsub.vx-5 \
+  vrsub.vx-6 \
+  vrsub.vx-7 \
   vs1r.v-0 \
   vs2r.v-0 \
   vs4r.v-0 \
@@ -676,25 +1141,45 @@ tests = \
   vsadd.vi-0 \
   vsadd.vi-1 \
   vsadd.vi-2 \
+  vsadd.vi-3 \
+  vsadd.vi-4 \
+  vsadd.vi-5 \
   vsadd.vv-0 \
   vsadd.vv-1 \
+  vsadd.vv-2 \
   vsadd.vx-0 \
   vsadd.vx-1 \
   vsadd.vx-2 \
   vsadd.vx-3 \
+  vsadd.vx-4 \
+  vsadd.vx-5 \
+  vsadd.vx-6 \
+  vsadd.vx-7 \
   vsaddu.vi-0 \
   vsaddu.vi-1 \
   vsaddu.vi-2 \
+  vsaddu.vi-3 \
+  vsaddu.vi-4 \
+  vsaddu.vi-5 \
   vsaddu.vv-0 \
   vsaddu.vv-1 \
+  vsaddu.vv-2 \
   vsaddu.vx-0 \
   vsaddu.vx-1 \
   vsaddu.vx-2 \
   vsaddu.vx-3 \
+  vsaddu.vx-4 \
+  vsaddu.vx-5 \
+  vsaddu.vx-6 \
+  vsaddu.vx-7 \
   vsbc.vvm-0 \
+  vsbc.vvm-1 \
   vsbc.vxm-0 \
   vsbc.vxm-1 \
   vsbc.vxm-2 \
+  vsbc.vxm-3 \
+  vsbc.vxm-4 \
+  vsbc.vxm-5 \
   vse16.v-0 \
   vse32.v-0 \
   vse64.v-0 \
@@ -703,49 +1188,101 @@ tests = \
   vsetvl-0 \
   vsetvli-0 \
   vsext.vf2-0 \
+  vsext.vf2-1 \
   vsext.vf4-0 \
   vsext.vf8-0 \
   vslide1down.vx-0 \
   vslide1down.vx-1 \
   vslide1down.vx-2 \
   vslide1down.vx-3 \
+  vslide1down.vx-4 \
+  vslide1down.vx-5 \
+  vslide1down.vx-6 \
+  vslide1down.vx-7 \
   vslide1up.vx-0 \
   vslide1up.vx-1 \
   vslide1up.vx-2 \
   vslide1up.vx-3 \
+  vslide1up.vx-4 \
+  vslide1up.vx-5 \
+  vslide1up.vx-6 \
+  vslide1up.vx-7 \
   vslidedown.vi-0 \
   vslidedown.vi-1 \
+  vslidedown.vi-2 \
+  vslidedown.vi-3 \
+  vslidedown.vi-4 \
   vslidedown.vx-0 \
   vslidedown.vx-1 \
   vslidedown.vx-2 \
   vslidedown.vx-3 \
+  vslidedown.vx-4 \
+  vslidedown.vx-5 \
+  vslidedown.vx-6 \
+  vslidedown.vx-7 \
   vslideup.vi-0 \
   vslideup.vi-1 \
+  vslideup.vi-2 \
+  vslideup.vi-3 \
+  vslideup.vi-4 \
   vslideup.vx-0 \
   vslideup.vx-1 \
   vslideup.vx-2 \
   vslideup.vx-3 \
+  vslideup.vx-4 \
+  vslideup.vx-5 \
+  vslideup.vx-6 \
+  vslideup.vx-7 \
   vsll.vi-0 \
   vsll.vi-1 \
+  vsll.vi-2 \
+  vsll.vi-3 \
+  vsll.vi-4 \
   vsll.vv-0 \
   vsll.vv-1 \
+  vsll.vv-2 \
   vsll.vx-0 \
   vsll.vx-1 \
   vsll.vx-2 \
   vsll.vx-3 \
+  vsll.vx-4 \
+  vsll.vx-5 \
+  vsll.vx-6 \
+  vsll.vx-7 \
   vsm.v-0 \
   vsmul.vv-0 \
   vsmul.vv-1 \
   vsmul.vv-2 \
   vsmul.vv-3 \
   vsmul.vv-4 \
+  vsmul.vv-5 \
+  vsmul.vv-6 \
+  vsmul.vv-7 \
+  vsmul.vv-8 \
+  vsmul.vv-9 \
   vsmul.vx-0 \
   vsmul.vx-1 \
   vsmul.vx-10 \
   vsmul.vx-11 \
   vsmul.vx-12 \
   vsmul.vx-13 \
+  vsmul.vx-14 \
+  vsmul.vx-15 \
+  vsmul.vx-16 \
+  vsmul.vx-17 \
+  vsmul.vx-18 \
+  vsmul.vx-19 \
   vsmul.vx-2 \
+  vsmul.vx-20 \
+  vsmul.vx-21 \
+  vsmul.vx-22 \
+  vsmul.vx-23 \
+  vsmul.vx-24 \
+  vsmul.vx-25 \
+  vsmul.vx-26 \
+  vsmul.vx-27 \
+  vsmul.vx-28 \
+  vsmul.vx-29 \
   vsmul.vx-3 \
   vsmul.vx-4 \
   vsmul.vx-5 \
@@ -754,21 +1291,31 @@ tests = \
   vsmul.vx-8 \
   vsmul.vx-9 \
   vsoxei16.v-0 \
+  vsoxei16.v-1 \
   vsoxei32.v-0 \
+  vsoxei32.v-1 \
   vsoxei64.v-0 \
   vsoxei8.v-0 \
+  vsoxei8.v-1 \
   vsoxseg2ei16.v-0 \
+  vsoxseg2ei16.v-1 \
   vsoxseg2ei32.v-0 \
+  vsoxseg2ei32.v-1 \
   vsoxseg2ei64.v-0 \
   vsoxseg2ei8.v-0 \
+  vsoxseg2ei8.v-1 \
   vsoxseg3ei16.v-0 \
+  vsoxseg3ei16.v-1 \
   vsoxseg3ei32.v-0 \
   vsoxseg3ei64.v-0 \
   vsoxseg3ei8.v-0 \
+  vsoxseg3ei8.v-1 \
   vsoxseg4ei16.v-0 \
+  vsoxseg4ei16.v-1 \
   vsoxseg4ei32.v-0 \
   vsoxseg4ei64.v-0 \
   vsoxseg4ei8.v-0 \
+  vsoxseg4ei8.v-1 \
   vsoxseg5ei16.v-0 \
   vsoxseg5ei32.v-0 \
   vsoxseg5ei64.v-0 \
@@ -787,27 +1334,48 @@ tests = \
   vsoxseg8ei8.v-0 \
   vsra.vi-0 \
   vsra.vi-1 \
+  vsra.vi-2 \
+  vsra.vi-3 \
+  vsra.vi-4 \
   vsra.vv-0 \
   vsra.vv-1 \
+  vsra.vv-2 \
   vsra.vx-0 \
   vsra.vx-1 \
   vsra.vx-2 \
   vsra.vx-3 \
+  vsra.vx-4 \
+  vsra.vx-5 \
+  vsra.vx-6 \
+  vsra.vx-7 \
   vsrl.vi-0 \
   vsrl.vi-1 \
+  vsrl.vi-2 \
+  vsrl.vi-3 \
+  vsrl.vi-4 \
   vsrl.vv-0 \
   vsrl.vv-1 \
+  vsrl.vv-2 \
   vsrl.vx-0 \
   vsrl.vx-1 \
   vsrl.vx-2 \
   vsrl.vx-3 \
+  vsrl.vx-4 \
+  vsrl.vx-5 \
+  vsrl.vx-6 \
+  vsrl.vx-7 \
   vsse16.v-0 \
   vsse16.v-1 \
+  vsse16.v-2 \
   vsse32.v-0 \
   vsse32.v-1 \
+  vsse32.v-2 \
   vsse64.v-0 \
+  vsse64.v-1 \
   vsse8.v-0 \
   vsse8.v-1 \
+  vsse8.v-2 \
+  vsse8.v-3 \
   vsseg2e16.v-0 \
   vsseg2e32.v-0 \
   vsseg2e64.v-0 \
@@ -838,17 +1406,31 @@ tests = \
   vsseg8e8.v-0 \
   vssra.vi-0 \
   vssra.vi-1 \
+  vssra.vi-10 \
+  vssra.vi-11 \
+  vssra.vi-12 \
+  vssra.vi-13 \
+  vssra.vi-14 \
+  vssra.vi-15 \
+  vssra.vi-16 \
   vssra.vi-2 \
   vssra.vi-3 \
   vssra.vi-4 \
   vssra.vi-5 \
   vssra.vi-6 \
   vssra.vi-7 \
+  vssra.vi-8 \
+  vssra.vi-9 \
   vssra.vv-0 \
   vssra.vv-1 \
   vssra.vv-2 \
   vssra.vv-3 \
   vssra.vv-4 \
+  vssra.vv-5 \
+  vssra.vv-6 \
+  vssra.vv-7 \
+  vssra.vv-8 \
+  vssra.vv-9 \
   vssra.vx-0 \
   vssra.vx-1 \
   vssra.vx-10 \
@@ -860,9 +1442,31 @@ tests = \
   vssra.vx-16 \
   vssra.vx-17 \
   vssra.vx-18 \
+  vssra.vx-19 \
   vssra.vx-2 \
+  vssra.vx-20 \
+  vssra.vx-21 \
+  vssra.vx-22 \
+  vssra.vx-23 \
+  vssra.vx-24 \
+  vssra.vx-25 \
+  vssra.vx-26 \
+  vssra.vx-27 \
+  vssra.vx-28 \
+  vssra.vx-29 \
   vssra.vx-3 \
+  vssra.vx-30 \
+  vssra.vx-31 \
+  vssra.vx-32 \
+  vssra.vx-33 \
+  vssra.vx-34 \
+  vssra.vx-35 \
+  vssra.vx-36 \
+  vssra.vx-37 \
+  vssra.vx-38 \
+  vssra.vx-39 \
   vssra.vx-4 \
+  vssra.vx-40 \
   vssra.vx-5 \
   vssra.vx-6 \
   vssra.vx-7 \
@@ -870,17 +1474,31 @@ tests = \
   vssra.vx-9 \
   vssrl.vi-0 \
   vssrl.vi-1 \
+  vssrl.vi-10 \
+  vssrl.vi-11 \
+  vssrl.vi-12 \
+  vssrl.vi-13 \
+  vssrl.vi-14 \
+  vssrl.vi-15 \
+  vssrl.vi-16 \
   vssrl.vi-2 \
   vssrl.vi-3 \
   vssrl.vi-4 \
   vssrl.vi-5 \
   vssrl.vi-6 \
   vssrl.vi-7 \
+  vssrl.vi-8 \
+  vssrl.vi-9 \
   vssrl.vv-0 \
   vssrl.vv-1 \
   vssrl.vv-2 \
   vssrl.vv-3 \
   vssrl.vv-4 \
+  vssrl.vv-5 \
+  vssrl.vv-6 \
+  vssrl.vv-7 \
+  vssrl.vv-8 \
+  vssrl.vv-9 \
   vssrl.vx-0 \
   vssrl.vx-1 \
   vssrl.vx-10 \
@@ -892,9 +1510,31 @@ tests = \
   vssrl.vx-16 \
   vssrl.vx-17 \
   vssrl.vx-18 \
+  vssrl.vx-19 \
   vssrl.vx-2 \
+  vssrl.vx-20 \
+  vssrl.vx-21 \
+  vssrl.vx-22 \
+  vssrl.vx-23 \
+  vssrl.vx-24 \
+  vssrl.vx-25 \
+  vssrl.vx-26 \
+  vssrl.vx-27 \
+  vssrl.vx-28 \
+  vssrl.vx-29 \
   vssrl.vx-3 \
+  vssrl.vx-30 \
+  vssrl.vx-31 \
+  vssrl.vx-32 \
+  vssrl.vx-33 \
+  vssrl.vx-34 \
+  vssrl.vx-35 \
+  vssrl.vx-36 \
+  vssrl.vx-37 \
+  vssrl.vx-38 \
+  vssrl.vx-39 \
   vssrl.vx-4 \
+  vssrl.vx-40 \
   vssrl.vx-5 \
   vssrl.vx-6 \
   vssrl.vx-7 \
@@ -902,73 +1542,122 @@ tests = \
   vssrl.vx-9 \
   vssseg2e16.v-0 \
   vssseg2e16.v-1 \
+  vssseg2e16.v-2 \
   vssseg2e32.v-0 \
+  vssseg2e32.v-1 \
   vssseg2e64.v-0 \
+  vssseg2e64.v-1 \
   vssseg2e8.v-0 \
   vssseg2e8.v-1 \
+  vssseg2e8.v-2 \
   vssseg3e16.v-0 \
+  vssseg3e16.v-1 \
   vssseg3e32.v-0 \
+  vssseg3e32.v-1 \
   vssseg3e64.v-0 \
   vssseg3e8.v-0 \
   vssseg3e8.v-1 \
+  vssseg3e8.v-2 \
   vssseg4e16.v-0 \
+  vssseg4e16.v-1 \
   vssseg4e32.v-0 \
+  vssseg4e32.v-1 \
   vssseg4e64.v-0 \
   vssseg4e8.v-0 \
   vssseg4e8.v-1 \
+  vssseg4e8.v-2 \
   vssseg5e16.v-0 \
+  vssseg5e16.v-1 \
   vssseg5e32.v-0 \
   vssseg5e64.v-0 \
   vssseg5e8.v-0 \
+  vssseg5e8.v-1 \
   vssseg6e16.v-0 \
+  vssseg6e16.v-1 \
   vssseg6e32.v-0 \
   vssseg6e64.v-0 \
   vssseg6e8.v-0 \
+  vssseg6e8.v-1 \
   vssseg7e16.v-0 \
+  vssseg7e16.v-1 \
   vssseg7e32.v-0 \
   vssseg7e64.v-0 \
   vssseg7e8.v-0 \
+  vssseg7e8.v-1 \
   vssseg8e16.v-0 \
+  vssseg8e16.v-1 \
   vssseg8e32.v-0 \
   vssseg8e64.v-0 \
   vssseg8e8.v-0 \
+  vssseg8e8.v-1 \
   vssub.vv-0 \
   vssub.vv-1 \
+  vssub.vv-2 \
   vssub.vx-0 \
   vssub.vx-1 \
+  vssub.vx-10 \
   vssub.vx-2 \
   vssub.vx-3 \
   vssub.vx-4 \
+  vssub.vx-5 \
+  vssub.vx-6 \
+  vssub.vx-7 \
+  vssub.vx-8 \
+  vssub.vx-9 \
   vssubu.vv-0 \
   vssubu.vv-1 \
+  vssubu.vv-2 \
   vssubu.vx-0 \
   vssubu.vx-1 \
+  vssubu.vx-10 \
   vssubu.vx-2 \
   vssubu.vx-3 \
   vssubu.vx-4 \
+  vssubu.vx-5 \
+  vssubu.vx-6 \
+  vssubu.vx-7 \
+  vssubu.vx-8 \
+  vssubu.vx-9 \
   vsub.vv-0 \
   vsub.vv-1 \
+  vsub.vv-2 \
   vsub.vx-0 \
   vsub.vx-1 \
+  vsub.vx-10 \
   vsub.vx-2 \
   vsub.vx-3 \
   vsub.vx-4 \
+  vsub.vx-5 \
+  vsub.vx-6 \
+  vsub.vx-7 \
+  vsub.vx-8 \
+  vsub.vx-9 \
   vsuxei16.v-0 \
+  vsuxei16.v-1 \
   vsuxei32.v-0 \
+  vsuxei32.v-1 \
   vsuxei64.v-0 \
   vsuxei8.v-0 \
+  vsuxei8.v-1 \
   vsuxseg2ei16.v-0 \
+  vsuxseg2ei16.v-1 \
   vsuxseg2ei32.v-0 \
+  vsuxseg2ei32.v-1 \
   vsuxseg2ei64.v-0 \
   vsuxseg2ei8.v-0 \
+  vsuxseg2ei8.v-1 \
   vsuxseg3ei16.v-0 \
+  vsuxseg3ei16.v-1 \
   vsuxseg3ei32.v-0 \
   vsuxseg3ei64.v-0 \
   vsuxseg3ei8.v-0 \
+  vsuxseg3ei8.v-1 \
   vsuxseg4ei16.v-0 \
+  vsuxseg4ei16.v-1 \
   vsuxseg4ei32.v-0 \
   vsuxseg4ei64.v-0 \
   vsuxseg4ei8.v-0 \
+  vsuxseg4ei8.v-1 \
   vsuxseg5ei16.v-0 \
   vsuxseg5ei32.v-0 \
   vsuxseg5ei64.v-0 \
@@ -986,75 +1675,136 @@ tests = \
   vsuxseg8ei64.v-0 \
   vsuxseg8ei8.v-0 \
   vwadd.vv-0 \
+  vwadd.vv-1 \
   vwadd.vx-0 \
   vwadd.vx-1 \
   vwadd.vx-2 \
+  vwadd.vx-3 \
+  vwadd.vx-4 \
   vwadd.wv-0 \
+  vwadd.wv-1 \
   vwadd.wx-0 \
   vwadd.wx-1 \
   vwadd.wx-2 \
+  vwadd.wx-3 \
+  vwadd.wx-4 \
   vwaddu.vv-0 \
+  vwaddu.vv-1 \
   vwaddu.vx-0 \
   vwaddu.vx-1 \
   vwaddu.vx-2 \
+  vwaddu.vx-3 \
+  vwaddu.vx-4 \
   vwaddu.wv-0 \
+  vwaddu.wv-1 \
   vwaddu.wx-0 \
   vwaddu.wx-1 \
   vwaddu.wx-2 \
+  vwaddu.wx-3 \
+  vwaddu.wx-4 \
   vwmacc.vv-0 \
+  vwmacc.vv-1 \
   vwmacc.vx-0 \
   vwmacc.vx-1 \
   vwmacc.vx-2 \
+  vwmacc.vx-3 \
+  vwmacc.vx-4 \
   vwmaccsu.vv-0 \
+  vwmaccsu.vv-1 \
   vwmaccsu.vx-0 \
   vwmaccsu.vx-1 \
   vwmaccsu.vx-2 \
+  vwmaccsu.vx-3 \
+  vwmaccsu.vx-4 \
   vwmaccu.vv-0 \
+  vwmaccu.vv-1 \
   vwmaccu.vx-0 \
   vwmaccu.vx-1 \
   vwmaccu.vx-2 \
+  vwmaccu.vx-3 \
+  vwmaccu.vx-4 \
   vwmaccus.vx-0 \
   vwmaccus.vx-1 \
   vwmaccus.vx-2 \
+  vwmaccus.vx-3 \
+  vwmaccus.vx-4 \
   vwmul.vv-0 \
+  vwmul.vv-1 \
   vwmul.vx-0 \
   vwmul.vx-1 \
   vwmul.vx-2 \
+  vwmul.vx-3 \
+  vwmul.vx-4 \
+  vwmul.vx-5 \
+  vwmul.vx-6 \
   vwmulsu.vv-0 \
+  vwmulsu.vv-1 \
   vwmulsu.vx-0 \
   vwmulsu.vx-1 \
   vwmulsu.vx-2 \
+  vwmulsu.vx-3 \
+  vwmulsu.vx-4 \
+  vwmulsu.vx-5 \
+  vwmulsu.vx-6 \
   vwmulu.vv-0 \
+  vwmulu.vv-1 \
   vwmulu.vx-0 \
   vwmulu.vx-1 \
   vwmulu.vx-2 \
+  vwmulu.vx-3 \
+  vwmulu.vx-4 \
+  vwmulu.vx-5 \
+  vwmulu.vx-6 \
   vwredsum.vs-0 \
+  vwredsum.vs-1 \
   vwredsumu.vs-0 \
+  vwredsumu.vs-1 \
   vwsub.vv-0 \
+  vwsub.vv-1 \
   vwsub.vx-0 \
   vwsub.vx-1 \
   vwsub.vx-2 \
+  vwsub.vx-3 \
+  vwsub.vx-4 \
   vwsub.wv-0 \
+  vwsub.wv-1 \
   vwsub.wx-0 \
   vwsub.wx-1 \
   vwsub.wx-2 \
+  vwsub.wx-3 \
+  vwsub.wx-4 \
   vwsubu.vv-0 \
+  vwsubu.vv-1 \
   vwsubu.vx-0 \
   vwsubu.vx-1 \
   vwsubu.vx-2 \
+  vwsubu.vx-3 \
+  vwsubu.vx-4 \
   vwsubu.wv-0 \
+  vwsubu.wv-1 \
   vwsubu.wx-0 \
   vwsubu.wx-1 \
   vwsubu.wx-2 \
+  vwsubu.wx-3 \
+  vwsubu.wx-4 \
   vxor.vi-0 \
   vxor.vi-1 \
   vxor.vi-2 \
+  vxor.vi-3 \
+  vxor.vi-4 \
+  vxor.vi-5 \
   vxor.vv-0 \
   vxor.vv-1 \
+  vxor.vv-2 \
   vxor.vx-0 \
   vxor.vx-1 \
   vxor.vx-2 \
   vxor.vx-3 \
+  vxor.vx-4 \
+  vxor.vx-5 \
+  vxor.vx-6 \
+  vxor.vx-7 \
   vzext.vf2-0 \
+  vzext.vf2-1 \
   vzext.vf4-0 \
   vzext.vf8-0 \
