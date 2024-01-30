@@ -1,5 +1,5 @@
-name = "vmerge.vvm"
-format = "vd,vs2,vs1,v0"
+name = "vmerge.vxm"
+format = "vd,vs2,rs1,v0"
 
 [tests]
 base = [
