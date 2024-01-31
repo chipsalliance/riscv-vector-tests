@@ -666,6 +666,8 @@ tests = \
   vmerge.vvm-1 \
   vmerge.vxm-0 \
   vmerge.vxm-1 \
+  vmerge.vxm-2 \
+  vmerge.vxm-3 \
   vmfeq.vf-0 \
   vmfeq.vf-1 \
   vmfeq.vf-2 \
