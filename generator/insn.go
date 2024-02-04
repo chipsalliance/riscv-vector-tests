@@ -340,6 +340,12 @@ func (i *Insn) genData() string {
 		strings.HasPrefix(i.Name, "vfw") {
 		dataSize *= 2
 	}
+	testDataPadding := 0
+	if strings.HasSuffix(i.Name, "vf4") {
+		testDataPadding = i.vlenb() * 4
+	} else if strings.HasSuffix(i.Name, "vf8") {
+		testDataPadding = i.vlenb() * 8
+	}
 
 	return fmt.Sprintf(`
   .data
@@ -351,9 +357,11 @@ resultdata:
 
 testdata:
 %s
+# testdata padding for vsext.vf4, vsext.vf8, vzext.vf4, vzext.vf8
+  .zero %d
 
 RVTEST_DATA_END
-`, dataSize, i.TestData.String())
+`, dataSize, i.TestData.String(), testDataPadding)
 }
 
 func (i *Insn) vlenb() int {
