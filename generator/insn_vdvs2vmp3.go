@@ -30,17 +30,9 @@ func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, c.LMUL1, c.SEW))
 
 		vs2EEW := c.SEW / SEW(f)
-		if vs2EEW < 8 {
-			res = append(res, "")
-			continue
-		}
 
-		vdEMUL := c.LMUL / LMUL(f)
-		if vdEMUL < 1/8 {
-			res = append(res, "")
-			continue
-		}
-		vdEMUL1 := LMUL(math.Max(float64(vdEMUL), 1))
+		vs2EMUL := c.LMUL / LMUL(f)
+		vs2EMUL1 := LMUL(math.Max(float64(vs2EMUL), 1))
 
 		vd := int(c.LMUL1)
 		vs2 := 2 * int(c.LMUL1)
@@ -48,8 +40,8 @@ func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
 
-		builder.WriteString(i.gWriteIntegerTestData(vdEMUL1, vs2EEW, 0))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, vdEMUL1, vs2EEW))
+		builder.WriteString(i.gWriteIntegerTestData(vs2EMUL1, vs2EEW, 0))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, vs2EMUL1, vs2EEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
