@@ -58,19 +58,7 @@ class magic_extension_t : public extension_t {
 int main(int argc, char** argv) {
   std::vector<mem_cfg_t> mem_cfg { mem_cfg_t(0x80000000, 0x10000000) };
   std::vector<size_t> hartids = {0};
-  cfg_t cfg(std::make_pair(0, 0),
-            nullptr,
-            "rv64gcv",
-            "MSU",
-            "vlen:128,elen:64",
-            false,
-            endianness_little,
-            16,
-            mem_cfg,
-            hartids,
-            false,
-            4);
-
+  cfg_t cfg;
   option_parser_t parser;
   parser.option(0, "isa", 1, [&](const char* s){cfg.isa = s;});
   parser.option(0, "varch", 1, [&](const char* s){cfg.varch = s;});
@@ -89,8 +77,8 @@ int main(int argc, char** argv) {
     .support_haltgroups = true,
     .support_impebreak = true
   };
-  std::vector<std::pair<reg_t, abstract_mem_t*>> mems = make_mems(cfg.mem_layout());
-  std::vector<const device_factory_t*> plugin_devices;
+  std::vector<std::pair<reg_t, abstract_mem_t*>> mems = make_mems(cfg.mem_layout);
+  std::vector<device_factory_t*> plugin_devices;
   sim_t sim(&cfg, false,
             mems,
             plugin_devices,
