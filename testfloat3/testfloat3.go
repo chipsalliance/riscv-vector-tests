@@ -6,6 +6,10 @@ package testfloat3
 // #include "testfloat3.h"
 import "C"
 
+func SetLevel(level int) {
+	C.genCases_setLevel(C.int(level));
+}
+
 func InitF32(numops int) {
 	C.srand(2024);
 	switch numops {

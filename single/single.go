@@ -4,10 +4,12 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/ksco/riscv-vector-tests/generator"
 	"os"
 	"path/filepath"
 	"regexp"
+
+	"github.com/ksco/riscv-vector-tests/generator"
+	"github.com/ksco/riscv-vector-tests/testfloat3"
 )
 
 func fatalIf(err error) {
@@ -22,6 +24,7 @@ var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "")
 var outputFileF = flag.String("outputfile", "", "output file name.")
 var configFileF = flag.String("configfile", "", "config file path.")
+var testfloat3LevelF = flag.Int("testfloat3level", 1, "testfloat3 testing level (1 or 2).")
 
 func main() {
 	flag.Parse()
@@ -32,6 +35,12 @@ func main() {
 	if configFileF == nil || *configFileF == "" {
 		fatalIf(errors.New("-configfile is required"))
 	}
+
+	if !(*testfloat3LevelF == 1 || *testfloat3LevelF == 2) {
+		fatalIf(errors.New("-testfloat3level must be 1 or 2"))
+	}
+
+	testfloat3.SetLevel(*testfloat3LevelF)
 
 	option := generator.Option{
 		VLEN: generator.VLEN(*vlenF),

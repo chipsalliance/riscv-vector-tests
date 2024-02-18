@@ -13,6 +13,7 @@ import (
 	"sync"
 
 	"github.com/ksco/riscv-vector-tests/generator"
+	"github.com/ksco/riscv-vector-tests/testfloat3"
 )
 
 func fatalIf(err error) {
@@ -30,6 +31,7 @@ var integerF = flag.Bool("integer", false, "only generate integer tests.")
 var patternF = flag.String("pattern", ".*", "regex to filter out tests.")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
+var testfloat3LevelF = flag.Int("testfloat3level", 1, "testfloat3 testing level (1 or 2).")
 
 func main() {
 	flag.Parse()
@@ -40,6 +42,12 @@ func main() {
 	if stage1OutputDirF == nil || *stage1OutputDirF == "" {
 		fatalIf(errors.New("-stage1output is required"))
 	}
+
+	if !(*testfloat3LevelF == 1 || *testfloat3LevelF == 2) {
+		fatalIf(errors.New("-testfloat3level must be 1 or 2"))
+	}
+
+	testfloat3.SetLevel(*testfloat3LevelF)
 
 	option := generator.Option{
 		VLEN: generator.VLEN(*vlenF),
