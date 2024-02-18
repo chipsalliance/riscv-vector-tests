@@ -51,10 +51,10 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(vdEMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(float, c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, c.LMUL1, c.SEW, 0, 2))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[0], c.LMUL1, c.SEW))
 
-		builder.WriteString(i.gWriteTestData(float, vs2EMUL1, vs2EEW, 1))
+		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, vs2EMUL1, vs2EEW, 1, 2))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[1], vs2EMUL1, vs2EEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")

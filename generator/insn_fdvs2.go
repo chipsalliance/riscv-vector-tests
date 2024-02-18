@@ -18,7 +18,7 @@ func (i *Insn) genCodeFdVs2(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(true, c.LMUL1, c.SEW, 0))
+		builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, c.LMUL1, c.SEW, 0, 1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")

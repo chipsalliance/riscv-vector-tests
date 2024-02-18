@@ -35,10 +35,10 @@ func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 
 		vd := int(vdEMUL1)
 		vs2 := vd * 2
-		builder.WriteString(i.gWriteTestData(true, vdEMUL1, vdEEW, 0))
+		builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, vdEMUL1, vdEEW, 0, 3))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
 
-		builder.WriteString(i.gWriteTestData(true, c.LMUL1, c.SEW, 2))
+		builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, c.LMUL1, c.SEW, 2, 3))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
 
 		cases := i.testCases(true, c.SEW)

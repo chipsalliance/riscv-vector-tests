@@ -39,7 +39,7 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(vdEMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(false, vs2EMUL1, vs2EEW, 0))
+		builder.WriteString(i.gWriteTestData(false, false, vs2EMUL1, vs2EEW, 0, 1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, vs2EMUL1, vs2EEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")

@@ -39,7 +39,7 @@ func (i *Insn) genCodeVdVs2Fs1Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(vdEMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(true, c.LMUL1, c.SEW, 1))
+		builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, c.LMUL1, c.SEW, 1, 2))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
 
 		cases := i.testCases(true, c.SEW)

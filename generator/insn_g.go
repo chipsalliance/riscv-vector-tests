@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math"
 	"strings"
+
+	"github.com/ksco/riscv-vector-tests/testfloat3"
 )
 
 func (i *Insn) gResultDataAddr() string {
@@ -55,10 +57,21 @@ func (i *Insn) gWriteIndexData(dataLmul1 LMUL, offsetLmul1 LMUL, n int, dataSew 
 }
 
 func (i *Insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
-	return i.gWriteTestData(false, lmul, sew, idx)
+	return i.gWriteTestData(false, false, lmul, sew, idx, 0)
 }
 
-func (i *Insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
+func (i *Insn) gWriteTestData(float bool, testfloat bool, lmul LMUL, sew SEW, idx int, numops int) string {
+	if float && testfloat {
+		testfloat3.InitF32(numops)
+		testfloat3.InitF64(numops)
+	}
+	nextf32 := func() float32 {
+		return testfloat3.GenF32(numops)[idx]
+	}
+	nextf64 := func() float64 {
+		return testfloat3.GenF64(numops)[idx]
+	}
+
 	nBytes := i.vlenb() * int(lmul)
 	cases := i.testCases(float, sew)
 	builder := strings.Builder{}
@@ -71,9 +84,19 @@ func (i *Insn) gWriteTestData(float bool, lmul LMUL, sew SEW, idx int) string {
 		case 16:
 			_ = binary.Write(buf, binary.LittleEndian, convNum[uint16](cases[b][idx]))
 		case 32:
-			_ = binary.Write(buf, binary.LittleEndian, convNum[uint32](cases[b][idx]))
+			// Manual test cases exhausted, use testfloat3 to generate new ones.
+			if float && testfloat && a >= len(cases) {
+				_ = binary.Write(buf, binary.LittleEndian, math.Float32bits(nextf32()))
+			} else {
+				_ = binary.Write(buf, binary.LittleEndian, convNum[uint32](cases[b][idx]))
+			}
 		case 64:
-			_ = binary.Write(buf, binary.LittleEndian, convNum[uint64](cases[b][idx]))
+			// Manual test cases exhausted, use testfloat3 to generate new ones.
+			if float && testfloat && a >= len(cases) {
+				_ = binary.Write(buf, binary.LittleEndian, math.Float64bits(nextf64()))
+			} else {
+				_ = binary.Write(buf, binary.LittleEndian, convNum[uint64](cases[b][idx]))
+			}
 		}
 	}
 	off := i.TestData.Append(buf.Bytes())

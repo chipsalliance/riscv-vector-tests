@@ -54,6 +54,7 @@ func (t *TestData) String() string {
 type Insn struct {
 	Name     string     `toml:"name"`
 	Format   insnFormat `toml:"format"`
+	NoTestfloat3 bool `toml:"notestfloat3"`
 	Vxrm     bool       `toml:"vxrm"`
 	Vxsat    bool       `toml:"vxsat"`
 	Tests    tests      `toml:"tests"`
