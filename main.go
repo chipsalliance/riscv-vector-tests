@@ -31,7 +31,7 @@ var integerF = flag.Bool("integer", false, "only generate integer tests.")
 var patternF = flag.String("pattern", ".*", "regex to filter out tests.")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
-var testfloat3LevelF = flag.Int("testfloat3level", 1, "testfloat3 testing level (1 or 2).")
+var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
 
 func main() {
 	flag.Parse()
