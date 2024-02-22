@@ -13,6 +13,7 @@ OUTPUT_STAGE2_PATCH = $(OUTPUT)/patches/stage2/
 OUTPUT_STAGE1_BIN = $(OUTPUT)/bin/stage1/
 OUTPUT_STAGE2_BIN = $(OUTPUT)/bin/stage2/
 CONFIGS = configs/
+TEST_MODE = self
 
 SPIKE = spike
 PATCHER_SPIKE = build/pspike
@@ -26,6 +27,14 @@ endif
 RISCV_PREFIX = riscv64-unknown-elf-
 RISCV_GCC = $(RISCV_PREFIX)gcc
 RISCV_GCC_OPTS = -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -DENTROPY=0xdeadbeef -DLFSR_BITS=9 -fno-tree-loop-distribute-patterns
+
+ifeq ($(TEST_MODE), self)
+STAGE2_GCC_OPTS =
+else ifeq ($(TEST_MODE), cosim)
+STAGE2_GCC_OPTS = -DCOSIM_TEST_CASE
+else
+$(error "Only self and cosim are supported for TEST_MODE")
+endif
 
 PK =
 
@@ -94,7 +103,7 @@ compile-stage2: generate-stage2
 tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
-	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) $(STAGE2_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 	${SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(PK) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 
 
