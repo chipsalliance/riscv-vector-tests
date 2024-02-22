@@ -1,4 +1,4 @@
-name = "vfmul.vv"
+name = "vfdiv.vv"
 format = "vd,vs2,vs1,vm"
 
 [tests]
