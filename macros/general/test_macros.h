@@ -17,9 +17,15 @@
     #define load lw
 #endif
 
+#ifdef COSIM_TEST_CASE
+// With cosim, only need to load the value to check that it is correct
+#define TEST_CASE( testnum, testreg, correctval, code... ) \
+  li TESTNUM, testnum;					   \
+  code;
+#else
 // Ugly, this currently inlines the correctval in with the code,
 // but this avoids many SLLI/ADDI to generate it from an immediate
-#define TEST_CASE( testnum, testreg, correctval, code... ) \
+#define TEST_CASE( testnum, testreg, correctval, code... )	\
 test_ ## testnum: \
     li  TESTNUM, testnum;				   \
     code;						   \
@@ -32,6 +38,7 @@ test_ ## testnum: \
 test_ ## testnum ## _data:			   \
    .quad MASK_XLEN(correctval);			   \
 test_ ## testnum ## _success:
+#endif
 
 # We use a macro hack to simpify code generation for various numbers
 # of bubble cycles.
