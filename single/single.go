@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 
 	"github.com/ksco/riscv-vector-tests/generator"
 	"github.com/ksco/riscv-vector-tests/testfloat3"
@@ -25,6 +26,7 @@ var xlenF = flag.Int("XLEN", 64, "")
 var outputFileF = flag.String("outputfile", "", "output file name.")
 var configFileF = flag.String("configfile", "", "config file path.")
 var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
+var repeatF = flag.Int("repeat", 1, "repeat same V instruction n times for a better coverage (only valid for float instructions).")
 
 func main() {
 	flag.Parse()
@@ -40,17 +42,25 @@ func main() {
 		fatalIf(errors.New("-testfloat3level must be 1 or 2"))
 	}
 
+	if *repeatF <= 0 {
+		fatalIf(errors.New("-repeat must greater than 0"))
+	}
+
 	testfloat3.SetLevel(*testfloat3LevelF)
 
 	option := generator.Option{
-		VLEN: generator.VLEN(*vlenF),
-		XLEN: generator.XLEN(*xlenF),
+		VLEN:   generator.VLEN(*vlenF),
+		XLEN:   generator.XLEN(*xlenF),
+		Repeat: *repeatF,
 	}
 
 	fp := *configFileF
 	contents, err := os.ReadFile(fp)
 	fatalIf(err)
 
+	if (!strings.HasPrefix(filepath.Base(fp), "vf") && !strings.HasPrefix(filepath.Base(fp), "vmf")) || strings.HasPrefix(filepath.Base(fp), "vfirst") {
+		option.Repeat = 1
+	}
 	insn, err := generator.ReadInsnFromToml(contents, option)
 	fatalIf(err)
 

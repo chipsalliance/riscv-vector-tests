@@ -5,6 +5,7 @@ SPLIT = 10000
 INTEGER = 0
 PATTERN = '.*'
 TESTFLOAT3LEVEL = 2
+REPEAT = 1
 SPIKE_INSTALL = $(RISCV)
 OUTPUT = out/v$(VLEN)x$(XLEN)$(MODE)
 OUTPUT_STAGE1 = $(OUTPUT)/tests/stage1/
@@ -73,7 +74,7 @@ unittest:
 
 generate-stage1: clean-out build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 include Makefrag
 

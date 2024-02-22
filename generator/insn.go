@@ -16,8 +16,9 @@ import (
 type insnFormat string
 
 type Option struct {
-	VLEN VLEN
-	XLEN XLEN
+	VLEN   VLEN
+	XLEN   XLEN
+	Repeat int
 }
 
 const minStride = -1 // Must be negative
@@ -52,14 +53,14 @@ func (t *TestData) String() string {
 }
 
 type Insn struct {
-	Name     string     `toml:"name"`
-	Format   insnFormat `toml:"format"`
-	NoTestfloat3 bool `toml:"notestfloat3"`
-	Vxrm     bool       `toml:"vxrm"`
-	Vxsat    bool       `toml:"vxsat"`
-	Tests    tests      `toml:"tests"`
-	Option   Option     `toml:"-"`
-	TestData *TestData
+	Name         string     `toml:"name"`
+	Format       insnFormat `toml:"format"`
+	NoTestfloat3 bool       `toml:"notestfloat3"`
+	Vxrm         bool       `toml:"vxrm"`
+	Vxsat        bool       `toml:"vxsat"`
+	Tests        tests      `toml:"tests"`
+	Option       Option     `toml:"-"`
+	TestData     *TestData
 }
 
 const (

@@ -32,6 +32,7 @@ var patternF = flag.String("pattern", ".*", "regex to filter out tests.")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
+var repeatF = flag.Int("repeat", 1, "repeat same V instruction n times for a better coverage (only valid for float instructions).")
 
 func main() {
 	flag.Parse()
@@ -47,12 +48,11 @@ func main() {
 		fatalIf(errors.New("-testfloat3level must be 1 or 2"))
 	}
 
-	testfloat3.SetLevel(*testfloat3LevelF)
-
-	option := generator.Option{
-		VLEN: generator.VLEN(*vlenF),
-		XLEN: generator.XLEN(*xlenF),
+	if *repeatF <= 0 {
+		fatalIf(errors.New("-repeat must greater than 0"))
 	}
+
+	testfloat3.SetLevel(*testfloat3LevelF)
 
 	files, err := os.ReadDir(*configsDirF)
 	fatalIf(err)
@@ -63,7 +63,7 @@ func main() {
 	lk := sync.Mutex{}
 	wg := sync.WaitGroup{}
 	for _, file := range files {
-		if *integerF && strings.HasPrefix(file.Name(), "vf") {
+		if *integerF && (strings.HasPrefix(file.Name(), "vf") || strings.HasPrefix(file.Name(), "vmf")) && !strings.HasPrefix(file.Name(), "vfirst") {
 			continue
 		}
 
@@ -87,6 +87,14 @@ func main() {
 			contents, err := os.ReadFile(fp)
 			fatalIf(err)
 
+			option := generator.Option{
+				VLEN:   generator.VLEN(*vlenF),
+				XLEN:   generator.XLEN(*xlenF),
+				Repeat: *repeatF,
+			}
+			if (!strings.HasPrefix(file.Name(), "vf") && !strings.HasPrefix(file.Name(), "vmf")) || strings.HasPrefix(file.Name(), "vfirst") {
+				option.Repeat = 1
+			}
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
 

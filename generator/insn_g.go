@@ -57,11 +57,15 @@ func (i *Insn) gWriteIndexData(dataLmul1 LMUL, offsetLmul1 LMUL, n int, dataSew 
 }
 
 func (i *Insn) gWriteIntegerTestData(lmul LMUL, sew SEW, idx int) string {
-	return i.gWriteTestData(false, false, lmul, sew, idx, 0)
+	return i.gWriteTestData(false, false, false, lmul, sew, idx, 0)
 }
 
-func (i *Insn) gWriteTestData(float bool, testfloat bool, lmul LMUL, sew SEW, idx int, numops int) string {
-	if float && testfloat {
+func (i *Insn) gWriteTestData(float bool, testfloat bool, cont bool, lmul LMUL, sew SEW, idx int, numops int) string {
+	if !float && cont {
+		panic("unreachable")
+	}
+
+	if float && testfloat && !cont {
 		testfloat3.InitF32(numops)
 		testfloat3.InitF64(numops)
 	}
@@ -77,24 +81,27 @@ func (i *Insn) gWriteTestData(float bool, testfloat bool, lmul LMUL, sew SEW, id
 	builder := strings.Builder{}
 	buf := &bytes.Buffer{}
 	for a := 0; a < (nBytes / (int(sew) / 8)); a++ {
-		b := a % len(cases)
 		switch sew {
 		case 8:
+			b := a % len(cases)
 			_ = binary.Write(buf, binary.LittleEndian, convNum[uint8](cases[b][idx]))
 		case 16:
+			b := a % len(cases)
 			_ = binary.Write(buf, binary.LittleEndian, convNum[uint16](cases[b][idx]))
 		case 32:
 			// Manual test cases exhausted, use testfloat3 to generate new ones.
-			if float && testfloat && a >= len(cases) {
+			if (float && testfloat && a >= len(cases)) || cont {
 				_ = binary.Write(buf, binary.LittleEndian, math.Float32bits(nextf32()))
 			} else {
+				b := a % len(cases)
 				_ = binary.Write(buf, binary.LittleEndian, convNum[uint32](cases[b][idx]))
 			}
 		case 64:
 			// Manual test cases exhausted, use testfloat3 to generate new ones.
-			if float && testfloat && a >= len(cases) {
+			if (float && testfloat && a >= len(cases)) || cont {
 				_ = binary.Write(buf, binary.LittleEndian, math.Float64bits(nextf64()))
 			} else {
+				b := a % len(cases)
 				_ = binary.Write(buf, binary.LittleEndian, convNum[uint64](cases[b][idx]))
 			}
 		}

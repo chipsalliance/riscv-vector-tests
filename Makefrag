@@ -251,13 +251,11 @@ tests = \
   vfmacc.vf-2 \
   vfmacc.vf-3 \
   vfmacc.vv-0 \
-  vfmacc.vv-1 \
   vfmadd.vf-0 \
   vfmadd.vf-1 \
   vfmadd.vf-2 \
   vfmadd.vf-3 \
   vfmadd.vv-0 \
-  vfmadd.vv-1 \
   vfmax.vf-0 \
   vfmax.vf-1 \
   vfmax.vf-2 \
@@ -275,13 +273,11 @@ tests = \
   vfmsac.vf-2 \
   vfmsac.vf-3 \
   vfmsac.vv-0 \
-  vfmsac.vv-1 \
   vfmsub.vf-0 \
   vfmsub.vf-1 \
   vfmsub.vf-2 \
   vfmsub.vf-3 \
   vfmsub.vv-0 \
-  vfmsub.vv-1 \
   vfmul.vf-0 \
   vfmul.vf-1 \
   vfmul.vf-2 \
@@ -303,25 +299,21 @@ tests = \
   vfnmacc.vf-2 \
   vfnmacc.vf-3 \
   vfnmacc.vv-0 \
-  vfnmacc.vv-1 \
   vfnmadd.vf-0 \
   vfnmadd.vf-1 \
   vfnmadd.vf-2 \
   vfnmadd.vf-3 \
   vfnmadd.vv-0 \
-  vfnmadd.vv-1 \
   vfnmsac.vf-0 \
   vfnmsac.vf-1 \
   vfnmsac.vf-2 \
   vfnmsac.vf-3 \
   vfnmsac.vv-0 \
-  vfnmsac.vv-1 \
   vfnmsub.vf-0 \
   vfnmsub.vf-1 \
   vfnmsub.vf-2 \
   vfnmsub.vf-3 \
   vfnmsub.vv-0 \
-  vfnmsub.vv-1 \
   vfrdiv.vf-0 \
   vfrdiv.vf-1 \
   vfrdiv.vf-2 \

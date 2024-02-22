@@ -43,28 +43,28 @@ func (i *Insn) genCodeVdVs1Vs2Vm(pos int) []string {
 			vd * 2,
 			vd*2 + int(vs1EMUL1),
 		}
-		builder.WriteString(i.gWriteRandomData(vdEMUL1))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, vdEMUL1, vdEEW, 0, 3))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
+		for r := 0; r < i.Option.Repeat; r += 1 {
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, vdEMUL1, vdEEW, 0, 3))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
 
-		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, vs1EMUL1, vs1EEW, 1, 3))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[1], vs1EMUL1, vs1EEW))
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, vs1EMUL1, vs1EEW, 1, 3))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[1], vs1EMUL1, vs1EEW))
 
-		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, c.LMUL1, c.SEW, 2, 3))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[0], c.LMUL1, c.SEW))
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, c.LMUL1, c.SEW, 2, 3))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[0], c.LMUL1, c.SEW))
 
-		builder.WriteString("# -------------- TEST BEGIN --------------\n")
-		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
+			builder.WriteString("# -------------- TEST BEGIN --------------\n")
+			builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
 
-		builder.WriteString(fmt.Sprintf("%s v%d, v%d, v%d%s\n",
-			i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
-		builder.WriteString("# -------------- TEST END   --------------\n")
+			builder.WriteString(fmt.Sprintf("%s v%d, v%d, v%d%s\n",
+				i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
+			builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gResultDataAddr())
-		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-		builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(i.gResultDataAddr())
+			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
+			builder.WriteString(i.gMagicInsn(vd))
+		}
 
 		res = append(res, builder.String())
 	}

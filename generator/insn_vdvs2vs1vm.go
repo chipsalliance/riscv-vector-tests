@@ -48,25 +48,28 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 			vd * 2,
 			vd*2 + int(vs2EMUL1),
 		}
-		builder.WriteString(i.gWriteRandomData(vdEMUL1))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, c.LMUL1, c.SEW, 0, 2))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[0], c.LMUL1, c.SEW))
+		for r := 0; r < i.Option.Repeat; r += 1 {
+			builder.WriteString(i.gWriteRandomData(vdEMUL1))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, vs2EMUL1, vs2EEW, 1, 2))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[1], vs2EMUL1, vs2EEW))
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, c.LMUL1, c.SEW, 0, 2))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[0], c.LMUL1, c.SEW))
 
-		builder.WriteString("# -------------- TEST BEGIN --------------\n")
-		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, vs2EMUL1, vs2EEW, 1, 2))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vss[1], vs2EMUL1, vs2EEW))
 
-		builder.WriteString(fmt.Sprintf("%s v%d, v%d, v%d%s\n",
-			i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
-		builder.WriteString("# -------------- TEST END   --------------\n")
+			builder.WriteString("# -------------- TEST BEGIN --------------\n")
+			builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
 
-		builder.WriteString(i.gResultDataAddr())
-		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-		builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(fmt.Sprintf("%s v%d, v%d, v%d%s\n",
+				i.Name, vd, vss[1], vss[0], v0t(c.Mask)))
+			builder.WriteString("# -------------- TEST END   --------------\n")
+
+			builder.WriteString(i.gResultDataAddr())
+			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
+			builder.WriteString(i.gMagicInsn(vd))
+		}
 
 		res = append(res, builder.String())
 	}

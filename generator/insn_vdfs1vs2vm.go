@@ -35,31 +35,34 @@ func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 
 		vd := int(vdEMUL1)
 		vs2 := vd * 2
-		builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, vdEMUL1, vdEEW, 0, 3))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
 
-		builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, c.LMUL1, c.SEW, 2, 3))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
+		for r := 0; r < i.Option.Repeat; r += 1 {
+			builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, r != 0, vdEMUL1, vdEEW, 0, 2))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
 
-		cases := i.testCases(true, c.SEW)
-		for a := 0; a < len(cases); a++ {
-			builder.WriteString("# -------------- TEST BEGIN --------------\n")
-			switch c.SEW {
-			case 32:
-				builder.WriteString(fmt.Sprintf("li s0, 0x%x\n", convNum[uint32](cases[a][1])))
-				builder.WriteString(fmt.Sprintf("fmv.w.x f0, s0\n"))
-			case 64:
-				builder.WriteString(fmt.Sprintf("li s0, 0x%x\n", convNum[uint64](cases[a][1])))
-				builder.WriteString(fmt.Sprintf("fmv.d.x f0, s0\n"))
+			builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, r != 0, c.LMUL1, c.SEW, 1, 2))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
+
+			cases := i.testCases(true, c.SEW)
+			for a := 0; a < len(cases); a++ {
+				builder.WriteString("# -------------- TEST BEGIN --------------\n")
+				switch c.SEW {
+				case 32:
+					builder.WriteString(fmt.Sprintf("li s0, 0x%x\n", convNum[uint32](cases[a][1])))
+					builder.WriteString(fmt.Sprintf("fmv.w.x f0, s0\n"))
+				case 64:
+					builder.WriteString(fmt.Sprintf("li s0, 0x%x\n", convNum[uint64](cases[a][1])))
+					builder.WriteString(fmt.Sprintf("fmv.d.x f0, s0\n"))
+				}
+				builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
+				builder.WriteString(fmt.Sprintf("%s v%d, f0, v%d%s\n",
+					i.Name, vd, vs2, v0t(c.Mask)))
+				builder.WriteString("# -------------- TEST END   --------------\n")
+
+				builder.WriteString(i.gResultDataAddr())
+				builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
+				builder.WriteString(i.gMagicInsn(vd))
 			}
-			builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
-			builder.WriteString(fmt.Sprintf("%s v%d, f0, v%d%s\n",
-				i.Name, vd, vs2, v0t(c.Mask)))
-			builder.WriteString("# -------------- TEST END   --------------\n")
-
-			builder.WriteString(i.gResultDataAddr())
-			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-			builder.WriteString(i.gMagicInsn(vd))
 		}
 
 		res = append(res, builder.String())
