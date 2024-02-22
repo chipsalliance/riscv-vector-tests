@@ -7,6 +7,7 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Vm(pos int) []string {
+	float := strings.HasPrefix(i.Name, "vf")
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
 	vdNarrowing := strings.HasPrefix(i.Name, "vfn")
 	vdSize := iff(vdWidening, 2, 1)
@@ -39,7 +40,7 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(vdEMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
 
-		builder.WriteString(i.gWriteTestData(false, false, vs2EMUL1, vs2EEW, 0, 1))
+		builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, vs2EMUL1, vs2EEW, 0, 1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, vs2EMUL1, vs2EEW))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
