@@ -1,10 +1,9 @@
 name: Build and Test
 
-
 on:
   push:
-    branches-ignore:
-      - '*'
+    branches:
+      - main
 
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
