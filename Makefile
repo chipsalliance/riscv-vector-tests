@@ -92,7 +92,7 @@ patching-stage2: build-patcher-spike compile-stage1
 	$(MAKE) $(tests_patch)
 
 $(tests_patch):
-	LD_LIBRARY_PATH=$(SPIKE_INSTALL)/lib ${PATCHER_SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} -m0x800000000:0x1000000 $(PK) ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
+	LD_LIBRARY_PATH=$(SPIKE_INSTALL)/lib ${PATCHER_SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(PK) ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
 
 generate-stage2: patching-stage2
 	build/merger -stage1output ${OUTPUT_STAGE1} -stage2output ${OUTPUT_STAGE2} -stage2patch ${OUTPUT_STAGE2_PATCH}
