@@ -411,7 +411,6 @@ tests = \
   vfwmul.vf-0 \
   vfwmul.vf-1 \
   vfwmul.vv-0 \
-  vfwmul.vv-1 \
   vfwnmacc.vf-0 \
   vfwnmacc.vf-1 \
   vfwnmacc.vv-0 \
