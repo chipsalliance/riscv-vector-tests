@@ -56,12 +56,13 @@ class magic_extension_t : public extension_t {
 };
 
 int main(int argc, char** argv) {
-  std::vector<mem_cfg_t> mem_cfg { mem_cfg_t(0x80000000, 0x10000000) };
+  std::vector<mem_cfg_t> mem_layout{mem_cfg_t(0x80000000, 0x10000000)};
   std::vector<size_t> hartids = {0};
   cfg_t cfg;
   option_parser_t parser;
   parser.option(0, "isa", 1, [&](const char* s){cfg.isa = s;});
   parser.option(0, "varch", 1, [&](const char* s){cfg.varch = s;});
+  cfg.mem_layout = mem_layout;
 
   auto argv1 = parser.parse(argv);
   std::vector<std::string> htif_args(argv1, (const char*const*)argv + argc);
