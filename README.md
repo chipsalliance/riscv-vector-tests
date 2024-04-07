@@ -1,10 +1,12 @@
-# RISC-V Vector Tests
+# RISC-V Vector Tests Generator
 
-RISC-V V-extension 1.0 has been frozen for a while, but there is currently no serious open-source test suite available, and this project tries to fill that void.
+## About
+
+This repository hosts unit tests generator for the RISC-V vector extension.
+
+## How it works
 
 The Spike simulator is known as the RISC-V gold standard simulator, and although we don't know how Spike is tested, it does fully support the V extension. So we added [a custom special instruction](https://github.com/ksco/riscv-vector-tests/blob/6a23892a5ab0cc72f4867cc95186b3528c99c2a0/pspike/pspike.cc#L20) to Spike, and for any test, let it automatically generate a reference result for that test. This way, we generate tests for all instructions almost automatically. Under this framework, all we have to do is write a [simple config file for each instruction](configs/).
-
-For starters, you can directly download the pre-generated tests from Github Action Artifacts.
 
 ## Prerequisite
 
@@ -13,11 +15,15 @@ For starters, you can directly download the pre-generated tests from Github Acti
 3. Golang 1.19+
 4. `riscv-pk` if you need to generate user-mode binaries
 
+For starters, you can directly download the pre-generated tests from Github Action Artifacts.
+
 ## How to use
 
 ```
 make -j$(nproc)
 ```
+
+> If you have problems compiling, please refer to the build steps in [build-and-test.yml](.github/workflows/build-and-test.yml).
 
 After `make`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
 
