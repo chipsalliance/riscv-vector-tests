@@ -1,0 +1,15 @@
+name = "vlseg3e64ff.v"
+format = "vd,(rs1),vm"
+
+[tests]
+base = [
+    [0x0],
+    [0x1],
+    [0x2],
+    [0xf]
+]
+sew64 = [
+    ["0x7fffffffffffffff"],
+    ["0xfffffffffffffff8"],
+    ["0xffffffffffffffff"]
+]

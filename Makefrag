@@ -516,33 +516,61 @@ tests = \
   vlse8.v-1 \
   vlse8.v-2 \
   vlseg2e16.v-0 \
+  vlseg2e16ff.v-0 \
   vlseg2e32.v-0 \
+  vlseg2e32ff.v-0 \
   vlseg2e64.v-0 \
+  vlseg2e64ff.v-0 \
   vlseg2e8.v-0 \
+  vlseg2e8ff.v-0 \
   vlseg3e16.v-0 \
+  vlseg3e16ff.v-0 \
   vlseg3e32.v-0 \
+  vlseg3e32ff.v-0 \
   vlseg3e64.v-0 \
+  vlseg3e64ff.v-0 \
   vlseg3e8.v-0 \
+  vlseg3e8ff.v-0 \
   vlseg4e16.v-0 \
+  vlseg4e16ff.v-0 \
   vlseg4e32.v-0 \
+  vlseg4e32ff.v-0 \
   vlseg4e64.v-0 \
+  vlseg4e64ff.v-0 \
   vlseg4e8.v-0 \
+  vlseg4e8ff.v-0 \
   vlseg5e16.v-0 \
+  vlseg5e16ff.v-0 \
   vlseg5e32.v-0 \
+  vlseg5e32ff.v-0 \
   vlseg5e64.v-0 \
+  vlseg5e64ff.v-0 \
   vlseg5e8.v-0 \
+  vlseg5e8ff.v-0 \
   vlseg6e16.v-0 \
+  vlseg6e16ff.v-0 \
   vlseg6e32.v-0 \
+  vlseg6e32ff.v-0 \
   vlseg6e64.v-0 \
+  vlseg6e64ff.v-0 \
   vlseg6e8.v-0 \
+  vlseg6e8ff.v-0 \
   vlseg7e16.v-0 \
+  vlseg7e16ff.v-0 \
   vlseg7e32.v-0 \
+  vlseg7e32ff.v-0 \
   vlseg7e64.v-0 \
+  vlseg7e64ff.v-0 \
   vlseg7e8.v-0 \
+  vlseg7e8ff.v-0 \
   vlseg8e16.v-0 \
+  vlseg8e16ff.v-0 \
   vlseg8e32.v-0 \
+  vlseg8e32ff.v-0 \
   vlseg8e64.v-0 \
+  vlseg8e64ff.v-0 \
   vlseg8e8.v-0 \
+  vlseg8e8ff.v-0 \
   vlsseg2e16.v-0 \
   vlsseg2e16.v-1 \
   vlsseg2e32.v-0 \

@@ -97,6 +97,9 @@ func main() {
 			}
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
+			if (insn.Name != strings.Replace(file.Name(), ".toml", "", -1)) {
+				fatalIf(errors.New("filename and instruction name unmatched"))
+			}
 
 			for idx, testContent := range insn.Generate(*splitF) {
 				asmFilename := strings.TrimSuffix(name, ".toml") + "-" + strconv.Itoa(idx)
