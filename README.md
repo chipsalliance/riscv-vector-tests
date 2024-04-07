@@ -62,3 +62,5 @@ This repository also provides a nix derivation with the following output provide
 This project uses third-party projects, and the licenses of these projects are attached to the corresponding directories.
 
 The code for this project is distributed under the MIT license.
+
+The “RISC-V” trade name is a registered trademark of RISC-V International.
