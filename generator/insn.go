@@ -452,7 +452,7 @@ func (c *combination) initialize() string {
 # Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v
 
 # Zero all vector registers
-vsetvli t0, x0, e8, m8, ta, ma
+vsetvli t0, x0, e8,m8,tu,mu
 vmv.v.i v0, 0x0
 vmv.v.i v8, 0x0
 vmv.v.i v16, 0x0
