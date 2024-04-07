@@ -6,15 +6,6 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 
 For starters, you can directly download the pre-generated tests from Github Action Artifacts.
 
-## Plan
-
-- [ ] Add check mechanism for CSR register
-- [ ] Add V register coverage test
-- [ ] Add test coverage statistics
-- [ ] Add negative tests
-- [ ] Add tests for sub-extensions (e.g. Zvamo, Zvfh).
-- [ ] Support Zve64f.
-
 ## Prerequisite
 
 1. `riscv64-unknown-elf-gcc` with RVV 1.0 support
@@ -52,6 +43,13 @@ This repository also provides a nix derivation with the following output provide
 - `${riscv-vector-test}/bin/*`: Generator binaries
 - `${riscv-vector-test}/include/*`: Necessary headers for runtime usage
 - `${riscv-vector-test}/configs/*`: Necessary runtime configs
+
+## TODOs
+
+- [ ] Add tests for sub-extensions (e.g. Zvamo, Zvfh)
+- [ ] Support Zve64f and Zve32d
+- [ ] Tail/mask agnostic support
+- [ ] Fault-only-first tests
 
 ## License
 
