@@ -1278,6 +1278,7 @@ tests = \
   vsetivli-0 \
   vsetvl-0 \
   vsetvli-0 \
+  vsetvli-1 \
   vsext.vf2-0 \
   vsext.vf2-1 \
   vsext.vf4-0 \
