@@ -310,6 +310,14 @@ func (i *Insn) genMergedCodeCombinations(splitPerLines int) ([]string, []string)
 				if len(str) != 0 {
 					buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
+
+# Zero all vector registers
+vsetvli t0, x0, e8,m8,tu,mu
+vmv.v.i v0, 0x0
+vmv.v.i v8, 0x0
+vmv.v.i v16, 0x0
+vmv.v.i v24, 0x0
+
 %s
   TEST_CASE(2, x0, 0x0)
   TEST_PASSFAIL
@@ -450,13 +458,6 @@ func (c *combination) initialize() string {
 	// write comments, set vxrm, clear vxsat if necessary
 	str := fmt.Sprintf(`
 # Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v
-
-# Zero all vector registers
-vsetvli t0, x0, e8,m8,tu,mu
-vmv.v.i v0, 0x0
-vmv.v.i v8, 0x0
-vmv.v.i v16, 0x0
-vmv.v.i v24, 0x0
 
 # Initialize vxrm CSR
 csrwi vxrm, %d # %s
