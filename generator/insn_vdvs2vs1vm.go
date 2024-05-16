@@ -49,6 +49,12 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 			vd*2 + int(vs2EMUL1),
 		}
 
+		if vdEMUL1 == vs2EMUL1 && !strings.HasPrefix(i.Name, "vrgatherei16") {
+			vd1, vs1, vs2 := getVRegs(vdEMUL1, false, i.Name)
+			vd = vd1
+			vss = []int{vs1, vs2}
+		}
+
 		for r := 0; r < i.Option.Repeat; r += 1 {
 			builder.WriteString(i.gWriteRandomData(vdEMUL1))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
