@@ -27,18 +27,7 @@ make -j$(nproc)
 
 After `make`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
 
-Options:
-
-- `VLEN`, default is 256
-- `XLEN`, default is 64, we do not support specifying ELEN yet, ELEN is consistent with XLEN
-- `MODE`, default is `machine`, can be `machine`, `virtual` or `user`
-- `INTEGER`, default is 0, set to 1 if you don't want float tests (i.e. for Zve32x or Zve64x)
-- `PATTERN`, default is `.*`, set to a valid regex to generate the tests of your interests (e.g. `PATTERN='^v[ls].+\.v$'` to generate load/store tests)
-- `TESTFLOAT3LEVEL`, default is 2, must be one of 1 or 2, testing level for testfloat3 generated cases.
-- `TEST_MODE`, default is `self`, set to `cosim` if you want to generate faster tests without self-verification (to be used with co-simulators).
-- `REPEAT`, default is `1`, set to greater value to repeat the same V instruction n times for a better coverage (only valid for float instructions).
-
-For example, to generate `isa=rv32gcv varch=vlen:128,elen:32 mode=machine` tests, use `make -e VLEN=128 XLEN=32 MODE=machine -j$(nproc)`.
+For more advanced options, run `make help`.
 
 > Note: [single/single.go](single/single.go) generates tests directly from stage 1, suitable for targets with co-simulators (or simply use `TEST_MODE=cosim` if you're lazy).
 
