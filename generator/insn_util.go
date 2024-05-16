@@ -2,7 +2,9 @@ package generator
 
 import (
 	"fmt"
+	"hash/fnv"
 	"log"
+	"math/rand"
 	"regexp"
 	"strconv"
 )
@@ -151,4 +153,30 @@ func ma(mask bool) string {
 		return "ma"
 	}
 	return "mu"
+}
+
+
+func hash(s string) uint32 {
+	h := fnv.New32a()
+	h.Write([]byte(s))
+	return h.Sum32()
+}
+
+func getVRegs(lmul1 LMUL, v0 bool, seed string) (int, int, int) {
+	if lmul1 < LMUL(1) {
+		log.Fatalln("unreachable")
+	}
+
+	availableOptions := make([]int, 0)
+	for i := iff(v0, 0, int(lmul1)); i < 32; i += int(lmul1) {
+		availableOptions = append(availableOptions, i)
+	}
+
+	rand.Seed(int64(len(availableOptions)) + int64(hash(seed)))
+
+	rand.Shuffle(len(availableOptions), func(i, j int) {
+		availableOptions[i], availableOptions[j] = availableOptions[j], availableOptions[i]
+	})
+
+	return availableOptions[0], availableOptions[1], availableOptions[2]
 }

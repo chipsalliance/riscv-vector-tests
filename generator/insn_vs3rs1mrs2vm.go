@@ -23,8 +23,8 @@ func (i *Insn) genCodeVs3Rs1mRs2Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-		lmul1 := LMUL(math.Max(float64(c.LMUL)*float64(nfields), 1))
-		vs3 := int(lmul1)
+		lmul1 := LMUL(math.Max(float64(c.LMUL1)*float64(nfields), 1))
+		vs3, _, _ := getVRegs(lmul1, false, i.Name)
 		for _, s := range []int{minStride, 0, 1, maxStride} {
 			stride := s * int(c.SEW) / 8
 			builder.WriteString(i.gWriteIntegerTestData(lmul1, c.SEW, 0))
@@ -46,7 +46,7 @@ func (i *Insn) genCodeVs3Rs1mRs2Vm(pos int) []string {
 			builder.WriteString("mv a4, a0\n")
 			for a := 0; a < strides; a++ {
 				builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, c.SEW))
-				builder.WriteString(i.gMagicInsn(vs3))
+				builder.WriteString(i.gMagicInsn(vs3, lmul1))
 				builder.WriteString(fmt.Sprintf("li a5, %d\n", i.vlenb()*int(c.LMUL1)))
 				builder.WriteString(fmt.Sprintf("add a4, a4, a5\n"))
 				builder.WriteString("mv a0, a4\n")

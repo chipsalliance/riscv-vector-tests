@@ -23,8 +23,8 @@ func (i *Insn) genCodeVdRs1mVm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-		lmul1 := LMUL(math.Max(float64(c.LMUL)*float64(nfields), 1))
-		vd := int(lmul1)
+		lmul1 := LMUL(math.Max(float64(c.LMUL1)*float64(nfields), 1))
+		vd, _, _ := getVRegs(lmul1, false, i.Name)
 		builder.WriteString(i.gWriteRandomData(lmul1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, lmul1, c.SEW))
 		builder.WriteString(i.gWriteIntegerTestData(lmul1, c.SEW, 0))
@@ -36,7 +36,7 @@ func (i *Insn) genCodeVdRs1mVm(pos int) []string {
 
 		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, lmul1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gMagicInsn(vd, lmul1))
 
 		res = append(res, builder.String())
 	}

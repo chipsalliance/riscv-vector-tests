@@ -58,7 +58,7 @@ func main() {
 		contents := r.Split(string(content), -1)
 
 		if len(contents) != len(patches) {
-			fatalIf(errors.New("wrong patch"))
+			fatalIf(fmt.Errorf("wrong patch generated for file %s, expected %d, got %d", file.Name(), len(contents), len(patches)))
 		}
 
 		builder := strings.Builder{}

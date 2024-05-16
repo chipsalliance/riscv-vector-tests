@@ -151,7 +151,7 @@ func (i *Insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
 	return builder.String()
 }
 
-func (i *Insn) gMagicInsn(group int) string {
+func (i *Insn) gMagicInsn(group int, lmul1 LMUL) string {
 
 	// opcode
 	insn := 0b0001011
@@ -163,6 +163,8 @@ func (i *Insn) gMagicInsn(group int) string {
 	if i.Vxsat {
 		insn += 1 << 20
 	}
+	// rs2[4:1] for EMUL
+	insn += int(lmul1) << 21
 
 	return fmt.Sprintf(".word 0x%x\n", insn)
 }

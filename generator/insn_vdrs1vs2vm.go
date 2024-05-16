@@ -33,8 +33,7 @@ func (i *Insn) genCodeVdRs1Vs2Vm(pos int) []string {
 			continue
 		}
 
-		vd := int(vdEMUL1)
-		vs2 := vd * 2
+		vd, vs2, _ := getVRegs(vdEMUL1, false, i.Name)
 		builder.WriteString(i.gWriteIntegerTestData(vdEMUL1, vdEEW, 0))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
 
@@ -61,7 +60,7 @@ func (i *Insn) genCodeVdRs1Vs2Vm(pos int) []string {
 
 			builder.WriteString(i.gResultDataAddr())
 			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-			builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(i.gMagicInsn(vd, vdEMUL1))
 		}
 
 		res = append(res, builder.String())

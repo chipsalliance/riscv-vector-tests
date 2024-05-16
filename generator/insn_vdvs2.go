@@ -22,8 +22,7 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
 
-		vd := int(c.LMUL)
-		vs2 := 2 * int(c.LMUL)
+		vd, vs2, _ := getVRegs(c.LMUL, true, i.Name)
 		builder.WriteString(i.gWriteRandomData(c.LMUL * 2))
 
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL, c.SEW))
@@ -39,7 +38,7 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 
 		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gMagicInsn(vd, c.LMUL))
 
 		res = append(res, builder.String())
 

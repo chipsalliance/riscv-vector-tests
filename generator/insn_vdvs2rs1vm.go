@@ -65,7 +65,7 @@ func (i *Insn) genCodeVdVs2Rs1Vm(pos int) []string {
 
 			builder.WriteString(i.gResultDataAddr())
 			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-			builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(i.gMagicInsn(vd, vdEMUL1))
 		}
 
 		res = append(res, builder.String())

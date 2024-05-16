@@ -34,7 +34,7 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
 			builder.WriteString(i.gWriteRandomData(LMUL(1)))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-			lmul1 := LMUL(math.Max(float64(c.LMUL)*float64(nfields), 1))
+			lmul1 := LMUL(math.Max(float64(c.LMUL1)*float64(nfields), 1))
 			vs3 := int(lmul1)
 			vs1 := 2 * int(math.Max(emul, float64(int(c.LMUL1)*nfields)))
 			builder.WriteString(i.gWriteIntegerTestData(lmul1, sew, 0))
@@ -49,7 +49,7 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
 			builder.WriteString("# -------------- TEST END   --------------\n")
 
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, sew))
-			builder.WriteString(i.gMagicInsn(vs3))
+			builder.WriteString(i.gMagicInsn(vs3, lmul1))
 		}
 		res = append(res, builder.String())
 	}
