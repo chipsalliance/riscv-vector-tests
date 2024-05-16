@@ -22,7 +22,6 @@ static reg_t magic_insn(processor_t* p, insn_t insn, reg_t pc) {
   int group = insn.rs1();
   bool vxsat = insn.rs2() & 1;
   int lmul1 = insn.rs2() >> 1;
-  std::cout << "# lmul1: " << lmul1 << " reg group: " << group << std::endl;
   for (int reg = group; reg < group + lmul1; reg++) {
     for (int i = 0; i < p->VU.VLEN / p->get_xlen(); i++) {
       if (p->get_xlen() == 64) {
