@@ -20,12 +20,12 @@ For starters, you can directly download the pre-generated tests from Github Acti
 ## How to use
 
 ```
-make -j$(nproc)
+make all -j$(nproc)
 ```
 
 > If you have problems compiling, please refer to the build steps in [build-and-test.yml](.github/workflows/build-and-test.yml).
 
-After `make`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
+After `make all`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
 
 For more advanced options, run `make help`.
 
