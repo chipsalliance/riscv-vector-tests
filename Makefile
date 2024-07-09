@@ -55,7 +55,7 @@ CONFIGS = configs/
 
 SPIKE = spike
 PATCHER_SPIKE = build/pspike
-MARCH = rv${XLEN}gcv
+MARCH = rv${XLEN}gcv_zvbb
 MABI = lp64d
 
 ifeq ($(XLEN), 32)
