@@ -37,7 +37,7 @@ jobs:
       - name: Install Toolchain
         if: steps.cache-spike.outputs.cache-hit != 'true'
         run: |
-          wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.07.07/riscv64-elf-ubuntu-22.04-gcc-nightly-2023.07.07-nightly.tar.gz | tar -xzf -
+          wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2024.04.12/riscv64-elf-ubuntu-22.04-gcc-nightly-2024.04.12-nightly.tar.gz | tar -xzf -
 
       - name: Build Spike
         if: steps.cache-spike.outputs.cache-hit != 'true'
