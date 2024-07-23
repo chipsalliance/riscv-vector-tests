@@ -1,6 +1,6 @@
 Copied from https://github.com/ucb-bar/berkeley-testfloat-3 to fit our usage.
 
-## LINCESE
+## LICENSE
 
 License for Berkeley TestFloat Release 3e
 
