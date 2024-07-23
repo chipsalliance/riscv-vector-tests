@@ -7,12 +7,14 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2UimmVm(pos int) []string {
+	vdWidening := strings.HasPrefix(i.Name, "vw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wi")
 	sews := iff(vs2Widening, allSEWs[:len(allSEWs)-2], allSEWs[:len(allSEWs)-1])
 	vs2Size := iff(vs2Widening, 2, 1)
+	vdSize := iff(vdWidening, 2, 1)
 
 	combinations := i.combinations(
-		iff(vs2Widening, wideningMULs, allLMULs),
+		iff(vdWidening || vs2Widening, wideningMULs, allLMULs),
 		sews,
 		[]bool{false, true},
 		i.vxrms(),
@@ -26,11 +28,18 @@ func (i *Insn) genCodeVdVs2UimmVm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
+		vdEMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vdSize), 1))
 		vs2EMUL1 := LMUL(math.Max(float64(int(c.LMUL)*vs2Size), 1))
+		vdEEW := c.SEW * SEW(vdSize)
 		vs2EEW := c.SEW * SEW(vs2Size)
+		if vdEEW > SEW(i.Option.XLEN) || vs2EEW > SEW(i.Option.XLEN) {
+			res = append(res, "")
+			continue
+		}
 
-		vd := int(c.LMUL1)
-		vs2 := 2*int(c.LMUL1) + int(vs2EMUL1)
+		vd := int(vdEMUL1)
+		vs2 := vd * 2
+
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, SEW(8)))
 

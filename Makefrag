@@ -122,6 +122,17 @@ tests = \
   vand.vx-5 \
   vand.vx-6 \
   vand.vx-7 \
+  vandn.vv-0 \
+  vandn.vv-1 \
+  vandn.vv-2 \
+  vandn.vx-0 \
+  vandn.vx-1 \
+  vandn.vx-2 \
+  vandn.vx-3 \
+  vandn.vx-4 \
+  vandn.vx-5 \
+  vandn.vx-6 \
+  vandn.vx-7 \
   vasub.vv-0 \
   vasub.vv-1 \
   vasub.vv-2 \
@@ -202,8 +213,13 @@ tests = \
   vasubu.vx-7 \
   vasubu.vx-8 \
   vasubu.vx-9 \
+  vbrev.v-0 \
+  vbrev8.v-0 \
+  vclz.v-0 \
   vcompress.vm-0 \
   vcpop.m-0 \
+  vcpop.v-0 \
+  vctz.v-0 \
   vdiv.vv-0 \
   vdiv.vv-1 \
   vdiv.vv-2 \
@@ -1123,6 +1139,7 @@ tests = \
   vremu.vx-6 \
   vremu.vx-7 \
   vremu.vx-8 \
+  vrev8.v-0 \
   vrgather.vi-0 \
   vrgather.vi-1 \
   vrgather.vi-2 \
@@ -1142,6 +1159,33 @@ tests = \
   vrgatherei16.vv-0 \
   vrgatherei16.vv-1 \
   vrgatherei16.vv-2 \
+  vrol.vv-0 \
+  vrol.vv-1 \
+  vrol.vv-2 \
+  vrol.vx-0 \
+  vrol.vx-1 \
+  vrol.vx-2 \
+  vrol.vx-3 \
+  vrol.vx-4 \
+  vrol.vx-5 \
+  vrol.vx-6 \
+  vrol.vx-7 \
+  vror.vi-0 \
+  vror.vi-1 \
+  vror.vi-2 \
+  vror.vi-3 \
+  vror.vi-4 \
+  vror.vv-0 \
+  vror.vv-1 \
+  vror.vv-2 \
+  vror.vx-0 \
+  vror.vx-1 \
+  vror.vx-2 \
+  vror.vx-3 \
+  vror.vx-4 \
+  vror.vx-5 \
+  vror.vx-6 \
+  vror.vx-7 \
   vrsub.vi-0 \
   vrsub.vi-1 \
   vrsub.vi-2 \
@@ -1782,6 +1826,17 @@ tests = \
   vwredsum.vs-1 \
   vwredsumu.vs-0 \
   vwredsumu.vs-1 \
+  vwsll.vi-0 \
+  vwsll.vi-1 \
+  vwsll.vi-2 \
+  vwsll.vi-3 \
+  vwsll.vv-0 \
+  vwsll.vv-1 \
+  vwsll.vx-0 \
+  vwsll.vx-1 \
+  vwsll.vx-2 \
+  vwsll.vx-3 \
+  vwsll.vx-4 \
   vwsub.vv-0 \
   vwsub.vv-1 \
   vwsub.vx-0 \
