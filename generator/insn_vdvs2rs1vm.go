@@ -9,12 +9,15 @@ import (
 func (i *Insn) genCodeVdVs2Rs1Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wx")
+	sew64_insn := i.Name == "vclmul.vx" || i.Name == "vclmulh.vx"
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
 
 	sews := iff(vdWidening || vs2Widening, allSEWs[:len(allSEWs)-1], allSEWs)
+	sews = iff(sew64_insn, []SEW{64}, sews)
+
 	combinations := i.combinations(
-		iff(vdWidening || vs2Widening, wideningMULs, allLMULs),
+		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64_insn, []LMUL{1, 2, 4, 8}, allLMULs)),
 		sews,
 		[]bool{false, true},
 		i.vxrms(),
