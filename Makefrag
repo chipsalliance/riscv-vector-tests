@@ -215,6 +215,12 @@ tests = \
   vasubu.vx-9 \
   vbrev.v-0 \
   vbrev8.v-0 \
+  vclmul.vv-0 \
+  vclmul.vx-0 \
+  vclmul.vx-1 \
+  vclmulh.vv-0 \
+  vclmulh.vx-0 \
+  vclmulh.vx-1 \
   vclz.v-0 \
   vcompress.vm-0 \
   vcpop.m-0 \
