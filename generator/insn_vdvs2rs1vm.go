@@ -9,7 +9,7 @@ import (
 func (i *Insn) genCodeVdVs2Rs1Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wx")
-	sew64_insn := i.Name == "vclmul.vx" || i.Name == "vclmulh.vx"
+	sew64Only := strings.HasSuffix(i.Name, "vclmul")
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
 
