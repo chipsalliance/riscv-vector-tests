@@ -8,7 +8,7 @@ import (
 
 func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 	float := strings.HasPrefix(i.Name, "vf") || strings.HasPrefix(i.Name, "vmf")
-	sew64_insn := i.Name == "vclmul.vv" || i.Name == "vclmulh.vv"
+	sew64Only := strings.HasPrefix(i.Name, "vclmul")	
 	vdWidening := strings.HasPrefix(i.Name, "vw") || strings.HasPrefix(i.Name, "vfw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wv")
 	vdSize := iff(vdWidening, 2, 1)
@@ -16,9 +16,9 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 
 	sews := iff(float, floatSEWs, allSEWs)
 	sews = iff(vdWidening || vs2Widening, sews[:len(sews)-1], sews)
-    sews = iff(sew64_insn, []SEW{64}, sews)
+    sews = iff(sew64Only, []SEW{64}, sews)
 	combinations := i.combinations(
-		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64_insn, []LMUL{1, 2, 4, 8}, allLMULs)),
+		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64Only, []LMUL{1, 2, 4, 8}, allLMULs)),
 		sews,
 		[]bool{false, true},
 		i.vxrms(),
