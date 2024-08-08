@@ -62,7 +62,6 @@ int main(int argc, char** argv) {
   cfg_t cfg;
   option_parser_t parser;
   parser.option(0, "isa", 1, [&](const char* s){cfg.isa = s;});
-  parser.option(0, "varch", 1, [&](const char* s){cfg.varch = s;});
   cfg.mem_layout = mem_layout;
 
   auto argv1 = parser.parse(argv);
@@ -80,10 +79,10 @@ int main(int argc, char** argv) {
     .support_impebreak = true
   };
   std::vector<std::pair<reg_t, abstract_mem_t*>> mems = make_mems(cfg.mem_layout);
-  std::vector<device_factory_t*> plugin_devices;
+  std::vector<device_factory_sargs_t> plugin_device_factories;
   sim_t sim(&cfg, false,
             mems,
-            plugin_devices,
+            plugin_device_factories,
             htif_args,
             dm_config,
             nullptr,

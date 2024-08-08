@@ -4,7 +4,7 @@
 ##
 ##Usage: make all -j$(nproc) --environment-overrides [OPTIONS]
 ##
-##Example: to generate isa=rv32gcv varch=vlen:128,elen:32 mode=machine tests, use:
+##Example: to generate isa=rv32gcv_zvl128b_zve32f mode=machine tests, use:
 ## make all --environment-overrides VLEN=128 XLEN=32 MODE=machine -j$(nproc)
 ##
 ##Subcommands:
@@ -60,6 +60,9 @@ MABI = lp64d
 
 ifeq ($(XLEN), 32)
 MABI = ilp32f
+VARCH = zvl${VLEN}b_zve32f
+else
+VARCH = zvl${VLEN}b_zve64d
 endif
 
 RISCV_PREFIX = riscv64-unknown-elf-
@@ -127,7 +130,7 @@ patching-stage2: build-patcher-spike compile-stage1
 	$(MAKE) $(tests_patch)
 
 $(tests_patch):
-	LD_LIBRARY_PATH=$(SPIKE_INSTALL)/lib ${PATCHER_SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(PK) ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
+	LD_LIBRARY_PATH=$(SPIKE_INSTALL)/lib ${PATCHER_SPIKE} --isa=${MARCH}_${VARCH} $(PK) ${OUTPUT_STAGE1_BIN}$(shell basename $@ .patch) > ${OUTPUT_STAGE2_PATCH}$@
 
 generate-stage2: patching-stage2
 	build/merger -stage1output ${OUTPUT_STAGE1} -stage2output ${OUTPUT_STAGE2} -stage2patch ${OUTPUT_STAGE2_PATCH}
@@ -140,7 +143,7 @@ tests_stage2 = $(addsuffix .stage2, $(tests))
 
 $(tests_stage2):
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) $(STAGE2_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-	${SPIKE} --isa=${MARCH} --varch=vlen:${VLEN},elen:${XLEN} $(PK) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
+	${SPIKE} --isa=${MARCH}_${VARCH} $(PK) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 
 
 clean-out:
