@@ -55,6 +55,7 @@ jobs:
         run: |
           export PATH="${{ github.workspace }}/riscv/bin:$PATH"
           export RISCV="${{ github.workspace }}/riscv"
+          make generate-stage1
           make all -j4
 
       - name: Archive artifacts
