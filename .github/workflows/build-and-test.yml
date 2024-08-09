@@ -44,7 +44,7 @@ jobs:
         run: |
           git clone https://github.com/riscv-software-src/riscv-isa-sim.git
           cd riscv-isa-sim
-          git reset --hard 3a53c80ade3336b1d46c9db3a6c6be8311c32cc5
+          git reset --hard 91793ed7d964aa0031c5a9a31fa05ec3d11b3b0f
           mkdir build
           cd build
           ../configure --prefix=${{ github.workspace }}/riscv
@@ -55,6 +55,7 @@ jobs:
         run: |
           export PATH="${{ github.workspace }}/riscv/bin:$PATH"
           export RISCV="${{ github.workspace }}/riscv"
+          make generate-stage1
           make all -j4
 
       - name: Archive artifacts

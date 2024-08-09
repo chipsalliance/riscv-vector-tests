@@ -84,6 +84,9 @@ func main() {
 				return
 			}
 
+			name = strings.TrimSuffix(name, ".toml")
+			name = strings.Replace(name, ".", "_", -1)
+
 			contents, err := os.ReadFile(fp)
 			fatalIf(err)
 
@@ -102,7 +105,7 @@ func main() {
 			}
 
 			for idx, testContent := range insn.Generate(*splitF) {
-				asmFilename := strings.TrimSuffix(name, ".toml") + "-" + strconv.Itoa(idx)
+				asmFilename := name + "-" + strconv.Itoa(idx)
 				writeTo(*stage1OutputDirF, asmFilename+".S", testContent)
 				lk.Lock()
 				makefrag = append(makefrag, fmt.Sprintf("  %s \\\n", asmFilename))
