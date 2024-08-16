@@ -9,16 +9,28 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2(pos int) []string {
-	s := regexp.MustCompile(`vmv(\d)r.v`)
-	nr, err := strconv.Atoi(s.FindStringSubmatch(i.Name)[1])
-	if err != nil {
-		log.Fatal("unreachable")
+	zvkg_insn := strings.HasPrefix(i.Name, "vg")
+	sew32_only := iff(zvkg_insn, []SEW{32}, allSEWs)
+
+	var nr int
+	var err error
+
+	if match := regexp.MustCompile(`vmv(\d+)r.v`).FindStringSubmatch(i.Name); len(match) > 1 {
+		nr, err = strconv.Atoi(match[1])
+		if err != nil {
+			log.Fatalf("Error parsing register number: %v", err)
+		}
 	}
 
-	combinations := i.combinations([]LMUL{LMUL(nr)}, allSEWs, []bool{false}, i.vxrms())
+
+	combinations := i.combinations(iff(zvkg_insn, []LMUL{1, 2, 4, 8}, []LMUL{LMUL(nr)}), iff(zvkg_insn, sew32_only, allSEWs), []bool{false}, i.vxrms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
+		if zvkg_insn && c.Vl % 4 != 0 {
+			c.Vl = (c.Vl + 3) / 4 * 4 
+		}
+
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
 
@@ -32,8 +44,7 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
-		builder.WriteString(fmt.Sprintf("%s v%d, v%d\n",
-			i.Name, vd, vs2))
+		builder.WriteString(fmt.Sprintf("%s v%d, v%d\n", i.Name, vd, vs2))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
 		builder.WriteString(i.gResultDataAddr())
@@ -41,7 +52,6 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		builder.WriteString(i.gMagicInsn(vd, c.LMUL))
 
 		res = append(res, builder.String())
-
 	}
 
 	return res

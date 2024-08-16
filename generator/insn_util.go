@@ -83,6 +83,10 @@ func (l LMUL) String() string {
 
 type VLEN int
 
+func (v VLEN) Zvkg_validVLEN() bool{
+	return 128 <= v && v <= 4096 && v&(v-1) == 0
+}
+
 func (v VLEN) Valid() bool {
 	return 64 <= v && v <= 4096 && v&(v-1) == 0
 }

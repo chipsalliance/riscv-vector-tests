@@ -6,9 +6,19 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
-	combinations := i.combinations(allLMULs, allSEWs, []bool{false}, i.vxrms())
+	zvkg_insn := strings.HasPrefix(i.Name, "vg")
+	sew32_only := iff(zvkg_insn, []SEW{32}, allSEWs)
+	combinations := i.combinations(
+		iff(zvkg_insn, []LMUL{1, 2, 4, 8}, allLMULs),
+		iff(zvkg_insn, sew32_only, allSEWs),
+		[]bool{false},
+		i.vxrms(),
+	)
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
+		if zvkg_insn && c.Vl % 4 != 0 {
+			c.Vl = (c.Vl + 3) / 4 * 4 
+		}
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
 
