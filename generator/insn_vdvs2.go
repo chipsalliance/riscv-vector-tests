@@ -22,8 +22,9 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		}
 	}
 
+	vlen := i.Option.VLEN
 
-	combinations := i.combinations(iff(zvkg_insn, []LMUL{1, 2, 4, 8}, []LMUL{LMUL(nr)}), iff(zvkg_insn, sew32_only, allSEWs), []bool{false}, i.vxrms())
+	combinations := i.combinations(iff(zvkg_insn, ZvkgAllowedLMULs(vlen), []LMUL{LMUL(nr)}), iff(zvkg_insn, sew32_only, allSEWs), []bool{false}, i.vxrms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
@@ -33,10 +34,16 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
+		
+		var vd, vs2 int
+		if (zvkg_insn){
+			vd = int(c.LMUL1)
+			vs2 = 3 * int(c.LMUL1)
+		}else{
+			vd, vs2, _ = getVRegs(c.LMUL, true, i.Name)
+		}
 
-		vd, vs2, _ := getVRegs(c.LMUL, true, i.Name)
 		builder.WriteString(i.gWriteRandomData(c.LMUL * 2))
-
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL, c.SEW))
 		builder.WriteString(fmt.Sprintf("li t1, %d\n", int(c.LMUL)*i.vlenb()))
 		builder.WriteString(fmt.Sprintf("add a0, a0, t1\n"))

@@ -8,8 +8,9 @@ import (
 func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
 	zvkg_insn := strings.HasPrefix(i.Name, "vg")
 	sew32_only := iff(zvkg_insn, []SEW{32}, allSEWs)
+	vlen := i.Option.VLEN
 	combinations := i.combinations(
-		iff(zvkg_insn, []LMUL{1, 2, 4, 8}, allLMULs),
+		iff(zvkg_insn, ZvkgAllowedLMULs(vlen), allLMULs),
 		iff(zvkg_insn, sew32_only, allSEWs),
 		[]bool{false},
 		i.vxrms(),

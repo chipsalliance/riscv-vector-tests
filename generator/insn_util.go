@@ -81,11 +81,22 @@ func (l LMUL) String() string {
 	return fmt.Sprintf("m%d", int(l))
 }
 
-type VLEN int
-
-func (v VLEN) Zvkg_validVLEN() bool{
-	return 128 <= v && v <= 4096 && v&(v-1) == 0
+func ZvkgAllowedLMULs(vlen VLEN) []LMUL {
+	switch vlen {
+	case 64:
+		return []LMUL{2, 4, 8}
+	case 128:
+		return []LMUL{1, 2, 4, 8}
+	case 256:
+		return []LMUL{LMUL(1) / 2, 1, 2, 4, 8}
+	case 512:
+		return []LMUL{LMUL(1) / 4, LMUL(1) / 2, 1, 2, 4, 8}
+	default:
+		return allLMULs
+	}
 }
+
+type VLEN int
 
 func (v VLEN) Valid() bool {
 	return 64 <= v && v <= 4096 && v&(v-1) == 0

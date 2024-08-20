@@ -101,14 +101,6 @@ func main() {
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
 
-			if strings.HasPrefix(insn.Name, "vg") && !option.VLEN.Zvkg_validVLEN() {
-                lk.Lock()
-                fmt.Printf("\033[0;1;31mskipping:\033[0m %s, VLEN is not greater than or equal to 128\n", name)
-                lk.Unlock()
-                wg.Done()
-                return
-            }
-
 			if insn.Name != strings.Replace(file.Name(), ".toml", "", -1) {
 				fatalIf(errors.New("filename and instruction name unmatched"))
 			}
