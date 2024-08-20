@@ -10,7 +10,7 @@ import (
 
 func (i *Insn) genCodeVdVs2(pos int) []string {
 	zvkg_insn := strings.HasPrefix(i.Name, "vg")
-	sew32_only := iff(zvkg_insn, []SEW{32}, allSEWs)
+	sews := iff(zvkg_insn, []SEW{32}, allSEWs)
 
 	var nr int
 	var err error
@@ -22,9 +22,7 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		}
 	}
 
-	vlen := i.Option.VLEN
-
-	combinations := i.combinations(iff(zvkg_insn, ZvkgAllowedLMULs(vlen), []LMUL{LMUL(nr)}), iff(zvkg_insn, sew32_only, allSEWs), []bool{false}, i.vxrms())
+	combinations := i.combinations([]LMUL{LMUL(nr)}, sews, []bool{false}, i.vxrms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {

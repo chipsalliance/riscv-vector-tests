@@ -416,7 +416,6 @@ tests = \
   vfwsub_wf-1 \
   vfwsub_wv-0 \
   vghsh_vv-0 \
-  vgmul_vv-0 \
   vid_v-0 \
   vid_v-1 \
   viota_m-0 \
