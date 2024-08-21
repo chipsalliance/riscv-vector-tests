@@ -105,6 +105,10 @@ tests = \
   vadd_vx-5 \
   vadd_vx-6 \
   vadd_vx-7 \
+  vaeskf1_vi-0 \
+  vaeskf1_vi-1 \
+  vaeskf2_vi-0 \
+  vaeskf2_vi-1 \
   vand_vi-0 \
   vand_vi-1 \
   vand_vi-2 \
