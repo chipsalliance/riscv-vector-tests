@@ -6,8 +6,8 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
-	zvkg_insn := strings.HasPrefix(i.Name, "vg")
-	sews := iff(zvkg_insn, []SEW{32}, allSEWs)
+	sew32Only_insn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsha")
+	sews := iff(sew32Only_insn, []SEW{32}, allSEWs)
 	combinations := i.combinations(
 		allLMULs,
 		sews,
@@ -16,7 +16,7 @@ func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
 	)
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
-		if zvkg_insn && c.Vl % 4 != 0 {
+		if sew32Only_insn && c.Vl % 4 != 0 {
 			c.Vl = (c.Vl + 3) / 4 * 4 
 		}
 		builder := strings.Builder{}
