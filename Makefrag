@@ -1269,6 +1269,9 @@ tests = \
   vsext_vf2-1 \
   vsext_vf4-0 \
   vsext_vf8-0 \
+  vsha2ch_vv-0 \
+  vsha2cl_vv-0 \
+  vsha2ms_vv-0 \
   vslide1down_vx-0 \
   vslide1down_vx-1 \
   vslide1down_vx-2 \
