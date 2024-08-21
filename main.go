@@ -100,6 +100,7 @@ func main() {
 			}
 			insn, err := generator.ReadInsnFromToml(contents, option)
 			fatalIf(err)
+
 			if insn.Name != strings.Replace(file.Name(), ".toml", "", -1) {
 				fatalIf(errors.New("filename and instruction name unmatched"))
 			}
