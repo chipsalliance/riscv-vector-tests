@@ -1327,6 +1327,8 @@ tests = \
   vsll_vx-5 \
   vsll_vx-6 \
   vsll_vx-7 \
+  vsm4k_vi-0 \
+  vsm4k_vi-1 \
   vsm_v-0 \
   vsmul_vv-0 \
   vsmul_vv-1 \

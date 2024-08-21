@@ -7,7 +7,7 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
-	sew32Only_insn := strings.HasPrefix(i.Name, "vaes")
+	sew32Only_insn := strings.HasPrefix(i.Name, "vaes") || strings.HasPrefix(i.Name, "vsm4")
 	sews := iff(sew32Only_insn, []SEW{32}, allSEWs)
 	vs2Size := 1
 	vdSize := 1
