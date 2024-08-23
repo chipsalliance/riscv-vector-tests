@@ -9,8 +9,8 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2(pos int) []string {
-	sew32Only_insn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsm4")
-	sews := iff(sew32Only_insn, []SEW{32}, allSEWs)
+	sew32OnlyInsn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsm4")
+	sews := iff(sew32OnlyInsn, []SEW{32}, allSEWs)
 
 	var nr int
 	var err error
@@ -26,7 +26,7 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
-		if sew32Only_insn && c.Vl % 4 != 0 {
+		if sew32OnlyInsn && c.Vl % 4 != 0 {
 			c.Vl = (c.Vl + 3) / 4 * 4 
 		}
 
@@ -34,7 +34,7 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		builder.WriteString(c.initialize())
 		
 		var vd, vs2 int
-		if (sew32Only_insn){
+		if (sew32OnlyInsn){
 			vd = int(c.LMUL1)
 			vs2 = 3 * int(c.LMUL1)
 		}else{
