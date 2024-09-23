@@ -1,5 +1,26 @@
 #include "testfloat3.h"
 
+void init_a_f16(void) { genCases_f16_a_init(); }
+void gen_a_f16(float16_t *a) {
+  genCases_f16_a_next();
+  *a = genCases_f16_a;
+}
+
+void init_ab_f16(void) { genCases_f16_ab_init(); }
+void gen_ab_f16(float16_t *a, float16_t *b) {
+  genCases_f16_ab_next();
+  *a = genCases_f16_a;
+  *b = genCases_f16_b;
+}
+
+void init_abc_f16(void) { genCases_f16_abc_init(); }
+void gen_abc_f16(float16_t *a, float16_t *b, float16_t *c) {
+  genCases_f16_abc_next();
+  *a = genCases_f16_a;
+  *b = genCases_f16_b;
+  *c = genCases_f16_c;
+}
+
 void init_a_f32(void) { genCases_f32_a_init(); }
 void gen_a_f32(float32_t *a) {
   genCases_f32_a_next();

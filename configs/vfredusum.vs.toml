@@ -4,6 +4,17 @@ format = "vd,vs2,vs1,vm"
 notestfloat3 = true
 
 [tests]
+fsew16 = [
+    ["2.5",                     "1.0"],
+    ["-1235.1",                 "1.1"],
+    ["1.1",                     "-1235.1"],
+    ["-1.0",                    "-2.0"],
+    ["nan",                     "-nan"],
+    ["inf",                     "-inf"],
+    ["quiet_nan",               "signaling_nan"],
+    ["smallest_nonzero_float",  "largest_subnormal_float"],
+    ["-smallest_nonzero_float", "-largest_subnormal_float"]
+]
 fsew32 = [
     ["2.5",                     "1.0"],
     ["-1235.5",                 "1.5"],

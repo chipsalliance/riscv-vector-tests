@@ -2,6 +2,20 @@ name = "vfnmadd.vf"
 format = "vd,fs1,vs2,vm"
 
 [tests]
+fsew16 = [
+    ["0.0",   "2.5",                     "1.0"],
+    ["-1.0",  "-1235.1",                 "1.1"],
+    ["0.002", "3.14159265",              "0.00000001"],
+    ["0.0",   "1.1",                     "-1235.1"],
+    ["-1.0",  "-1.0",                    "-2.0"],
+    ["0.002", "nan",                     "-nan"],
+    ["0.0",   "inf",                     "-inf"],
+    ["-1.0",  "quiet_nan",               "signaling_nan"],
+    ["0.002", "smallest_nonzero_float",  "largest_subnormal_float"],
+    ["0.0",   "smallest_normal_float",   "max_float"],
+    ["-1.0",  "-smallest_nonzero_float", "-largest_subnormal_float"],
+    ["0.002", "-smallest_normal_float",  "-max_float"]
+]
 fsew32 = [
     ["0.0",   "2.5",                     "1.0"],
     ["-1.0",  "-1235.1",                 "1.1"],

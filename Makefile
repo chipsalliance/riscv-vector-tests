@@ -55,14 +55,14 @@ CONFIGS = configs/
 
 SPIKE = spike
 PATCHER_SPIKE = build/pspike
-MARCH = rv${XLEN}gcv_zvbb
+MARCH = rv${XLEN}gcv_zvbb_zfh
 MABI = lp64d
 
 ifeq ($(XLEN), 32)
 MABI = ilp32f
-VARCH = zvl${VLEN}b_zve32f
+VARCH = zvl${VLEN}b_zve32f_zfh_zfhmin_zvfh
 else
-VARCH = zvl${VLEN}b_zve64d
+VARCH = zvl${VLEN}b_zve64d_zfh_zfhmin_zvfh
 endif
 
 RISCV_PREFIX = riscv64-unknown-elf-

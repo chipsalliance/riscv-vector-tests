@@ -396,7 +396,17 @@ func (i *Insn) testCases(float bool, sew SEW) [][]any {
 			res = append(res, l)
 		}
 	case 16:
-		for _, c := range i.Tests.SEW16 {
+		if float {
+			for _, c := range i.Tests.FSEW16 {
+				l := make([]any, len(c))
+				for b, op := range c {
+					l[b] = op
+				}
+				res = append(res, l)
+			}
+			break
+		}
+                for _, c := range i.Tests.SEW16 {
 			l := make([]any, len(c))
 			for b, op := range c {
 				l[b] = op

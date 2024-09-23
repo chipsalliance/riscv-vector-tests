@@ -2,6 +2,11 @@ name = "vfncvt.f.x.w"
 format = "vd,vs2,vm"
 
 [tests]
+sew32 = [
+    [0xffffffff],
+    [0xfffffffe],
+    [0x2],
+]
 sew64 = [
     ["0xffffffffffffffff"],
     ["0xfffffffffffffffe"],

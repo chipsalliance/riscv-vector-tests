@@ -23,6 +23,9 @@ func (i *Insn) genCodeVdFs1(pos int) []string {
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		switch c.SEW {
+		case 16:
+			builder.WriteString(fmt.Sprintf("li s0, %d\n", convNum[uint16](cases[0][0])))
+			builder.WriteString(fmt.Sprintf("fmv.h.x f0, s0\n"))
 		case 32:
 			builder.WriteString(fmt.Sprintf("li s0, %d\n", convNum[uint32](cases[0][0])))
 			builder.WriteString(fmt.Sprintf("fmv.w.x f0, s0\n"))

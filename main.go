@@ -98,8 +98,11 @@ func main() {
 			if (!strings.HasPrefix(file.Name(), "vf") && !strings.HasPrefix(file.Name(), "vmf")) || strings.HasPrefix(file.Name(), "vfirst") {
 				option.Repeat = 1
 			}
+
 			insn, err := generator.ReadInsnFromToml(contents, option)
+
 			fatalIf(err)
+
 			if insn.Name != strings.Replace(file.Name(), ".toml", "", -1) {
 				fatalIf(errors.New("filename and instruction name unmatched"))
 			}

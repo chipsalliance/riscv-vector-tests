@@ -2,5 +2,6 @@ name = "vfmv.f.s"
 format = "fd,vs2"
 
 [tests]
+fsew16 = [["42.0"]]
 fsew32 = [["42.0"]]
 fsew64 = [["42.0"]]

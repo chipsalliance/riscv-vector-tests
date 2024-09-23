@@ -29,7 +29,7 @@ type VXSAT bool
 type SEW int
 
 var allSEWs = []SEW{8, 16, 32, 64}
-var floatSEWs = []SEW{32, 64}
+var floatSEWs = []SEW{16, 32, 64}
 var validSEWs = map[SEW]struct{}{
 	allSEWs[0]: {},
 	allSEWs[1]: {},
