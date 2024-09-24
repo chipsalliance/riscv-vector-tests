@@ -10,7 +10,7 @@ func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
 	vdSize := iff(vdWidening, 2, 1)
 
-	sews := iff(vdWidening, floatSEWs[:len(floatSEWs)-1], floatSEWs)
+	sews := iff(vdWidening, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
 	combinations := i.combinations(
 		iff(vdWidening, wideningMULs, allLMULs),
 		sews,

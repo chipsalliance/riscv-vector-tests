@@ -32,6 +32,9 @@
   INTEGER = 0##
         ##Set to [1] if you don't want float tests (i.e. for Zve32x or Zve64x)
         ##
+  FLOAT16 = 1##
+        ##Set to [0] if you don't want float16 (Zvfh) tests
+        ##
   PATTERN = '.*'##
         ##Set to a valid regex to generate the tests of your interests (e.g. PATTERN='^v[ls].+\.v$' to generate only load/store tests)
         ##
@@ -112,7 +115,7 @@ unittest:
 
 generate-stage1: clean-out build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -float16=${FLOAT16} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 include Makefrag
 

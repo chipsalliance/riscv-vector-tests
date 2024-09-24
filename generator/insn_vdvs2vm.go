@@ -14,7 +14,7 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 	vs2Size := iff(vdNarrowing, 2, 1)
 
 	lmuls := iff(vdWidening || vdNarrowing, wideningMULs, allLMULs)
-	sews := iff(vdWidening || vdNarrowing, floatSEWs[:len(floatSEWs)-1], floatSEWs)
+	sews := iff(vdWidening || vdNarrowing, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
 	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.vxrms())
 
 	res := make([]string, 0, len(combinations))

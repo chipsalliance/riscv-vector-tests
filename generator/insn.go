@@ -19,6 +19,7 @@ type Option struct {
 	VLEN   VLEN
 	XLEN   XLEN
 	Repeat int
+	Float16 bool
 }
 
 const minStride = -1 // Must be negative
