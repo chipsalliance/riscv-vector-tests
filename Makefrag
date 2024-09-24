@@ -105,6 +105,10 @@ tests = \
   vadd_vx-5 \
   vadd_vx-6 \
   vadd_vx-7 \
+  vaeskf1_vi-0 \
+  vaeskf1_vi-1 \
+  vaeskf2_vi-0 \
+  vaeskf2_vi-1 \
   vand_vi-0 \
   vand_vi-1 \
   vand_vi-2 \
@@ -215,6 +219,12 @@ tests = \
   vasubu_vx-9 \
   vbrev8_v-0 \
   vbrev_v-0 \
+  vclmul_vv-0 \
+  vclmul_vx-0 \
+  vclmul_vx-1 \
+  vclmulh_vv-0 \
+  vclmulh_vx-0 \
+  vclmulh_vx-1 \
   vclz_v-0 \
   vcompress_vm-0 \
   vcpop_m-0 \
@@ -409,6 +419,7 @@ tests = \
   vfwsub_wf-0 \
   vfwsub_wf-1 \
   vfwsub_wv-0 \
+  vghsh_vv-0 \
   vid_v-0 \
   vid_v-1 \
   viota_m-0 \
@@ -1258,6 +1269,9 @@ tests = \
   vsext_vf2-1 \
   vsext_vf4-0 \
   vsext_vf8-0 \
+  vsha2ch_vv-0 \
+  vsha2cl_vv-0 \
+  vsha2ms_vv-0 \
   vslide1down_vx-0 \
   vslide1down_vx-1 \
   vslide1down_vx-2 \
@@ -1316,6 +1330,11 @@ tests = \
   vsll_vx-5 \
   vsll_vx-6 \
   vsll_vx-7 \
+  vsm3c_vi-0 \
+  vsm3c_vi-1 \
+  vsm3me_vv-0 \
+  vsm4k_vi-0 \
+  vsm4k_vi-1 \
   vsm_v-0 \
   vsmul_vv-0 \
   vsmul_vv-1 \

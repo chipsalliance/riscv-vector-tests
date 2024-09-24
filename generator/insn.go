@@ -84,6 +84,7 @@ const (
 	insnFormatVdVs2Imm     insnFormat = "vd,vs2,imm"
 	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0"
 	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"
+	insnFormatVdVs2Uimm    insnFormat = "vd,vs2,uimm"
 	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm"
 	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"
 	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm"
@@ -125,6 +126,7 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVdVs2Imm:     {},
 	insnFormatVdVs2ImmV0:   {},
 	insnFormatVdVs2ImmVm:   {},
+	insnFormatVdVs2Uimm:    {},
 	insnFormatVdVs2UimmVm:  {},
 	insnFormatVdVs1Vs2Vm:   {},
 	insnFormatVdRs1Vs2Vm:   {},
@@ -190,6 +192,8 @@ func (i *Insn) genCodeCombinations(pos int) []string {
 		return i.genCodeVdVs2ImmV0(pos)
 	case insnFormatVdVs2ImmVm:
 		return i.genCodeVdVs2ImmVm(pos)
+	case insnFormatVdVs2Uimm:
+		return i.genCodeVdVs2Uimm(pos)
 	case insnFormatVdVs2UimmVm:
 		return i.genCodeVdVs2UimmVm(pos)
 	case insnFormatVdFs1Vs2Vm:
