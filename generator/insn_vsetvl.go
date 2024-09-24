@@ -114,7 +114,7 @@ func (i *Insn) genCodevsetvl(pos int) []string {
 			case 0:
 				curvl = t[2]
 			case 1:
-				if t[1] == 1 << (i.Option.XLEN - 1) { // vill
+				if t[1] == 1<<(i.Option.XLEN-1) { // vill
 					curvl = t[2]
 				} else {
 					curvl = int64(getVlmax(curvtype, int(i.Option.VLEN)))

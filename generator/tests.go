@@ -158,7 +158,7 @@ type tests struct {
 	SEW64_ []testCase[string] `toml:"sew64"`
 	SEW64  []testCase[uint64] `toml:"-"`
 
-	FSEW16_ []testCase[string]  `toml:"fsew16"`
+	FSEW16_ []testCase[string] `toml:"fsew16"`
 	FSEW16  []testCase[uint16] `toml:"-"`
 
 	FSEW32_ []testCase[string]  `toml:"fsew32"`

@@ -14,7 +14,7 @@ func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
 	vdSize := 1
 
 	combinations := i.combinations(
-		iff(vsm3Insn, []LMUL {1, 2, 4, 8}, allLMULs),
+		iff(vsm3Insn, []LMUL{1, 2, 4, 8}, allLMULs),
 		sews,
 		[]bool{false, true},
 		i.vxrms(),
@@ -22,7 +22,7 @@ func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
-		if sew32OnlyInsn && c.Vl % 4 != 0 {
+		if sew32OnlyInsn && c.Vl%4 != 0 {
 			c.Vl = (c.Vl + 3) &^ 3
 		}
 		if vsm3Insn {
@@ -59,16 +59,16 @@ func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
 			switch c.SEW {
 			case 8:
 				builder.WriteString(fmt.Sprintf("%s v%d, v%d, %d\n",
-					i.Name, vd, vs2, convNum[uint8](cases[a][0]) % 32))
+					i.Name, vd, vs2, convNum[uint8](cases[a][0])%32))
 			case 16:
 				builder.WriteString(fmt.Sprintf("%s v%d, v%d, %d\n",
-					i.Name, vd, vs2, convNum[uint16](cases[a][0]) % 32))
+					i.Name, vd, vs2, convNum[uint16](cases[a][0])%32))
 			case 32:
 				builder.WriteString(fmt.Sprintf("%s v%d, v%d, %d\n",
-					i.Name, vd, vs2, convNum[uint32](cases[a][0]) % 32))
+					i.Name, vd, vs2, convNum[uint32](cases[a][0])%32))
 			case 64:
 				builder.WriteString(fmt.Sprintf("%s v%d, v%d, %d\n",
-					i.Name, vd, vs2, convNum[uint64](cases[a][0]) % 32))
+					i.Name, vd, vs2, convNum[uint64](cases[a][0])%32))
 			}
 			builder.WriteString("# -------------- TEST END   --------------\n")
 

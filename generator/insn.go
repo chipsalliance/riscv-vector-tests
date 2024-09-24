@@ -16,9 +16,9 @@ import (
 type insnFormat string
 
 type Option struct {
-	VLEN   VLEN
-	XLEN   XLEN
-	Repeat int
+	VLEN    VLEN
+	XLEN    XLEN
+	Repeat  int
 	Float16 bool
 }
 
@@ -411,7 +411,7 @@ func (i *Insn) testCases(float bool, sew SEW) [][]any {
 			}
 			break
 		}
-                for _, c := range i.Tests.SEW16 {
+		for _, c := range i.Tests.SEW16 {
 			l := make([]any, len(c))
 			for b, op := range c {
 				l[b] = op

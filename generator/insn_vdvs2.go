@@ -26,18 +26,18 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
-		if sew32OnlyInsn && c.Vl % 4 != 0 {
-			c.Vl = (c.Vl + 3) / 4 * 4 
+		if sew32OnlyInsn && c.Vl%4 != 0 {
+			c.Vl = (c.Vl + 3) / 4 * 4
 		}
 
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
-		
+
 		var vd, vs2 int
-		if (sew32OnlyInsn){
+		if sew32OnlyInsn {
 			vd = int(c.LMUL1)
 			vs2 = 3 * int(c.LMUL1)
-		}else{
+		} else {
 			vd, vs2, _ = getVRegs(c.LMUL, true, i.Name)
 		}
 
