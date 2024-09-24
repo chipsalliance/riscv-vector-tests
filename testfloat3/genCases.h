@@ -37,6 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdbool.h>
 #include <stdint.h>
 
+typedef uint16_t float16_t;
 typedef float float32_t;
 typedef double float64_t;
 
@@ -46,6 +47,14 @@ void genCases_setLevel(int);
 
 extern uint_fast64_t genCases_total;
 extern bool genCases_done;
+
+void genCases_f16_a_init(void);
+void genCases_f16_a_next(void);
+void genCases_f16_ab_init(void);
+void genCases_f16_ab_next(void);
+void genCases_f16_abc_init(void);
+void genCases_f16_abc_next(void);
+extern float16_t genCases_f16_a, genCases_f16_b, genCases_f16_c;
 
 void genCases_f32_a_init(void);
 void genCases_f32_a_next(void);

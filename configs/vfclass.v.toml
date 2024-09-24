@@ -2,6 +2,21 @@ name = "vfclass.v"
 format = "vd,vs2,vm"
 
 [tests]
+sew16 = [
+    [0x7e00], # Quiet NaN
+    [0x7e01], # Quiet NaN "1"
+    [0x7e02], # Quiet NaN "2"
+    [0x7d00], # Signaling NaN
+    [0x7c00], #  Inf
+    [0xfc00], # -Inf
+    [0x0000], #  0
+    [0x8000], # -0
+    [0xc248], # -3.14159
+    [0x4248], #  3.14159
+    [0x0001], # Subnormal
+    [0x03ff], # Subnormal
+]
+
 sew32 = [
     [0x7fc00000], # Quiet NaN
     [0x7fc00001], # Quiet NaN "1"

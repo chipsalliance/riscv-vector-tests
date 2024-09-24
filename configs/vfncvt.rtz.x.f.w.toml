@@ -2,6 +2,20 @@ name = "vfncvt.rtz.x.f.w"
 format = "vd,vs2,vm"
 
 [tests]
+sew32 = [
+    [0x7fc00000], # Quiet NaN
+    [0x7fc00001], # Quiet NaN "1"
+    [0x7fc00002], # Quiet NaN "2"
+    [0x7fa00000], # Signaling NaN
+    [0x7f800000], #  Inf
+    [0xff800000], # -Inf
+    [0x00000000], #  0
+    [0x80000000], # -0
+    [0xc0490e56], # -3.14159
+    [0x40490fd0], #  3.14159
+    [0x00000001], # Subnormal
+    [0x007fffff], # Subnormal
+]
 sew64 = [
     ["0x7ff8000000000000"], # Quiet NaN
     ["0x7ff8000000000001"], # Quiet NaN "1"

@@ -6,7 +6,7 @@ import (
 )
 
 func (i *Insn) genCodeFdVs2(pos int) []string {
-	combinations := i.combinations([]LMUL{1}, floatSEWs, []bool{false}, i.vxrms())
+	combinations := i.combinations([]LMUL{1}, i.floatSEWs(), []bool{false}, i.vxrms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {

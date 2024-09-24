@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"unsafe"
+
+	f16 "github.com/x448/float16"
 )
 
 type num interface {
@@ -18,6 +20,42 @@ func convNum[T num](n any) T {
 		res = T(n.(uint8))
 	}
 	return res
+}
+
+func parseCustomFloat16(n string) uint16 {
+	switch n {
+	case "nan":
+		return 0x7e01
+	case "-nan":
+		return 0xfe01
+	case "inf":
+		return 0x7c00
+	case "-inf":
+		return 0xfc00
+	case "quiet_nan":
+		return 0x7e00
+	case "signaling_nan":
+		return 0x7d00
+	case "smallest_nonzero_float":
+		return 0x0001
+	case "largest_subnormal_float":
+		return 0x03ff
+	case "smallest_normal_float":
+		return 0x0400
+	case "max_float":
+		return 0x7bff
+	case "-smallest_nonzero_float":
+		return 0x8001
+	case "-largest_subnormal_float":
+		return 0x83ff
+	case "-smallest_normal_float":
+		return 0x8400
+	case "-max_float":
+		return 0xfbff
+	default:
+		v, _ := strconv.ParseFloat(n, 32)
+		return f16.Fromfloat32(float32(v)).Bits()
+	}
 }
 
 func parseCustomFloat32(n string) float32 {
@@ -120,6 +158,9 @@ type tests struct {
 	SEW64_ []testCase[string] `toml:"sew64"`
 	SEW64  []testCase[uint64] `toml:"-"`
 
+	FSEW16_ []testCase[string]  `toml:"fsew16"`
+	FSEW16  []testCase[uint16] `toml:"-"`
+
 	FSEW32_ []testCase[string]  `toml:"fsew32"`
 	FSEW32  []testCase[float32] `toml:"-"`
 
@@ -134,6 +175,16 @@ func (t *tests) initialize() error {
 		for j, s := range ss {
 			t.SEW64[i][j], err = strconv.ParseUint(
 				strings.TrimPrefix(s, "0x"), 16, 64)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	for i, ss := range t.FSEW16_ {
+		t.FSEW16 = append(t.FSEW16, make([]uint16, len(ss)))
+		for j, s := range ss {
+			t.FSEW16[i][j] = parseCustomFloat16(s)
 			if err != nil {
 				return err
 			}

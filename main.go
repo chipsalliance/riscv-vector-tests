@@ -28,6 +28,7 @@ var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "we do not support specifying ELEN yet, ELEN is consistent with XLEN.")
 var splitF = flag.Int("split", 10000, "split per lines.")
 var integerF = flag.Bool("integer", false, "only generate integer tests.")
+var float16F = flag.Bool("float16", true, "generate float16 tests")
 var patternF = flag.String("pattern", ".*", "regex to filter out tests.")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
@@ -94,11 +95,14 @@ func main() {
 				VLEN:   generator.VLEN(*vlenF),
 				XLEN:   generator.XLEN(*xlenF),
 				Repeat: *repeatF,
+                                Float16: *float16F,
 			}
 			if (!strings.HasPrefix(file.Name(), "vf") && !strings.HasPrefix(file.Name(), "vmf")) || strings.HasPrefix(file.Name(), "vfirst") {
 				option.Repeat = 1
 			}
+
 			insn, err := generator.ReadInsnFromToml(contents, option)
+
 			fatalIf(err)
 
 			if insn.Name != strings.Replace(file.Name(), ".toml", "", -1) {

@@ -66,8 +66,12 @@ func (i *Insn) gWriteTestData(float bool, testfloat bool, cont bool, lmul LMUL, 
 	}
 
 	if float && testfloat && !cont {
+		testfloat3.InitF16(numops)
 		testfloat3.InitF32(numops)
 		testfloat3.InitF64(numops)
+	}
+	nextf16 := func() uint16 {
+		return testfloat3.GenF16(numops)[idx]
 	}
 	nextf32 := func() float32 {
 		return testfloat3.GenF32(numops)[idx]
@@ -86,8 +90,12 @@ func (i *Insn) gWriteTestData(float bool, testfloat bool, cont bool, lmul LMUL, 
 			b := a % len(cases)
 			_ = binary.Write(buf, binary.LittleEndian, convNum[uint8](cases[b][idx]))
 		case 16:
-			b := a % len(cases)
-			_ = binary.Write(buf, binary.LittleEndian, convNum[uint16](cases[b][idx]))
+			if (float && testfloat && a >= len(cases)) || cont {
+				_ = binary.Write(buf, binary.LittleEndian, nextf16())
+			} else {
+				b := a % len(cases)
+				_ = binary.Write(buf, binary.LittleEndian, convNum[uint16](cases[b][idx]))
+			}
 		case 32:
 			// Manual test cases exhausted, use testfloat3 to generate new ones.
 			if (float && testfloat && a >= len(cases)) || cont {

@@ -10,7 +10,7 @@ func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
 	vdSize := iff(vdWidening, 2, 1)
 
-	sews := iff(vdWidening, floatSEWs[:len(floatSEWs)-1], floatSEWs)
+	sews := iff(vdWidening, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
 	combinations := i.combinations(
 		iff(vdWidening, wideningMULs, allLMULs),
 		sews,
@@ -46,6 +46,9 @@ func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 			for a := 0; a < len(cases); a++ {
 				builder.WriteString("# -------------- TEST BEGIN --------------\n")
 				switch c.SEW {
+				case 16:
+					builder.WriteString(fmt.Sprintf("li s0, 0x%x\n", convNum[uint16](cases[a][1])))
+					builder.WriteString(fmt.Sprintf("fmv.h.x f0, s0\n"))
 				case 32:
 					builder.WriteString(fmt.Sprintf("li s0, 0x%x\n", convNum[uint32](cases[a][1])))
 					builder.WriteString(fmt.Sprintf("fmv.w.x f0, s0\n"))

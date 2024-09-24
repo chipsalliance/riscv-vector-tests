@@ -32,6 +32,9 @@
   INTEGER = 0##
         ##Set to [1] if you don't want float tests (i.e. for Zve32x or Zve64x)
         ##
+  FLOAT16 = 1##
+        ##Set to [0] if you don't want float16 (Zvfh) tests
+        ##
   PATTERN = '.*'##
         ##Set to a valid regex to generate the tests of your interests (e.g. PATTERN='^v[ls].+\.v$' to generate only load/store tests)
         ##
@@ -55,14 +58,14 @@ CONFIGS = configs/
 
 SPIKE = spike
 PATCHER_SPIKE = build/pspike
-MARCH = rv${XLEN}gcv_zvbb_zvbc_zvkg_zvkned_zvknha_zvksed_zvksh
+MARCH = rv${XLEN}gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh
 MABI = lp64d
 
 ifeq ($(XLEN), 32)
 MABI = ilp32f
-VARCH = zvl${VLEN}b_zve32f
+VARCH = zvl${VLEN}b_zve32f_zfh_zfhmin_zvfh
 else
-VARCH = zvl${VLEN}b_zve64d
+VARCH = zvl${VLEN}b_zve64d_zfh_zfhmin_zvfh
 endif
 
 RISCV_PREFIX = riscv64-unknown-elf-
@@ -112,7 +115,7 @@ unittest:
 
 generate-stage1: clean-out build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -float16=${FLOAT16} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
 
 include Makefrag
 

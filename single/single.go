@@ -23,6 +23,7 @@ func fatalIf(err error) {
 
 var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "")
+var float16F = flag.Bool("float16", true, "")
 var outputFileF = flag.String("outputfile", "", "output file name.")
 var configFileF = flag.String("configfile", "", "config file path.")
 var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
@@ -52,6 +53,7 @@ func main() {
 		VLEN:   generator.VLEN(*vlenF),
 		XLEN:   generator.XLEN(*xlenF),
 		Repeat: *repeatF,
+		Float16: *float16F,
 	}
 
 	fp := *configFileF
