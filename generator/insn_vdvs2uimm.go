@@ -13,8 +13,13 @@ func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
 	vs2Size := 1
 	vdSize := 1
 
+	if vsm3Insn {
+		i.EGW = 256
+	} else if sew32OnlyInsn {
+		i.EGW = 128
+	}
 	combinations := i.combinations(
-		iff(vsm3Insn, []LMUL{1, 2, 4, 8}, allLMULs),
+		allLMULs,
 		sews,
 		[]bool{false, true},
 		i.vxrms(),
@@ -22,10 +27,9 @@ func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
-		if sew32OnlyInsn && c.Vl%4 != 0 {
+		if sew32OnlyInsn {
 			c.Vl = (c.Vl + 3) &^ 3
-		}
-		if vsm3Insn {
+		} else if vsm3Insn {
 			c.Vl = (c.Vl + 7) &^ 7
 		}
 		builder := strings.Builder{}

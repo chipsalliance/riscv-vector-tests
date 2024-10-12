@@ -9,18 +9,23 @@ func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
 	vsm3Insn := strings.HasPrefix(i.Name, "vsm3")
 	sew32OnlyInsn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsha")
 	sews := iff(sew32OnlyInsn || vsm3Insn, []SEW{32}, allSEWs)
+	if vsm3Insn {
+		i.EGW = 256
+	} else if sew32OnlyInsn {
+		i.EGW = 128
+	}
 	combinations := i.combinations(
-		iff(vsm3Insn, []LMUL{1, 2, 4, 8}, allLMULs),
+		allLMULs,
 		sews,
 		[]bool{false},
 		i.vxrms(),
 	)
+
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
-		if sew32OnlyInsn && c.Vl%4 != 0 {
+		if sew32OnlyInsn {
 			c.Vl = (c.Vl + 3) &^ 3
-		}
-		if vsm3Insn {
+		} else if vsm3Insn {
 			c.Vl = (c.Vl + 7) &^ 7
 		}
 		builder := strings.Builder{}

@@ -61,6 +61,7 @@ type Insn struct {
 	Vxsat        bool       `toml:"vxsat"`
 	Tests        tests      `toml:"tests"`
 	Option       Option     `toml:"-"`
+	EGW          int        `toml:"-"`
 	TestData     *TestData
 }
 
@@ -237,6 +238,7 @@ func (i *Insn) genCodeCombinations(pos int) []string {
 func ReadInsnFromToml(contents []byte, option Option) (*Insn, error) {
 	i := Insn{
 		Option:   option,
+		EGW:      int(option.XLEN),
 		TestData: &TestData{},
 	}
 
@@ -491,6 +493,9 @@ csrci vxsat, 1
 func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM) []combination {
 	res := make([]combination, 0)
 	for _, lmul := range lmuls {
+		if int(lmul)*int(i.Option.VLEN) < i.EGW {
+			continue
+		}
 		for _, sew := range sews {
 			if int(i.Option.XLEN) < int(sew) {
 				continue
