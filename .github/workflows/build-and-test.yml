@@ -55,8 +55,9 @@ jobs:
         run: |
           export PATH="${{ github.workspace }}/riscv/bin:$PATH"
           export RISCV="${{ github.workspace }}/riscv"
-          make generate-stage1
+          make generate-stage1 --environment-overrides VLEN=256
           make all -j4 --environment-overrides VLEN=256
+          make generate-stage1 --environment-overrides VLEN=128
           make all -j4 --environment-overrides VLEN=128
 
       - name: Archive artifacts
