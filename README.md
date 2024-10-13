@@ -4,6 +4,30 @@
 
 This repository hosts unit tests generator for the RISC-V vector extension.
 
+## Features
+
+- Similar to [riscv-tests](https://github.com/riscv-software-src/riscv-tests), simple and easy to use
+- Self-verification by default, Co-simulator friendly
+- User-mode and machine-mode binaries
+- TestFloat3 integration
+- Support RV32 and RV64
+- Test SEW from e8 to e64
+- Test LMUL from mf8 to m8
+- Support VLEN from 64 to 4096
+- Support varies sub-extensions: Zvfh, Zvbb, Zvbc, Zvkg, Zvkned, Zvknha, Zvksed and Zvksh
+- Configurable, see `make help`
+
+## Limitations
+
+- All the tests are per instruction, and it is done more or less in the same fashion
+- Lack of tail/mask agnostic support (i.e. ta/ma)
+- Lack of fault-only-first testing
+- Lack of vstart testing
+- Lack of register group overlap testing
+- ... and more
+
+Overall, there are no coverage statistics or guarantees.
+
 ## How it works
 
 The Spike simulator is known as the RISC-V gold standard simulator, and although we don't know how Spike is tested, it does fully support the V extension. So we added [a custom special instruction](https://github.com/ksco/riscv-vector-tests/blob/6a23892a5ab0cc72f4867cc95186b3528c99c2a0/pspike/pspike.cc#L20) to Spike, and for any test, let it automatically generate a reference result for that test. This way, we generate tests for all instructions almost automatically. Under this framework, all we have to do is write a [simple config file for each instruction](configs/).
@@ -38,13 +62,6 @@ This repository also provides a nix derivation with the following output provide
 - `${riscv-vector-test}/bin/*`: Generator binaries
 - `${riscv-vector-test}/include/*`: Necessary headers for runtime usage
 - `${riscv-vector-test}/configs/*`: Necessary runtime configs
-
-## TODOs
-
-- [ ] Add tests for sub-extensions (e.g. Zvamo, Zvfh)
-- [ ] Support Zve64f and Zve32d
-- [ ] Tail/mask agnostic support
-- [ ] Fault-only-first tests
 
 ## License
 
