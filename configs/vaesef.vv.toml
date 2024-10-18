@@ -1,4 +1,5 @@
 name = "vaesef.vv"
+fp = true
 format = "vd,vs2"
 
 [tests]

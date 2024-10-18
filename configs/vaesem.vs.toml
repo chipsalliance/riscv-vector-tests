@@ -1,4 +1,5 @@
 name = "vaesem.vs"
+fp = true
 format = "vd,vs2"
 
 [tests]

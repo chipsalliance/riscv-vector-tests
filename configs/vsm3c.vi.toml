@@ -1,4 +1,5 @@
 name = "vsm3c.vi"
+fp = true
 format = "vd,vs2,uimm"
 
 [tests]

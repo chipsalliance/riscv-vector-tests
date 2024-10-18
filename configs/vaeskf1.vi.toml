@@ -1,4 +1,5 @@
 name = "vaeskf1.vi"
+fp = true
 format = "vd,vs2,uimm"
 
 [tests]
