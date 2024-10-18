@@ -99,6 +99,8 @@ func main() {
 			}
 			if (!strings.HasPrefix(file.Name(), "vf") && !strings.HasPrefix(file.Name(), "vmf")) || strings.HasPrefix(file.Name(), "vfirst") {
 				option.Repeat = 1
+			} else {
+				option.Fp = true
 			}
 
 			insn, err := generator.ReadInsnFromToml(contents, option)

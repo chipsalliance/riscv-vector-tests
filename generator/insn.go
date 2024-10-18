@@ -18,6 +18,7 @@ type insnFormat string
 type Option struct {
 	VLEN    VLEN
 	XLEN    XLEN
+	Fp      bool
 	Repeat  int
 	Float16 bool
 }
@@ -294,8 +295,8 @@ func (i *Insn) genHeader() string {
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV%dUV
-`, i.Name, i.Option.XLEN)
+RVTEST_RV%dUV%s
+`, i.Name, i.Option.XLEN, iff(i.Option.Fp, "", "X"))
 }
 
 func (i *Insn) genMergedCodeCombinations(splitPerLines int) ([]string, []string) {

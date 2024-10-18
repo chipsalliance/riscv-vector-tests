@@ -62,7 +62,10 @@ func main() {
 
 	if (!strings.HasPrefix(filepath.Base(fp), "vf") && !strings.HasPrefix(filepath.Base(fp), "vmf")) || strings.HasPrefix(filepath.Base(fp), "vfirst") {
 		option.Repeat = 1
+	} else {
+		option.Fp = true
 	}
+
 	insn, err := generator.ReadInsnFromToml(contents, option)
 	fatalIf(err)
 
