@@ -1,4 +1,5 @@
 name = "vsm4k.vi"
+fp = true
 format = "vd,vs2,uimm"
 
 [tests]

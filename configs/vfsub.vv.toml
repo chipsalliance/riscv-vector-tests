@@ -1,4 +1,5 @@
 name = "vfsub.vv"
+fp = true
 format = "vd,vs2,vs1,vm"
 
 [tests]

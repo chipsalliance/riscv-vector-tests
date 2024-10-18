@@ -1,4 +1,5 @@
 name = "vfmerge.vfm"
+fp = true
 format = "vd,vs2,fs1,v0"
 
 [tests]
