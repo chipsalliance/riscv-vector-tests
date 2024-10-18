@@ -1,4 +1,5 @@
 name = "vfwsub.wf"
+fp = true
 format = "vd,vs2,fs1,vm"
 
 [tests]

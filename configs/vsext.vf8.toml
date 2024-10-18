@@ -1,4 +1,5 @@
 name = "vsext.vf8"
+fp = true
 format = "vd,vs2,vm/3"
 
 [tests]

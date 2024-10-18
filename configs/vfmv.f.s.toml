@@ -1,4 +1,5 @@
 name = "vfmv.f.s"
+fp = true
 format = "fd,vs2"
 
 [tests]
