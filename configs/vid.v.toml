@@ -1,4 +1,5 @@
 name = "vid.v"
+fp = false
 format = "vd,vm"
 
 [tests]

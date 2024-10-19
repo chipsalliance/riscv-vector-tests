@@ -1,4 +1,5 @@
 name = "vsetivli"
+fp = false
 format = "vsetivli"
 
 [tests]

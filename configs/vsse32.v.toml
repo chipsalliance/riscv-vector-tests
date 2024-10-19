@@ -1,4 +1,5 @@
 name = "vsse32.v"
+fp = false
 format = "vs3,(rs1),rs2,vm"
 
 [tests]

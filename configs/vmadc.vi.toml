@@ -1,4 +1,5 @@
 name = "vmadc.vi"
+fp = false
 format = "vd,vs2,imm"
 
 [tests]

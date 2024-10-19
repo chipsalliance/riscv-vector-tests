@@ -1,4 +1,5 @@
 name = "vadd.vi"
+fp = false
 format = "vd,vs2,imm,vm"
 
 [tests]

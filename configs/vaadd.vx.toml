@@ -1,4 +1,5 @@
 name = "vaadd.vx"
+fp = false
 format = "vd,vs2,rs1,vm"
 vxrm = true
 

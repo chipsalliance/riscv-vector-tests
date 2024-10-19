@@ -1,4 +1,5 @@
 name = "vmsof.m"
+fp = false
 format = "vd,vs2,vm/2"
 
 [tests]

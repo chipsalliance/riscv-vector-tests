@@ -1,4 +1,5 @@
 name = "vnclip.wi"
+fp = false
 format = "vd,vs2,uimm,vm"
 vxrm = true
 vxsat = true
