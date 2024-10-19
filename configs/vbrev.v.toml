@@ -1,4 +1,5 @@
 name = "vbrev.v"
+fp = false
 format = "vd,vs2,vm"
 
 [tests]

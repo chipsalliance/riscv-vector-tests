@@ -1,4 +1,5 @@
 name = "vfirst.m"
+fp = false
 format = "rd,vs2,vm"
 
 [tests]

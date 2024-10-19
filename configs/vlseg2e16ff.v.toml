@@ -1,4 +1,5 @@
 name = "vlseg2e16ff.v"
+fp = false
 format = "vd,(rs1),vm"
 
 [tests]

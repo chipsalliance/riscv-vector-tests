@@ -1,4 +1,5 @@
 name = "vsadd.vi"
+fp = false
 format = "vd,vs2,imm,vm"
 vxsat = true
 

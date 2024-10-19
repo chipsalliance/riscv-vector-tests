@@ -1,4 +1,5 @@
 name = "vfncvt.f.xu.w"
+fp = true
 format = "vd,vs2,vm"
 
 [tests]

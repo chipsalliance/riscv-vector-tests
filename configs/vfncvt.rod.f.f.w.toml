@@ -1,4 +1,5 @@
 name = "vfncvt.rod.f.f.w"
+fp = true
 format = "vd,vs2,vm"
 
 [tests]

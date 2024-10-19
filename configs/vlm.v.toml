@@ -1,4 +1,5 @@
 name = "vlm.v"
+fp = false
 format = "vd,(rs1)"
 
 [tests]

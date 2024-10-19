@@ -1,4 +1,5 @@
 name = "vfnmadd.vv"
+fp = true
 format = "vd,vs1,vs2,vm"
 
 [tests]

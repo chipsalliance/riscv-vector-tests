@@ -1,4 +1,5 @@
 name = "vsuxseg5ei16.v"
+fp = false
 format = "vs3,(rs1),vs2,vm"
 
 [tests]

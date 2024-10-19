@@ -1,4 +1,5 @@
 name = "vsetvli"
+fp = false
 format = "vsetvli"
 
 [tests]

@@ -1,4 +1,5 @@
 name = "vsseg6e16.v"
+fp = false
 format = "vs3,(rs1),vm"
 
 [tests]

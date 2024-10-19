@@ -1,4 +1,5 @@
 name = "vmfge.vf"
+fp = true
 format = "vd,vs2,fs1,vm"
 
 [tests]

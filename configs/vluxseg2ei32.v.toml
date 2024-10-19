@@ -1,4 +1,5 @@
 name = "vluxseg2ei32.v"
+fp = false
 format = "vd,(rs1),vs2,vm"
 
 [tests]

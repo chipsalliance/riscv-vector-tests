@@ -1,4 +1,5 @@
 name = "vfclass.v"
+fp = true
 format = "vd,vs2,vm"
 
 [tests]

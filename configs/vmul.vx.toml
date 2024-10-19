@@ -1,4 +1,5 @@
 name = "vmul.vx"
+fp = false
 format = "vd,vs2,rs1,vm"
 
 [tests]

@@ -1,4 +1,5 @@
 name = "vzext.vf2"
+fp = false
 format = "vd,vs2,vm/3"
 
 [tests]
