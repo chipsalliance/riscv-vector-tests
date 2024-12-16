@@ -117,7 +117,7 @@ func getEEW(name string) SEW {
 	return SEW(eew)
 }
 
-func getNfieldsRoundedUp(name string) int {
+func getNfields(name string) int {
 	s := regexp.MustCompile(`v.+?seg(\d)e.+?\.v`)
 	subs := s.FindStringSubmatch(name)
 	if len(subs) < 2 {
@@ -127,19 +127,7 @@ func getNfieldsRoundedUp(name string) int {
 	if err != nil {
 		return 1
 	}
-	switch nfields {
-	case 1:
-		return 1
-	case 2:
-		return 2
-	case 3, 4:
-		return 4
-	case 5, 6, 7, 8:
-		return 8
-	default:
-		log.Fatalln("unreachable")
-		return 1
-	}
+	return nfields
 }
 
 func iff[T any](condition bool, t T, f T) T {

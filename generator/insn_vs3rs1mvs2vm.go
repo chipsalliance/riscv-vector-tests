@@ -7,7 +7,7 @@ import (
 )
 
 func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
-	nfields := getNfieldsRoundedUp(i.Name)
+	nfields := getNfields(i.Name)
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
@@ -28,18 +28,30 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
 			if emul > 8 || emul < 1./8 {
 				continue
 			}
-			emul = math.Max(emul, 1)
+			emul = math.Max(emul, 1) // offset lmul
 			builder.WriteString(c.initialize())
 
 			builder.WriteString(i.gWriteRandomData(LMUL(1)))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-			lmul1 := LMUL(math.Max(float64(c.LMUL1)*float64(nfields), 1))
-			vs3 := int(lmul1)
-			vs1 := 2 * int(math.Max(emul, float64(int(c.LMUL1)*nfields)))
-			builder.WriteString(i.gWriteIntegerTestData(lmul1, sew, 0))
-			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, sew))
-			builder.WriteString(i.gWriteIndexData(lmul1, LMUL(emul), c.Vl, sew, c.SEW))
+			vs3 := int(c.LMUL1)
+
+			vs1 := 0
+			for k := vs3+int(c.LMUL1)*nfields; true; k += 1 {
+				if k % int(emul) == 0 {
+					vs1 = k
+					break
+				}
+			}
+
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1*LMUL(nfields), sew, 0))
+			for nf := 0; nf < nfields; nf++ {
+				builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3+(nf*int(c.LMUL1)), c.LMUL1, sew))
+				builder.WriteString(fmt.Sprintf("li a5, %d\n", i.vlenb()*int(c.LMUL1)))
+				builder.WriteString("add a0, a0, a5\n")
+			}
+
+			builder.WriteString(i.gWriteIndexData(c.LMUL1, LMUL(emul), c.Vl, sew, c.SEW))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs1, LMUL(emul), c.SEW))
 
 			builder.WriteString(i.gResultDataAddr())
@@ -48,8 +60,8 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
 			builder.WriteString(fmt.Sprintf("%s v%d, (a0), v%d%s\n", i.Name, vs3, vs1, v0t(c.Mask)))
 			builder.WriteString("# -------------- TEST END   --------------\n")
 
-			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, sew))
-			builder.WriteString(i.gMagicInsn(vs3, lmul1))
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, sew))
+			builder.WriteString(i.gMagicInsn(vs3, c.LMUL1))
 		}
 		res = append(res, builder.String())
 	}

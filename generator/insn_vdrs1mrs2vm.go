@@ -2,12 +2,11 @@ package generator
 
 import (
 	"fmt"
-	"math"
 	"strings"
 )
 
 func (i *Insn) genCodeVdRs1mRs2Vm(pos int) []string {
-	nfields := getNfieldsRoundedUp(i.Name)
+	nfields := getNfields(i.Name)
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
@@ -23,11 +22,12 @@ func (i *Insn) genCodeVdRs1mRs2Vm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-		lmul1 := LMUL(math.Max(float64(c.LMUL1)*float64(nfields), 1))
-		vd, _, _ := getVRegs(lmul1, false, i.Name)
-		builder.WriteString(i.gWriteRandomData(lmul1))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, lmul1, c.SEW))
-		builder.WriteString(i.gWriteIntegerTestData(lmul1, c.SEW, 0))
+		vd := int(c.LMUL1)
+		builder.WriteString(i.gWriteRandomData(c.LMUL1))
+		for nf := 0; nf < nfields; nf++ {
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd+(nf*int(c.LMUL1)), c.LMUL1, c.SEW))
+		}
+		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1*LMUL(nfields), c.SEW, 0))
 
 		builder.WriteString("# -------------- TEST BEGIN --------------\n")
 		builder.WriteString(i.gVsetvli(c.Vl, c.SEW, c.LMUL))
@@ -35,15 +35,16 @@ func (i *Insn) genCodeVdRs1mRs2Vm(pos int) []string {
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
 		builder.WriteString(i.gResultDataAddr())
-		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, lmul1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd, lmul1))
+		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, c.SEW))
+		builder.WriteString(i.gMagicInsn(vd, c.LMUL1))
 
 		for _, stride := range []int{minStride, 0, 1, maxStride} {
 			stride = stride * int(c.SEW) / 8
-			builder.WriteString(i.gWriteRandomData(lmul1))
-			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, lmul1, c.SEW))
-			builder.WriteString(i.gWriteIntegerTestData(lmul1*strides, c.SEW, 0))
-
+			builder.WriteString(i.gWriteRandomData(c.LMUL1))
+			for nf := 0; nf < nfields; nf++ {
+				builder.WriteString(i.gLoadDataIntoRegisterGroup(vd+(nf*int(c.LMUL1)), c.LMUL1, c.SEW))
+			}
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1*LMUL(nfields*stride), c.SEW, 0))
 			builder.WriteString(fmt.Sprintf("li a5, %d\n", -minStride*i.vlenb()*int(c.LMUL1)))
 			builder.WriteString("add a0, a0, a5\n")
 
@@ -54,8 +55,10 @@ func (i *Insn) genCodeVdRs1mRs2Vm(pos int) []string {
 			builder.WriteString("# -------------- TEST END   --------------\n")
 
 			builder.WriteString(i.gResultDataAddr())
-			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, lmul1, c.SEW))
-			builder.WriteString(i.gMagicInsn(vd, lmul1))
+			for nf := 0; nf < nfields; nf++ {
+				builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd+(nf*int(c.LMUL1)), c.LMUL1, c.SEW))
+				builder.WriteString(i.gMagicInsn(vd+(nf*int(c.LMUL1)), c.LMUL1))
+			}
 		}
 		res = append(res, builder.String())
 	}

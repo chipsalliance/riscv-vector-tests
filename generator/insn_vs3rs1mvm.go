@@ -2,12 +2,11 @@ package generator
 
 import (
 	"fmt"
-	"math"
 	"strings"
 )
 
 func (i *Insn) genCodeVs3Rs1mVm(pos int) []string {
-	nfields := getNfieldsRoundedUp(i.Name)
+	nfields := getNfields(i.Name)
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
@@ -23,10 +22,14 @@ func (i *Insn) genCodeVs3Rs1mVm(pos int) []string {
 		builder.WriteString(i.gWriteRandomData(LMUL(1)))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-		lmul1 := LMUL(math.Max(float64(c.LMUL1)*float64(nfields), 1))
-		vs3, _, _ := getVRegs(lmul1, false, i.Name)
-		builder.WriteString(i.gWriteIntegerTestData(lmul1, c.SEW, 0))
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, c.SEW))
+		vs3 := int(c.LMUL1)
+
+		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1*LMUL(nfields), c.SEW, 0))
+		for nf := 0; nf < nfields; nf++ {
+			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3+(nf*int(c.LMUL1)), c.LMUL1, c.SEW))
+			builder.WriteString(fmt.Sprintf("li a5, %d\n", i.vlenb()*int(c.LMUL1)))
+			builder.WriteString("add a0, a0, a5\n")
+		}
 
 		builder.WriteString(i.gResultDataAddr())
 
@@ -35,8 +38,8 @@ func (i *Insn) genCodeVs3Rs1mVm(pos int) []string {
 		builder.WriteString(fmt.Sprintf("%s v%d, (a0)%s\n", i.Name, vs3, v0t(c.Mask)))
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
-		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, lmul1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vs3, lmul1))
+		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
+		builder.WriteString(i.gMagicInsn(vs3, c.LMUL1))
 
 		res = append(res, builder.String())
 	}

@@ -462,16 +462,24 @@ tests = \
   vloxseg2ei32_v-0 \
   vloxseg2ei32_v-1 \
   vloxseg2ei64_v-0 \
+  vloxseg2ei64_v-1 \
   vloxseg2ei8_v-0 \
   vloxseg2ei8_v-1 \
   vloxseg3ei16_v-0 \
+  vloxseg3ei16_v-1 \
   vloxseg3ei32_v-0 \
+  vloxseg3ei32_v-1 \
   vloxseg3ei64_v-0 \
   vloxseg3ei8_v-0 \
+  vloxseg3ei8_v-1 \
   vloxseg4ei16_v-0 \
+  vloxseg4ei16_v-1 \
   vloxseg4ei32_v-0 \
+  vloxseg4ei32_v-1 \
   vloxseg4ei64_v-0 \
+  vloxseg4ei64_v-1 \
   vloxseg4ei8_v-0 \
+  vloxseg4ei8_v-1 \
   vloxseg5ei16_v-0 \
   vloxseg5ei32_v-0 \
   vloxseg5ei64_v-0 \
@@ -553,17 +561,25 @@ tests = \
   vlseg8e8_v-0 \
   vlseg8e8ff_v-0 \
   vlsseg2e16_v-0 \
+  vlsseg2e16_v-1 \
   vlsseg2e32_v-0 \
+  vlsseg2e32_v-1 \
   vlsseg2e64_v-0 \
+  vlsseg2e64_v-1 \
   vlsseg2e8_v-0 \
+  vlsseg2e8_v-1 \
   vlsseg3e16_v-0 \
   vlsseg3e32_v-0 \
   vlsseg3e64_v-0 \
   vlsseg3e8_v-0 \
   vlsseg4e16_v-0 \
+  vlsseg4e16_v-1 \
   vlsseg4e32_v-0 \
+  vlsseg4e32_v-1 \
   vlsseg4e64_v-0 \
+  vlsseg4e64_v-1 \
   vlsseg4e8_v-0 \
+  vlsseg4e8_v-1 \
   vlsseg5e16_v-0 \
   vlsseg5e32_v-0 \
   vlsseg5e64_v-0 \
@@ -592,16 +608,24 @@ tests = \
   vluxseg2ei32_v-0 \
   vluxseg2ei32_v-1 \
   vluxseg2ei64_v-0 \
+  vluxseg2ei64_v-1 \
   vluxseg2ei8_v-0 \
   vluxseg2ei8_v-1 \
   vluxseg3ei16_v-0 \
+  vluxseg3ei16_v-1 \
   vluxseg3ei32_v-0 \
+  vluxseg3ei32_v-1 \
   vluxseg3ei64_v-0 \
   vluxseg3ei8_v-0 \
+  vluxseg3ei8_v-1 \
   vluxseg4ei16_v-0 \
+  vluxseg4ei16_v-1 \
   vluxseg4ei32_v-0 \
+  vluxseg4ei32_v-1 \
   vluxseg4ei64_v-0 \
+  vluxseg4ei64_v-1 \
   vluxseg4ei8_v-0 \
+  vluxseg4ei8_v-1 \
   vluxseg5ei16_v-0 \
   vluxseg5ei32_v-0 \
   vluxseg5ei64_v-0 \
@@ -1173,6 +1197,7 @@ tests = \
   vsoxseg2ei16_v-0 \
   vsoxseg2ei16_v-1 \
   vsoxseg2ei32_v-0 \
+  vsoxseg2ei32_v-1 \
   vsoxseg2ei64_v-0 \
   vsoxseg2ei8_v-0 \
   vsoxseg2ei8_v-1 \
@@ -1181,9 +1206,12 @@ tests = \
   vsoxseg3ei64_v-0 \
   vsoxseg3ei8_v-0 \
   vsoxseg4ei16_v-0 \
+  vsoxseg4ei16_v-1 \
   vsoxseg4ei32_v-0 \
+  vsoxseg4ei32_v-1 \
   vsoxseg4ei64_v-0 \
   vsoxseg4ei8_v-0 \
+  vsoxseg4ei8_v-1 \
   vsoxseg5ei16_v-0 \
   vsoxseg5ei32_v-0 \
   vsoxseg5ei64_v-0 \
@@ -1224,12 +1252,16 @@ tests = \
   vsrl_vx-5 \
   vsse16_v-0 \
   vsse16_v-1 \
+  vsse16_v-2 \
   vsse32_v-0 \
   vsse32_v-1 \
+  vsse32_v-2 \
   vsse64_v-0 \
   vsse64_v-1 \
+  vsse64_v-2 \
   vsse8_v-0 \
   vsse8_v-1 \
+  vsse8_v-2 \
   vsseg2e16_v-0 \
   vsseg2e32_v-0 \
   vsseg2e64_v-0 \
@@ -1365,13 +1397,21 @@ tests = \
   vssseg2e8_v-0 \
   vssseg2e8_v-1 \
   vssseg3e16_v-0 \
+  vssseg3e16_v-1 \
   vssseg3e32_v-0 \
+  vssseg3e32_v-1 \
   vssseg3e64_v-0 \
+  vssseg3e64_v-1 \
   vssseg3e8_v-0 \
+  vssseg3e8_v-1 \
   vssseg4e16_v-0 \
+  vssseg4e16_v-1 \
   vssseg4e32_v-0 \
+  vssseg4e32_v-1 \
   vssseg4e64_v-0 \
+  vssseg4e64_v-1 \
   vssseg4e8_v-0 \
+  vssseg4e8_v-1 \
   vssseg5e16_v-0 \
   vssseg5e32_v-0 \
   vssseg5e64_v-0 \
@@ -1428,6 +1468,7 @@ tests = \
   vsuxseg2ei16_v-0 \
   vsuxseg2ei16_v-1 \
   vsuxseg2ei32_v-0 \
+  vsuxseg2ei32_v-1 \
   vsuxseg2ei64_v-0 \
   vsuxseg2ei8_v-0 \
   vsuxseg2ei8_v-1 \
@@ -1436,9 +1477,12 @@ tests = \
   vsuxseg3ei64_v-0 \
   vsuxseg3ei8_v-0 \
   vsuxseg4ei16_v-0 \
+  vsuxseg4ei16_v-1 \
   vsuxseg4ei32_v-0 \
+  vsuxseg4ei32_v-1 \
   vsuxseg4ei64_v-0 \
   vsuxseg4ei8_v-0 \
+  vsuxseg4ei8_v-1 \
   vsuxseg5ei16_v-0 \
   vsuxseg5ei32_v-0 \
   vsuxseg5ei64_v-0 \

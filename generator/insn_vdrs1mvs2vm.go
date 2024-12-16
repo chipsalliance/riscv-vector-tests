@@ -7,7 +7,7 @@ import (
 )
 
 func (i *Insn) genCodeVdRs1mVs2Vm(pos int) []string {
-	nfields := getNfieldsRoundedUp(i.Name)
+	nfields := getNfields(i.Name)
 	combinations := i.combinations(
 		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
@@ -27,21 +27,29 @@ func (i *Insn) genCodeVdRs1mVs2Vm(pos int) []string {
 			if emul > 8 || emul < 1./8 {
 				continue
 			}
-			emul = math.Max(emul, 1)
+			emul = math.Max(emul, 1) // offset lmul
 			builder.WriteString(c.initialize())
 
 			builder.WriteString(i.gWriteRandomData(LMUL(1)))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(0, LMUL(1), SEW(32)))
 
-			lmul1 := LMUL(math.Max(float64(c.LMUL)*float64(nfields), 1))
-			vd := int(lmul1)
-			vs2 := 2 * int(math.Max(emul, float64(int(c.LMUL1)*nfields)))
+			vd := int(c.LMUL1)
 
-			builder.WriteString(i.gWriteIndexData(lmul1, LMUL(emul), c.Vl, sew, c.SEW))
+			vs2 := 0
+			for k := vd+int(c.LMUL1)*nfields; true; k += 1 {
+				if k % int(emul) == 0 {
+					vs2 = k
+					break
+				}
+			}
+
+			builder.WriteString(i.gWriteIndexData(c.LMUL1, LMUL(emul), c.Vl, sew, c.SEW))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, LMUL(emul), c.SEW))
-			builder.WriteString(i.gWriteRandomData(lmul1))
-			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, lmul1, sew))
-			builder.WriteString(i.gWriteIntegerTestData(lmul1, sew, 0))
+			builder.WriteString(i.gWriteRandomData(c.LMUL1))
+			for nf := 0; nf < nfields; nf++ {
+				builder.WriteString(i.gLoadDataIntoRegisterGroup(vd+(nf*int(c.LMUL1)), c.LMUL1, sew))
+			}
+			builder.WriteString(i.gWriteIntegerTestData(c.LMUL1*LMUL(nfields), sew, 0))
 
 			builder.WriteString("# -------------- TEST BEGIN --------------\n")
 			builder.WriteString(i.gVsetvli(c.Vl, sew, c.LMUL))
@@ -49,8 +57,10 @@ func (i *Insn) genCodeVdRs1mVs2Vm(pos int) []string {
 			builder.WriteString("# -------------- TEST END   --------------\n")
 
 			builder.WriteString(i.gResultDataAddr())
-			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, lmul1, sew))
-			builder.WriteString(i.gMagicInsn(vd, lmul1))
+			for nf := 0; nf < nfields; nf++ {
+				builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd+(nf*int(c.LMUL1)), c.LMUL1, sew))
+				builder.WriteString(i.gMagicInsn(vd+(nf*int(c.LMUL1)), c.LMUL1))
+			}
 		}
 		res = append(res, builder.String())
 	}
