@@ -1,4 +1,5 @@
 name = "vmerge.vxm"
+fp = false
 format = "vd,vs2,rs1,v0"
 
 [tests]

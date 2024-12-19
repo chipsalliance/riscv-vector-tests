@@ -1,4 +1,5 @@
 name = "vs1r.v"
+fp = false
 format = "vs3,(rs1)"
 
 [tests]

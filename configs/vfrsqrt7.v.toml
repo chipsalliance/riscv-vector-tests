@@ -1,4 +1,5 @@
 name = "vfrsqrt7.v"
+fp = true
 format = "vd,vs2,vm"
 
 [tests]

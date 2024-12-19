@@ -1,4 +1,5 @@
 name = "vwmacc.vv"
+fp = false
 format = "vd,vs1,vs2,vm"
 
 [tests]
