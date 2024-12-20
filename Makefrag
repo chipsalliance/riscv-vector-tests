@@ -1522,6 +1522,7 @@ tests = \
   vsll_vx-6 \
   vsll_vx-7 \
   vsm3c_vi-0 \
+  vsm3c_vi-1 \
   vsm3me_vv-0 \
   vsm4k_vi-0 \
   vsm4k_vi-1 \
@@ -1656,18 +1657,10 @@ tests = \
   vsrl_vx-7 \
   vsse16_v-0 \
   vsse16_v-1 \
-  vsse16_v-2 \
-  vsse16_v-3 \
   vsse32_v-0 \
-  vsse32_v-1 \
-  vsse32_v-2 \
   vsse64_v-0 \
-  vsse64_v-1 \
-  vsse64_v-2 \
   vsse8_v-0 \
   vsse8_v-1 \
-  vsse8_v-2 \
-  vsse8_v-3 \
   vsseg2e16_v-0 \
   vsseg2e32_v-0 \
   vsseg2e64_v-0 \
@@ -1834,42 +1827,31 @@ tests = \
   vssrl_vx-9 \
   vssseg2e16_v-0 \
   vssseg2e16_v-1 \
-  vssseg2e16_v-2 \
   vssseg2e32_v-0 \
   vssseg2e32_v-1 \
-  vssseg2e32_v-2 \
   vssseg2e64_v-0 \
-  vssseg2e64_v-1 \
   vssseg2e8_v-0 \
   vssseg2e8_v-1 \
-  vssseg2e8_v-2 \
-  vssseg2e8_v-3 \
   vssseg3e16_v-0 \
   vssseg3e16_v-1 \
-  vssseg3e16_v-2 \
   vssseg3e32_v-0 \
   vssseg3e32_v-1 \
   vssseg3e64_v-0 \
-  vssseg3e64_v-1 \
   vssseg3e8_v-0 \
   vssseg3e8_v-1 \
   vssseg3e8_v-2 \
-  vssseg3e8_v-3 \
   vssseg4e16_v-0 \
   vssseg4e16_v-1 \
   vssseg4e16_v-2 \
   vssseg4e32_v-0 \
   vssseg4e32_v-1 \
-  vssseg4e32_v-2 \
   vssseg4e64_v-0 \
   vssseg4e64_v-1 \
   vssseg4e8_v-0 \
   vssseg4e8_v-1 \
   vssseg4e8_v-2 \
-  vssseg4e8_v-3 \
   vssseg5e16_v-0 \
   vssseg5e16_v-1 \
-  vssseg5e16_v-2 \
   vssseg5e32_v-0 \
   vssseg5e32_v-1 \
   vssseg5e64_v-0 \
@@ -1899,13 +1881,16 @@ tests = \
   vssseg8e16_v-0 \
   vssseg8e16_v-1 \
   vssseg8e16_v-2 \
+  vssseg8e16_v-3 \
   vssseg8e32_v-0 \
   vssseg8e32_v-1 \
+  vssseg8e32_v-2 \
   vssseg8e64_v-0 \
   vssseg8e8_v-0 \
   vssseg8e8_v-1 \
   vssseg8e8_v-2 \
   vssseg8e8_v-3 \
+  vssseg8e8_v-4 \
   vssub_vv-0 \
   vssub_vv-1 \
   vssub_vv-2 \

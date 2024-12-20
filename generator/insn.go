@@ -348,10 +348,12 @@ RVTEST_CODE_END
 }
 
 func (i *Insn) genData() string {
-	dataSize := i.vlenb() * (8 /* max LMUL */)
+	dataSize := i.vlenb() * 8 /* max LMUL */ * 8 /* max NFIELDS */
 	// Stride insns
 	if strings.HasPrefix(i.Name, "vlse") ||
-		strings.HasPrefix(i.Name, "vsse") {
+		strings.HasPrefix(i.Name, "vsse") ||
+		strings.HasPrefix(i.Name, "vlsse") ||
+		strings.HasPrefix(i.Name, "vssse") {
 		dataSize *= strides
 	} else if strings.HasPrefix(i.Name, "vw") ||
 		strings.HasPrefix(i.Name, "vfw") {

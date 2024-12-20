@@ -37,8 +37,8 @@ func (i *Insn) genCodeVs3Rs1mVs2Vm(pos int) []string {
 			vs3 := int(c.LMUL1)
 
 			vs1 := 0
-			for k := vs3+int(c.LMUL1)*nfields; true; k += 1 {
-				if k % int(emul) == 0 {
+			for k := vs3 + int(c.LMUL1)*nfields; true; k += 1 {
+				if k%int(emul) == 0 {
 					vs1 = k
 					break
 				}
