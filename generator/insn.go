@@ -238,7 +238,7 @@ func (i *Insn) genCodeCombinations(pos int) []string {
 func ReadInsnFromToml(contents []byte, option Option) (*Insn, error) {
 	i := Insn{
 		Option:   option,
-		EGW:      int(option.XLEN),
+		EGW:      0,
 		TestData: &TestData{},
 	}
 
@@ -493,7 +493,7 @@ csrci vxsat, 1
 func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM) []combination {
 	res := make([]combination, 0)
 	for _, lmul := range lmuls {
-		if int(lmul)*int(i.Option.VLEN) < i.EGW {
+		if i.EGW > 0 && int(float64(lmul)*float64(i.Option.VLEN)) < i.EGW {
 			continue
 		}
 		for _, sew := range sews {
@@ -555,6 +555,12 @@ func (i *Insn) vsetvlicombinations(lmuls []LMUL, sews []SEW, vtas []bool, vmas [
 	res := make([]vsetvlicombinations, 0)
 	for _, lmul := range lmuls {
 		for _, sew := range sews {
+			if int(i.Option.XLEN) < int(sew) {
+				continue
+			}
+			if float64(lmul) < float64(sew)/float64(i.Option.XLEN) {
+				continue
+			}
 			for _, vta := range vtas {
 				for _, vma := range vmas {
 					res = append(res, vsetvlicombinations{
