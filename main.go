@@ -92,10 +92,10 @@ func main() {
 			fatalIf(err)
 
 			option := generator.Option{
-				VLEN:   generator.VLEN(*vlenF),
-				XLEN:   generator.XLEN(*xlenF),
-				Repeat: *repeatF,
-                                Float16: *float16F,
+				VLEN:    generator.VLEN(*vlenF),
+				XLEN:    generator.XLEN(*xlenF),
+				Repeat:  *repeatF,
+				Float16: *float16F,
 			}
 			if (!strings.HasPrefix(file.Name(), "vf") && !strings.HasPrefix(file.Name(), "vmf")) || strings.HasPrefix(file.Name(), "vfirst") {
 				option.Repeat = 1

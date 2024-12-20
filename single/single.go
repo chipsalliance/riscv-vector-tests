@@ -50,9 +50,9 @@ func main() {
 	testfloat3.SetLevel(*testfloat3LevelF)
 
 	option := generator.Option{
-		VLEN:   generator.VLEN(*vlenF),
-		XLEN:   generator.XLEN(*xlenF),
-		Repeat: *repeatF,
+		VLEN:    generator.VLEN(*vlenF),
+		XLEN:    generator.XLEN(*xlenF),
+		Repeat:  *repeatF,
 		Float16: *float16F,
 	}
 
