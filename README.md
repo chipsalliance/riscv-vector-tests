@@ -39,8 +39,6 @@ The Spike simulator is known as the RISC-V gold standard simulator, and although
 3. Golang 1.19+
 4. `riscv-pk` if you need to generate user-mode binaries
 
-For starters, you can directly download the pre-generated tests from Github Action Artifacts.
-
 ## How to use
 
 ```
