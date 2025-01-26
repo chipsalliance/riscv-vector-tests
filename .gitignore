@@ -15,3 +15,5 @@ vendor/
 
 # ccls
 .ccls-cache/
+
+Makefrag
