@@ -16,6 +16,44 @@ import (
 	"github.com/ksco/riscv-vector-tests/testfloat3"
 )
 
+func parse_extension(march string) []string {
+	var valid_exts = []string{"zvbb", "zvbc", "zfh", "zvfh", "zvkg", "zvkned", "zvknha", "zvksed", "zvksh"}
+	var exts = []string{}
+	exts = append(exts, "v") // standard RVV
+	for _, s := range valid_exts {
+		for _, e := range strings.Split(march, "_") {
+			if e == s {
+				exts = append(exts, e)
+				break
+			}
+		}
+	}
+	return exts
+}
+
+type FileTuple struct {
+	Entry    os.DirEntry
+	FullPath string
+}
+
+func walkDirectories(root string) (map[string][]FileTuple, error) {
+	filesByDir := make(map[string][]FileTuple)
+	err := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if !d.IsDir() {
+			parentDir := filepath.Base(filepath.Dir(path))
+			filesByDir[parentDir] = append(filesByDir[parentDir], FileTuple{Entry: d, FullPath: path})
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return filesByDir, nil
+}
+
 func fatalIf(err error) {
 	if err == nil {
 		return
@@ -28,12 +66,13 @@ var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "we do not support specifying ELEN yet, ELEN is consistent with XLEN.")
 var splitF = flag.Int("split", 10000, "split per lines.")
 var integerF = flag.Bool("integer", false, "only generate integer tests.")
-var float16F = flag.Bool("float16", true, "generate float16 tests")
+var float16F = false
 var patternF = flag.String("pattern", ".*", "regex to filter out tests.")
 var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.")
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
 var repeatF = flag.Int("repeat", 1, "repeat same V instruction n times for a better coverage (only valid for float instructions).")
+var march = flag.String("march", "gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh", "march")
 
 func main() {
 	flag.Parse()
@@ -55,15 +94,30 @@ func main() {
 
 	testfloat3.SetLevel(*testfloat3LevelF)
 
-	files, err := os.ReadDir(*configsDirF)
+	extensions := parse_extension(*march)
+	extFiles, err := walkDirectories(*configsDirF)
 	fatalIf(err)
+
+	fileTuples := make([]FileTuple, 0)
+	for _, e := range extensions {
+		fs, ok := extFiles[e]
+		if ok {
+			fileTuples = append(fileTuples, fs...)
+			if e == "zvfh" {
+				float16F = true
+			}
+			println("Test extension: ", e)
+		}
+	}
 
 	println("Generating...")
 
 	makefrag := make([]string, 0)
 	lk := sync.Mutex{}
 	wg := sync.WaitGroup{}
-	for _, file := range files {
+	for _, fileTuple := range fileTuples {
+		fp := fileTuple.FullPath
+		file := fileTuple.Entry
 		if *integerF && (strings.HasPrefix(file.Name(), "vf") || strings.HasPrefix(file.Name(), "vmf")) && !strings.HasPrefix(file.Name(), "vfirst") {
 			continue
 		}
@@ -75,7 +129,6 @@ func main() {
 		wg.Add(1)
 		go func(file os.DirEntry) {
 			name := file.Name()
-			fp := filepath.Join(*configsDirF, name)
 			if file.IsDir() ||
 				!strings.HasPrefix(name, "v") ||
 				!strings.HasSuffix(name, ".toml") {
@@ -95,7 +148,7 @@ func main() {
 				VLEN:    generator.VLEN(*vlenF),
 				XLEN:    generator.XLEN(*xlenF),
 				Repeat:  *repeatF,
-				Float16: *float16F,
+				Float16: float16F,
 			}
 			if (!strings.HasPrefix(file.Name(), "vf") && !strings.HasPrefix(file.Name(), "vmf")) || strings.HasPrefix(file.Name(), "vfirst") {
 				option.Repeat = 1

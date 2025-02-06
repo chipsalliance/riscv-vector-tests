@@ -32,9 +32,6 @@
   INTEGER = 0##
         ##Set to [1] if you don't want float tests (i.e. for Zve32x or Zve64x)
         ##
-  FLOAT16 = 1##
-        ##Set to [0] if you don't want float16 (Zvfh) tests
-        ##
   PATTERN = '.*'##
         ##Set to a valid regex to generate the tests of your interests (e.g. PATTERN='^v[ls].+\.v$' to generate only load/store tests)
         ##
@@ -47,6 +44,11 @@
   TEST_MODE = self##
         ##Change to [cosim] if you want to generate faster tests without self-verification (to be used with co-simulators).
         ##
+  MARCH = rv${XLEN}gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh
+        ##Set the ISA string to define the base architecture and enabled extensions.
+        ##If your compiler doesn't support vector crypto extensions, you can use MARCH = rv${XLEN}gv_zfh_zvfh
+        ##If your compiler doesn't support half floating, you can use MARCH = rv${XLEN}gv
+
 SPIKE_INSTALL = $(RISCV)
 OUTPUT = out/v$(VLEN)x$(XLEN)$(MODE)
 OUTPUT_STAGE1 = $(OUTPUT)/tests/stage1/
@@ -58,7 +60,6 @@ CONFIGS = configs/
 
 SPIKE = spike
 PATCHER_SPIKE = build/pspike
-MARCH = rv${XLEN}gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh
 MABI = lp64d
 
 ifeq ($(XLEN), 32)
@@ -115,7 +116,8 @@ unittest:
 
 generate-stage1: clean-out build
 	@mkdir -p ${OUTPUT_STAGE1}
-	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -float16=${FLOAT16} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS}
+	-rm -rf Makefrag
+	build/generator -VLEN ${VLEN} -XLEN ${XLEN} -split=${SPLIT} -integer=${INTEGER} -pattern='${PATTERN}' -testfloat3level='${TESTFLOAT3LEVEL}' -repeat='${REPEAT}' -stage1output ${OUTPUT_STAGE1} -configs ${CONFIGS} -march ${MARCH}
 
 include Makefrag
 
