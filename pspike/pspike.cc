@@ -89,7 +89,8 @@ int main(int argc, char** argv) {
             true,
             nullptr,
             false,
-            nullptr);
+            nullptr,
+            std::nullopt);
   magic_extension_t magic;
   sim.get_core(0)->register_extension(&magic);
   sim.run();
