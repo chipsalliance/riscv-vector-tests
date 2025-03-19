@@ -127,8 +127,7 @@ func (i *Insn) gLoadDataIntoRegisterGroup(
 	group int, lmul LMUL, sew SEW) string {
 	builder := strings.Builder{}
 	builder.WriteString(fmt.Sprintf("\n# Load data into v%d register group.\n", group))
-	builder.WriteString("li t0, -1\n")
-	builder.WriteString(fmt.Sprintf("vsetvli t1, t0, %s,%s,tu,mu\n", sew.String(), lmul.String()))
+	builder.WriteString(fmt.Sprintf("vsetvli t1, x0, %s,%s,tu,mu\n", sew.String(), lmul.String()))
 	builder.WriteString(fmt.Sprintf("vle%d.v v%d, (a0)\n\n", sew, group))
 	return builder.String()
 }
@@ -138,8 +137,7 @@ func (i *Insn) gStoreRegisterGroupIntoResultData(
 	builder := strings.Builder{}
 
 	builder.WriteString(fmt.Sprintf("\n# Store v%d register group into result data area.\n", group))
-	builder.WriteString("li t0, -1\n")
-	builder.WriteString(fmt.Sprintf("vsetvli t1, t0, %s,%s,tu,mu\n",
+	builder.WriteString(fmt.Sprintf("vsetvli t1, x0, %s,%s,tu,mu\n",
 		sew.String(), lmul.String()))
 	builder.WriteString(fmt.Sprintf("vse%d.v v%d, (a0)\n\n", sew, group))
 	return builder.String()
@@ -151,8 +149,7 @@ func (i *Insn) gMoveScalarToVector(scalar string, vector int, sew SEW) string {
 
 	builder.WriteString(fmt.Sprintf("\n# Move %s to the elem 0 of v%d\n", scalar, vector))
 
-	builder.WriteString("li t0, -1\n")
-	builder.WriteString(fmt.Sprintf("vsetvli t1, t0, %s,m1,tu,mu\n", sew.String()))
+	builder.WriteString(fmt.Sprintf("vsetvli t1, x0, %s,m1,tu,mu\n", sew.String()))
 	builder.WriteString(fmt.Sprintf("v%smv.s.%s v%d, %s\n",
 		iff(float, "f", ""), iff(float, "f", "x"), vector, scalar))
 
