@@ -1,5 +1,5 @@
 name = "vgmul.vv"
-format = "vd,vs2"
+format = "vd,vs2,vs1"
 
 [tests]
 base = [
