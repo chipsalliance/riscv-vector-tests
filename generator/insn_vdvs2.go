@@ -9,8 +9,12 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2(pos int) []string {
-	sew32OnlyInsn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsm4")
+	sew32OnlyInsn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsm4") || strings.HasPrefix(i.Name, "vaes")
 	sews := iff(sew32OnlyInsn, []SEW{32}, allSEWs)
+
+	if sew32OnlyInsn {
+		i.EGW = 128
+	}
 
 	var nr int
 	var err error
@@ -22,7 +26,12 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 		}
 	}
 
-	combinations := i.combinations([]LMUL{LMUL(nr)}, sews, []bool{false}, i.vxrms())
+	var combinations []combination
+	if sew32OnlyInsn {
+		combinations = i.combinations(allLMULs, sews, []bool{false}, i.vxrms())
+	} else {
+		combinations = i.combinations([]LMUL{LMUL(nr)}, sews, []bool{false}, i.vxrms())
+	}
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
