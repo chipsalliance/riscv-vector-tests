@@ -470,20 +470,21 @@ type combination struct {
 	LMUL1 LMUL
 	Vl    int
 	Mask  bool
-	VXRM  VXRM
+	RM    RM
+	FRM   bool
 	VXSAT VXSAT
 }
 
 func (c *combination) initialize() string {
-	// write comments, set vxrm, clear vxsat if necessary
+	// write comments, set vxrm/frm, clear vxsat if necessary
 	str := fmt.Sprintf(`
 # Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v
 
-# Initialize vxrm CSR
-csrwi vxrm, %d # %s
+# Initialize rounding mode CSR
+csrwi %s, %d # %s
 
 `,
-		c.Vl, c.LMUL.String(), c.SEW.String(), c.Mask, c.VXRM, c.VXRM)
+		c.Vl, c.LMUL.String(), c.SEW.String(), c.Mask, iff(c.FRM, "frm", "vxrm"), c.RM, iff(c.FRM, c.RM.FRMString(), c.RM.VXRMString()))
 	if c.VXSAT {
 		str = fmt.Sprintf(`%s# Clear vxsat CSR
 csrci vxsat, 1
@@ -493,7 +494,7 @@ csrci vxsat, 1
 	return str
 }
 
-func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM) []combination {
+func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, rms []RM) []combination {
 	res := make([]combination, 0)
 	for _, lmul := range lmuls {
 		if i.EGW > 0 && int(float64(lmul)*float64(i.Option.VLEN)) < i.EGW {
@@ -511,14 +512,15 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM
 				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))
 				rand.Seed(int64(vlmax1))
 				for _, vl := range []int{0, vlmax1/2 - 1, vlmax1 / 2, vlmax1, vlmax1 - 1, vlmax1 + 1, rand.Intn(vlmax1), rand.Intn(vlmax1), rand.Intn(vlmax1)} {
-					for _, vxrm := range vxrms {
+					for _, rm := range rms {
 						res = append(res, combination{
 							SEW:   sew,
 							LMUL:  lmul,
 							LMUL1: lmul1,
 							Vl:    vl,
 							Mask:  mask,
-							VXRM:  vxrm,
+							RM:    rm,
+							FRM:   i.Option.Fp,
 							VXSAT: VXSAT(i.Vxsat),
 						})
 					}
@@ -530,11 +532,13 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM
 	return res
 }
 
-func (i *Insn) vxrms() []VXRM {
+func (i *Insn) rms() []RM {
 	if i.Vxrm {
 		return allVXRMs
+	} else if i.Option.Fp {
+		return allFRMs
 	}
-	return noVXRMs
+	return noRMs
 }
 
 type vsetvlicombinations struct {

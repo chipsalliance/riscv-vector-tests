@@ -11,7 +11,7 @@ func (i *Insn) genCodeVs3Rs1mRs2Vm(pos int) []string {
 		nfieldsLMULs(nfields),
 		[]SEW{getEEW(i.Name)},
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 

@@ -7,7 +7,7 @@ import (
 
 func (i *Insn) genCodeVdRs1(pos int) []string {
 	lmuls := iff(strings.HasSuffix(i.Name, ".s.x"), []LMUL{1}, allLMULs)
-	combinations := i.combinations(lmuls, allSEWs, []bool{false}, i.vxrms())
+	combinations := i.combinations(lmuls, allSEWs, []bool{false}, i.rms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {

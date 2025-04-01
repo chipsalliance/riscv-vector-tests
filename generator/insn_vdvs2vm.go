@@ -15,7 +15,7 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 
 	lmuls := iff(vdWidening || vdNarrowing, wideningMULs, allLMULs)
 	sews := iff(vdWidening || vdNarrowing, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
-	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.vxrms())
+	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.rms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {

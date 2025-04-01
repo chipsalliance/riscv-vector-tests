@@ -22,7 +22,7 @@ func (i *Insn) genCodeVdVs2Uimm(pos int) []string {
 		allLMULs,
 		sews,
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 

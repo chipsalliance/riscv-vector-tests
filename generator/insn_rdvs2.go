@@ -6,7 +6,7 @@ import (
 )
 
 func (i *Insn) genCodeRdVs2(pos int) []string {
-	combinations := i.combinations([]LMUL{1}, allSEWs, []bool{false}, i.vxrms())
+	combinations := i.combinations([]LMUL{1}, allSEWs, []bool{false}, i.rms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {

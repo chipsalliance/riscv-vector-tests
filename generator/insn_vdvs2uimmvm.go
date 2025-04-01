@@ -17,7 +17,7 @@ func (i *Insn) genCodeVdVs2UimmVm(pos int) []string {
 		iff(vdWidening || vs2Widening, wideningMULs, allLMULs),
 		sews,
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 

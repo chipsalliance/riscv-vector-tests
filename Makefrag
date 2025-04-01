@@ -8,7 +8,6 @@ tests = \
   vaadd_vv-6 \
   vaadd_vv-7 \
   vaadd_vv-8 \
-  vaadd_vv-9 \
   vaadd_vx-0 \
   vaadd_vx-1 \
   vaadd_vx-10 \
@@ -30,8 +29,6 @@ tests = \
   vaadd_vx-25 \
   vaadd_vx-26 \
   vaadd_vx-27 \
-  vaadd_vx-28 \
-  vaadd_vx-29 \
   vaadd_vx-3 \
   vaadd_vx-4 \
   vaadd_vx-5 \
@@ -48,7 +45,6 @@ tests = \
   vaaddu_vv-6 \
   vaaddu_vv-7 \
   vaaddu_vv-8 \
-  vaaddu_vv-9 \
   vaaddu_vx-0 \
   vaaddu_vx-1 \
   vaaddu_vx-10 \
@@ -70,8 +66,6 @@ tests = \
   vaaddu_vx-25 \
   vaaddu_vx-26 \
   vaaddu_vx-27 \
-  vaaddu_vx-28 \
-  vaaddu_vx-29 \
   vaaddu_vx-3 \
   vaaddu_vx-4 \
   vaaddu_vx-5 \
@@ -93,7 +87,6 @@ tests = \
   vadd_vi-2 \
   vadd_vi-3 \
   vadd_vi-4 \
-  vadd_vi-5 \
   vadd_vv-0 \
   vadd_vv-1 \
   vadd_vv-2 \
@@ -104,17 +97,24 @@ tests = \
   vadd_vx-4 \
   vadd_vx-5 \
   vadd_vx-6 \
-  vadd_vx-7 \
+  vaesdf_vs-0 \
+  vaesdf_vv-0 \
+  vaesdm_vs-0 \
+  vaesdm_vv-0 \
+  vaesef_vs-0 \
+  vaesef_vv-0 \
+  vaesem_vs-0 \
+  vaesem_vv-0 \
   vaeskf1_vi-0 \
   vaeskf1_vi-1 \
   vaeskf2_vi-0 \
   vaeskf2_vi-1 \
+  vaesz_vs-0 \
   vand_vi-0 \
   vand_vi-1 \
   vand_vi-2 \
   vand_vi-3 \
   vand_vi-4 \
-  vand_vi-5 \
   vand_vv-0 \
   vand_vv-1 \
   vand_vv-2 \
@@ -125,7 +125,6 @@ tests = \
   vand_vx-4 \
   vand_vx-5 \
   vand_vx-6 \
-  vand_vx-7 \
   vandn_vv-0 \
   vandn_vv-1 \
   vandn_vv-2 \
@@ -136,7 +135,6 @@ tests = \
   vandn_vx-4 \
   vandn_vx-5 \
   vandn_vx-6 \
-  vandn_vx-7 \
   vasub_vv-0 \
   vasub_vv-1 \
   vasub_vv-2 \
@@ -146,7 +144,6 @@ tests = \
   vasub_vv-6 \
   vasub_vv-7 \
   vasub_vv-8 \
-  vasub_vv-9 \
   vasub_vx-0 \
   vasub_vx-1 \
   vasub_vx-10 \
@@ -168,8 +165,6 @@ tests = \
   vasub_vx-25 \
   vasub_vx-26 \
   vasub_vx-27 \
-  vasub_vx-28 \
-  vasub_vx-29 \
   vasub_vx-3 \
   vasub_vx-4 \
   vasub_vx-5 \
@@ -186,7 +181,6 @@ tests = \
   vasubu_vv-6 \
   vasubu_vv-7 \
   vasubu_vv-8 \
-  vasubu_vv-9 \
   vasubu_vx-0 \
   vasubu_vx-1 \
   vasubu_vx-10 \
@@ -208,8 +202,6 @@ tests = \
   vasubu_vx-25 \
   vasubu_vx-26 \
   vasubu_vx-27 \
-  vasubu_vx-28 \
-  vasubu_vx-29 \
   vasubu_vx-3 \
   vasubu_vx-4 \
   vasubu_vx-5 \
@@ -218,9 +210,7 @@ tests = \
   vasubu_vx-8 \
   vasubu_vx-9 \
   vbrev8_v-0 \
-  vbrev8_v-1 \
   vbrev_v-0 \
-  vbrev_v-1 \
   vclmul_vv-0 \
   vclmul_vx-0 \
   vclmul_vx-1 \
@@ -228,13 +218,10 @@ tests = \
   vclmulh_vx-0 \
   vclmulh_vx-1 \
   vclz_v-0 \
-  vclz_v-1 \
   vcompress_vm-0 \
   vcpop_m-0 \
   vcpop_v-0 \
-  vcpop_v-1 \
   vctz_v-0 \
-  vctz_v-1 \
   vdiv_vv-0 \
   vdiv_vv-1 \
   vdiv_vv-2 \
@@ -261,262 +248,639 @@ tests = \
   vdivu_vx-8 \
   vfadd_vf-0 \
   vfadd_vf-1 \
+  vfadd_vf-10 \
+  vfadd_vf-11 \
+  vfadd_vf-12 \
+  vfadd_vf-13 \
+  vfadd_vf-14 \
+  vfadd_vf-15 \
   vfadd_vf-2 \
   vfadd_vf-3 \
   vfadd_vf-4 \
   vfadd_vf-5 \
+  vfadd_vf-6 \
+  vfadd_vf-7 \
+  vfadd_vf-8 \
+  vfadd_vf-9 \
   vfadd_vv-0 \
   vfadd_vv-1 \
+  vfadd_vv-2 \
+  vfadd_vv-3 \
+  vfadd_vv-4 \
   vfclass_v-0 \
   vfclass_v-1 \
+  vfclass_v-2 \
+  vfclass_v-3 \
   vfcvt_f_x_v-0 \
   vfcvt_f_x_v-1 \
+  vfcvt_f_x_v-2 \
+  vfcvt_f_x_v-3 \
   vfcvt_f_xu_v-0 \
   vfcvt_f_xu_v-1 \
+  vfcvt_f_xu_v-2 \
+  vfcvt_f_xu_v-3 \
   vfcvt_rtz_x_f_v-0 \
   vfcvt_rtz_x_f_v-1 \
+  vfcvt_rtz_x_f_v-2 \
+  vfcvt_rtz_x_f_v-3 \
   vfcvt_rtz_xu_f_v-0 \
   vfcvt_rtz_xu_f_v-1 \
+  vfcvt_rtz_xu_f_v-2 \
+  vfcvt_rtz_xu_f_v-3 \
   vfcvt_x_f_v-0 \
   vfcvt_x_f_v-1 \
+  vfcvt_x_f_v-2 \
+  vfcvt_x_f_v-3 \
   vfcvt_xu_f_v-0 \
   vfcvt_xu_f_v-1 \
+  vfcvt_xu_f_v-2 \
+  vfcvt_xu_f_v-3 \
   vfdiv_vf-0 \
   vfdiv_vf-1 \
+  vfdiv_vf-10 \
+  vfdiv_vf-11 \
+  vfdiv_vf-12 \
+  vfdiv_vf-13 \
+  vfdiv_vf-14 \
+  vfdiv_vf-15 \
+  vfdiv_vf-16 \
   vfdiv_vf-2 \
   vfdiv_vf-3 \
   vfdiv_vf-4 \
   vfdiv_vf-5 \
+  vfdiv_vf-6 \
+  vfdiv_vf-7 \
+  vfdiv_vf-8 \
+  vfdiv_vf-9 \
   vfdiv_vv-0 \
   vfdiv_vv-1 \
+  vfdiv_vv-2 \
+  vfdiv_vv-3 \
+  vfdiv_vv-4 \
   vfirst_m-0 \
   vfmacc_vf-0 \
   vfmacc_vf-1 \
+  vfmacc_vf-10 \
+  vfmacc_vf-11 \
+  vfmacc_vf-12 \
+  vfmacc_vf-13 \
+  vfmacc_vf-14 \
+  vfmacc_vf-15 \
+  vfmacc_vf-16 \
   vfmacc_vf-2 \
   vfmacc_vf-3 \
   vfmacc_vf-4 \
   vfmacc_vf-5 \
+  vfmacc_vf-6 \
+  vfmacc_vf-7 \
+  vfmacc_vf-8 \
+  vfmacc_vf-9 \
   vfmacc_vv-0 \
   vfmacc_vv-1 \
+  vfmacc_vv-2 \
+  vfmacc_vv-3 \
+  vfmacc_vv-4 \
   vfmadd_vf-0 \
   vfmadd_vf-1 \
+  vfmadd_vf-10 \
+  vfmadd_vf-11 \
+  vfmadd_vf-12 \
+  vfmadd_vf-13 \
+  vfmadd_vf-14 \
+  vfmadd_vf-15 \
+  vfmadd_vf-16 \
   vfmadd_vf-2 \
   vfmadd_vf-3 \
   vfmadd_vf-4 \
   vfmadd_vf-5 \
+  vfmadd_vf-6 \
+  vfmadd_vf-7 \
+  vfmadd_vf-8 \
+  vfmadd_vf-9 \
   vfmadd_vv-0 \
   vfmadd_vv-1 \
+  vfmadd_vv-2 \
+  vfmadd_vv-3 \
+  vfmadd_vv-4 \
   vfmax_vf-0 \
   vfmax_vf-1 \
+  vfmax_vf-10 \
+  vfmax_vf-11 \
+  vfmax_vf-12 \
+  vfmax_vf-13 \
+  vfmax_vf-14 \
+  vfmax_vf-15 \
+  vfmax_vf-16 \
   vfmax_vf-2 \
   vfmax_vf-3 \
   vfmax_vf-4 \
   vfmax_vf-5 \
+  vfmax_vf-6 \
+  vfmax_vf-7 \
+  vfmax_vf-8 \
+  vfmax_vf-9 \
   vfmax_vv-0 \
   vfmax_vv-1 \
+  vfmax_vv-2 \
+  vfmax_vv-3 \
+  vfmax_vv-4 \
   vfmerge_vfm-0 \
   vfmerge_vfm-1 \
   vfmerge_vfm-2 \
+  vfmerge_vfm-3 \
+  vfmerge_vfm-4 \
+  vfmerge_vfm-5 \
+  vfmerge_vfm-6 \
+  vfmerge_vfm-7 \
+  vfmerge_vfm-8 \
   vfmin_vf-0 \
   vfmin_vf-1 \
+  vfmin_vf-10 \
+  vfmin_vf-11 \
+  vfmin_vf-12 \
+  vfmin_vf-13 \
+  vfmin_vf-14 \
+  vfmin_vf-15 \
+  vfmin_vf-16 \
   vfmin_vf-2 \
   vfmin_vf-3 \
   vfmin_vf-4 \
   vfmin_vf-5 \
+  vfmin_vf-6 \
+  vfmin_vf-7 \
+  vfmin_vf-8 \
+  vfmin_vf-9 \
   vfmin_vv-0 \
   vfmin_vv-1 \
+  vfmin_vv-2 \
+  vfmin_vv-3 \
+  vfmin_vv-4 \
   vfmsac_vf-0 \
   vfmsac_vf-1 \
+  vfmsac_vf-10 \
+  vfmsac_vf-11 \
+  vfmsac_vf-12 \
+  vfmsac_vf-13 \
+  vfmsac_vf-14 \
+  vfmsac_vf-15 \
+  vfmsac_vf-16 \
   vfmsac_vf-2 \
   vfmsac_vf-3 \
   vfmsac_vf-4 \
   vfmsac_vf-5 \
+  vfmsac_vf-6 \
+  vfmsac_vf-7 \
+  vfmsac_vf-8 \
+  vfmsac_vf-9 \
   vfmsac_vv-0 \
   vfmsac_vv-1 \
+  vfmsac_vv-2 \
+  vfmsac_vv-3 \
+  vfmsac_vv-4 \
   vfmsub_vf-0 \
   vfmsub_vf-1 \
+  vfmsub_vf-10 \
+  vfmsub_vf-11 \
+  vfmsub_vf-12 \
+  vfmsub_vf-13 \
+  vfmsub_vf-14 \
+  vfmsub_vf-15 \
+  vfmsub_vf-16 \
   vfmsub_vf-2 \
   vfmsub_vf-3 \
   vfmsub_vf-4 \
   vfmsub_vf-5 \
+  vfmsub_vf-6 \
+  vfmsub_vf-7 \
+  vfmsub_vf-8 \
+  vfmsub_vf-9 \
   vfmsub_vv-0 \
   vfmsub_vv-1 \
+  vfmsub_vv-2 \
+  vfmsub_vv-3 \
+  vfmsub_vv-4 \
   vfmul_vf-0 \
   vfmul_vf-1 \
+  vfmul_vf-10 \
+  vfmul_vf-11 \
+  vfmul_vf-12 \
+  vfmul_vf-13 \
+  vfmul_vf-14 \
+  vfmul_vf-15 \
+  vfmul_vf-16 \
   vfmul_vf-2 \
   vfmul_vf-3 \
   vfmul_vf-4 \
   vfmul_vf-5 \
+  vfmul_vf-6 \
+  vfmul_vf-7 \
+  vfmul_vf-8 \
+  vfmul_vf-9 \
   vfmul_vv-0 \
   vfmul_vv-1 \
+  vfmul_vv-2 \
+  vfmul_vv-3 \
+  vfmul_vv-4 \
   vfmv_f_s-0 \
   vfmv_s_f-0 \
   vfmv_v_f-0 \
+  vfmv_v_f-1 \
   vfncvt_f_f_w-0 \
+  vfncvt_f_f_w-1 \
   vfncvt_f_x_w-0 \
+  vfncvt_f_x_w-1 \
   vfncvt_f_xu_w-0 \
+  vfncvt_f_xu_w-1 \
   vfncvt_rod_f_f_w-0 \
+  vfncvt_rod_f_f_w-1 \
   vfncvt_rtz_x_f_w-0 \
+  vfncvt_rtz_x_f_w-1 \
   vfncvt_rtz_xu_f_w-0 \
+  vfncvt_rtz_xu_f_w-1 \
   vfncvt_x_f_w-0 \
+  vfncvt_x_f_w-1 \
   vfncvt_xu_f_w-0 \
+  vfncvt_xu_f_w-1 \
   vfnmacc_vf-0 \
   vfnmacc_vf-1 \
+  vfnmacc_vf-10 \
+  vfnmacc_vf-11 \
+  vfnmacc_vf-12 \
+  vfnmacc_vf-13 \
+  vfnmacc_vf-14 \
+  vfnmacc_vf-15 \
+  vfnmacc_vf-16 \
   vfnmacc_vf-2 \
   vfnmacc_vf-3 \
   vfnmacc_vf-4 \
   vfnmacc_vf-5 \
+  vfnmacc_vf-6 \
+  vfnmacc_vf-7 \
+  vfnmacc_vf-8 \
+  vfnmacc_vf-9 \
   vfnmacc_vv-0 \
   vfnmacc_vv-1 \
+  vfnmacc_vv-2 \
+  vfnmacc_vv-3 \
+  vfnmacc_vv-4 \
   vfnmadd_vf-0 \
   vfnmadd_vf-1 \
+  vfnmadd_vf-10 \
+  vfnmadd_vf-11 \
+  vfnmadd_vf-12 \
+  vfnmadd_vf-13 \
+  vfnmadd_vf-14 \
+  vfnmadd_vf-15 \
+  vfnmadd_vf-16 \
   vfnmadd_vf-2 \
   vfnmadd_vf-3 \
   vfnmadd_vf-4 \
   vfnmadd_vf-5 \
+  vfnmadd_vf-6 \
+  vfnmadd_vf-7 \
+  vfnmadd_vf-8 \
+  vfnmadd_vf-9 \
   vfnmadd_vv-0 \
   vfnmadd_vv-1 \
+  vfnmadd_vv-2 \
+  vfnmadd_vv-3 \
+  vfnmadd_vv-4 \
   vfnmsac_vf-0 \
   vfnmsac_vf-1 \
+  vfnmsac_vf-10 \
+  vfnmsac_vf-11 \
+  vfnmsac_vf-12 \
+  vfnmsac_vf-13 \
+  vfnmsac_vf-14 \
+  vfnmsac_vf-15 \
+  vfnmsac_vf-16 \
   vfnmsac_vf-2 \
   vfnmsac_vf-3 \
   vfnmsac_vf-4 \
   vfnmsac_vf-5 \
+  vfnmsac_vf-6 \
+  vfnmsac_vf-7 \
+  vfnmsac_vf-8 \
+  vfnmsac_vf-9 \
   vfnmsac_vv-0 \
   vfnmsac_vv-1 \
+  vfnmsac_vv-2 \
+  vfnmsac_vv-3 \
+  vfnmsac_vv-4 \
   vfnmsub_vf-0 \
   vfnmsub_vf-1 \
+  vfnmsub_vf-10 \
+  vfnmsub_vf-11 \
+  vfnmsub_vf-12 \
+  vfnmsub_vf-13 \
+  vfnmsub_vf-14 \
+  vfnmsub_vf-15 \
+  vfnmsub_vf-16 \
   vfnmsub_vf-2 \
   vfnmsub_vf-3 \
   vfnmsub_vf-4 \
   vfnmsub_vf-5 \
+  vfnmsub_vf-6 \
+  vfnmsub_vf-7 \
+  vfnmsub_vf-8 \
+  vfnmsub_vf-9 \
   vfnmsub_vv-0 \
   vfnmsub_vv-1 \
+  vfnmsub_vv-2 \
+  vfnmsub_vv-3 \
+  vfnmsub_vv-4 \
   vfrdiv_vf-0 \
   vfrdiv_vf-1 \
+  vfrdiv_vf-10 \
+  vfrdiv_vf-11 \
+  vfrdiv_vf-12 \
+  vfrdiv_vf-13 \
+  vfrdiv_vf-14 \
+  vfrdiv_vf-15 \
+  vfrdiv_vf-16 \
   vfrdiv_vf-2 \
   vfrdiv_vf-3 \
   vfrdiv_vf-4 \
   vfrdiv_vf-5 \
+  vfrdiv_vf-6 \
+  vfrdiv_vf-7 \
+  vfrdiv_vf-8 \
+  vfrdiv_vf-9 \
   vfrec7_v-0 \
   vfrec7_v-1 \
+  vfrec7_v-2 \
+  vfrec7_v-3 \
   vfredmax_vs-0 \
   vfredmax_vs-1 \
+  vfredmax_vs-2 \
+  vfredmax_vs-3 \
+  vfredmax_vs-4 \
   vfredmin_vs-0 \
   vfredmin_vs-1 \
+  vfredmin_vs-2 \
+  vfredmin_vs-3 \
+  vfredmin_vs-4 \
   vfredosum_vs-0 \
   vfredosum_vs-1 \
+  vfredosum_vs-2 \
+  vfredosum_vs-3 \
+  vfredosum_vs-4 \
   vfredusum_vs-0 \
   vfredusum_vs-1 \
+  vfredusum_vs-2 \
+  vfredusum_vs-3 \
+  vfredusum_vs-4 \
   vfrsqrt7_v-0 \
   vfrsqrt7_v-1 \
+  vfrsqrt7_v-2 \
+  vfrsqrt7_v-3 \
   vfrsub_vf-0 \
   vfrsub_vf-1 \
+  vfrsub_vf-10 \
+  vfrsub_vf-11 \
+  vfrsub_vf-12 \
+  vfrsub_vf-13 \
+  vfrsub_vf-14 \
+  vfrsub_vf-15 \
+  vfrsub_vf-16 \
   vfrsub_vf-2 \
   vfrsub_vf-3 \
   vfrsub_vf-4 \
   vfrsub_vf-5 \
+  vfrsub_vf-6 \
+  vfrsub_vf-7 \
+  vfrsub_vf-8 \
+  vfrsub_vf-9 \
   vfsgnj_vf-0 \
   vfsgnj_vf-1 \
+  vfsgnj_vf-10 \
+  vfsgnj_vf-11 \
+  vfsgnj_vf-12 \
+  vfsgnj_vf-13 \
+  vfsgnj_vf-14 \
   vfsgnj_vf-2 \
   vfsgnj_vf-3 \
   vfsgnj_vf-4 \
   vfsgnj_vf-5 \
+  vfsgnj_vf-6 \
+  vfsgnj_vf-7 \
+  vfsgnj_vf-8 \
+  vfsgnj_vf-9 \
   vfsgnj_vv-0 \
   vfsgnj_vv-1 \
+  vfsgnj_vv-2 \
+  vfsgnj_vv-3 \
+  vfsgnj_vv-4 \
   vfsgnjn_vf-0 \
   vfsgnjn_vf-1 \
+  vfsgnjn_vf-10 \
+  vfsgnjn_vf-11 \
+  vfsgnjn_vf-12 \
+  vfsgnjn_vf-13 \
+  vfsgnjn_vf-14 \
   vfsgnjn_vf-2 \
   vfsgnjn_vf-3 \
   vfsgnjn_vf-4 \
   vfsgnjn_vf-5 \
+  vfsgnjn_vf-6 \
+  vfsgnjn_vf-7 \
+  vfsgnjn_vf-8 \
+  vfsgnjn_vf-9 \
   vfsgnjn_vv-0 \
   vfsgnjn_vv-1 \
+  vfsgnjn_vv-2 \
+  vfsgnjn_vv-3 \
+  vfsgnjn_vv-4 \
   vfsgnjx_vf-0 \
   vfsgnjx_vf-1 \
+  vfsgnjx_vf-10 \
+  vfsgnjx_vf-11 \
+  vfsgnjx_vf-12 \
+  vfsgnjx_vf-13 \
+  vfsgnjx_vf-14 \
   vfsgnjx_vf-2 \
   vfsgnjx_vf-3 \
   vfsgnjx_vf-4 \
   vfsgnjx_vf-5 \
+  vfsgnjx_vf-6 \
+  vfsgnjx_vf-7 \
+  vfsgnjx_vf-8 \
+  vfsgnjx_vf-9 \
   vfsgnjx_vv-0 \
   vfsgnjx_vv-1 \
+  vfsgnjx_vv-2 \
+  vfsgnjx_vv-3 \
+  vfsgnjx_vv-4 \
   vfslide1down_vf-0 \
   vfslide1down_vf-1 \
+  vfslide1down_vf-10 \
+  vfslide1down_vf-11 \
+  vfslide1down_vf-12 \
+  vfslide1down_vf-13 \
+  vfslide1down_vf-14 \
+  vfslide1down_vf-15 \
+  vfslide1down_vf-16 \
   vfslide1down_vf-2 \
   vfslide1down_vf-3 \
   vfslide1down_vf-4 \
   vfslide1down_vf-5 \
+  vfslide1down_vf-6 \
+  vfslide1down_vf-7 \
+  vfslide1down_vf-8 \
+  vfslide1down_vf-9 \
   vfslide1up_vf-0 \
   vfslide1up_vf-1 \
+  vfslide1up_vf-10 \
+  vfslide1up_vf-11 \
+  vfslide1up_vf-12 \
+  vfslide1up_vf-13 \
+  vfslide1up_vf-14 \
+  vfslide1up_vf-15 \
+  vfslide1up_vf-16 \
   vfslide1up_vf-2 \
   vfslide1up_vf-3 \
   vfslide1up_vf-4 \
   vfslide1up_vf-5 \
+  vfslide1up_vf-6 \
+  vfslide1up_vf-7 \
+  vfslide1up_vf-8 \
+  vfslide1up_vf-9 \
   vfsqrt_v-0 \
   vfsqrt_v-1 \
+  vfsqrt_v-2 \
+  vfsqrt_v-3 \
   vfsub_vf-0 \
   vfsub_vf-1 \
+  vfsub_vf-10 \
+  vfsub_vf-11 \
+  vfsub_vf-12 \
+  vfsub_vf-13 \
+  vfsub_vf-14 \
+  vfsub_vf-15 \
+  vfsub_vf-16 \
   vfsub_vf-2 \
   vfsub_vf-3 \
   vfsub_vf-4 \
   vfsub_vf-5 \
+  vfsub_vf-6 \
+  vfsub_vf-7 \
+  vfsub_vf-8 \
+  vfsub_vf-9 \
   vfsub_vv-0 \
   vfsub_vv-1 \
+  vfsub_vv-2 \
+  vfsub_vv-3 \
+  vfsub_vv-4 \
   vfwadd_vf-0 \
   vfwadd_vf-1 \
   vfwadd_vf-2 \
   vfwadd_vf-3 \
+  vfwadd_vf-4 \
+  vfwadd_vf-5 \
+  vfwadd_vf-6 \
+  vfwadd_vf-7 \
   vfwadd_vv-0 \
+  vfwadd_vv-1 \
   vfwadd_wf-0 \
   vfwadd_wf-1 \
   vfwadd_wf-2 \
   vfwadd_wf-3 \
+  vfwadd_wf-4 \
+  vfwadd_wf-5 \
+  vfwadd_wf-6 \
+  vfwadd_wf-7 \
   vfwadd_wv-0 \
+  vfwadd_wv-1 \
   vfwcvt_f_f_v-0 \
+  vfwcvt_f_f_v-1 \
   vfwcvt_f_x_v-0 \
+  vfwcvt_f_x_v-1 \
   vfwcvt_f_xu_v-0 \
+  vfwcvt_f_xu_v-1 \
   vfwcvt_rtz_x_f_v-0 \
+  vfwcvt_rtz_x_f_v-1 \
   vfwcvt_rtz_xu_f_v-0 \
+  vfwcvt_rtz_xu_f_v-1 \
   vfwcvt_x_f_v-0 \
+  vfwcvt_x_f_v-1 \
   vfwcvt_xu_f_v-0 \
+  vfwcvt_xu_f_v-1 \
   vfwmacc_vf-0 \
   vfwmacc_vf-1 \
   vfwmacc_vf-2 \
   vfwmacc_vf-3 \
+  vfwmacc_vf-4 \
+  vfwmacc_vf-5 \
+  vfwmacc_vf-6 \
+  vfwmacc_vf-7 \
   vfwmacc_vv-0 \
+  vfwmacc_vv-1 \
   vfwmsac_vf-0 \
   vfwmsac_vf-1 \
   vfwmsac_vf-2 \
   vfwmsac_vf-3 \
+  vfwmsac_vf-4 \
+  vfwmsac_vf-5 \
+  vfwmsac_vf-6 \
+  vfwmsac_vf-7 \
   vfwmsac_vv-0 \
+  vfwmsac_vv-1 \
   vfwmul_vf-0 \
   vfwmul_vf-1 \
   vfwmul_vf-2 \
   vfwmul_vf-3 \
+  vfwmul_vf-4 \
+  vfwmul_vf-5 \
+  vfwmul_vf-6 \
+  vfwmul_vf-7 \
   vfwmul_vv-0 \
+  vfwmul_vv-1 \
   vfwnmacc_vf-0 \
   vfwnmacc_vf-1 \
   vfwnmacc_vf-2 \
   vfwnmacc_vf-3 \
+  vfwnmacc_vf-4 \
+  vfwnmacc_vf-5 \
+  vfwnmacc_vf-6 \
+  vfwnmacc_vf-7 \
   vfwnmacc_vv-0 \
+  vfwnmacc_vv-1 \
   vfwnmsac_vf-0 \
   vfwnmsac_vf-1 \
   vfwnmsac_vf-2 \
   vfwnmsac_vf-3 \
+  vfwnmsac_vf-4 \
+  vfwnmsac_vf-5 \
+  vfwnmsac_vf-6 \
+  vfwnmsac_vf-7 \
   vfwnmsac_vv-0 \
+  vfwnmsac_vv-1 \
   vfwredosum_vs-0 \
+  vfwredosum_vs-1 \
   vfwredusum_vs-0 \
+  vfwredusum_vs-1 \
   vfwsub_vf-0 \
   vfwsub_vf-1 \
   vfwsub_vf-2 \
   vfwsub_vf-3 \
+  vfwsub_vf-4 \
+  vfwsub_vf-5 \
+  vfwsub_vf-6 \
+  vfwsub_vf-7 \
   vfwsub_vv-0 \
+  vfwsub_vv-1 \
   vfwsub_wf-0 \
   vfwsub_wf-1 \
   vfwsub_wf-2 \
   vfwsub_wf-3 \
+  vfwsub_wf-4 \
+  vfwsub_wf-5 \
+  vfwsub_wf-6 \
+  vfwsub_wf-7 \
   vfwsub_wv-0 \
+  vfwsub_wv-1 \
   vghsh_vv-0 \
+  vgmul_vv-0 \
   vid_v-0 \
   vid_v-1 \
   viota_m-0 \
@@ -553,17 +917,13 @@ tests = \
   vloxei64_v-0 \
   vloxei8_v-0 \
   vloxei8_v-1 \
-  vloxei8_v-2 \
   vloxseg2ei16_v-0 \
   vloxseg2ei16_v-1 \
-  vloxseg2ei16_v-2 \
   vloxseg2ei32_v-0 \
   vloxseg2ei32_v-1 \
   vloxseg2ei64_v-0 \
-  vloxseg2ei64_v-1 \
   vloxseg2ei8_v-0 \
   vloxseg2ei8_v-1 \
-  vloxseg2ei8_v-2 \
   vloxseg3ei16_v-0 \
   vloxseg3ei16_v-1 \
   vloxseg3ei32_v-0 \
@@ -573,7 +933,6 @@ tests = \
   vloxseg3ei8_v-1 \
   vloxseg4ei16_v-0 \
   vloxseg4ei16_v-1 \
-  vloxseg4ei16_v-2 \
   vloxseg4ei32_v-0 \
   vloxseg4ei32_v-1 \
   vloxseg4ei64_v-0 \
@@ -595,10 +954,8 @@ tests = \
   vloxseg6ei64_v-0 \
   vloxseg6ei8_v-0 \
   vloxseg6ei8_v-1 \
-  vloxseg6ei8_v-2 \
   vloxseg7ei16_v-0 \
   vloxseg7ei16_v-1 \
-  vloxseg7ei16_v-2 \
   vloxseg7ei32_v-0 \
   vloxseg7ei32_v-1 \
   vloxseg7ei64_v-0 \
@@ -622,7 +979,6 @@ tests = \
   vlse64_v-1 \
   vlse8_v-0 \
   vlse8_v-1 \
-  vlse8_v-2 \
   vlseg2e16_v-0 \
   vlseg2e16ff_v-0 \
   vlseg2e32_v-0 \
@@ -690,7 +1046,6 @@ tests = \
   vlsseg2e8_v-2 \
   vlsseg3e16_v-0 \
   vlsseg3e16_v-1 \
-  vlsseg3e16_v-2 \
   vlsseg3e32_v-0 \
   vlsseg3e32_v-1 \
   vlsseg3e64_v-0 \
@@ -707,10 +1062,8 @@ tests = \
   vlsseg4e8_v-0 \
   vlsseg4e8_v-1 \
   vlsseg4e8_v-2 \
-  vlsseg4e8_v-3 \
   vlsseg5e16_v-0 \
   vlsseg5e16_v-1 \
-  vlsseg5e16_v-2 \
   vlsseg5e32_v-0 \
   vlsseg5e32_v-1 \
   vlsseg5e64_v-0 \
@@ -726,7 +1079,6 @@ tests = \
   vlsseg6e8_v-0 \
   vlsseg6e8_v-1 \
   vlsseg6e8_v-2 \
-  vlsseg6e8_v-3 \
   vlsseg7e16_v-0 \
   vlsseg7e16_v-1 \
   vlsseg7e16_v-2 \
@@ -740,16 +1092,13 @@ tests = \
   vlsseg8e16_v-0 \
   vlsseg8e16_v-1 \
   vlsseg8e16_v-2 \
-  vlsseg8e16_v-3 \
   vlsseg8e32_v-0 \
   vlsseg8e32_v-1 \
-  vlsseg8e32_v-2 \
   vlsseg8e64_v-0 \
   vlsseg8e8_v-0 \
   vlsseg8e8_v-1 \
   vlsseg8e8_v-2 \
   vlsseg8e8_v-3 \
-  vlsseg8e8_v-4 \
   vluxei16_v-0 \
   vluxei16_v-1 \
   vluxei32_v-0 \
@@ -757,17 +1106,13 @@ tests = \
   vluxei64_v-0 \
   vluxei8_v-0 \
   vluxei8_v-1 \
-  vluxei8_v-2 \
   vluxseg2ei16_v-0 \
   vluxseg2ei16_v-1 \
-  vluxseg2ei16_v-2 \
   vluxseg2ei32_v-0 \
   vluxseg2ei32_v-1 \
   vluxseg2ei64_v-0 \
-  vluxseg2ei64_v-1 \
   vluxseg2ei8_v-0 \
   vluxseg2ei8_v-1 \
-  vluxseg2ei8_v-2 \
   vluxseg3ei16_v-0 \
   vluxseg3ei16_v-1 \
   vluxseg3ei32_v-0 \
@@ -777,7 +1122,6 @@ tests = \
   vluxseg3ei8_v-1 \
   vluxseg4ei16_v-0 \
   vluxseg4ei16_v-1 \
-  vluxseg4ei16_v-2 \
   vluxseg4ei32_v-0 \
   vluxseg4ei32_v-1 \
   vluxseg4ei64_v-0 \
@@ -799,10 +1143,8 @@ tests = \
   vluxseg6ei64_v-0 \
   vluxseg6ei8_v-0 \
   vluxseg6ei8_v-1 \
-  vluxseg6ei8_v-2 \
   vluxseg7ei16_v-0 \
   vluxseg7ei16_v-1 \
-  vluxseg7ei16_v-2 \
   vluxseg7ei32_v-0 \
   vluxseg7ei32_v-1 \
   vluxseg7ei64_v-0 \
@@ -828,7 +1170,6 @@ tests = \
   vmacc_vx-4 \
   vmacc_vx-5 \
   vmacc_vx-6 \
-  vmacc_vx-7 \
   vmadc_vi-0 \
   vmadc_vi-1 \
   vmadc_vi-2 \
@@ -856,7 +1197,6 @@ tests = \
   vmadd_vx-4 \
   vmadd_vx-5 \
   vmadd_vx-6 \
-  vmadd_vx-7 \
   vmand_mm-0 \
   vmandn_mm-0 \
   vmax_vv-0 \
@@ -869,7 +1209,6 @@ tests = \
   vmax_vx-4 \
   vmax_vx-5 \
   vmax_vx-6 \
-  vmax_vx-7 \
   vmaxu_vv-0 \
   vmaxu_vv-1 \
   vmaxu_vv-2 \
@@ -880,7 +1219,6 @@ tests = \
   vmaxu_vx-4 \
   vmaxu_vx-5 \
   vmaxu_vx-6 \
-  vmaxu_vx-7 \
   vmerge_vim-0 \
   vmerge_vim-1 \
   vmerge_vim-2 \
@@ -892,48 +1230,126 @@ tests = \
   vmerge_vxm-3 \
   vmfeq_vf-0 \
   vmfeq_vf-1 \
+  vmfeq_vf-10 \
+  vmfeq_vf-11 \
+  vmfeq_vf-12 \
+  vmfeq_vf-13 \
+  vmfeq_vf-14 \
+  vmfeq_vf-15 \
+  vmfeq_vf-16 \
   vmfeq_vf-2 \
   vmfeq_vf-3 \
   vmfeq_vf-4 \
   vmfeq_vf-5 \
+  vmfeq_vf-6 \
+  vmfeq_vf-7 \
+  vmfeq_vf-8 \
+  vmfeq_vf-9 \
   vmfeq_vv-0 \
   vmfeq_vv-1 \
+  vmfeq_vv-2 \
+  vmfeq_vv-3 \
+  vmfeq_vv-4 \
   vmfge_vf-0 \
   vmfge_vf-1 \
+  vmfge_vf-10 \
+  vmfge_vf-11 \
+  vmfge_vf-12 \
+  vmfge_vf-13 \
+  vmfge_vf-14 \
+  vmfge_vf-15 \
+  vmfge_vf-16 \
   vmfge_vf-2 \
   vmfge_vf-3 \
   vmfge_vf-4 \
   vmfge_vf-5 \
+  vmfge_vf-6 \
+  vmfge_vf-7 \
+  vmfge_vf-8 \
+  vmfge_vf-9 \
   vmfgt_vf-0 \
   vmfgt_vf-1 \
+  vmfgt_vf-10 \
+  vmfgt_vf-11 \
+  vmfgt_vf-12 \
+  vmfgt_vf-13 \
+  vmfgt_vf-14 \
+  vmfgt_vf-15 \
+  vmfgt_vf-16 \
   vmfgt_vf-2 \
   vmfgt_vf-3 \
   vmfgt_vf-4 \
   vmfgt_vf-5 \
+  vmfgt_vf-6 \
+  vmfgt_vf-7 \
+  vmfgt_vf-8 \
+  vmfgt_vf-9 \
   vmfle_vf-0 \
   vmfle_vf-1 \
+  vmfle_vf-10 \
+  vmfle_vf-11 \
+  vmfle_vf-12 \
+  vmfle_vf-13 \
+  vmfle_vf-14 \
+  vmfle_vf-15 \
+  vmfle_vf-16 \
   vmfle_vf-2 \
   vmfle_vf-3 \
   vmfle_vf-4 \
   vmfle_vf-5 \
+  vmfle_vf-6 \
+  vmfle_vf-7 \
+  vmfle_vf-8 \
+  vmfle_vf-9 \
   vmfle_vv-0 \
   vmfle_vv-1 \
+  vmfle_vv-2 \
+  vmfle_vv-3 \
+  vmfle_vv-4 \
   vmflt_vf-0 \
   vmflt_vf-1 \
+  vmflt_vf-10 \
+  vmflt_vf-11 \
+  vmflt_vf-12 \
+  vmflt_vf-13 \
+  vmflt_vf-14 \
+  vmflt_vf-15 \
+  vmflt_vf-16 \
   vmflt_vf-2 \
   vmflt_vf-3 \
   vmflt_vf-4 \
   vmflt_vf-5 \
+  vmflt_vf-6 \
+  vmflt_vf-7 \
+  vmflt_vf-8 \
+  vmflt_vf-9 \
   vmflt_vv-0 \
   vmflt_vv-1 \
+  vmflt_vv-2 \
+  vmflt_vv-3 \
+  vmflt_vv-4 \
   vmfne_vf-0 \
   vmfne_vf-1 \
+  vmfne_vf-10 \
+  vmfne_vf-11 \
+  vmfne_vf-12 \
+  vmfne_vf-13 \
+  vmfne_vf-14 \
+  vmfne_vf-15 \
+  vmfne_vf-16 \
   vmfne_vf-2 \
   vmfne_vf-3 \
   vmfne_vf-4 \
   vmfne_vf-5 \
+  vmfne_vf-6 \
+  vmfne_vf-7 \
+  vmfne_vf-8 \
+  vmfne_vf-9 \
   vmfne_vv-0 \
   vmfne_vv-1 \
+  vmfne_vv-2 \
+  vmfne_vv-3 \
+  vmfne_vv-4 \
   vmin_vv-0 \
   vmin_vv-1 \
   vmin_vv-2 \
@@ -944,7 +1360,6 @@ tests = \
   vmin_vx-4 \
   vmin_vx-5 \
   vmin_vx-6 \
-  vmin_vx-7 \
   vminu_vv-0 \
   vminu_vv-1 \
   vminu_vv-2 \
@@ -955,7 +1370,6 @@ tests = \
   vminu_vx-4 \
   vminu_vx-5 \
   vminu_vx-6 \
-  vminu_vx-7 \
   vmnand_mm-0 \
   vmnor_mm-0 \
   vmor_mm-0 \
@@ -977,7 +1391,6 @@ tests = \
   vmseq_vi-2 \
   vmseq_vi-3 \
   vmseq_vi-4 \
-  vmseq_vi-5 \
   vmseq_vv-0 \
   vmseq_vv-1 \
   vmseq_vv-2 \
@@ -988,13 +1401,11 @@ tests = \
   vmseq_vx-4 \
   vmseq_vx-5 \
   vmseq_vx-6 \
-  vmseq_vx-7 \
   vmsgt_vi-0 \
   vmsgt_vi-1 \
   vmsgt_vi-2 \
   vmsgt_vi-3 \
   vmsgt_vi-4 \
-  vmsgt_vi-5 \
   vmsgt_vv-0 \
   vmsgt_vv-1 \
   vmsgt_vv-2 \
@@ -1005,13 +1416,11 @@ tests = \
   vmsgt_vx-4 \
   vmsgt_vx-5 \
   vmsgt_vx-6 \
-  vmsgt_vx-7 \
   vmsgtu_vi-0 \
   vmsgtu_vi-1 \
   vmsgtu_vi-2 \
   vmsgtu_vi-3 \
   vmsgtu_vi-4 \
-  vmsgtu_vi-5 \
   vmsgtu_vv-0 \
   vmsgtu_vv-1 \
   vmsgtu_vv-2 \
@@ -1022,14 +1431,12 @@ tests = \
   vmsgtu_vx-4 \
   vmsgtu_vx-5 \
   vmsgtu_vx-6 \
-  vmsgtu_vx-7 \
   vmsif_m-0 \
   vmsle_vi-0 \
   vmsle_vi-1 \
   vmsle_vi-2 \
   vmsle_vi-3 \
   vmsle_vi-4 \
-  vmsle_vi-5 \
   vmsle_vv-0 \
   vmsle_vv-1 \
   vmsle_vv-2 \
@@ -1040,13 +1447,11 @@ tests = \
   vmsle_vx-4 \
   vmsle_vx-5 \
   vmsle_vx-6 \
-  vmsle_vx-7 \
   vmsleu_vi-0 \
   vmsleu_vi-1 \
   vmsleu_vi-2 \
   vmsleu_vi-3 \
   vmsleu_vi-4 \
-  vmsleu_vi-5 \
   vmsleu_vv-0 \
   vmsleu_vv-1 \
   vmsleu_vv-2 \
@@ -1057,7 +1462,6 @@ tests = \
   vmsleu_vx-4 \
   vmsleu_vx-5 \
   vmsleu_vx-6 \
-  vmsleu_vx-7 \
   vmslt_vv-0 \
   vmslt_vv-1 \
   vmslt_vv-2 \
@@ -1068,7 +1472,6 @@ tests = \
   vmslt_vx-4 \
   vmslt_vx-5 \
   vmslt_vx-6 \
-  vmslt_vx-7 \
   vmsltu_vv-0 \
   vmsltu_vv-1 \
   vmsltu_vv-2 \
@@ -1079,13 +1482,11 @@ tests = \
   vmsltu_vx-4 \
   vmsltu_vx-5 \
   vmsltu_vx-6 \
-  vmsltu_vx-7 \
   vmsne_vi-0 \
   vmsne_vi-1 \
   vmsne_vi-2 \
   vmsne_vi-3 \
   vmsne_vi-4 \
-  vmsne_vi-5 \
   vmsne_vv-0 \
   vmsne_vv-1 \
   vmsne_vv-2 \
@@ -1096,7 +1497,6 @@ tests = \
   vmsne_vx-4 \
   vmsne_vx-5 \
   vmsne_vx-6 \
-  vmsne_vx-7 \
   vmsof_m-0 \
   vmul_vv-0 \
   vmul_vv-1 \
@@ -1160,7 +1560,6 @@ tests = \
   vmxor_mm-0 \
   vnclip_wi-0 \
   vnclip_wi-1 \
-  vnclip_wi-10 \
   vnclip_wi-2 \
   vnclip_wi-3 \
   vnclip_wi-4 \
@@ -1186,8 +1585,6 @@ tests = \
   vnclip_wx-15 \
   vnclip_wx-16 \
   vnclip_wx-17 \
-  vnclip_wx-18 \
-  vnclip_wx-19 \
   vnclip_wx-2 \
   vnclip_wx-3 \
   vnclip_wx-4 \
@@ -1198,7 +1595,6 @@ tests = \
   vnclip_wx-9 \
   vnclipu_wi-0 \
   vnclipu_wi-1 \
-  vnclipu_wi-10 \
   vnclipu_wi-2 \
   vnclipu_wi-3 \
   vnclipu_wi-4 \
@@ -1224,8 +1620,6 @@ tests = \
   vnclipu_wx-15 \
   vnclipu_wx-16 \
   vnclipu_wx-17 \
-  vnclipu_wx-18 \
-  vnclipu_wx-19 \
   vnclipu_wx-2 \
   vnclipu_wx-3 \
   vnclipu_wx-4 \
@@ -1244,7 +1638,6 @@ tests = \
   vnmsac_vx-4 \
   vnmsac_vx-5 \
   vnmsac_vx-6 \
-  vnmsac_vx-7 \
   vnmsub_vv-0 \
   vnmsub_vv-1 \
   vnmsub_vv-2 \
@@ -1255,7 +1648,6 @@ tests = \
   vnmsub_vx-4 \
   vnmsub_vx-5 \
   vnmsub_vx-6 \
-  vnmsub_vx-7 \
   vnsra_wi-0 \
   vnsra_wi-1 \
   vnsra_wi-2 \
@@ -1281,7 +1673,6 @@ tests = \
   vor_vi-2 \
   vor_vi-3 \
   vor_vi-4 \
-  vor_vi-5 \
   vor_vv-0 \
   vor_vv-1 \
   vor_vv-2 \
@@ -1292,7 +1683,6 @@ tests = \
   vor_vx-4 \
   vor_vx-5 \
   vor_vx-6 \
-  vor_vx-7 \
   vredand_vs-0 \
   vredand_vs-1 \
   vredand_vs-2 \
@@ -1342,12 +1732,10 @@ tests = \
   vremu_vx-7 \
   vremu_vx-8 \
   vrev8_v-0 \
-  vrev8_v-1 \
   vrgather_vi-0 \
   vrgather_vi-1 \
   vrgather_vi-2 \
   vrgather_vi-3 \
-  vrgather_vi-4 \
   vrgather_vv-0 \
   vrgather_vv-1 \
   vrgather_vv-2 \
@@ -1358,7 +1746,6 @@ tests = \
   vrgather_vx-4 \
   vrgather_vx-5 \
   vrgather_vx-6 \
-  vrgather_vx-7 \
   vrgatherei16_vv-0 \
   vrgatherei16_vv-1 \
   vrgatherei16_vv-2 \
@@ -1372,12 +1759,10 @@ tests = \
   vrol_vx-4 \
   vrol_vx-5 \
   vrol_vx-6 \
-  vrol_vx-7 \
   vror_vi-0 \
   vror_vi-1 \
   vror_vi-2 \
   vror_vi-3 \
-  vror_vi-4 \
   vror_vv-0 \
   vror_vv-1 \
   vror_vv-2 \
@@ -1388,13 +1773,11 @@ tests = \
   vror_vx-4 \
   vror_vx-5 \
   vror_vx-6 \
-  vror_vx-7 \
   vrsub_vi-0 \
   vrsub_vi-1 \
   vrsub_vi-2 \
   vrsub_vi-3 \
   vrsub_vi-4 \
-  vrsub_vi-5 \
   vrsub_vx-0 \
   vrsub_vx-1 \
   vrsub_vx-2 \
@@ -1402,7 +1785,6 @@ tests = \
   vrsub_vx-4 \
   vrsub_vx-5 \
   vrsub_vx-6 \
-  vrsub_vx-7 \
   vs1r_v-0 \
   vs2r_v-0 \
   vs4r_v-0 \
@@ -1412,7 +1794,6 @@ tests = \
   vsadd_vi-2 \
   vsadd_vi-3 \
   vsadd_vi-4 \
-  vsadd_vi-5 \
   vsadd_vv-0 \
   vsadd_vv-1 \
   vsadd_vv-2 \
@@ -1423,13 +1804,11 @@ tests = \
   vsadd_vx-4 \
   vsadd_vx-5 \
   vsadd_vx-6 \
-  vsadd_vx-7 \
   vsaddu_vi-0 \
   vsaddu_vi-1 \
   vsaddu_vi-2 \
   vsaddu_vi-3 \
   vsaddu_vi-4 \
-  vsaddu_vi-5 \
   vsaddu_vv-0 \
   vsaddu_vv-1 \
   vsaddu_vv-2 \
@@ -1440,7 +1819,6 @@ tests = \
   vsaddu_vx-4 \
   vsaddu_vx-5 \
   vsaddu_vx-6 \
-  vsaddu_vx-7 \
   vsbc_vvm-0 \
   vsbc_vvm-1 \
   vsbc_vxm-0 \
@@ -1448,7 +1826,6 @@ tests = \
   vsbc_vxm-2 \
   vsbc_vxm-3 \
   vsbc_vxm-4 \
-  vsbc_vxm-5 \
   vse16_v-0 \
   vse32_v-0 \
   vse64_v-0 \
@@ -1457,7 +1834,6 @@ tests = \
   vsetvl-0 \
   vsetvli-0 \
   vsext_vf2-0 \
-  vsext_vf2-1 \
   vsext_vf4-0 \
   vsext_vf8-0 \
   vsha2ch_vv-0 \
@@ -1470,7 +1846,6 @@ tests = \
   vslide1down_vx-4 \
   vslide1down_vx-5 \
   vslide1down_vx-6 \
-  vslide1down_vx-7 \
   vslide1up_vx-0 \
   vslide1up_vx-1 \
   vslide1up_vx-2 \
@@ -1478,12 +1853,10 @@ tests = \
   vslide1up_vx-4 \
   vslide1up_vx-5 \
   vslide1up_vx-6 \
-  vslide1up_vx-7 \
   vslidedown_vi-0 \
   vslidedown_vi-1 \
   vslidedown_vi-2 \
   vslidedown_vi-3 \
-  vslidedown_vi-4 \
   vslidedown_vx-0 \
   vslidedown_vx-1 \
   vslidedown_vx-2 \
@@ -1491,12 +1864,10 @@ tests = \
   vslidedown_vx-4 \
   vslidedown_vx-5 \
   vslidedown_vx-6 \
-  vslidedown_vx-7 \
   vslideup_vi-0 \
   vslideup_vi-1 \
   vslideup_vi-2 \
   vslideup_vi-3 \
-  vslideup_vi-4 \
   vslideup_vx-0 \
   vslideup_vx-1 \
   vslideup_vx-2 \
@@ -1504,12 +1875,10 @@ tests = \
   vslideup_vx-4 \
   vslideup_vx-5 \
   vslideup_vx-6 \
-  vslideup_vx-7 \
   vsll_vi-0 \
   vsll_vi-1 \
   vsll_vi-2 \
   vsll_vi-3 \
-  vsll_vi-4 \
   vsll_vv-0 \
   vsll_vv-1 \
   vsll_vv-2 \
@@ -1520,12 +1889,12 @@ tests = \
   vsll_vx-4 \
   vsll_vx-5 \
   vsll_vx-6 \
-  vsll_vx-7 \
   vsm3c_vi-0 \
-  vsm3c_vi-1 \
   vsm3me_vv-0 \
   vsm4k_vi-0 \
   vsm4k_vi-1 \
+  vsm4r_vs-0 \
+  vsm4r_vv-0 \
   vsm_v-0 \
   vsmul_vv-0 \
   vsmul_vv-1 \
@@ -1558,8 +1927,6 @@ tests = \
   vsmul_vx-25 \
   vsmul_vx-26 \
   vsmul_vx-27 \
-  vsmul_vx-28 \
-  vsmul_vx-29 \
   vsmul_vx-3 \
   vsmul_vx-4 \
   vsmul_vx-5 \
@@ -1598,7 +1965,6 @@ tests = \
   vsoxseg5ei16_v-0 \
   vsoxseg5ei16_v-1 \
   vsoxseg5ei32_v-0 \
-  vsoxseg5ei32_v-1 \
   vsoxseg5ei64_v-0 \
   vsoxseg5ei8_v-0 \
   vsoxseg5ei8_v-1 \
@@ -1627,7 +1993,6 @@ tests = \
   vsra_vi-1 \
   vsra_vi-2 \
   vsra_vi-3 \
-  vsra_vi-4 \
   vsra_vv-0 \
   vsra_vv-1 \
   vsra_vv-2 \
@@ -1638,12 +2003,10 @@ tests = \
   vsra_vx-4 \
   vsra_vx-5 \
   vsra_vx-6 \
-  vsra_vx-7 \
   vsrl_vi-0 \
   vsrl_vi-1 \
   vsrl_vi-2 \
   vsrl_vi-3 \
-  vsrl_vi-4 \
   vsrl_vv-0 \
   vsrl_vv-1 \
   vsrl_vv-2 \
@@ -1654,7 +2017,6 @@ tests = \
   vsrl_vx-4 \
   vsrl_vx-5 \
   vsrl_vx-6 \
-  vsrl_vx-7 \
   vsse16_v-0 \
   vsse16_v-1 \
   vsse32_v-0 \
@@ -1697,7 +2059,6 @@ tests = \
   vssra_vi-13 \
   vssra_vi-14 \
   vssra_vi-15 \
-  vssra_vi-16 \
   vssra_vi-2 \
   vssra_vi-3 \
   vssra_vi-4 \
@@ -1715,7 +2076,6 @@ tests = \
   vssra_vv-6 \
   vssra_vv-7 \
   vssra_vv-8 \
-  vssra_vv-9 \
   vssra_vx-0 \
   vssra_vx-1 \
   vssra_vx-10 \
@@ -1748,10 +2108,7 @@ tests = \
   vssra_vx-35 \
   vssra_vx-36 \
   vssra_vx-37 \
-  vssra_vx-38 \
-  vssra_vx-39 \
   vssra_vx-4 \
-  vssra_vx-40 \
   vssra_vx-5 \
   vssra_vx-6 \
   vssra_vx-7 \
@@ -1765,7 +2122,6 @@ tests = \
   vssrl_vi-13 \
   vssrl_vi-14 \
   vssrl_vi-15 \
-  vssrl_vi-16 \
   vssrl_vi-2 \
   vssrl_vi-3 \
   vssrl_vi-4 \
@@ -1783,7 +2139,6 @@ tests = \
   vssrl_vv-6 \
   vssrl_vv-7 \
   vssrl_vv-8 \
-  vssrl_vv-9 \
   vssrl_vx-0 \
   vssrl_vx-1 \
   vssrl_vx-10 \
@@ -1816,10 +2171,7 @@ tests = \
   vssrl_vx-35 \
   vssrl_vx-36 \
   vssrl_vx-37 \
-  vssrl_vx-38 \
-  vssrl_vx-39 \
   vssrl_vx-4 \
-  vssrl_vx-40 \
   vssrl_vx-5 \
   vssrl_vx-6 \
   vssrl_vx-7 \
@@ -1839,14 +2191,11 @@ tests = \
   vssseg3e64_v-0 \
   vssseg3e8_v-0 \
   vssseg3e8_v-1 \
-  vssseg3e8_v-2 \
   vssseg4e16_v-0 \
   vssseg4e16_v-1 \
-  vssseg4e16_v-2 \
   vssseg4e32_v-0 \
   vssseg4e32_v-1 \
   vssseg4e64_v-0 \
-  vssseg4e64_v-1 \
   vssseg4e8_v-0 \
   vssseg4e8_v-1 \
   vssseg4e8_v-2 \
@@ -1867,7 +2216,6 @@ tests = \
   vssseg6e8_v-0 \
   vssseg6e8_v-1 \
   vssseg6e8_v-2 \
-  vssseg6e8_v-3 \
   vssseg7e16_v-0 \
   vssseg7e16_v-1 \
   vssseg7e16_v-2 \
@@ -1881,22 +2229,18 @@ tests = \
   vssseg8e16_v-0 \
   vssseg8e16_v-1 \
   vssseg8e16_v-2 \
-  vssseg8e16_v-3 \
   vssseg8e32_v-0 \
   vssseg8e32_v-1 \
-  vssseg8e32_v-2 \
   vssseg8e64_v-0 \
   vssseg8e8_v-0 \
   vssseg8e8_v-1 \
   vssseg8e8_v-2 \
   vssseg8e8_v-3 \
-  vssseg8e8_v-4 \
   vssub_vv-0 \
   vssub_vv-1 \
   vssub_vv-2 \
   vssub_vx-0 \
   vssub_vx-1 \
-  vssub_vx-10 \
   vssub_vx-2 \
   vssub_vx-3 \
   vssub_vx-4 \
@@ -1910,7 +2254,6 @@ tests = \
   vssubu_vv-2 \
   vssubu_vx-0 \
   vssubu_vx-1 \
-  vssubu_vx-10 \
   vssubu_vx-2 \
   vssubu_vx-3 \
   vssubu_vx-4 \
@@ -1924,7 +2267,6 @@ tests = \
   vsub_vv-2 \
   vsub_vx-0 \
   vsub_vx-1 \
-  vsub_vx-10 \
   vsub_vx-2 \
   vsub_vx-3 \
   vsub_vx-4 \
@@ -1964,7 +2306,6 @@ tests = \
   vsuxseg5ei16_v-0 \
   vsuxseg5ei16_v-1 \
   vsuxseg5ei32_v-0 \
-  vsuxseg5ei32_v-1 \
   vsuxseg5ei64_v-0 \
   vsuxseg5ei8_v-0 \
   vsuxseg5ei8_v-1 \
@@ -2051,7 +2392,6 @@ tests = \
   vwmul_vx-3 \
   vwmul_vx-4 \
   vwmul_vx-5 \
-  vwmul_vx-6 \
   vwmulsu_vv-0 \
   vwmulsu_vv-1 \
   vwmulsu_vx-0 \
@@ -2060,7 +2400,6 @@ tests = \
   vwmulsu_vx-3 \
   vwmulsu_vx-4 \
   vwmulsu_vx-5 \
-  vwmulsu_vx-6 \
   vwmulu_vv-0 \
   vwmulu_vv-1 \
   vwmulu_vx-0 \
@@ -2069,7 +2408,6 @@ tests = \
   vwmulu_vx-3 \
   vwmulu_vx-4 \
   vwmulu_vx-5 \
-  vwmulu_vx-6 \
   vwredsum_vs-0 \
   vwredsum_vs-1 \
   vwredsumu_vs-0 \
@@ -2118,7 +2456,6 @@ tests = \
   vxor_vi-2 \
   vxor_vi-3 \
   vxor_vi-4 \
-  vxor_vi-5 \
   vxor_vv-0 \
   vxor_vv-1 \
   vxor_vv-2 \
@@ -2129,8 +2466,6 @@ tests = \
   vxor_vx-4 \
   vxor_vx-5 \
   vxor_vx-6 \
-  vxor_vx-7 \
   vzext_vf2-0 \
-  vzext_vf2-1 \
   vzext_vf4-0 \
   vzext_vf8-0 \

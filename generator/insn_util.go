@@ -9,19 +9,32 @@ import (
 	"strconv"
 )
 
-type VXRM int
+type RM int
 
-var allVXRMs = []VXRM{0, 1, 2, 3}
-var noVXRMs = []VXRM{0}
-var vxrmNames = map[VXRM]string{
+var noRMs = []RM{0}
+var allVXRMs = []RM{0, 1, 2, 3}
+var vxrmNames = map[RM]string{
 	allVXRMs[0]: "rnu (round-to-nearest-up)",
 	allVXRMs[1]: "rne (round-to-nearest-even)",
 	allVXRMs[2]: "rdn (round-down (truncate))",
 	allVXRMs[3]: "rod round-to-odd (OR bits into LSB, aka \"jam\")",
 }
 
-func (v VXRM) String() string {
-	return vxrmNames[v]
+func (r RM) VXRMString() string {
+	return vxrmNames[r]
+}
+
+var allFRMs = []RM{0, 1, 2, 3, 4}
+var frmNames = map[RM]string{
+	allFRMs[0]: "RNE (Round to Nearest, ties to Even)",
+	allFRMs[1]: "RTZ (Round towards Zero)",
+	allFRMs[2]: "RDN (Round Down, towards -Inf)",
+	allFRMs[3]: "RUP (Round Up, towards +Inf)",
+	allFRMs[4]: "RMM (Round to Nearest, ties to Max Magnitude)",
+}
+
+func (r RM) FRMString() string {
+	return frmNames[r]
 }
 
 type VXSAT bool

@@ -28,9 +28,9 @@ func (i *Insn) genCodeVdVs2(pos int) []string {
 
 	var combinations []combination
 	if sew32OnlyInsn {
-		combinations = i.combinations(allLMULs, sews, []bool{false}, i.vxrms())
+		combinations = i.combinations(allLMULs, sews, []bool{false}, i.rms())
 	} else {
-		combinations = i.combinations([]LMUL{LMUL(nr)}, sews, []bool{false}, i.vxrms())
+		combinations = i.combinations([]LMUL{LMUL(nr)}, sews, []bool{false}, i.rms())
 	}
 	res := make([]string, 0, len(combinations))
 

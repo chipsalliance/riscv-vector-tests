@@ -18,7 +18,7 @@ func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
 		allLMULs,
 		sews,
 		[]bool{false},
-		i.vxrms(),
+		i.rms(),
 	)
 
 	res := make([]string, 0, len(combinations))

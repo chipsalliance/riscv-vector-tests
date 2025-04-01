@@ -21,7 +21,7 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64Only, []LMUL{1, 2, 4, 8}, allLMULs)),
 		sews,
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 

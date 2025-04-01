@@ -19,7 +19,7 @@ func (i *Insn) genCodeVdRs1m(pos int) []string {
 		lmuls = []LMUL{LMUL(nfields)}
 		sews = []SEW{SEW(eew)}
 	}
-	combinations := i.combinations(lmuls, sews, []bool{false}, i.vxrms())
+	combinations := i.combinations(lmuls, sews, []bool{false}, i.rms())
 
 	res := make([]string, 0, len(combinations))
 
