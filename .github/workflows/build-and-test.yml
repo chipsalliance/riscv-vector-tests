@@ -44,7 +44,7 @@ jobs:
         run: |
           git clone https://github.com/riscv-software-src/riscv-isa-sim.git
           cd riscv-isa-sim
-          git reset --hard 3f79e3b7ded80d9ef0e722126b3765207e010711
+          git reset --hard b0d7621ff8e9520aaacd57d97d4d99a545062d14
           mkdir build
           cd build
           ../configure --prefix=${{ github.workspace }}/riscv
