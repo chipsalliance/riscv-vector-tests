@@ -45,15 +45,15 @@ static reg_t magic_insn(processor_t* p, insn_t insn, reg_t pc) {
 }
 
 class magic_extension_t : public extension_t {
-  std::vector<insn_desc_t> get_instructions() override {
+  std::vector<insn_desc_t> get_instructions(const processor_t &proc) override {
     std::vector<insn_desc_t> insns;
     insns.push_back((insn_desc_t){0x0000000B, 0x0000007F,
                                   magic_insn, magic_insn, magic_insn, magic_insn,
                                   magic_insn, magic_insn, magic_insn, magic_insn});
     return insns;
   }
-  std::vector<disasm_insn_t*> get_disasms() override { return std::vector<disasm_insn_t*>(); }
-  const char* name() override { return "magic"; }
+  std::vector<disasm_insn_t*> get_disasms(const processor_t *proc) override { return std::vector<disasm_insn_t*>(); }
+  const char* name() const override { return "magic"; }
 };
 
 int main(int argc, char** argv) {
