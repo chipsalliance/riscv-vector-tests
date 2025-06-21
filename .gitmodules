@@ -1,3 +1,3 @@
 [submodule "env/riscv-test-env"]
 	path = env/riscv-test-env
-	url = https://github.com/akifejaz/riscv-test-env
+	url = https://github.com/riscv/riscv-test-env.git
