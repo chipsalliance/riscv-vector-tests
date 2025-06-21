@@ -6,9 +6,28 @@ import (
 )
 
 func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
-	combinations := i.combinations(allLMULs, allSEWs, []bool{false}, i.vxrms())
+	vsm3Insn := strings.HasPrefix(i.Name, "vsm3")
+	sew32OnlyInsn := strings.HasPrefix(i.Name, "vg") || strings.HasPrefix(i.Name, "vsha")
+	sews := iff(sew32OnlyInsn || vsm3Insn, []SEW{32}, allSEWs)
+	if vsm3Insn {
+		i.EGW = 256
+	} else if sew32OnlyInsn {
+		i.EGW = 128
+	}
+	combinations := i.combinations(
+		allLMULs,
+		sews,
+		[]bool{false},
+		i.rms(),
+	)
+
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
+		if sew32OnlyInsn {
+			c.Vl = (c.Vl + 3) &^ 3
+		} else if vsm3Insn {
+			c.Vl = (c.Vl + 7) &^ 7
+		}
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
 
@@ -30,7 +49,7 @@ func (i *Insn) genCodeVdVs2Vs1(pos int) []string {
 
 		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gMagicInsn(vd, c.LMUL1))
 
 		res = append(res, builder.String())
 	}

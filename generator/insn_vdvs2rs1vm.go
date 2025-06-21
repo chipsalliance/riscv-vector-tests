@@ -9,15 +9,17 @@ import (
 func (i *Insn) genCodeVdVs2Rs1Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wx")
+	sew64Only := strings.HasPrefix(i.Name, "vclmul")
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
 
 	sews := iff(vdWidening || vs2Widening, allSEWs[:len(allSEWs)-1], allSEWs)
+	sews = iff(sew64Only, []SEW{64}, sews)
 	combinations := i.combinations(
-		iff(vdWidening || vs2Widening, wideningMULs, allLMULs),
+		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64Only, []LMUL{1, 2, 4, 8}, allLMULs)),
 		sews,
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 
@@ -65,7 +67,7 @@ func (i *Insn) genCodeVdVs2Rs1Vm(pos int) []string {
 
 			builder.WriteString(i.gResultDataAddr())
 			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-			builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(i.gMagicInsn(vd, vdEMUL1))
 		}
 
 		res = append(res, builder.String())

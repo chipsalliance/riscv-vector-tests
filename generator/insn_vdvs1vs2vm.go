@@ -12,13 +12,13 @@ func (i *Insn) genCodeVdVs1Vs2Vm(pos int) []string {
 	vdSize := iff(vdWidening, 2, 1)
 	vs1Size := 1
 
-	sews := iff(float, floatSEWs, allSEWs)
+	sews := iff(float, i.floatSEWs(), allSEWs)
 	sews = iff(vdWidening, sews[:len(sews)-1], sews)
 	combinations := i.combinations(
 		iff(vdWidening, wideningMULs, allLMULs),
 		sews,
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 
@@ -63,7 +63,7 @@ func (i *Insn) genCodeVdVs1Vs2Vm(pos int) []string {
 
 			builder.WriteString(i.gResultDataAddr())
 			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-			builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(i.gMagicInsn(vd, vdEMUL1))
 		}
 
 		res = append(res, builder.String())

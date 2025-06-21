@@ -1,9 +1,0 @@
-name = "vfwcvt.f.x.v"
-format = "vd,vs2,vm"
-
-[tests]
-sew32 = [
-    [0xffffffff],
-    [0xfffffffe],
-    [0x2],
-]

@@ -14,8 +14,8 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 	vs2Size := iff(vdNarrowing, 2, 1)
 
 	lmuls := iff(vdWidening || vdNarrowing, wideningMULs, allLMULs)
-	sews := iff(vdWidening || vdNarrowing, floatSEWs[:len(floatSEWs)-1], floatSEWs)
-	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.vxrms())
+	sews := iff(vdWidening || vdNarrowing, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
+	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.rms())
 
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
@@ -51,7 +51,7 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 
 		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gMagicInsn(vd, vdEMUL1))
 
 		res = append(res, builder.String())
 	}

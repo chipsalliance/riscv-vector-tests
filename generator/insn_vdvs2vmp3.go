@@ -20,7 +20,7 @@ func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 	sews := allSEWs[len(allSEWs)-(4-n):]
 	lmuls := allLMULs[:len(allLMULs)-n]
 
-	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.vxrms())
+	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.rms())
 	res := make([]string, 0, len(combinations))
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
@@ -34,8 +34,7 @@ func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 		vs2EMUL := c.LMUL / LMUL(f)
 		vs2EMUL1 := LMUL(math.Max(float64(vs2EMUL), 1))
 
-		vd := int(c.LMUL1)
-		vs2 := 2 * int(c.LMUL1)
+		vd, vs2, _ := getVRegs(c.LMUL1, false, i.Name)
 
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
@@ -51,7 +50,7 @@ func (i *Insn) genCodeVdVs2VmP3(pos int) []string {
 
 		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gMagicInsn(vd, c.LMUL1))
 
 		res = append(res, builder.String())
 	}

@@ -16,9 +16,11 @@ import (
 type insnFormat string
 
 type Option struct {
-	VLEN   VLEN
-	XLEN   XLEN
-	Repeat int
+	VLEN    VLEN
+	XLEN    XLEN
+	Fp      bool
+	Repeat  int
+	Float16 bool
 }
 
 const minStride = -1 // Must be negative
@@ -60,6 +62,7 @@ type Insn struct {
 	Vxsat        bool       `toml:"vxsat"`
 	Tests        tests      `toml:"tests"`
 	Option       Option     `toml:"-"`
+	EGW          int        `toml:"-"`
 	TestData     *TestData
 }
 
@@ -83,6 +86,7 @@ const (
 	insnFormatVdVs2Imm     insnFormat = "vd,vs2,imm"
 	insnFormatVdVs2ImmV0   insnFormat = "vd,vs2,imm,v0"
 	insnFormatVdVs2ImmVm   insnFormat = "vd,vs2,imm,vm"
+	insnFormatVdVs2Uimm    insnFormat = "vd,vs2,uimm"
 	insnFormatVdVs2UimmVm  insnFormat = "vd,vs2,uimm,vm"
 	insnFormatVdVs1Vs2Vm   insnFormat = "vd,vs1,vs2,vm"
 	insnFormatVdRs1Vs2Vm   insnFormat = "vd,rs1,vs2,vm"
@@ -124,6 +128,7 @@ var formats = map[insnFormat]struct{}{
 	insnFormatVdVs2Imm:     {},
 	insnFormatVdVs2ImmV0:   {},
 	insnFormatVdVs2ImmVm:   {},
+	insnFormatVdVs2Uimm:    {},
 	insnFormatVdVs2UimmVm:  {},
 	insnFormatVdVs1Vs2Vm:   {},
 	insnFormatVdRs1Vs2Vm:   {},
@@ -189,6 +194,8 @@ func (i *Insn) genCodeCombinations(pos int) []string {
 		return i.genCodeVdVs2ImmV0(pos)
 	case insnFormatVdVs2ImmVm:
 		return i.genCodeVdVs2ImmVm(pos)
+	case insnFormatVdVs2Uimm:
+		return i.genCodeVdVs2Uimm(pos)
 	case insnFormatVdVs2UimmVm:
 		return i.genCodeVdVs2UimmVm(pos)
 	case insnFormatVdFs1Vs2Vm:
@@ -232,6 +239,7 @@ func (i *Insn) genCodeCombinations(pos int) []string {
 func ReadInsnFromToml(contents []byte, option Option) (*Insn, error) {
 	i := Insn{
 		Option:   option,
+		EGW:      0,
 		TestData: &TestData{},
 	}
 
@@ -287,8 +295,8 @@ func (i *Insn) genHeader() string {
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV%dUV
-`, i.Name, i.Option.XLEN)
+RVTEST_RV%dUV%s
+`, i.Name, i.Option.XLEN, iff(i.Option.Fp, "", "X"))
 }
 
 func (i *Insn) genMergedCodeCombinations(splitPerLines int) ([]string, []string) {
@@ -310,6 +318,14 @@ func (i *Insn) genMergedCodeCombinations(splitPerLines int) ([]string, []string)
 				if len(str) != 0 {
 					buf := fmt.Sprintf(`
 RVTEST_CODE_BEGIN
+
+# Zero all vector registers
+vsetvli t0, x0, e8,m8,tu,mu
+vmv.v.i v0, 0x0
+vmv.v.i v8, 0x0
+vmv.v.i v16, 0x0
+vmv.v.i v24, 0x0
+
 %s
   TEST_CASE(2, x0, 0x0)
   TEST_PASSFAIL
@@ -333,10 +349,12 @@ RVTEST_CODE_END
 }
 
 func (i *Insn) genData() string {
-	dataSize := i.vlenb() * (8 /* max LMUL */)
+	dataSize := i.vlenb() * 8 /* max LMUL */ * 8 /* max NFIELDS */
 	// Stride insns
 	if strings.HasPrefix(i.Name, "vlse") ||
-		strings.HasPrefix(i.Name, "vsse") {
+		strings.HasPrefix(i.Name, "vsse") ||
+		strings.HasPrefix(i.Name, "vlsse") ||
+		strings.HasPrefix(i.Name, "vssse") {
 		dataSize *= strides
 	} else if strings.HasPrefix(i.Name, "vw") ||
 		strings.HasPrefix(i.Name, "vfw") {
@@ -388,6 +406,16 @@ func (i *Insn) testCases(float bool, sew SEW) [][]any {
 			res = append(res, l)
 		}
 	case 16:
+		if float {
+			for _, c := range i.Tests.FSEW16 {
+				l := make([]any, len(c))
+				for b, op := range c {
+					l[b] = op
+				}
+				res = append(res, l)
+			}
+			break
+		}
 		for _, c := range i.Tests.SEW16 {
 			l := make([]any, len(c))
 			for b, op := range c {
@@ -442,27 +470,21 @@ type combination struct {
 	LMUL1 LMUL
 	Vl    int
 	Mask  bool
-	VXRM  VXRM
+	RM    RM
+	FRM   bool
 	VXSAT VXSAT
 }
 
 func (c *combination) initialize() string {
-	// write comments, set vxrm, clear vxsat if necessary
+	// write comments, set vxrm/frm, clear vxsat if necessary
 	str := fmt.Sprintf(`
 # Generating tests for VL: %d, LMUL: %s, SEW: %s, Mask: %v
 
-# Zero all vector registers
-vsetvli t0, x0, e8, m8, ta, ma
-vmv.v.i v0, 0x0
-vmv.v.i v8, 0x0
-vmv.v.i v16, 0x0
-vmv.v.i v24, 0x0
-
-# Initialize vxrm CSR
-csrwi vxrm, %d # %s
+# Initialize rounding mode CSR
+csrwi %s, %d # %s
 
 `,
-		c.Vl, c.LMUL.String(), c.SEW.String(), c.Mask, c.VXRM, c.VXRM)
+		c.Vl, c.LMUL.String(), c.SEW.String(), c.Mask, iff(c.FRM, "frm", "vxrm"), c.RM, iff(c.FRM, c.RM.FRMString(), c.RM.VXRMString()))
 	if c.VXSAT {
 		str = fmt.Sprintf(`%s# Clear vxsat CSR
 csrci vxsat, 1
@@ -472,9 +494,12 @@ csrci vxsat, 1
 	return str
 }
 
-func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM) []combination {
+func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, rms []RM) []combination {
 	res := make([]combination, 0)
 	for _, lmul := range lmuls {
+		if i.EGW > 0 && int(float64(lmul)*float64(i.Option.VLEN)) < i.EGW {
+			continue
+		}
 		for _, sew := range sews {
 			if int(i.Option.XLEN) < int(sew) {
 				continue
@@ -487,14 +512,15 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM
 				vlmax1 := int((float64(i.Option.VLEN) / float64(sew)) * float64(lmul1))
 				rand.Seed(int64(vlmax1))
 				for _, vl := range []int{0, vlmax1/2 - 1, vlmax1 / 2, vlmax1, vlmax1 - 1, vlmax1 + 1, rand.Intn(vlmax1), rand.Intn(vlmax1), rand.Intn(vlmax1)} {
-					for _, vxrm := range vxrms {
+					for _, rm := range rms {
 						res = append(res, combination{
 							SEW:   sew,
 							LMUL:  lmul,
 							LMUL1: lmul1,
 							Vl:    vl,
 							Mask:  mask,
-							VXRM:  vxrm,
+							RM:    rm,
+							FRM:   i.Option.Fp,
 							VXSAT: VXSAT(i.Vxsat),
 						})
 					}
@@ -506,11 +532,13 @@ func (i *Insn) combinations(lmuls []LMUL, sews []SEW, masks []bool, vxrms []VXRM
 	return res
 }
 
-func (i *Insn) vxrms() []VXRM {
+func (i *Insn) rms() []RM {
 	if i.Vxrm {
 		return allVXRMs
+	} else if i.Option.Fp {
+		return allFRMs
 	}
-	return noVXRMs
+	return noRMs
 }
 
 type vsetvlicombinations struct {
@@ -534,6 +562,12 @@ func (i *Insn) vsetvlicombinations(lmuls []LMUL, sews []SEW, vtas []bool, vmas [
 	res := make([]vsetvlicombinations, 0)
 	for _, lmul := range lmuls {
 		for _, sew := range sews {
+			if int(i.Option.XLEN) < int(sew) {
+				continue
+			}
+			if float64(lmul) < float64(sew)/float64(i.Option.XLEN) {
+				continue
+			}
 			for _, vta := range vtas {
 				for _, vma := range vmas {
 					res = append(res, vsetvlicombinations{

@@ -1,19 +1,36 @@
-# RISC-V Vector Tests
+# RISC-V Vector Tests Generator
 
-RISC-V V-extension 1.0 has been frozen for a while, but there is currently no serious open-source test suite available, and this project tries to fill that void.
+## About
+
+This repository hosts unit tests generator for the RISC-V vector extension.
+
+## Features
+
+- Similar to [riscv-tests](https://github.com/riscv-software-src/riscv-tests), simple and easy to use
+- Self-verification by default, Co-simulator friendly
+- User-mode and machine-mode binaries
+- TestFloat3 integration
+- Support RV32 and RV64
+- Test SEW from e8 to e64
+- Test LMUL from mf8 to m8
+- Support VLEN from 64 to 4096
+- Support varies sub-extensions: Zvfh, Zvbb, Zvbc, Zvkg, Zvkned, Zvknha, Zvksed and Zvksh
+- Configurable, see `make help`
+
+## Limitations
+
+- All the tests are per instruction, and it is done more or less in the same fashion
+- Lack of tail/mask agnostic support (i.e. ta/ma)
+- Lack of fault-only-first testing
+- Lack of vstart testing
+- Lack of register group overlap testing
+- ... and more
+
+Overall, there are no coverage statistics or guarantees.
+
+## How it works
 
 The Spike simulator is known as the RISC-V gold standard simulator, and although we don't know how Spike is tested, it does fully support the V extension. So we added [a custom special instruction](https://github.com/ksco/riscv-vector-tests/blob/6a23892a5ab0cc72f4867cc95186b3528c99c2a0/pspike/pspike.cc#L20) to Spike, and for any test, let it automatically generate a reference result for that test. This way, we generate tests for all instructions almost automatically. Under this framework, all we have to do is write a [simple config file for each instruction](configs/).
-
-For starters, you can directly download the pre-generated tests from Github Action Artifacts.
-
-## Plan
-
-- [ ] Add check mechanism for CSR register
-- [ ] Add V register coverage test
-- [ ] Add test coverage statistics
-- [ ] Add negative tests
-- [ ] Add tests for sub-extensions (e.g. Zvamo, Zvfh).
-- [ ] Support Zve64f.
 
 ## Prerequisite
 
@@ -22,26 +39,25 @@ For starters, you can directly download the pre-generated tests from Github Acti
 3. Golang 1.19+
 4. `riscv-pk` if you need to generate user-mode binaries
 
+## Cloning
+
+This repository uses the `riscv-test-env` repository as a submodule.
+
+```
+git clone --recurse-submodules https://github.com/chipsalliance/riscv-vector-tests
+```
+
 ## How to use
 
 ```
-make -j$(nproc)
+make all -j$(nproc)
 ```
 
-After `make`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
+> If you have problems compiling, please refer to the build steps in [build-and-test.yml](.github/workflows/build-and-test.yml).
 
-Options:
+After `make all`, you will find all the generated tests in `out/v[vlen]x[xlen][mode]/bin/stage2/`.
 
-- `VLEN`, default is 256
-- `XLEN`, default is 64, we do not support specifying ELEN yet, ELEN is consistent with XLEN
-- `MODE`, default is `machine`, can be `machine`, `virtual` or `user`
-- `INTEGER`, default is 0, set to 1 if you don't want float tests (i.e. for Zve32x or Zve64x)
-- `PATTERN`, default is `.*`, set to a valid regex to generate the tests of your interests (e.g. `PATTERN='^v[ls].+\.v$'` to generate load/store tests)
-- `TESTFLOAT3LEVEL`, default is 2, must be one of 1 or 2, testing level for testfloat3 generated cases.
-- `TEST_MODE`, default is `self`, set to `cosim` if you want to generate faster tests without self-verification (to be used with co-simulators).
-- `REPEAT`, default is `1`, set to greater value to repeat the same V instruction n times for a better coverage (only valid for float instructions).
-
-For example, to generate `isa=rv32gcv varch=vlen:128,elen:32 mode=machine` tests, use `make -e VLEN=128 XLEN=32 MODE=machine -j$(nproc)`.
+For more advanced options, run `make help`.
 
 > Note: [single/single.go](single/single.go) generates tests directly from stage 1, suitable for targets with co-simulators (or simply use `TEST_MODE=cosim` if you're lazy).
 
@@ -57,4 +73,6 @@ This repository also provides a nix derivation with the following output provide
 
 This project uses third-party projects, and the licenses of these projects are attached to the corresponding directories.
 
-The code for this project is distributed under the MIT license.
+The code for this project is distributed under the Apache License Version 2.0.
+
+The “RISC-V” trade name is a registered trademark of RISC-V International.

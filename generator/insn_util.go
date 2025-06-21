@@ -2,24 +2,39 @@ package generator
 
 import (
 	"fmt"
+	"hash/fnv"
 	"log"
+	"math/rand"
 	"regexp"
 	"strconv"
 )
 
-type VXRM int
+type RM int
 
-var allVXRMs = []VXRM{0, 1, 2, 3}
-var noVXRMs = []VXRM{0}
-var vxrmNames = map[VXRM]string{
+var noRMs = []RM{0}
+var allVXRMs = []RM{0, 1, 2, 3}
+var vxrmNames = map[RM]string{
 	allVXRMs[0]: "rnu (round-to-nearest-up)",
 	allVXRMs[1]: "rne (round-to-nearest-even)",
 	allVXRMs[2]: "rdn (round-down (truncate))",
 	allVXRMs[3]: "rod round-to-odd (OR bits into LSB, aka \"jam\")",
 }
 
-func (v VXRM) String() string {
-	return vxrmNames[v]
+func (r RM) VXRMString() string {
+	return vxrmNames[r]
+}
+
+var allFRMs = []RM{0, 1, 2, 3, 4}
+var frmNames = map[RM]string{
+	allFRMs[0]: "RNE (Round to Nearest, ties to Even)",
+	allFRMs[1]: "RTZ (Round towards Zero)",
+	allFRMs[2]: "RDN (Round Down, towards -Inf)",
+	allFRMs[3]: "RUP (Round Up, towards +Inf)",
+	allFRMs[4]: "RMM (Round to Nearest, ties to Max Magnitude)",
+}
+
+func (r RM) FRMString() string {
+	return frmNames[r]
 }
 
 type VXSAT bool
@@ -27,7 +42,15 @@ type VXSAT bool
 type SEW int
 
 var allSEWs = []SEW{8, 16, 32, 64}
-var floatSEWs = []SEW{32, 64}
+
+func (i *Insn) floatSEWs() []SEW {
+	if i.Option.Float16 {
+		return []SEW{16, 32, 64}
+	} else {
+		return []SEW{32, 64}
+	}
+}
+
 var validSEWs = map[SEW]struct{}{
 	allSEWs[0]: {},
 	allSEWs[1]: {},
@@ -107,7 +130,7 @@ func getEEW(name string) SEW {
 	return SEW(eew)
 }
 
-func getNfieldsRoundedUp(name string) int {
+func getNfields(name string) int {
 	s := regexp.MustCompile(`v.+?seg(\d)e.+?\.v`)
 	subs := s.FindStringSubmatch(name)
 	if len(subs) < 2 {
@@ -117,19 +140,7 @@ func getNfieldsRoundedUp(name string) int {
 	if err != nil {
 		return 1
 	}
-	switch nfields {
-	case 1:
-		return 1
-	case 2:
-		return 2
-	case 3, 4:
-		return 4
-	case 5, 6, 7, 8:
-		return 8
-	default:
-		log.Fatalln("unreachable")
-		return 1
-	}
+	return nfields
 }
 
 func iff[T any](condition bool, t T, f T) T {
@@ -151,4 +162,29 @@ func ma(mask bool) string {
 		return "ma"
 	}
 	return "mu"
+}
+
+func hash(s string) uint32 {
+	h := fnv.New32a()
+	h.Write([]byte(s))
+	return h.Sum32()
+}
+
+func getVRegs(lmul1 LMUL, v0 bool, seed string) (int, int, int) {
+	if lmul1 < LMUL(1) {
+		log.Fatalln("unreachable")
+	}
+
+	availableOptions := make([]int, 0)
+	for i := iff(v0, 0, int(lmul1)); i < 32; i += int(lmul1) {
+		availableOptions = append(availableOptions, i)
+	}
+
+	rand.Seed(int64(len(availableOptions)) + int64(hash(seed)))
+
+	rand.Shuffle(len(availableOptions), func(i, j int) {
+		availableOptions[i], availableOptions[j] = availableOptions[j], availableOptions[i]
+	})
+
+	return availableOptions[0], availableOptions[1], availableOptions[2]
 }

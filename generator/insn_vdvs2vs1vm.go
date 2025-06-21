@@ -8,18 +8,20 @@ import (
 
 func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 	float := strings.HasPrefix(i.Name, "vf") || strings.HasPrefix(i.Name, "vmf")
+	sew64Only := strings.HasPrefix(i.Name, "vclmul")
 	vdWidening := strings.HasPrefix(i.Name, "vw") || strings.HasPrefix(i.Name, "vfw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wv")
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
 
-	sews := iff(float, floatSEWs, allSEWs)
+	sews := iff(float, i.floatSEWs(), allSEWs)
 	sews = iff(vdWidening || vs2Widening, sews[:len(sews)-1], sews)
+	sews = iff(sew64Only, []SEW{64}, sews)
 	combinations := i.combinations(
-		iff(vdWidening || vs2Widening, wideningMULs, allLMULs),
+		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64Only, []LMUL{1, 2, 4, 8}, allLMULs)),
 		sews,
 		[]bool{false, true},
-		i.vxrms(),
+		i.rms(),
 	)
 	res := make([]string, 0, len(combinations))
 
@@ -49,6 +51,12 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 			vd*2 + int(vs2EMUL1),
 		}
 
+		if vdEMUL1 == vs2EMUL1 && !strings.HasPrefix(i.Name, "vrgatherei16") {
+			vd1, vs1, vs2 := getVRegs(vdEMUL1, false, i.Name)
+			vd = vd1
+			vss = []int{vs1, vs2}
+		}
+
 		for r := 0; r < i.Option.Repeat; r += 1 {
 			builder.WriteString(i.gWriteRandomData(vdEMUL1))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, SEW(8)))
@@ -68,7 +76,7 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 
 			builder.WriteString(i.gResultDataAddr())
 			builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, vdEMUL1, vdEEW))
-			builder.WriteString(i.gMagicInsn(vd))
+			builder.WriteString(i.gMagicInsn(vd, vdEMUL1))
 		}
 
 		res = append(res, builder.String())

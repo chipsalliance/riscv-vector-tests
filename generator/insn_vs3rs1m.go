@@ -17,14 +17,14 @@ func (i *Insn) genCodeVs3Rs1m(pos int) []string {
 		lmuls = []LMUL{LMUL(nfields)}
 	}
 
-	combinations := i.combinations(lmuls, []SEW{8}, []bool{false}, i.vxrms())
+	combinations := i.combinations(lmuls, []SEW{8}, []bool{false}, i.rms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
 
-		vs3 := int(c.LMUL1)
+		vs3, _, _ := getVRegs(c.LMUL1, true, i.Name)
 		builder.WriteString(i.gWriteIntegerTestData(c.LMUL1, c.SEW, 0))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
 
@@ -35,7 +35,7 @@ func (i *Insn) genCodeVs3Rs1m(pos int) []string {
 		builder.WriteString("# -------------- TEST END   --------------\n")
 
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vs3, c.LMUL1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vs3))
+		builder.WriteString(i.gMagicInsn(vs3, c.LMUL1))
 
 		res = append(res, builder.String())
 	}

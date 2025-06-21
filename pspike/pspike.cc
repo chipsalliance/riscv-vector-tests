@@ -20,8 +20,9 @@ static std::vector<std::pair<reg_t, abstract_mem_t*>> make_mems(const std::vecto
 static reg_t magic_insn(processor_t* p, insn_t insn, reg_t pc) {
   static int ncase = 2;
   int group = insn.rs1();
-  bool vxsat = insn.rs2() & 0x1;
-  for (int reg = group; reg < 2*group; reg++) {
+  bool vxsat = insn.rs2() & 1;
+  int lmul1 = insn.rs2() >> 1;
+  for (int reg = group; reg < group + lmul1; reg++) {
     for (int i = 0; i < p->VU.VLEN / p->get_xlen(); i++) {
       if (p->get_xlen() == 64) {
         printf(
@@ -44,24 +45,24 @@ static reg_t magic_insn(processor_t* p, insn_t insn, reg_t pc) {
 }
 
 class magic_extension_t : public extension_t {
-  std::vector<insn_desc_t> get_instructions() override {
+  std::vector<insn_desc_t> get_instructions(const processor_t &proc) override {
     std::vector<insn_desc_t> insns;
     insns.push_back((insn_desc_t){0x0000000B, 0x0000007F,
                                   magic_insn, magic_insn, magic_insn, magic_insn,
                                   magic_insn, magic_insn, magic_insn, magic_insn});
     return insns;
   }
-  std::vector<disasm_insn_t*> get_disasms() override { return std::vector<disasm_insn_t*>(); }
-  const char* name() override { return "magic"; }
+  std::vector<disasm_insn_t*> get_disasms(const processor_t *proc) override { return std::vector<disasm_insn_t*>(); }
+  const char* name() const override { return "magic"; }
 };
 
 int main(int argc, char** argv) {
-  std::vector<mem_cfg_t> mem_cfg { mem_cfg_t(0x80000000, 0x10000000) };
+  std::vector<mem_cfg_t> mem_layout{mem_cfg_t(0x80000000, 0x10000000)};
   std::vector<size_t> hartids = {0};
   cfg_t cfg;
   option_parser_t parser;
   parser.option(0, "isa", 1, [&](const char* s){cfg.isa = s;});
-  parser.option(0, "varch", 1, [&](const char* s){cfg.varch = s;});
+  cfg.mem_layout = mem_layout;
 
   auto argv1 = parser.parse(argv);
   std::vector<std::string> htif_args(argv1, (const char*const*)argv + argc);
@@ -78,17 +79,18 @@ int main(int argc, char** argv) {
     .support_impebreak = true
   };
   std::vector<std::pair<reg_t, abstract_mem_t*>> mems = make_mems(cfg.mem_layout);
-  std::vector<device_factory_t*> plugin_devices;
+  std::vector<device_factory_sargs_t> plugin_device_factories;
   sim_t sim(&cfg, false,
             mems,
-            plugin_devices,
+            plugin_device_factories,
             htif_args,
             dm_config,
             nullptr,
             true,
             nullptr,
             false,
-            nullptr);
+            nullptr,
+            std::nullopt);
   magic_extension_t magic;
   sim.get_core(0)->register_extension(&magic);
   sim.run();

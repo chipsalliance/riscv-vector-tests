@@ -6,15 +6,14 @@ import (
 )
 
 func (i *Insn) genCodeVdVs1(pos int) []string {
-	combinations := i.combinations(allLMULs, allSEWs, []bool{false}, i.vxrms())
+	combinations := i.combinations(allLMULs, allSEWs, []bool{false}, i.rms())
 	res := make([]string, 0, len(combinations))
 
 	for _, c := range combinations[pos:] {
 		builder := strings.Builder{}
 		builder.WriteString(c.initialize())
 
-		vd := int(c.LMUL1)
-		vs1 := 2 * int(c.LMUL1)
+		vd, vs1, _ := getVRegs(c.LMUL1, true, i.Name)
 		builder.WriteString(i.gWriteRandomData(c.LMUL1))
 		builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, c.LMUL1, c.SEW))
 
@@ -29,7 +28,7 @@ func (i *Insn) genCodeVdVs1(pos int) []string {
 
 		builder.WriteString(i.gResultDataAddr())
 		builder.WriteString(i.gStoreRegisterGroupIntoResultData(vd, c.LMUL1, c.SEW))
-		builder.WriteString(i.gMagicInsn(vd))
+		builder.WriteString(i.gMagicInsn(vd, c.LMUL1))
 
 		res = append(res, builder.String())
 	}

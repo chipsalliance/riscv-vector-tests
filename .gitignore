@@ -12,3 +12,8 @@ vendor/
 
 # macOS
 .DS_Store
+
+# ccls
+.ccls-cache/
+
+Makefrag
