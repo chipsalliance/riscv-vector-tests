@@ -7,10 +7,13 @@ import (
 )
 
 func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
+	float := strings.HasPrefix(i.Name, "vf")
 	vdWidening := strings.HasPrefix(i.Name, "vfw")
+	sew16Only := strings.HasPrefix(i.Name, "vfwmaccbf16")
 	vdSize := iff(vdWidening, 2, 1)
 
 	sews := iff(vdWidening, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
+	sews = iff(sew16Only, []SEW{16}, sews)
 	combinations := i.combinations(
 		iff(vdWidening, wideningMULs, allLMULs),
 		sews,
@@ -36,13 +39,13 @@ func (i *Insn) genCodeVdFs1Vs2Vm(pos int) []string {
 		vd, vs2, _ := getVRegs(vdEMUL1, false, i.Name)
 
 		for r := 0; r < i.Option.Repeat; r += 1 {
-			builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, r != 0, vdEMUL1, vdEEW, 0, 2))
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, vdEMUL1, vdEEW, 0, 2))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vd, vdEMUL1, vdEEW))
 
-			builder.WriteString(i.gWriteTestData(true, !i.NoTestfloat3, r != 0, c.LMUL1, c.SEW, 1, 2))
+			builder.WriteString(i.gWriteTestData(float, !i.NoTestfloat3, r != 0, c.LMUL1, c.SEW, 1, 2))
 			builder.WriteString(i.gLoadDataIntoRegisterGroup(vs2, c.LMUL1, c.SEW))
 
-			cases := i.testCases(true, c.SEW)
+			cases := i.testCases(float, c.SEW)
 			for a := 0; a < len(cases); a++ {
 				builder.WriteString("# -------------- TEST BEGIN --------------\n")
 				switch c.SEW {

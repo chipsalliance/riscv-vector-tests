@@ -9,11 +9,14 @@ import (
 func (i *Insn) genCodeVdVs1Vs2Vm(pos int) []string {
 	float := strings.HasPrefix(i.Name, "vf")
 	vdWidening := strings.HasPrefix(i.Name, "vw") || strings.HasPrefix(i.Name, "vfw")
+	sew16Only := strings.HasPrefix(i.Name, "vfwmaccbf16")
 	vdSize := iff(vdWidening, 2, 1)
 	vs1Size := 1
 
 	sews := iff(float, i.floatSEWs(), allSEWs)
 	sews = iff(vdWidening, sews[:len(sews)-1], sews)
+	sews = iff(sew16Only, []SEW{16}, sews)
+
 	combinations := i.combinations(
 		iff(vdWidening, wideningMULs, allLMULs),
 		sews,

@@ -22,6 +22,44 @@ func convNum[T num](n any) T {
 	return res
 }
 
+func parseCustomBFloat16(n string) uint16 {
+	switch n {
+	case "nan":
+		return 0x7fc1
+	case "-nan":
+		return 0xffc1
+	case "inf":
+		return 0x7f80
+	case "-inf":
+		return 0xff80
+	case "quiet_nan":
+		return 0x7fc0
+	case "signaling_nan":
+		return 0x7f81
+	case "smallest_nonzero_float":
+		return 0x0001
+	case "largest_subnormal_float":
+		return 0x007f
+	case "smallest_normal_float":
+		return 0x0080
+	case "max_float":
+		return 0x7f7f
+	case "-smallest_nonzero_float":
+		return 0x8001
+	case "-largest_subnormal_float":
+		return 0x807f
+	case "-smallest_normal_float":
+		return 0x8080
+	case "-max_float":
+		return 0xff7f
+	default:
+		// Perform simple truncation (round towards zero)
+		v, _ := strconv.ParseFloat(n, 32)
+		bits := math.Float32bits(float32(v))
+		return uint16(bits >> 16)
+	}
+}
+
 func parseCustomFloat16(n string) uint16 {
 	switch n {
 	case "nan":
@@ -158,6 +196,9 @@ type tests struct {
 	SEW64_ []testCase[string] `toml:"sew64"`
 	SEW64  []testCase[uint64] `toml:"-"`
 
+	BF16SEW16_ []testCase[string] `toml:"bf16sew16"`
+	BF16SEW16  []testCase[uint16] `toml:"-"`
+
 	FSEW16_ []testCase[string] `toml:"fsew16"`
 	FSEW16  []testCase[uint16] `toml:"-"`
 
@@ -175,6 +216,16 @@ func (t *tests) initialize() error {
 		for j, s := range ss {
 			t.SEW64[i][j], err = strconv.ParseUint(
 				strings.TrimPrefix(s, "0x"), 16, 64)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	for i, ss := range t.BF16SEW16_ {
+		t.BF16SEW16 = append(t.BF16SEW16, make([]uint16, len(ss)))
+		for j, s := range ss {
+			t.BF16SEW16[i][j] = parseCustomBFloat16(s)
 			if err != nil {
 				return err
 			}
