@@ -501,6 +501,9 @@ tests = \
   vfncvt_x_f_w-1 \
   vfncvt_xu_f_w-0 \
   vfncvt_xu_f_w-1 \
+  vfncvtbf16_f_f_w-0 \
+  vfncvtbf16_f_f_w-1 \
+  vfncvtbf16_f_f_w-2 \
   vfnmacc_vf-0 \
   vfnmacc_vf-1 \
   vfnmacc_vf-10 \
@@ -805,6 +808,9 @@ tests = \
   vfwcvt_x_f_v-1 \
   vfwcvt_xu_f_v-0 \
   vfwcvt_xu_f_v-1 \
+  vfwcvtbf16_f_f_v-0 \
+  vfwcvtbf16_f_f_v-1 \
+  vfwcvtbf16_f_f_v-2 \
   vfwmacc_vf-0 \
   vfwmacc_vf-1 \
   vfwmacc_vf-2 \
@@ -815,6 +821,19 @@ tests = \
   vfwmacc_vf-7 \
   vfwmacc_vv-0 \
   vfwmacc_vv-1 \
+  vfwmaccbf16_vf-0 \
+  vfwmaccbf16_vf-1 \
+  vfwmaccbf16_vf-2 \
+  vfwmaccbf16_vf-3 \
+  vfwmaccbf16_vf-4 \
+  vfwmaccbf16_vf-5 \
+  vfwmaccbf16_vf-6 \
+  vfwmaccbf16_vf-7 \
+  vfwmaccbf16_vf-8 \
+  vfwmaccbf16_vf-9 \
+  vfwmaccbf16_vv-0 \
+  vfwmaccbf16_vv-1 \
+  vfwmaccbf16_vv-2 \
   vfwmsac_vf-0 \
   vfwmsac_vf-1 \
   vfwmsac_vf-2 \
@@ -857,8 +876,10 @@ tests = \
   vfwnmsac_vv-1 \
   vfwredosum_vs-0 \
   vfwredosum_vs-1 \
+  vfwredosum_vs-2 \
   vfwredusum_vs-0 \
   vfwredusum_vs-1 \
+  vfwredusum_vs-2 \
   vfwsub_vf-0 \
   vfwsub_vf-1 \
   vfwsub_vf-2 \
@@ -1890,6 +1911,7 @@ tests = \
   vsll_vx-5 \
   vsll_vx-6 \
   vsm3c_vi-0 \
+  vsm3c_vi-1 \
   vsm3me_vv-0 \
   vsm4k_vi-0 \
   vsm4k_vi-1 \

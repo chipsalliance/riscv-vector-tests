@@ -44,7 +44,7 @@
   TEST_MODE = self##
         ##Change to [cosim] if you want to generate faster tests without self-verification (to be used with co-simulators).
         ##
-  MARCH = rv${XLEN}gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh
+  MARCH = rv${XLEN}gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh_zvfbfmin_zvfbfwma
         ##Set the ISA string to define the base architecture and enabled extensions.
         ##If your compiler doesn't support vector crypto extensions, you can use MARCH = rv${XLEN}gv_zfh_zvfh
         ##If your compiler doesn't support half floating, you can use MARCH = rv${XLEN}gv

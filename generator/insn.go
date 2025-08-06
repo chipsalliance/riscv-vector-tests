@@ -16,11 +16,12 @@ import (
 type insnFormat string
 
 type Option struct {
-	VLEN    VLEN
-	XLEN    XLEN
-	Fp      bool
-	Repeat  int
-	Float16 bool
+	VLEN     VLEN
+	XLEN     XLEN
+	Fp       bool
+	Repeat   int
+	Float16  bool
+	Bfloat16 bool
 }
 
 const minStride = -1 // Must be negative
@@ -407,7 +408,15 @@ func (i *Insn) testCases(float bool, sew SEW) [][]any {
 		}
 	case 16:
 		if float {
-			for _, c := range i.Tests.FSEW16 {
+			var testCases []testCase[uint16]
+
+			if i.Option.Bfloat16 {
+				testCases = i.Tests.BF16SEW16
+			} else {
+				testCases = i.Tests.FSEW16
+			}
+
+			for _, c := range testCases {
 				l := make([]any, len(c))
 				for b, op := range c {
 					l[b] = op
