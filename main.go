@@ -17,7 +17,7 @@ import (
 )
 
 func parse_extension(march string) []string {
-	var valid_exts = []string{"zvbb", "zvbc", "zfh", "zvfh", "zvkg", "zvkned", "zvknha", "zvksed", "zvksh"}
+	var valid_exts = []string{"zvbb", "zvbc", "zfh", "zvfh", "zvkg", "zvkned", "zvknha", "zvksed", "zvksh", "zvfbfmin", "zvfbfwma"}
 	var exts = []string{}
 	exts = append(exts, "v") // standard RVV
 	for _, s := range valid_exts {
@@ -72,7 +72,7 @@ var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
 var repeatF = flag.Int("repeat", 1, "repeat same V instruction n times for a better coverage (only valid for float instructions).")
-var march = flag.String("march", "gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh", "march")
+var march = flag.String("march", "gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh_zvfbfmin_zvfbfwma", "march")
 
 func main() {
 	flag.Parse()
@@ -154,6 +154,10 @@ func main() {
 				option.Repeat = 1
 			} else {
 				option.Fp = true
+			}
+
+			if strings.Contains(file.Name(), "bf16") {
+				option.Bfloat16 = true
 			}
 
 			insn, err := generator.ReadInsnFromToml(contents, option)

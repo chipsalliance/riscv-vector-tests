@@ -91,7 +91,14 @@ func (i *Insn) gWriteTestData(float bool, testfloat bool, cont bool, lmul LMUL, 
 			_ = binary.Write(buf, binary.LittleEndian, convNum[uint8](cases[b][idx]))
 		case 16:
 			if (float && testfloat && a >= len(cases)) || cont {
-				_ = binary.Write(buf, binary.LittleEndian, nextf16())
+				var val uint16
+				if i.Option.Bfloat16 {
+					// Perform simple truncation (round towards zero)
+					val = uint16(math.Float32bits(nextf32()) >> 16)
+				} else {
+					val = nextf16()
+				}
+				_ = binary.Write(buf, binary.LittleEndian, val)
 			} else {
 				b := a % len(cases)
 				_ = binary.Write(buf, binary.LittleEndian, convNum[uint16](cases[b][idx]))

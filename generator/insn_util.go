@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"hash/fnv"
 	"log"
-	"math/rand"
 	"regexp"
 	"strconv"
 )
@@ -180,11 +179,6 @@ func getVRegs(lmul1 LMUL, v0 bool, seed string) (int, int, int) {
 		availableOptions = append(availableOptions, i)
 	}
 
-	rand.Seed(int64(len(availableOptions)) + int64(hash(seed)))
-
-	rand.Shuffle(len(availableOptions), func(i, j int) {
-		availableOptions[i], availableOptions[j] = availableOptions[j], availableOptions[i]
-	})
-
+	shuffleSlice(availableOptions, int64(len(availableOptions))+int64(hash(seed)))
 	return availableOptions[0], availableOptions[1], availableOptions[2]
 }
