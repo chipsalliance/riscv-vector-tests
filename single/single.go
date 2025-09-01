@@ -23,6 +23,7 @@ func fatalIf(err error) {
 
 var vlenF = flag.Int("VLEN", 256, "")
 var xlenF = flag.Int("XLEN", 64, "")
+var splitF = flag.Int("split", -1, "split per lines.")
 var float16F = flag.Bool("float16", true, "")
 var outputFileF = flag.String("outputfile", "", "output file name.")
 var configFileF = flag.String("configfile", "", "config file path.")
@@ -70,7 +71,7 @@ func main() {
 	fatalIf(err)
 
 	r := regexp.MustCompile(".word 0x.+")
-	writeTo(*outputFileF, r.ReplaceAllString(insn.Generate(-1)[0], ""))
+	writeTo(*outputFileF, r.ReplaceAllString(insn.Generate(*splitF)[0], ""))
 }
 
 func writeTo(path string, contents string) {
