@@ -1,40 +1,38 @@
 name: Build and Test
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request, workflow_dispatch]
 
-  pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
-
-  workflow_dispatch:
+env:
+  SPIKE_COMMIT: f51df5d3955a27602a872eaf01492177513baf6f
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        VLEN: [256, 128, 64]
+        XLEN: [64, 32]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
       - uses: actions/setup-go@v4
+        with:
+          go-version: '1.25.1'
 
       - name: Install Dependencies
         run: |
-          sudo apt-get install device-tree-compiler
-
-      - name: Get Spike Cache Key
-        id: get-spike-cache-key
-        run: |
-          echo "key=5a1145742e701597eb45825855311dfad21232a6" >> $GITHUB_OUTPUT
+          sudo apt-get update
+          sudo apt-get install -y device-tree-compiler
 
       - name: Cache Spike
         id: cache-spike
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/riscv
-          key: ${{ runner.os }}-${{ steps.get-spike-cache-key.outputs.key }}-spike
+          key: ${{ runner.os }}-spike-${{ env.SPIKE_COMMIT }}
 
       - name: Install Toolchain
         if: steps.cache-spike.outputs.cache-hit != 'true'
@@ -46,7 +44,7 @@ jobs:
         run: |
           git clone https://github.com/riscv-software-src/riscv-isa-sim.git
           cd riscv-isa-sim
-          git reset --hard b0d7621ff8e9520aaacd57d97d4d99a545062d14
+          git reset --hard ${{ env.SPIKE_COMMIT }}
           mkdir build
           cd build
           ../configure --prefix=${{ github.workspace }}/riscv
@@ -57,9 +55,5 @@ jobs:
         run: |
           export PATH="${{ github.workspace }}/riscv/bin:$PATH"
           export RISCV="${{ github.workspace }}/riscv"
-          make generate-stage1 --environment-overrides VLEN=256
-          make all -j$(nproc) --environment-overrides VLEN=256
-          make generate-stage1 --environment-overrides VLEN=128
-          make all -j$(nproc) --environment-overrides VLEN=128
-          make generate-stage1 --environment-overrides VLEN=128 XLEN=32
-          make all -j$(nproc) --environment-overrides VLEN=128 XLEN=32
+          make generate-stage1 --environment-overrides VLEN=${{ matrix.VLEN }} XLEN=${{ matrix.XLEN }}
+          make all -j$(nproc) --environment-overrides VLEN=${{ matrix.VLEN }} XLEN=${{ matrix.XLEN }}

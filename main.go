@@ -72,7 +72,7 @@ var stage1OutputDirF = flag.String("stage1output", "", "stage1 output directory.
 var configsDirF = flag.String("configs", "configs/", "config files directory.")
 var testfloat3LevelF = flag.Int("testfloat3level", 2, "testfloat3 testing level (1 or 2).")
 var repeatF = flag.Int("repeat", 1, "repeat same V instruction n times for a better coverage (only valid for float instructions).")
-var march = flag.String("march", "gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh_zvfbfmin_zvfbfwma", "march")
+var march = flag.String("march", "gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh_zfbfmin_zvfbfmin_zvfbfwma", "march")
 
 func main() {
 	flag.Parse()
