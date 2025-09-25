@@ -44,10 +44,26 @@
   TEST_MODE = self##
         ##Change to [cosim] if you want to generate faster tests without self-verification (to be used with co-simulators).
         ##
-  MARCH = rv${XLEN}gcv_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh_zvfbfmin_zvfbfwma
+
+# Fail if ELEN (XLEN) > VLEN
+# ELEN parameter is derived from XLEN
+ifeq ($(shell [ $(XLEN) -gt $(VLEN) ] && echo yes),yes)
+$(error ELEN=$(XLEN) cannot be greater than VLEN=$(VLEN))
+endif
+
+ifeq ($(VLEN), 64)
+# For VLEN=64, use embedded vector extensions instead of full 'v'
+EXT_V =
+else
+# For VLEN >= 128, use full vector extension
+EXT_V = v
+endif
+
+  MARCH = rv${XLEN}gc${EXT_V}_zvbb_zvbc_zfh_zvfh_zvkg_zvkned_zvknha_zvksed_zvksh_zfbfmin_zvfbfmin_zvfbfwma
         ##Set the ISA string to define the base architecture and enabled extensions.
-        ##If your compiler doesn't support vector crypto extensions, you can use MARCH = rv${XLEN}gv_zfh_zvfh
-        ##If your compiler doesn't support half floating, you can use MARCH = rv${XLEN}gv
+        ##If your compiler doesn't support vector crypto extensions, you can use MARCH = rv${XLEN}g{EXT_V}_zfh_zvfh
+        ##If your compiler doesn't support half floating, you can use MARCH = rv${XLEN}g${EXT_V}
+        ##If your compiler doesn't support bfloat16 extensions, you can use MARCH = rv${XLEN}g{EXT_V}
 
 SPIKE_INSTALL = $(RISCV)
 OUTPUT = out/v$(VLEN)x$(XLEN)$(MODE)
@@ -149,7 +165,6 @@ tests_stage2 = $(addsuffix .stage2, $(tests))
 $(tests_stage2):
 	$(RISCV_GCC) -march=${MARCH} -mabi=${MABI} $(RISCV_GCC_OPTS) $(STAGE2_GCC_OPTS) -I$(ENV) -Imacros/general -T$(ENV)/link.ld $(ENV_CSRCS) ${OUTPUT_STAGE2}$(shell basename $@ .stage2).S -o ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
 	${SPIKE} --isa=${MARCH}_${VARCH} $(PK) ${OUTPUT_STAGE2_BIN}$(shell basename $@ .stage2)
-
 
 clean-out:
 	rm -rf $(OUTPUT)
