@@ -1,4 +1,4 @@
-name = "vfwcvt.f.f.v"
+name = "vfncvt.f.f.w"
 format = "vd,vs2,vm"
 
 [tests]
@@ -7,3 +7,4 @@ sew32 = [
     [0xfffffffe],
     [0x2],
 ]
+
