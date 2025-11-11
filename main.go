@@ -17,7 +17,7 @@ import (
 )
 
 func parse_extension(march string) []string {
-	var valid_exts = []string{"zvbb", "zvbc", "zfh", "zvfh", "zvkg", "zvkned", "zvknha", "zvksed", "zvksh", "zvfbfmin", "zvfbfwma"}
+	var valid_exts = []string{"zvbb", "zvbc", "zfh", "zvfh", "zvfhmin", "zvkg", "zvkned", "zvknha", "zvksed", "zvksh", "zvfbfmin", "zvfbfwma"}
 	var exts = []string{}
 	exts = append(exts, "v") // standard RVV
 	for _, s := range valid_exts {
@@ -27,6 +27,20 @@ func parse_extension(march string) []string {
 				break
 			}
 		}
+	}
+	// zvfh implies zvfhmin
+	hasZvfh := false
+	hasZvfhmin := false
+	for _, ext := range exts {
+		if ext == "zvfh" {
+			hasZvfh = true
+		}
+		if ext == "zvfhmin" {
+			hasZvfhmin = true
+		}
+	}
+	if hasZvfh && !hasZvfhmin {
+		exts = append(exts, "zvfhmin")
 	}
 	return exts
 }
@@ -103,9 +117,9 @@ func main() {
 		fs, ok := extFiles[e]
 		if ok {
 			fileTuples = append(fileTuples, fs...)
-			if e == "zvfh" {
-				float16F = true
-			}
+			println("Test extension: ", e)
+		} else if e == "zvfh" {
+			float16F = true
 			println("Test extension: ", e)
 		}
 	}

@@ -2,8 +2,9 @@ name = "vfwcvt.f.f.v"
 format = "vd,vs2,vm"
 
 [tests]
-sew32 = [
-    [0xffffffff],
-    [0xfffffffe],
+sew16 = [
+    [0xffff],
+    [0xfffe],
     [0x2],
 ]
+
