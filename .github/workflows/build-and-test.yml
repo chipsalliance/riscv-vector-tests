@@ -3,7 +3,7 @@ name: Build and Test
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  SPIKE_COMMIT: 591cff16109ced6a21bb2a612a3853b4e9cbd86d
+  SPIKE_COMMIT: 509bec19b01aa2f0445045cad6c540698714efad
 
 jobs:
   check:
