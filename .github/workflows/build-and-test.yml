@@ -3,7 +3,7 @@ name: Build and Test
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  SPIKE_COMMIT: f51df5d3955a27602a872eaf01492177513baf6f
+  SPIKE_COMMIT: 20feb9c2bf2a7deab964d8190b0cbd4b4131bec3
 
 jobs:
   check:
@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-go@v4
         with:
-          go-version: '1.25.1'
+          go-version: "1.25.1"
 
       - name: Install Dependencies
         run: |
