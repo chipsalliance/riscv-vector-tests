@@ -83,6 +83,7 @@ int main(int argc, char** argv) {
   sim_t sim(&cfg, false,
             mems,
             plugin_device_factories,
+            false,
             htif_args,
             dm_config,
             nullptr,

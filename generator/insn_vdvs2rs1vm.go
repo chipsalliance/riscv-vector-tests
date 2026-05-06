@@ -12,9 +12,11 @@ func (i *Insn) genCodeVdVs2Rs1Vm(pos int) []string {
 	sew64Only := strings.HasPrefix(i.Name, "vclmul")
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
+	noSew64WithoutV := strings.HasPrefix(i.Name, "vmulh") || strings.HasPrefix(i.Name, "vsmul")
 
 	sews := iff(vdWidening || vs2Widening, allSEWs[:len(allSEWs)-1], allSEWs)
 	sews = iff(sew64Only, []SEW{64}, sews)
+	sews = iff(noSew64WithoutV && !i.Option.HasV, []SEW{8, 16, 32}, sews)
 	combinations := i.combinations(
 		iff(vdWidening || vs2Widening, wideningMULs, iff(sew64Only, []LMUL{1, 2, 4, 8}, allLMULs)),
 		sews,

@@ -45,6 +45,13 @@ func parse_extension(march string) []string {
 	return exts
 }
 
+func hasVExtension(march string) bool {
+    base := strings.SplitN(march, "_", 2)[0]
+    base = strings.TrimPrefix(base, "rv32")
+    base = strings.TrimPrefix(base, "rv64")
+    return strings.Contains(base, "v")
+}
+
 type FileTuple struct {
 	Entry    os.DirEntry
 	FullPath string
@@ -161,6 +168,7 @@ func main() {
 			option := generator.Option{
 				VLEN:    generator.VLEN(*vlenF),
 				XLEN:    generator.XLEN(*xlenF),
+				HasV:    hasVExtension(*march),
 				Repeat:  *repeatF,
 				Float16: float16F,
 			}

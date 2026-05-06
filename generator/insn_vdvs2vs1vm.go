@@ -12,6 +12,7 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vw") || strings.HasPrefix(i.Name, "vfw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wv")
 	isWideningReduction := strings.HasPrefix(i.Name, "vwred") || strings.HasPrefix(i.Name, "vfwred")
+	noSew64WithoutV := strings.HasPrefix(i.Name, "vmulh") || strings.HasPrefix(i.Name, "vsmul")
 
 	vdSize := iff(vdWidening, 2, 1)
 	vs2Size := iff(vs2Widening, 2, 1)
@@ -19,6 +20,7 @@ func (i *Insn) genCodeVdVs2Vs1Vm(pos int) []string {
 	sews := iff(float, i.floatSEWs(), allSEWs)
 	sews = iff(vdWidening || vs2Widening, sews[:len(sews)-1], sews)
 	sews = iff(sew64Only, []SEW{64}, sews)
+	sews = iff(noSew64WithoutV && !i.Option.HasV, []SEW{8, 16, 32}, sews)
 
 	lmuls := iff((vdWidening || vs2Widening) && !isWideningReduction,
 		wideningMULs, iff(sew64Only, []LMUL{1, 2, 4, 8}, allLMULs))

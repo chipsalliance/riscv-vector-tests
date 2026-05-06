@@ -17,6 +17,7 @@ type insnFormat string
 type Option struct {
 	VLEN     VLEN
 	XLEN     XLEN
+	HasV	 bool
 	Fp       bool
 	Repeat   int
 	Float16  bool
